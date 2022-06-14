@@ -28,6 +28,99 @@
     </content>
     <orderEntry type="jdk" jdkName="RVM: ruby-3.0.0 [final-project-group-5-amadeus]" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="actioncable (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionmailbox (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionmailer (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionpack (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actiontext (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="actionview (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activejob (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activemodel (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activerecord (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activestorage (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="activesupport (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="addressable (v2.8.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.12.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="builder (v3.2.4, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bundler (v2.3.15, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="byebug (v11.1.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="capybara (v3.37.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="coderay (v1.1.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.1.10, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber (v7.1.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber-core (v10.1.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber-create-meta (v6.0.4, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber-cucumber-expressions (v14.0.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber-gherkin (v22.0.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber-html-formatter (v17.0.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber-messages (v17.1.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber-rails (v2.5.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber-rails-training-wheels (v1.0.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber-tag-expressions (v4.1.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="cucumber-wire (v6.2.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="database_cleaner (v2.0.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="database_cleaner-active_record (v2.0.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="database_cleaner-core (v2.0.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.5.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="digest (v3.1.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="erubi (v1.10.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ffi (v1.15.5, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="globalid (v1.0.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="i18n (v1.10.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="importmap-rails (v1.1.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.11.5, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="launchy (v2.5.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="loofah (v2.18.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mail (v2.7.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="marcel (v1.0.2, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="matrix (v0.4.2, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="method_source (v1.0.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mime-types (v3.4.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mime-types-data (v3.2022.0105, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.2, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="minitest (v5.15.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.5.2, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multi_test (v0.1.2, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.2.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="net-protocol (v0.1.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="net-smtp (v0.3.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.5.8, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.13.6, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pry (v0.13.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pry-byebug (v3.9.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="public_suffix (v4.0.7, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="puma (v5.6.4, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="racc (v1.6.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack (v2.2.3.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack-test (v1.1.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rails (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v2.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.4.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="railties (v7.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rake (v13.0.6, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="regexp_parser (v2.5.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rexml (v3.2.5, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-core (v3.11.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v3.11.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v3.11.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-rails (v5.1.2, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-support (v3.11.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sprockets (v4.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.4.2, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v1.4.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="stimulus-rails (v1.0.4, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="strscan (v3.0.3, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sys-uname (v1.2.2, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="thor (v1.2.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="timeout (v0.3.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="turbo-rails (v1.1.1, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.4, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="webrick (v1.7.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="websocket-driver (v0.7.5, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="websocket-extensions (v0.1.5, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="xpath (v3.2.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="zeitwerk (v2.6.0, RVM: ruby-3.0.0 [final-project-group-5-amadeus]) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />
@@ -42,6 +135,9 @@
         <option value="benchmark" />
         <option value="channel" />
         <option value="controller" />
+        <option value="cucumber:install" />
+        <option value="cucumber_rails_training_wheels:feature" />
+        <option value="cucumber_rails_training_wheels:install" />
         <option value="generator" />
         <option value="helper" />
         <option value="integration_test" />
@@ -52,16 +148,39 @@
         <option value="migration" />
         <option value="model" />
         <option value="resource" />
+        <option value="rspec:channel" />
+        <option value="rspec:controller" />
+        <option value="rspec:feature" />
+        <option value="rspec:generator" />
+        <option value="rspec:helper" />
+        <option value="rspec:install" />
+        <option value="rspec:integration" />
+        <option value="rspec:job" />
+        <option value="rspec:mailbox" />
+        <option value="rspec:mailer" />
+        <option value="rspec:model" />
+        <option value="rspec:request" />
+        <option value="rspec:scaffold" />
+        <option value="rspec:system" />
+        <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
         <option value="stimulus" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
+        <option value="test_unit:controller" />
         <option value="test_unit:generator" />
+        <option value="test_unit:helper" />
         <option value="test_unit:install" />
+        <option value="test_unit:integration" />
+        <option value="test_unit:job" />
         <option value="test_unit:mailbox" />
+        <option value="test_unit:mailer" />
+        <option value="test_unit:model" />
         <option value="test_unit:plugin" />
+        <option value="test_unit:scaffold" />
+        <option value="test_unit:system" />
       </list>
     </option>
     <option name="myGenerators">
@@ -72,6 +191,9 @@
         <option value="benchmark" />
         <option value="channel" />
         <option value="controller" />
+        <option value="cucumber:install" />
+        <option value="cucumber_rails_training_wheels:feature" />
+        <option value="cucumber_rails_training_wheels:install" />
         <option value="generator" />
         <option value="helper" />
         <option value="integration_test" />
@@ -82,16 +204,39 @@
         <option value="migration" />
         <option value="model" />
         <option value="resource" />
+        <option value="rspec:channel" />
+        <option value="rspec:controller" />
+        <option value="rspec:feature" />
+        <option value="rspec:generator" />
+        <option value="rspec:helper" />
+        <option value="rspec:install" />
+        <option value="rspec:integration" />
+        <option value="rspec:job" />
+        <option value="rspec:mailbox" />
+        <option value="rspec:mailer" />
+        <option value="rspec:model" />
+        <option value="rspec:request" />
+        <option value="rspec:scaffold" />
+        <option value="rspec:system" />
+        <option value="rspec:view" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
         <option value="stimulus" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
+        <option value="test_unit:controller" />
         <option value="test_unit:generator" />
+        <option value="test_unit:helper" />
         <option value="test_unit:install" />
+        <option value="test_unit:integration" />
+        <option value="test_unit:job" />
         <option value="test_unit:mailbox" />
+        <option value="test_unit:mailer" />
+        <option value="test_unit:model" />
         <option value="test_unit:plugin" />
+        <option value="test_unit:scaffold" />
+        <option value="test_unit:system" />
       </list>
     </option>
   </component>
@@ -172,6 +317,16 @@
             <subtasks>
               <RakeTaskImpl description="Lookup first-level dependencies for TEMPLATE (like messages/show or comments/_comment.html)" fullCommand="cache_digests:dependencies" id="dependencies" />
               <RakeTaskImpl description="Lookup nested dependencies for TEMPLATE (like messages/show or comments/_comment.html)" fullCommand="cache_digests:nested_dependencies" id="nested_dependencies" />
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl description="Alias for cucumber:ok" fullCommand="cucumber" id="cucumber" />
+          <RakeTaskImpl id="cucumber">
+            <subtasks>
+              <RakeTaskImpl description="Run all features" fullCommand="cucumber:all" id="all" />
+              <RakeTaskImpl description="Run features that should pass" fullCommand="cucumber:ok" id="ok" />
+              <RakeTaskImpl description="Record failing features and run only them if any exist" fullCommand="cucumber:rerun" id="rerun" />
+              <RakeTaskImpl description="Run features that are being worked on" fullCommand="cucumber:wip" id="wip" />
+              <RakeTaskImpl description="" fullCommand="cucumber:statsetup" id="statsetup" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl id="db">
@@ -285,6 +440,7 @@
           <RakeTaskImpl description="Prints out your Rack middleware stack" fullCommand="middleware" id="middleware" />
           <RakeTaskImpl description="Restart app by touching tmp/restart.txt" fullCommand="restart" id="restart" />
           <RakeTaskImpl description="Generate a cryptographically secure secret key (this is typically used to generate a secret for cookie sessions)" fullCommand="secret" id="secret" />
+          <RakeTaskImpl description="Run all specs in spec directory (excluding plugin specs)" fullCommand="spec" id="spec" />
           <RakeTaskImpl description="Report code statistics (KLOCs, etc) from the application or engine" fullCommand="stats" id="stats" />
           <RakeTaskImpl id="stimulus">
             <subtasks>
@@ -392,6 +548,7 @@
           </RakeTaskImpl>
           <RakeTaskImpl description="" fullCommand="default" id="default" />
           <RakeTaskImpl description="" fullCommand="environment" id="environment" />
+          <RakeTaskImpl description="" fullCommand="features" id="features" />
           <RakeTaskImpl id="railties">
             <subtasks>
               <RakeTaskImpl id="install">
@@ -399,6 +556,12 @@
                   <RakeTaskImpl description="" fullCommand="railties:install:migrations" id="migrations" />
                 </subtasks>
               </RakeTaskImpl>
+            </subtasks>
+          </RakeTaskImpl>
+          <RakeTaskImpl id="spec">
+            <subtasks>
+              <RakeTaskImpl description="" fullCommand="spec:prepare" id="prepare" />
+              <RakeTaskImpl description="" fullCommand="spec:statsetup" id="statsetup" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="" fullCommand="tmp" id="tmp" />
