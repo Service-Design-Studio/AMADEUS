@@ -9,6 +9,9 @@ gem "rails", "~> 7.0.3"
 # For ActiveRecord
 gem 'sqlite3', '~> 1.4.0'
 
+# For Json serialization
+gem 'active_model_serializers'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
