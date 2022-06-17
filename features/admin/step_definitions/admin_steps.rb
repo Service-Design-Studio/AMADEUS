@@ -33,3 +33,19 @@ end
 When(/^I click "([^"]*)" button to select the "([^"]*)" (zipped folder|file)$/) do |arg1, arg2|
   pending
 end
+
+And(/^I click "([^"]*)" button$/) do |arg|
+  pending
+end
+
+Then(/^I should see a flash message "([^"]*)"$/) do |arg|
+  pending
+end
+
+And(/^I should see my article count increase by (.*) inside the "([^"]*)" field$/) do |count_value, arg|
+  pending
+end
+
+And(/^I should see my article count unchanged inside the "([^"]*)" field$/) do |arg|
+  pending
+end
