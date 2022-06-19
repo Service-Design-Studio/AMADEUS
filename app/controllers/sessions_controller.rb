@@ -34,6 +34,11 @@ class SessionsController < ApplicationController
     end
 
     def admin
+        if session[:user_id] == "admin"
+            render "admin"
+        else
+            redirect_to "/sign_in"
+        end
     end
 
 end
