@@ -16,9 +16,8 @@
     <%= form.text_field :title %>
   </div>
 
-  <div>
-      <%= form.label :title, style: "display: block" %>
-      <%= form.file_field :file, accept:'.zip' %>
+  <div class="drag-area">
+      <%= form.file_field :file, class: "custom-file-input", accept:'.zip' %>
   </div>
 
   <div>
