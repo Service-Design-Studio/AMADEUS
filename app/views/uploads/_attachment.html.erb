@@ -1,0 +1,11 @@
+<% if upload.file.attached? %>
+    <div class="row">
+        <% if upload.file.image? %>
+            <div class="message-image-container">
+                <%= image_tag(upload.file)%>
+            </div>
+        <% else %>
+            <%= link_to upload.file.filename, url_for(upload.file)%>
+        <% end %>
+    </div>
+<% end %>
