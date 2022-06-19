@@ -25,9 +25,11 @@ class UploadsController < ApplicationController
 
     respond_to do |format|
       if @upload.save
-        format.html { redirect_to upload_url(@upload), notice: "Upload was successfully created." }
+        flash[:success] = "Upload was successfully created."
+        format.html { redirect_to upload_url(@upload)}
         format.json { render :show, status: :created, location: @upload }
       else
+        flash[:error] = "Upload failed."
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @upload.errors, status: :unprocessable_entity }
       end
@@ -38,9 +40,11 @@ class UploadsController < ApplicationController
   def update
     respond_to do |format|
       if @upload.update(upload_params)
-        format.html { redirect_to upload_url(@upload), notice: "Upload was successfully updated." }
+        flash[:success] = "Upload was successfully updated."
+        format.html { redirect_to upload_url(@upload)}
         format.json { render :show, status: :ok, location: @upload }
       else
+        flash[:error] = "Update failed."
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @upload.errors, status: :unprocessable_entity }
       end
@@ -52,7 +56,8 @@ class UploadsController < ApplicationController
     @upload.destroy
 
     respond_to do |format|
-      format.html { redirect_to uploads_url, notice: "Upload was successfully destroyed." }
+      flash[:success] = "Upload was successfully destroyed."
+      format.html { redirect_to uploads_url}
       format.json { head :no_content }
     end
   end
