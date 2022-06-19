@@ -1,0 +1,30 @@
+
+.drag-area input {
+    width:300px;
+    height:150px
+  }
+.drag-area{
+    border: 2px dashed #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .custom-file-input::before {
+    content: 'Select .zip';
+    display: inline-block;
+    border: 1px solid #999;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+  }
+  .custom-file-input:hover::before {
+    border-color: white;
+  }
