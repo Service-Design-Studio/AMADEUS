@@ -9,6 +9,17 @@ Rails.application.routes.draw do
     resources :articles, only: [:index, :update]
   end
 
-  root :to => redirect('/admin/articles')
+  # root :to => redirect('/admin/articles')
+
+  # root to: "uploads#index"
+
+  get "admin", to: "sessions#admin"
+
+  get "sign_in", to: "sessions#new"
+  post "sign_in", to: "sessions#create"
+  get "logout", to: "sessions#destroy"
+
+  root to: "main#index"
+
 
 end
