@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         if params[:email] == "admin" && params[:password] == "admin"
             session[:user_id] = "admin"
             flash[:success] = "Logged in successfully."
-            redirect_to uploads_path
+            redirect_to "/admin"
         else
             flash[:danger] = "Invalid email or password"
             redirect_to "/sign_in"
