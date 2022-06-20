@@ -27,18 +27,19 @@ class SessionsController < ApplicationController
         # end
     end
 
-    def destroy
-        session[:user_id] = nil
-        flash[:success] = "Logged out successfully."
-        redirect_to root_path
-    end
-
     def admin
         if session[:user_id] == "admin"
             render "admin"
         else
+            flash[:danger] = "You must be logged in to access this section"
             redirect_to "/sign_in"
         end
+    end
+
+    def destroy
+        session[:user_id] = nil
+        flash[:success] = "Logged out successfully."
+        redirect_to root_path
     end
 
 end

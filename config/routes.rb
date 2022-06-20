@@ -3,16 +3,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  # root :to => redirect('/admin/articles')
+  # root to: "uploads#index"
 
-  resources :uploads
 
   scope :admin do
-    resources :articles, only: [:index, :update]
+    # resources :articles, only: [:index, :update]
+    resources :uploads
   end
-
-  # root :to => redirect('/admin/articles')
-
-  # root to: "uploads#index"
 
   get "admin", to: "sessions#admin"
 
