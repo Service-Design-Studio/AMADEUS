@@ -19,8 +19,10 @@ Article.create(
   description: 'Description 2'
 )
 
-User.create(
-  email: 'admin@admin.com',
-  password: 'password123'
+user = User.new(
+  :email                 => "admin123@admin.com",
+  :password              => "admin123",
+  :password_confirmation => "admin123"
 )
+user.save!
 
