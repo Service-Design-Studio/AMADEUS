@@ -1,4 +1,4 @@
-@admin
+@sign_in
 Feature: signing in as an admin
   As an admin of Amadeus
   So that I can contribute documents for Amadeus's knowledge repository
@@ -9,7 +9,7 @@ Feature: signing in as an admin
 
 
   @sign_in @view
-  Scenario: view sign in page after choosing admin path
+  Scenario: view sign in page
     Then I should see a "Sign In" title
     And I should see a "Sign In" form that requires email and password credentials
 
