@@ -19,3 +19,8 @@ Article.create(
   description: 'Description 2'
 )
 
+User.create(
+  email: 'admin@admin.com',
+  password: 'password123'
+)
+
