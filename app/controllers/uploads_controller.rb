@@ -1,5 +1,6 @@
 class UploadsController < ApplicationController
   before_action :set_upload, only: %i[ show edit update destroy ]
+  before_action :require_login, only: [:new, :edit, :update, :destroy, :index, :show, :create]
 
   # GET /uploads or /uploads.json
   def index
@@ -71,5 +72,14 @@ class UploadsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def upload_params
       params.require(:upload).permit(:title, :file)
+    end
+
+
+  # Ensures that admin must be logged in to access upload feature
+    def require_login
+      if session[:user_id] != "admin"
+        flash[:danger] = "You must be logged in to access this section"
+        redirect_to "/sign_in"
+      end
     end
 end
