@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -6,6 +7,8 @@ Rails.application.routes.draw do
   # root :to => redirect('/admin/articles')
   # root to: "uploads#index"
 
+
+  devise_for :user, :path => '' #, :path_names => { :sign_out => "logout"}
 
   scope :admin do
     # resources :articles, only: [:index, :update]
@@ -16,7 +19,6 @@ Rails.application.routes.draw do
 
   get "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
-  get "logout", to: "sessions#destroy"
 
   root to: "main#index"
   
