@@ -11,10 +11,37 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="mb-3">
+    <%= form.label :title, { class: "form-label"} %>
+    <%= form.text_field :title, { class: "form-control", placeholder: "Title" }%>
   </div>
+
+<br>
+
+  <%# <div class="form-group">
+    <label for="topic_sel">Select Topic:</label>
+    <select class="form-control" id="topic_sel">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+    </select>
+  </div>
+
+  <br>
+
+  <div>
+    <label for="subtopic_show">Sub topics:</label>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Subtopic</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">A fourth item</li>
+      <li class="list-group-item">And a fifth one</li>
+    </ul>
+  </div>  
+
+  <br> %>
 
   <div class="drag-area">
       <%= form.file_field :file, class: "custom-file-input", accept:'.zip' %>
@@ -23,4 +50,5 @@
   <div>
     <%= form.submit %>
   </div>
+
 <% end %>
