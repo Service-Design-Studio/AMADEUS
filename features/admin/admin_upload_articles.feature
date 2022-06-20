@@ -4,9 +4,9 @@ Feature: upload zipped folder containing pdf file of articles
   So that I can contribute documents for Amadeus's knowledge repository
   I want to upload pdf locally in bulk using zipped format
 
-  Background:
-    Given I am logged in as admin of Amadeus
-    And I am trying to upload articles from the upload page
+#  Background:
+#    Given I am logged in as admin of Amadeus
+#    And I am trying to upload articles from the upload page
 
 #  @upload @view
 #  Scenario: view upload page
