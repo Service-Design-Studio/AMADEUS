@@ -2,9 +2,10 @@
 
 <%= render @upload %>
 
-<div>
-  <%= link_to "Edit this upload", edit_upload_path(@upload) %> |
-  <%= link_to "Back to uploads", uploads_path %>
+<br>
 
-  <%= button_to "Destroy this upload", @upload, method: :delete %>
+<div class="d-grid gap-2">
+  <%= link_to "Edit this upload", edit_upload_path(@upload), class: "btn btn-outline-success" %>
+  <%= link_to "Destroy this upload", @upload, method: :delete, class: "btn btn-outline-danger" %>
+  <%= link_to "Back to uploads", uploads_path, class: "btn btn-primary" %>
 </div>
