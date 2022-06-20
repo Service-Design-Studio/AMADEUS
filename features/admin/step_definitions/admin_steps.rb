@@ -12,9 +12,6 @@ end
 
 # Upload feature
 ## View upload page
-Then(/^I should see a "([^"]*)" button$/) do |button_name|
-  pending
-end
 
 And(/^I should see a warning text "([^"]*)"$/) do |warning_text|
   pending
