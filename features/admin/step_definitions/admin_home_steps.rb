@@ -1,5 +1,6 @@
 Given(/^I am logged in as admin of Amadeus$/) do
-  login
+  login('admin123@admin.com', 'admin123')
+  visit '/admin'
   expect(page).to have_current_path('/admin')
 end
 

@@ -10,19 +10,18 @@ Feature: signing in as an admin
 
   @sign_in @view
   Scenario: view sign in page
-    Then I should see a "Sign In" title
-    And I should see a "Sign In" form that requires email and password credentials
+    Then I should see a "Sign In" form that requires email and password credentials
 
 
   @sign_in @success
   Scenario Outline: (Success) able to log in with the correct credentials
-    When I fill in my credentials with Email <email> and Password <password>
-    And I click on the "Sign in" button
-    Then I should be logged in as admin
+    When I sign in with correct credentials Email <email> and password <password>
 
     Examples:
-      | email | password |
-      | admin |  admin   |
+      |       email        |  password   |
+      | admin123@admin.com |  admin123   |
+      | admin456@admin.com |  admin456   |
+      | admin789@admin.com |  admin789   |
 
   @sign_in @fail
   Scenario Outline: (Fail) unable to log in with incorrect credentials
