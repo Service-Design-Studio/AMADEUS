@@ -42,5 +42,14 @@ When(/^I attach no zip file and key in the topic (.*)$/) do |topic_name|
 end
 
 And(/^I should remain in this upload page$/) do
-  expect(page).to have_current_path('/admin/uploads/new')
+  expect(page).to have_current_path('/admin/uploads')
+end
+
+When(/^I click "([^"]*)" button$/) do |arg|
+  find("#back-to-database").click
+end
+
+Then(/^I am redirected back to upload database page$/) do
+  visit '/admin/uploads'
+  expect(page).to have_current_path('/admin/uploads')
 end
