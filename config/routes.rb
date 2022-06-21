@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     resources :uploads
   end
 
-  resources :uploads
   get "admin", to: "sessions#admin"
 
   get "sign_in", to: "sessions#new"

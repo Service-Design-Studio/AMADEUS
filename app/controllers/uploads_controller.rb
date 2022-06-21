@@ -42,10 +42,12 @@ class UploadsController < ApplicationController
   def create
     file = params[:upload][:file]
     Zip::File.open(file) do |zipfile|
-      zipfile.each do |file|
-        new_upload = Upload.new()
-        new_upload.file.attach(io: StringIO.new(file.get_input_stream.read), filename: file.name)
-        new_upload.save
+      zipfile.each do |entry|
+        if entry.file?
+          new_upload = Upload.new()
+          new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
+          new_upload.save
+        end
       end
     end
     respond_to do |format|
@@ -95,10 +97,10 @@ class UploadsController < ApplicationController
   # Ensures that admin must be logged in to access upload feature
     def require_login
 
-      # if current_user.nil?
-      #   flash[:danger] = "You must be logged in to access this section"
-      #   redirect_to "/sign_in"
-      # end
+      if current_user.nil?
+        flash[:danger] = "You must be logged in to access this section"
+        redirect_to "/sign_in"
+      end
 
       # if session[:user_id] != "admin"
       #   flash[:danger] = "You must be logged in to access this section"
