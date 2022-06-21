@@ -80,10 +80,10 @@ class UploadsController < ApplicationController
   # Ensures that admin must be logged in to access upload feature
     def require_login
 
-      if current_user.nil?
-        flash[:danger] = "You must be logged in to access this section"
-        redirect_to "/sign_in"
-      end
+      # if current_user.nil?
+      #   flash[:danger] = "You must be logged in to access this section"
+      #   redirect_to "/sign_in"
+      # end
 
       # if session[:user_id] != "admin"
       #   flash[:danger] = "You must be logged in to access this section"
