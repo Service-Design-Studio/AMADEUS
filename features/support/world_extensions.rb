@@ -9,5 +9,12 @@ module KnowsUser
   def capybara_logout
     logout()
   end
+
+  def capybara_upload_zip(zip_name, topic_name)
+    visit '/admin/uploads/new'
+    attach_file(Rails.root + "features/test_zip/#{zip_name}")
+    fill_in :title, with: topic_name
+    find("#create-upload-button").click
+  end
 end
 World(KnowsUser)

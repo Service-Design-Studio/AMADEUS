@@ -37,3 +37,7 @@ Feature: upload zipped folder containing pdf file of articles
       |   Russia   |
       |    UAV     |
       |  Ukraine   |
+@upload @back
+  Scenario: want to leave upload page
+    When I click "Back to Upload Database" button
+    Then I am redirected back to upload database page

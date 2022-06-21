@@ -3,7 +3,7 @@
 <h1>Upload Database</h1>
 
 <br>
-<%= link_to "New Upload", new_upload_path, class: "btn btn-success"%>
+<%= link_to "New Upload", new_upload_path, class: "btn btn-success", id: "new-upload-button"%>
 
 <div id="uploads">
   <% @uploads.each do |upload| %>
