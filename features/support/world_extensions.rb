@@ -1,9 +1,9 @@
+include Warden::Test::Helpers
+
 module KnowsUser
-  def login
-    visit '/sign_in'
-    fill_in :email, with: 'admin'
-    fill_in :password, with: 'admin'
-    find("#sign-in-button").click
+  def login(email, password)
+    user = User.create!(email: email, password: password)
+    login_as(user, :scope => :user)
   end
 end
 World(KnowsUser)
