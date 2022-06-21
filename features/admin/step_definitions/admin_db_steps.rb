@@ -10,10 +10,21 @@ And /I have these zip files already uploaded/ do |db|
 end
 
 Then(/^I should see all the uploaded zip files$/) do
-  db = {Russia: 'rus.zip', Ukraine: 'ukr.zip', UAV: 'UAV' }
-  db.each do |zip_name, topic_name|
-    expect(page).to have_content(zip_name)
+  topics = %w(Russia UAV Ukraine)
+  articles = [
+    "Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf",
+    "Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf",
+    "Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf",
+    "Chinese drone firm DJI pauses operations in Russia and Ukraine - BBC News.pdf",
+    "How many Ukrainian refugees are there and where have they gone_ - BBC News.pdf",
+    "Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News.pdf",
+  ]
+  topics.each do |topic_name|
     expect(page).to have_content(topic_name)
+  end
+
+  articles.each do |article_name|
+    expect(page).to have_content(article_name)
   end
 end
 
