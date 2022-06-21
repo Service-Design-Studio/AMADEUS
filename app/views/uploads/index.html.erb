@@ -1,16 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Uploads</h1>
+<h1>Upload Database</h1>
 
 <br>
-<%= link_to "New upload", new_upload_path, class: "btn btn-success"%>
+<%= link_to "New Upload", new_upload_path, class: "btn btn-success"%>
 
 <div id="uploads">
   <% @uploads.each do |upload| %>
     <%= render upload %>
-    <p>
-      <%= link_to "Show this upload", upload, class: "btn btn-outline-secondary btn-sm" %>
-    </p>
+<!--    <p>-->
+      <%#= link_to "Show this upload", upload, class: "btn btn-outline-secondary btn-sm" %>
+<!--    </p>-->
   <% end %>
 </div>
 

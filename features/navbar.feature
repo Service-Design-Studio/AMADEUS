@@ -1,4 +1,3 @@
-Blong Tran sutd, [6/21/2022 16:26]
 @navbar
 Feature: navigation bar
   As a general user of Amadeus
@@ -51,6 +50,6 @@ Feature: navigation bar
 
     Examples:
       |    feature_name    |
-      |       Topics       |
-      |  Upload new file   |
-      |      All files     |
+      |     Topic List     |
+      |     New Upload     |
+      |   Upload Database  |
