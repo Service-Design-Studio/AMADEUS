@@ -1,3 +1,4 @@
+require 'zip'
 class UploadsController < ApplicationController
   before_action :set_upload, only: %i[ show edit update destroy ]
   before_action :require_login, only: [:new, :edit, :update, :destroy, :index, :show, :create]
@@ -21,20 +22,34 @@ class UploadsController < ApplicationController
   end
 
   # POST /uploads or /uploads.json
-  def create
-    @upload = Upload.new(upload_params)
+  # def create
+  #   @upload = Upload.new(upload_params)
 
-    respond_to do |format|
-      if @upload.save
-        flash[:success] = "Upload was successfully created."
-        # format.html { redirect_to upload_url(@upload)}
-        format.html { redirect_to uploads_url}
-        format.json { render :show, status: :created, location: @upload }
-      else
-        flash[:error] = "Upload failed."
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
+  #   respond_to do |format|
+  #     if @upload.save
+  #       flash[:success] = "Upload was successfully created."
+  #       # format.html { redirect_to upload_url(@upload)}
+  #       format.html { redirect_to uploads_url}
+  #       format.json { render :show, status: :created, location: @upload }
+  #     else
+  #       flash[:error] = "Upload failed."
+  #       format.html { render :new, status: :unprocessable_entity }
+  #       format.json { render json: @upload.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+
+  def create
+    file = params[:upload][:file]
+    Zip::File.open(file) do |zipfile|
+      zipfile.each do |file|
+        new_upload = Upload.new()
+        new_upload.file.attach(io: StringIO.new(file.get_input_stream.read), filename: file.name)
+        new_upload.save
       end
+    end
+    respond_to do |format|
+      format.html { redirect_to uploads_url }
     end
   end
 
@@ -80,14 +95,16 @@ class UploadsController < ApplicationController
   # Ensures that admin must be logged in to access upload feature
     def require_login
 
-      if current_user.nil?
-        flash[:danger] = "You must be logged in to access this section"
-        redirect_to "/sign_in"
-      end
+      # if current_user.nil?
+      #   flash[:danger] = "You must be logged in to access this section"
+      #   redirect_to "/sign_in"
+      # end
 
       # if session[:user_id] != "admin"
       #   flash[:danger] = "You must be logged in to access this section"
       #   redirect_to "/sign_in"
       # end
     end
+    
+  
 end
