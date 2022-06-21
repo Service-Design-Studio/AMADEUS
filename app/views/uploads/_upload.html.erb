@@ -1,8 +1,11 @@
 <div id="<%= dom_id upload %>">
-  <p>
-    <strong>Topic:</strong>
-    <%= upload.title %>
-  </p>
-
-  <%= render 'uploads/attachment', upload: upload %>
+  <div style="width: 100%; display: table;">
+    <div style="display: table-row">
+      <div style="width: 200px; display: table-cell;">
+        <p> <%= upload.title %> </p>
+      </div>
+      <div style="display: table-cell;"> <%= render 'uploads/attachment', upload: upload %> </div>
+    </div>
+  </div>
+  <hr style="width:100%", size="5", color=black>
 </div>

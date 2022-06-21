@@ -17,7 +17,7 @@ Then(/^I should see all the uploaded zip files$/) do
   end
 end
 
-When(/^I click on the "([^"]*)" button$/) do |arg|
+When(/^I click on the "New Upload" button$/) do
   find("#new-upload-button").click
 end
 
