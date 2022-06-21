@@ -10,7 +10,7 @@ gem "rails", "~> 7.0.3"
 gem 'jquery-rails'
 
 # For ActiveRecord
-gem 'sqlite3', '~> 1.4.0'
+gem 'sqlite3'
 
 # For Json serialization
 gem 'active_model_serializers'
