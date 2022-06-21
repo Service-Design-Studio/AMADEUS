@@ -1,10 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
 <h1>Upload Database</h1>
-
-<br>
 <%= link_to "New Upload", new_upload_path, class: "btn btn-success", id: "new-upload-button"%>
+<br><br>
 
+<div style="width: 100%; display: table;">
+  <div style="display: table-row">
+    <div style="width: 400px; display: table-cell;">
+      <p>
+        <strong>Topic</strong>
+      </p>
+    </div>
+    <div style="display: table-cell;">
+      <p>
+        <strong>Article</strong>
+      </p>
+    </div>
+  </div>
+</div>
 <div id="uploads">
   <% @uploads.each do |upload| %>
     <%= render upload %>

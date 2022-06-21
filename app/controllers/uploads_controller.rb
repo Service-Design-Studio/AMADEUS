@@ -46,6 +46,7 @@ class UploadsController < ApplicationController
         if entry.file?
           new_upload = Upload.new()
           new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
+          new_upload.title = params[:upload][:title]
           new_upload.save
         end
       end

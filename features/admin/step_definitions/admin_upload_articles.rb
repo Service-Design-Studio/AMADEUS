@@ -32,8 +32,16 @@ end
 
 And(/^I should see the above (.*) zip file with its corresponding (.*)$/) do |zip_name, topic_name|
   expect(page).to have_current_path('/admin/uploads')
-  expect(page).to have_content(zip_name)
   expect(page).to have_content(topic_name)
+  if zip_name == "rus.zip"
+    expect(page).to have_content(zip_name)
+  elsif zip_name == "uav.zip"
+    expect(page).to have_content(zip_name)
+  elsif zip_name == "ukr.zip"
+    expect(page).to have_content(zip_name)
+  end
+
+
 end
 
 When(/^I attach no zip file and key in the topic (.*)$/) do |topic_name|
