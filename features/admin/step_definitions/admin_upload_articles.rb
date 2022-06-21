@@ -18,7 +18,7 @@ end
 
 ## Upload funtionalities
 When(/^I attach a zip file called (.*) and key in the topic (.*)$/) do |zip_name, topic_name|
-  attach_file(Rails.root + "features/test_zip/#{zip_name}")
+  attach_file(Rails.root + "app/assets/test_zip/#{zip_name}")
   fill_in :title, with: topic_name
 end
 
@@ -34,11 +34,24 @@ And(/^I should see the above (.*) zip file with its corresponding (.*)$/) do |zi
   expect(page).to have_current_path('/admin/uploads')
   expect(page).to have_content(topic_name)
   if zip_name == "rus.zip"
-    expect(page).to have_content(zip_name)
+    articles = [
+      "Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf",
+      "Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf"
+    ]
   elsif zip_name == "uav.zip"
-    expect(page).to have_content(zip_name)
+    articles = [
+      "Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf",
+      "Chinese drone firm DJI pauses operations in Russia and Ukraine - BBC News.pdf"
+    ]
   elsif zip_name == "ukr.zip"
-    expect(page).to have_content(zip_name)
+    articles = [
+      "How many Ukrainian refugees are there and where have they gone_ - BBC News.pdf",
+      "Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News.pdf"
+    ]
+  end
+
+  articles.each do |article|
+    expect(page).to have_content(article)
   end
 
 
@@ -53,7 +66,7 @@ And(/^I should remain in this upload page$/) do
   expect(page).to have_current_path('/admin/uploads')
 end
 
-When(/^I click "([^"]*)" button$/) do |arg|
+When(/^I click "Back to Upload Database" button$/) do
   find("#back-to-database").click
 end
 
