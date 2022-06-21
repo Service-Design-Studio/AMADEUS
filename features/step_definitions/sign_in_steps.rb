@@ -13,7 +13,7 @@ end
 
 ## Login Functionalities
 When(/^I sign in with correct credentials Email (.*) and password (.*)$/) do |email, password|
-  login(email, password)
+  capybara_login(email, password)
 end
 
 Then(/^I should be logged in as admin$/) do
