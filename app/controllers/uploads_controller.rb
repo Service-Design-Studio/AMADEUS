@@ -27,7 +27,8 @@ class UploadsController < ApplicationController
     respond_to do |format|
       if @upload.save
         flash[:success] = "Upload was successfully created."
-        format.html { redirect_to upload_url(@upload)}
+        # format.html { redirect_to upload_url(@upload)}
+        format.html { redirect_to uploads_url}
         format.json { render :show, status: :created, location: @upload }
       else
         flash[:error] = "Upload failed."
@@ -42,7 +43,8 @@ class UploadsController < ApplicationController
     respond_to do |format|
       if @upload.update(upload_params)
         flash[:success] = "Upload was successfully updated."
-        format.html { redirect_to upload_url(@upload)}
+        # format.html { redirect_to upload_url(@upload)}
+        format.html { redirect_to uploads_url}
         format.json { render :show, status: :ok, location: @upload }
       else
         flash[:error] = "Update failed."

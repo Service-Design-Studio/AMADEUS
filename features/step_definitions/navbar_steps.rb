@@ -25,7 +25,7 @@ When(/^I click on the ([^"]*) feature$/) do |feature_name|
   elsif feature_name == "Admin"
     find("#admin-feature-link").click
   elsif feature_name == "Sign Out"
-
+    capybara_logout
   end
 end
 
