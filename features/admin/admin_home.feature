@@ -18,6 +18,6 @@ Feature: navigate to different admin functionalities
 
     Examples:
     |  feature_name   |
-    |  Topic List    |
-    | New Upload |
+    |  Topic List     |
+    |   New Upload    |
     |  Edit articles  |
