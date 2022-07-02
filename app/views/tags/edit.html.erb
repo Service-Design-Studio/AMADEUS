@@ -1,0 +1,11 @@
+<h1>Editing Tag</h1>
+
+<%= render "form", tag: @tag %>
+
+<br>
+
+<div class="d-grid gap-2">
+  <%= link_to "Show this Tag", @tag %> 
+  <%= link_to "Back to Tags", tags_path %> 
+  <%= link_to "Back to Topics", posts_path %>
+</div>

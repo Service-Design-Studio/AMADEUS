@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Topic List</h1>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <%= render post %>
+    <p>
+      <%= link_to "Show this Topic", post %>
+    </p>
+  <% end %>
+</div>
+
+
+<div class="mt-5">
+  <p display:block> <%= link_to "New Topic",new_post_path %> </p>
+  <p display:block> <%=  link_to "Tags", tags_path %> </p>
+</div>
