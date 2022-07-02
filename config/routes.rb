@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   scope :admin do
     # resources :articles, only: [:index, :update]
     resources :uploads
+    resources :posts
+    resources :tags
   end
 
   get "admin", to: "sessions#admin"

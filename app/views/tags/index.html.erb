@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tags</h1>
+
+<div id="tags">
+  <% @tags.each do |tag| %>
+    <%= render tag %>
+    <p>
+      <%= link_to "Show this tag", tag %>
+    </p>
+  <% end %>
+</div>
+
+<div class="mt-5 d-grid gap-2">
+  <%= link_to "New Tag", new_tag_path %>
+  <%= link_to "Back to Topic List", posts_path %>
+</div>
