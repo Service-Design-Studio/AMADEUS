@@ -42,16 +42,7 @@ class UploadsController < ApplicationController
   def create
     file = params[:upload][:file]
     if !file.nil?
-      Zip::File.open(file) do |zipfile|
-        zipfile.each do |entry|
-          if entry.file?
-            new_upload = Upload.new()
-            new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
-            new_upload.title = params[:upload][:title]
-            new_upload.save
-          end
-        end
-      end
+      Upload.unzip_file(file,params)
     end
     respond_to do |format|
       format.html { redirect_to uploads_url }
