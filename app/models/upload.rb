@@ -4,6 +4,8 @@ require 'pdf-reader'
 class Upload < ApplicationRecord
   has_one_attached :file
   validate :validate_attachment_filetype
+  has_many :uploadlinks, dependent: :destroy
+  has_many :topics, through: :uploadlinks
 
 
     private

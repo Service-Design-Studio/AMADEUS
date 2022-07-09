@@ -5,7 +5,19 @@
         <p> <%= upload.title %> </p>
       </div>
       <div style="display: table-cell;"> <%= render 'uploads/attachment', upload: upload %> </div>
+
+      <div style="display: table-cell;">
+          <%#= <strong>Topics:</strong> #%>
+            <% upload.topics.each do |topic| %>
+              <%= link_to topic, style:"text-decoration:none" do %>
+                <span class="tag"><%= topic.name %></span>
+              <% end %>
+            <% end %>
+        </div>  
+      </div>
+
     </div>
   </div>
   <hr style="width:100%", size="5", color=black>
 </div>
+

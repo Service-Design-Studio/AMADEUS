@@ -77,6 +77,13 @@ class UploadsController < ApplicationController
   end
 
   private
+  def create_or_delete_uploads_topics(upload, topic)
+    upload.uploadlinks.destroy_all
+    # tags = tags.strip.split(',')
+    # tags.each do |tag|
+    #   post.tags << Tag.find_or_create_by(name: tag)
+    # end
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_upload
       @upload = Upload.find(params[:id])
