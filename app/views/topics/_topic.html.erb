@@ -1,0 +1,14 @@
+<div id="<%= dom_id topic %>">
+  <p>
+    <strong>Name:</strong>
+    <%= topic.name %>
+  </p>
+  
+  <% topic.uploadlinks.each do |uploadlink| %>
+    <p>Topics:</p>
+    <%#= render 'uploads/upload', upload: taggable.upload #%>
+    <%= link_to "Read More", uploadlink.upload %>
+    <hr />
+  <% end %>
+
+</div>
