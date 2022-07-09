@@ -1,7 +1,14 @@
-<h1>Editing upload</h1>
+<h1>Edit Upload</h1>
 
-<%= render "form", upload: @upload %>
+<%= form_with(model: @upload) do |form| %>
 
+
+  <div class="mb-3">
+    <%= form.label 'Topic', { class: "form-label"} %>
+    <%= form.text_field :title, { class: "form-control", placeholder: "Topic", id: :title }%>
+    <%= form.submit "Update Title", id: "create-upload-button" %>
+  </div>
+<% end %>
 <br>
 
 <div>
