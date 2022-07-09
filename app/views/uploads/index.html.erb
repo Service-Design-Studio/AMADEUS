@@ -20,10 +20,8 @@
 </div>
 <div id="uploads">
   <% @uploads.each do |upload| %>
-    <%= render upload %>
-<!--    <p>-->
-      <%#= link_to "Show this upload", upload, class: "btn btn-outline-secondary btn-sm" %>
-<!--    </p>-->
+      <%= link_to "Show this upload", upload, class: "btn btn-outline-secondary btn-sm" %>
+      <%= render upload %> 
   <% end %>
 </div>
 
