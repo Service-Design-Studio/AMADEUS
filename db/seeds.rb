@@ -5,38 +5,100 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Article.create(
-  title: 'Title 1',
-  category: 'Category 1',
-  summary: 'Summary 1',
-  description: 'Description 1'
-)
+# user1 = User.new(
+#   :email                 => "admin123@admin.com",
+#   :password              => "admin123",
+#   :password_confirmation => "admin123"
+# )
+# user1.save!
 
-Article.create(
-  title: 'Title 2',
-  category: 'Category 2',
-  summary: 'Summary 2',
-  description: 'Description 2'
-)
+# user2 = User.new(
+#   :email                 => "admin456@admin.com",
+#   :password              => "admin456",
+#   :password_confirmation => "admin456"
+# )
+# user2.save!
 
-user1 = User.new(
-  :email                 => "admin123@admin.com",
-  :password              => "admin123",
-  :password_confirmation => "admin123"
-)
-user1.save!
+# user3 = User.new(
+#   :email                 => "admin789@admin.com",
+#   :password              => "admin789",
+#   :password_confirmation => "admin789"
+# )
+# user3.save!
 
-user2 = User.new(
-  :email                 => "admin456@admin.com",
-  :password              => "admin456",
-  :password_confirmation => "admin456"
-)
-user2.save!
+tag50 = Tag.new(:name => "testing1")
+tag50.id = 50
+tag50.save!
 
-user3 = User.new(
-  :email                 => "admin789@admin.com",
-  :password              => "admin789",
-  :password_confirmation => "admin789"
-)
-user3.save!
+tag51 = Tag.new(:name => "testing2")
+tag51.id = 51
+tag51.save!
 
+post40 = Post.new(:title => "post40" )
+post40.id = 40
+post40.save!
+
+post41 = Post.new(:title => "post41" )
+post41.id = 41
+post41.save!
+
+taggabletest = Taggable.new(
+  :post_id => 40, 
+  :tag_id => 51
+  )
+taggabletest.save!
+
+taggabletest2 = Taggable.new(
+  :post_id => 40,
+  :tag_id => 50,
+  )
+taggabletest2.save!
+
+
+topic1 = Topic.new(
+  :name => "topic1",
+  :id =>60,
+)
+topic1.save!
+
+topic2 = Topic.new(
+  :name => "topic2",
+  :id =>61,
+)
+topic2.save!
+
+uploadlink1 = Uploadlink.new(
+  :upload_id => 1,
+  :topic_id => 60,
+)
+uploadlink1.save!
+
+uploadlink2 = Uploadlink.new(
+  :upload_id => 1,
+  :topic_id => 61,
+)
+uploadlink2.save!
+
+topic3 = Topic.new(
+  :name => "topic3",
+  :id =>62,
+)
+topic3.save!
+
+topic4 = Topic.new(
+  :name => "topic4",
+  :id =>63,
+)
+topic4.save!
+
+uploadlink3 = Uploadlink.new(
+  :upload_id => 1,
+  :topic_id => 62,
+)
+uploadlink3.save!
+
+uploadlink4 = Uploadlink.new(
+  :upload_id => 1,
+  :topic_id => 63,
+)
+uploadlink4.save!

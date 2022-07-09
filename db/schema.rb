@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_01_111720) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_09_163622) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -55,8 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_111720) do
   end
 
   create_table "taggables", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "tag_id", null: false
+    t.integer "post_id"
+    t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_taggables_on_post_id"
@@ -67,6 +67,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_111720) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "uploadlinks", force: :cascade do |t|
+    t.integer "upload_id", null: false
+    t.integer "topic_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_uploadlinks_on_topic_id"
+    t.index ["upload_id"], name: "index_uploadlinks_on_upload_id"
   end
 
   create_table "uploads", force: :cascade do |t|
@@ -92,4 +107,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_111720) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "taggables", "posts"
   add_foreign_key "taggables", "tags"
+  add_foreign_key "uploadlinks", "topics"
+  add_foreign_key "uploadlinks", "uploads"
 end
