@@ -51,14 +51,25 @@ class UploadsController < ApplicationController
 
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
+    result = create_or_delete_uploads_topics(@upload, params[:upload][:topics])
+
     respond_to do |format|
-      if @upload.update(upload_params)
-        flash[:success] = "Upload was successfully updated."
-        # format.html { redirect_to upload_url(@upload)}
-        format.html { redirect_to uploads_url}
-        format.json { render :show, status: :ok, location: @upload }
+      if result == "exist" || result == "empty"
+          if result == "exist"
+            flash[:danger] = "Current article already includes #{params[:upload][:topics]}!"
+          end
+          if result == "empty"
+            flash[:danger] = "Invalid topic input!"
+          end
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @upload.errors, status: :unprocessable_entity }
+      elsif @upload.update(upload_params.except(:topics))
+        flash[:success] = "Topics successfully updated."
+        format.html { redirect_to edit_upload_path(@upload)}
+        # format.html { redirect_to uploads_url}
+        format.json { render :edit, status: :ok, location: @upload }
       else
-        flash[:error] = "Update failed."
+        flash[:danger] = "Update failed."
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @upload.errors, status: :unprocessable_entity }
       end
@@ -78,7 +89,25 @@ class UploadsController < ApplicationController
 
   private
   def create_or_delete_uploads_topics(upload, topic)
-    upload.uploadlinks.destroy_all
+    upload.uploadlinks.each do |uploadlink|
+      if uploadlink.topic.name == topic
+        return "exist"
+      end
+    end
+
+    if ((topic == "") || topic.nil?)
+      return "empty"
+    end
+
+    new_topic = Topic.find_by(name: topic)
+    if new_topic.nil?
+      new_topic = Topic.create(name: topic)
+      new_uploadlink = Uploadlink.create(upload_id: @upload.id, topic_id: new_topic.id, similarity: 100)
+    else
+      new_uploadlink = Uploadlink.create(upload_id: @upload.id, topic_id: new_topic.id, similarity: 100)
+    end
+
+    # upload.uploadlinks.destroy_all
     # tags = tags.strip.split(',')
     # tags.each do |tag|
     #   post.tags << Tag.find_or_create_by(name: tag)
@@ -91,7 +120,7 @@ class UploadsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def upload_params
-      params.require(:upload).permit(:title, :file)
+      params.require(:upload).permit(:title, :file, :topics)
     end
 
 
