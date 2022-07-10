@@ -1,6 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @upload %>
+<h1><%= render 'uploads/attachment', upload: @upload %></h1>
+
+<br>
+
+<ul class="list-group">
+  <% @upload.uploadlinks.each do |uploadlink| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <%= link_to uploadlink.topic, style:"text-decoration:none" do %>
+          <%= uploadlink.topic.name %>
+        <% end %>
+        <span class="badge bg-primary rounded-pill"><%=uploadlink.similarity%></span>
+      </li>
+  <% end %>
+</ul>
 
 <br>
 
