@@ -2,6 +2,13 @@
 
 <%= form_with(model: @upload) do |form| %>
 
+  <label for="addnewtopiclist" class="form-label">Add new topic</label>
+  <input class="form-control" list="topicslist" id="addnewtopiclist" placeholder="Add new topic...">
+  <datalist id="topicslist">
+    <%= Topic.all.each do |topic| %>
+      <option value="<%= topic.name %>">
+    <% end %>
+  </datalist>
 
   <div class="mb-3">
     <%= form.label 'Topic', { class: "form-label"} %>
