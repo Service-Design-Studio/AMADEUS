@@ -5,15 +5,14 @@
 <br>
 
 <%= form_with(model: @upload) do |form| %>
-
-  <datalist id="topicslist">
-    <%= Topic.all.order(:name).each do |topic| %>
-      <option value="<%= topic.name %>">
+  <datalist id="topics_list">
+    <%= @all_topics.each do |topic| %>
+      <option value="<%= topic %>"></option>
     <% end %>
   </datalist>
 
   <div class="d-grid gap-2">
-    <%= form.text_field :topics, class: "form-control", value: "", placeholder: "Add new topic...", list:"topicslist"%>
+    <%= form.text_field :topics, class: "form-control", value: "", placeholder: "Add new topic...", list:"topics_list"%>
     <%= form.submit "Add new topic", class: "btn btn-outline-success"%>
   </div>
  
@@ -26,15 +25,13 @@
 <% end %>
 <br>
 
-<% @upload.uploadlinks.order(:similarity).reverse.each do |uploadlink| %>
+<% @linked_topics.each do |uploadlink| %>
     <%= link_to uploadlink.topic, class: "list-group-item list-group-item-action" do %>
       <div class="d-flex justify-content-between">
-        <div> <%= uploadlink.topic.name %> </div>
-        <div> 
+        <div> <%= uploadlink.topic.name %>
           <span class="badge bg-primary rounded-pill"><%=uploadlink.similarity%></span> 
         </div>
         <%= link_to "Remove", uploadlink , method: :delete, class: "btn btn-outline-danger" %>
-
       </div>
     <% end %>
 <% end %>

@@ -19,6 +19,8 @@ class UploadsController < ApplicationController
 
   # GET /uploads/1/edit
   def edit
+    @all_topics = Upload.get_all_topics
+    @linked_topics = Upload.get_linked_topics(@upload)
   end
 
   # POST /uploads or /uploads.json
@@ -126,7 +128,6 @@ class UploadsController < ApplicationController
 
   # Ensures that admin must be logged in to access upload feature
     def require_login
-
       if current_user.nil?
         flash[:danger] = "You must be logged in to access this section"
         redirect_to "/sign_in"
