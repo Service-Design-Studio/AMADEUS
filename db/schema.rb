@@ -78,6 +78,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_163622) do
   create_table "uploadlinks", force: :cascade do |t|
     t.integer "upload_id", null: false
     t.integer "topic_id", null: false
+    t.integer "similarity", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["topic_id"], name: "index_uploadlinks_on_topic_id"
