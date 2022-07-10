@@ -36,6 +36,7 @@ class Upload < ApplicationRecord
       reader = PDF::Reader.new(StringIO.new(pdf.get_input_stream.read))
       first_page = reader.pages[0].text.split("\n")
       title = first_page[0]
+      return title
     end
 
     # Generates random upload_links associated to the upload, remove when ML is implemented
@@ -45,8 +46,16 @@ class Upload < ApplicationRecord
       n.times do
         topic_id = topic_ids.sample
         similarity = Random.rand(1...100)
-        new_uploadlink = Uploadlink.create(upload_id: upload_id, topic_id: topic_id, similarity: similarity)
+        Uploadlink.create(upload_id: upload_id, topic_id: topic_id, similarity: similarity)
         topic_ids.delete(topic_id)
       end
+    end
+
+    def self.get_all_topics
+      Topic.all.collect(&:name)
+    end
+
+    def self.get_linked_topics(upload)
+      upload.uploadlinks.order(:similarity).reverse
     end
 end
