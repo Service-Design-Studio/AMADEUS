@@ -26,6 +26,7 @@ class Upload < ApplicationRecord
             new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
             new_upload.title = get_pdf_title(entry)
             new_upload.save
+            seed_pdf_topic(new_upload.id)
           end
         end
       end
@@ -37,5 +38,15 @@ class Upload < ApplicationRecord
       title = first_page[0]
     end
 
-
+    # Generates random upload_links associated to the upload, remove when ML is implemented
+    def self.seed_pdf_topic(upload_id)
+      topic_ids = Topic.pluck(:id)
+      n = Random.rand(1...topic_ids.length)
+      n.times do
+        topic_id = topic_ids.sample
+        puts "ADDING: #{topic_id}"
+        Uploadlink.create(upload_id: upload_id, topic_id: topic_id)
+        topic_ids.delete(topic_id)
+      end
+    end
 end
