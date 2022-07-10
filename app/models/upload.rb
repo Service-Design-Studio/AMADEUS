@@ -44,8 +44,8 @@ class Upload < ApplicationRecord
       n = Random.rand(1...topic_ids.length)
       n.times do
         topic_id = topic_ids.sample
-        puts "ADDING: #{topic_id}"
-        Uploadlink.create(upload_id: upload_id, topic_id: topic_id)
+        similarity = Random.rand(1...100)
+        new_uploadlink = Uploadlink.create(upload_id: upload_id, topic_id: topic_id, similarity: similarity)
         topic_ids.delete(topic_id)
       end
     end

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :posts
     resources :tags
     resources :topics
+    resources :uploadlinks
   end
 
   get "admin", to: "sessions#admin"
