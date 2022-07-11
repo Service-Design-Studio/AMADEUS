@@ -3,43 +3,34 @@
 <h1><%= render 'uploads/attachment', upload: @upload %></h1>
 
 <br>
+<div class="custom-inner-padding">
+  <% @linked_topics.each do |uploadlink| %>
+    <div class="d-flex justify-content-between">
+      <%= link_to edit_topic_path(uploadlink.topic), class: "list-group-item list-group-item-action" do %>
+        <%= uploadlink.topic.name %>
+        <span class="badge bg-primary rounded-pill"><%= "#{uploadlink.similarity} %" %></span>
+        <%= link_to "x", uploadlink, method: :delete, class: "btn btn-outline-danger" %>
+      <% end %>
+    </div>
+  <% end %>
 
-<%= form_with(model: @upload) do |form| %>
-  <datalist id="topics_list">
-    <%= @all_topics.each do |topic| %>
-      <option value="<%= topic %>"></option>
-    <% end %>
-  </datalist>
+  <br>
 
   <div class="d-grid gap-2">
-    <%= form.text_field :topics, class: "form-control", value: "", placeholder: "Add new topic...", list:"topics_list"%>
-    <%= form.submit "Add new topic", class: "btn btn-outline-success"%>
-  </div>
- 
-  <%# <div class="mb-3"> %>
-    <%#= form.label 'Topic', { class: "form-label"} %>
-    <%#= form.text_field :title, { class: "form-control", placeholder: "Topic", id: :title }%>
-    <%#= form.submit "Update Title", id: "create-upload-button" %>
-  <%# </div> %>
+    <%= form_with(model: @upload) do |form| %>
+      <datalist id="topics_list">
+        <%= @all_topics.each do |topic| %>
+          <option value="<%= topic %>"></option>
+        <% end %>
+      </datalist>
 
-<% end %>
-<br>
-
-<% @linked_topics.each do |uploadlink| %>
-    <%= link_to uploadlink.topic, class: "list-group-item list-group-item-action" do %>
-      <div class="d-flex justify-content-between">
-        <div> <%= uploadlink.topic.name %>
-          <span class="badge bg-primary rounded-pill"><%=uploadlink.similarity%></span> 
-        </div>
-        <%= link_to "Remove", uploadlink , method: :delete, class: "btn btn-outline-danger" %>
+      <div class="d-grid gap-2">
+        <%= form.text_field :topics, class: "form-control", value: "", placeholder: "Add new topic...", list: "topics_list" %>
+        <%= form.submit "Add new topic", class: "btn btn-outline-success d-grid gap-2" %>
       </div>
     <% end %>
-<% end %>
-
-<br>
-
-<div class="d-grid gap-2">
-  <%#= link_to "Show this upload", @upload %>
-  <%= link_to "Delete this article", @upload, method: :delete, class: "btn btn-outline-danger" %>
-  <%= link_to "Back to database", uploads_path, class: "btn btn-primary" %>
+    <%#= link_to "Show this upload", @upload %>
+    <%= link_to "Delete this article", @upload, method: :delete, class: "btn btn-outline-danger" %>
+    <%= link_to "Back to Database", uploads_path, class: "btn btn-primary" %>
+  </div>
 </div>

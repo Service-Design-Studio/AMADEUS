@@ -18,7 +18,6 @@ end
 
 Then(/^I should be logged in as admin$/) do
   expect(page).to have_current_path('/admin')
-  expect(page).to have_content('Signed in successfully.')
 end
 
 When(/^I fill in my credentials with Email (.*) and Password (.*)$/) do |email, password|

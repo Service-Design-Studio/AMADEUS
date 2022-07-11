@@ -1,3 +1,3 @@
 class UploadSerializer < ActiveModel::Serializer
-  attributes :id, :title
+  attributes :id
 end

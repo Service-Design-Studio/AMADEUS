@@ -1,19 +1,10 @@
 <%= form_with(model: upload) do |form| %>
-
-
-  <div class="mb-3">
-    <%= form.label 'Topic', { class: "form-label"} %>
-    <%= form.text_field :title, { class: "form-control", placeholder: "Topic", id: :title }%>
-  </div>
-
-  <br>
-
   <div class="drag-area">
-      <%= form.file_field :file, id: :file, class: "custom-file-input", accept:'.zip', :required => 'required' %>
+    <%= form.file_field :file, id: :file, class: "custom-file-input", accept: '.zip', :required => 'required' %>
   </div>
 
   <div>
-    <%= form.submit "Create Upload", id: "create-upload-button" %>
+    <%= form.submit "Upload", id: "create-upload-button" %>
   </div>
 
 <% end %>

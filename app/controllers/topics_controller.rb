@@ -1,31 +1,31 @@
 class TopicsController < InheritedResources::Base
   before_action :set_topic, only: %i[ show edit update destroy ]
 
-  # GET /tags or /tags.json
+  # GET /topics or /topics.json
   def index
     @topics = Topic.all
   end
 
-  # GET /tags/1 or /tags/1.json
+  # GET /topics/1 or /topics/1.json
   def show
   end
 
-  # GET /tags/new
+  # GET /topics/new
   def new
     @topic = Topic.new
   end
 
-  # GET /tags/1/edit
+  # GET /topics/1/edit
   def edit
   end
 
-  # POST /tags or /tags.json
+  # POST /topics or /topics.json
   def create
     @topic = Topic.new(tag_params)
 
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to tag_url(@topic), notice: "topic was successfully created." }
+        format.html { redirect_to topics_path, notice: "Added #{tag_params[:name]}" }
         format.json { render :show, status: :created, location: @topic }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,11 +34,11 @@ class TopicsController < InheritedResources::Base
     end
   end
 
-  # PATCH/PUT /tags/1 or /tags/1.json
+  # PATCH/PUT /topics/1 or /topics/1.json
   def update
     respond_to do |format|
       if @topic.update(tag_params)
-        format.html { redirect_to tag_url(@topic), notice: "topic was successfully updated." }
+        format.html { redirect_to topics_path, notice: "Updated into #{tag_params[:name]}." }
         format.json { render :show, status: :ok, location: @topic }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,24 +47,25 @@ class TopicsController < InheritedResources::Base
     end
   end
 
-  # DELETE /tags/1 or /tags/1.json
+  # DELETE /topics/1 or /topics/1.json
   def destroy
     @topic.destroy
 
     respond_to do |format|
-      format.html { redirect_to tags_url, notice: "topic was successfully destroyed." }
+      format.html { redirect_to topics_path, notice: "Deleted #{@topic.name}." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_topic
-      @topic = Topic.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def tag_params
-      params.require(:topic).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_topic
+    @topic = Topic.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tag_params
+    params.require(:topic).permit(:name)
+  end
 end

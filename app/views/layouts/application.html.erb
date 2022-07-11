@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>FinalProjectGroup5Amadeus</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -13,7 +13,7 @@
 
   <body>
     <%= render 'layouts/navbar'%>
-    <main>
+    <main class="custom-main-padding">
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
