@@ -3,12 +3,15 @@
 <h1><%= render 'uploads/attachment', upload: @upload %></h1>
 
 <br>
-<div class="custom-inner-padding">
+<div class="d-grid gap-2">
   <% @linked_topics.each do |uploadlink| %>
     <div class="d-flex justify-content-between">
       <%= link_to edit_topic_path(uploadlink.topic), class: "list-group-item list-group-item-action" do %>
-        <%= uploadlink.topic.name %>
-        <span class="badge bg-primary rounded-pill"><%= "#{uploadlink.similarity} %" %></span>
+        <div class="d-flex justify-content-between">
+          <%= uploadlink.topic.name %>
+          <span class="badge bg-primary rounded-pill"><%= "#{uploadlink.similarity} %" %></span>
+
+        </div>
         <%= link_to "x", uploadlink, method: :delete, class: "btn btn-outline-danger" %>
       <% end %>
     </div>
