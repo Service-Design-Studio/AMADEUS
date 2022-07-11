@@ -1,12 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Upload Database</h1>
-<%= link_to "New Upload", new_upload_path, class: "btn btn-success", id: "new-upload-button"%>
+<div class="center">
+  <h1>Database</h1>
+  <%= link_to "New Upload", new_upload_path, class: "btn btn-success", id: "new-upload-button" %>
+  <%= link_to "Back to Home", admin_path, class: "btn btn-primary", id: "back-to-home" %>
+</div>
 <br><br>
 
 <div style="width: 100%; display: table;">
   <div style="display: table-row">
-    <div style="width: 400px; display: table-cell;">
+    <div style="width: 60%; display: table-cell;">
       <p>
         <strong>Article</strong>
       </p>
@@ -21,8 +24,10 @@
 
 <div id="uploads">
   <% @uploads.each do |upload| %>
-      <%= render upload %> 
+    <%= render upload %>
   <% end %>
 </div>
+
+
 
 

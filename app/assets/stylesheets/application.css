@@ -14,12 +14,13 @@
  *= require_self
  */
 
- *{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  body{
+}
+
+body {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,14 +28,27 @@
     padding-top: 100px;
     padding-bottom: 100px;
     background: white;
-  }
+}
 
-  .tag {
-    background:#073da2;
-    color:#FFF;
+.tag {
+    background: #073da2;
+    color: #FFF;
     padding: 0.25em;
     margin: 0.25em;
     border-radius: 0.25em;
     display: inline-block;
- }
+}
+
+.center {
+    text-align: center;
+}
+
+.custom-main-padding {
+    padding: 5% 10% 5% 10%;
+}
+
+.custom-inner-padding {
+    padding-left: 35%;
+    padding-right: 35%;
+}
   

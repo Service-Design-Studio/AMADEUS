@@ -7,61 +7,31 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 user1 = User.new(
-  :email                 => "admin123@admin.com",
-  :password              => "admin123",
+  :email => "admin123@admin.com",
+  :password => "admin123",
   :password_confirmation => "admin123"
 )
 user1.save!
 
 user2 = User.new(
-  :email                 => "admin456@admin.com",
-  :password              => "admin456",
+  :email => "admin456@admin.com",
+  :password => "admin456",
   :password_confirmation => "admin456"
 )
 user2.save!
 
 user3 = User.new(
-  :email                 => "admin789@admin.com",
-  :password              => "admin789",
+  :email => "admin789@admin.com",
+  :password => "admin789",
   :password_confirmation => "admin789"
 )
 user3.save!
 
-topic_bank = ["Tanks","Artillery", "UAVs", "Fighter/Bomber Aircraft", "Helicopters", "Missles", "MANPADs", "Infrastructure damage/strike"]
+topic_bank = ["Tanks", "Artillery", "UAVs", "Fighter/Bomber Aircraft", "Helicopters", "Missles", "MANPADs", "Infrastructure damage/strike"]
 topic_bank.each do |topic|
   topic = Topic.new(:name => topic)
   topic.save!
 end
-
-
-# tag50 = Tag.new(:name => "testing1")
-# tag50.id = 50
-# tag50.save!
-
-# tag51 = Tag.new(:name => "testing2")
-# tag51.id = 51
-# tag51.save!
-
-# post40 = Post.new(:title => "post40" )
-# post40.id = 40
-# post40.save!
-
-# post41 = Post.new(:title => "post41" )
-# post41.id = 41
-# post41.save!
-
-# taggabletest = Taggable.new(
-#   :post_id => 40, 
-#   :tag_id => 51
-#   )
-# taggabletest.save!
-
-# taggabletest2 = Taggable.new(
-#   :post_id => 40,
-#   :tag_id => 50,
-#   )
-# taggabletest2.save!
-
 
 # topic1 = Topic.new(
 #   :name => "topic1",
