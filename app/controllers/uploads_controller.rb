@@ -3,6 +3,7 @@ require 'zip'
 class UploadsController < ApplicationController
   before_action :set_upload, only: %i[ show edit update destroy ]
   before_action :require_login, only: [:new, :edit, :update, :destroy, :index, :show, :create]
+  before_action :set_tagging,  only: %i[ edit update ]
 
   # GET /uploads or /uploads.json
   def index
@@ -20,8 +21,6 @@ class UploadsController < ApplicationController
 
   # GET /uploads/1/edit
   def edit
-    @all_topics = Upload.get_all_topics
-    @linked_topics = Upload.get_linked_topics(@upload)
   end
 
   def create
@@ -37,6 +36,7 @@ class UploadsController < ApplicationController
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
     result = modify_uploads_topics(@upload, params[:upload][:topics])
+
 
     respond_to do |format|
       if result == "exist" || result == "empty"
@@ -92,6 +92,11 @@ class UploadsController < ApplicationController
     else
       Uploadlink.create(upload_id: @upload.id, topic_id: new_topic.id, similarity: 100)
     end
+  end
+
+  def set_tagging
+    @all_topics = Upload.get_all_topics
+    @linked_topics = Upload.get_linked_topics(@upload)
   end
 
   # Use callbacks to share common setup or constraints between actions.
