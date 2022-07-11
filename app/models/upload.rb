@@ -23,7 +23,6 @@ class Upload < ApplicationRecord
         if entry.file?
           new_upload = Upload.new
           new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
-          # new_upload.title = get_pdf_title(entry)
           new_upload.save
           seed_pdf_topic(new_upload.id)
         end
