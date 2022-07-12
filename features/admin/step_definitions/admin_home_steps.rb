@@ -22,7 +22,7 @@ end
 
 Then(/^I should be redirected to (.*) page$/) do |feature_name|
   if feature_name == "Topic List"
-    expect(page).to have_current_path('/admin#')
+    expect(page).to have_current_path('/admin/topics')
   elsif feature_name == "New Upload"
     expect(page).to have_current_path('/admin/uploads/new')
   elsif feature_name == "Upload Database"
