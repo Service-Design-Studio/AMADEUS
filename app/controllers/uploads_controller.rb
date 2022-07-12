@@ -7,7 +7,7 @@ class UploadsController < ApplicationController
 
   # GET /uploads or /uploads.json
   def index
-    @uploads = Upload.all
+    @uploads = Upload.all.reverse
   end
 
   # GET /uploads/1 or /uploads/1.json

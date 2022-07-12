@@ -1,7 +1,9 @@
 require 'zip'
 require 'pdf-reader'
+require 'json'
 
 class Upload < ApplicationRecord
+  require_relative 'nltk_model.rb'
   has_one_attached :file
   validate :validate_attachment_filetype
   has_many :uploadlinks, dependent: :destroy
@@ -23,10 +25,14 @@ class Upload < ApplicationRecord
         if entry.file?
           new_upload = Upload.new
           new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
-          new_upload.content = get_pdf_text(entry)
-          puts get_pdf_text(entry)
+          content = get_pdf_text(entry)
+          response = NLTK_Model.request(content)
+          summary = response[:summary]
+          topics = response.dig(:topics)
+          new_upload.content = content
+          new_upload.summary = summary
           new_upload.save
-          seed_pdf_topic(new_upload.id)
+          set_pdf_topic(new_upload.id, topics)
         end
       end
     end
@@ -34,9 +40,21 @@ class Upload < ApplicationRecord
   end
 
   def self.get_pdf_text(pdf)
+    content = ""
     reader = PDF::Reader.new(StringIO.new(pdf.get_input_stream.read))
-    first_page = reader.pages[0]
-    return first_page
+    reader.pages.each do |page|
+      content.concat(page.text.strip.gsub("\n", ' ').squeeze(' '))
+    end
+    return content.to_json
+  end
+
+  def self.set_pdf_topic(upload_id, topics)
+    topics.each do |topic, frequency|
+      topic = Topic.new(:name => topic)
+      topic.save!
+      similarity = Random.rand(1...100)
+      Uploadlink.create(upload_id: upload_id, topic_id: topic.id, similarity: similarity)
+    end
   end
 
   # Generates random upload_links associated to the upload, remove when ML is implemented

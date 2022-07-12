@@ -3,7 +3,7 @@ class TopicsController < InheritedResources::Base
 
   # GET /topics or /topics.json
   def index
-    @topics = Topic.all
+    @topics = Topic.all.reverse
   end
 
   # GET /topics/1 or /topics/1.json

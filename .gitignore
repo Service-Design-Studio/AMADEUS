@@ -36,3 +36,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Python
+__pycache__
+lib/assets/env/*
