@@ -1,8 +1,6 @@
 require 'zip'
 
 class UploadsController < ApplicationController
-  include FlashString
-
   before_action :set_upload, only: %i[ show edit update destroy ]
   before_action :require_login, only: [:new, :edit, :update, :destroy, :index, :show, :create]
   before_action :set_tagging,  only: %i[ edit update ]

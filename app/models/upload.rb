@@ -8,6 +8,7 @@ class Upload < ApplicationRecord
   has_many :topics, through: :uploadlinks
 
   private
+
   def validate_attachment_filetype
     return unless file.attached?
 
@@ -22,7 +23,8 @@ class Upload < ApplicationRecord
         if entry.file?
           new_upload = Upload.new
           new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
-          new_upload.title = get_pdf_text(entry)
+          new_upload.content = get_pdf_text(entry)
+          puts get_pdf_text(entry)
           new_upload.save
           seed_pdf_topic(new_upload.id)
         end
