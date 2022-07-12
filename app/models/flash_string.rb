@@ -5,6 +5,7 @@ module FlashString
     INVALID_TOPIC = "Invalid topic input!"
     ADD_FAIL = "Update failed!"
     UPLOAD_DELETED = "Upload deleted!"
+    UPLOAD_SOME_FAILED = "Some pdfs failed to be parse!"
 
     def self.get_duplicate_upload(upload)
       "Current article already includes %{upload}!" % {upload: upload}
