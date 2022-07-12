@@ -1,0 +1,12 @@
+{
+  "upload": {
+    "upload_text": "Russia has become China's biggest supplier of oil as the country sold discounted crude to Beijing amid sanctions over the Ukraine war. Imports of Russian oil rose by 55% from a year earlier to a record level in May, displacing Saudi Arabia as China's biggest provider. China has ramped up purchases of Russian oil despite demand dampened by Covid curbs and a slowing economy. In February, China and Russia declared their friendship had no limits. And Chinese companies, including state refining giant Sinopec and state-run Zhenhua Oil, have increased their purchases of Russian crude in recent months after being offered heavy discounts as buyers in Europe and the US shunned Russian energy in line with sanctions over its war on Ukraine. The imports into China, which include supplies pumped through the East Siberia Pacific Ocean pipeline and shipments by sea, totalled nearly 8.42m tonnes last month, according to data from the Chinese General Administration",
+    "replace_dict": {
+      "US": "USA",
+      "U.S": "USA",
+      "United States": "USA"
+    },
+    "num_topic": "7",
+    "summary_threshold": "1.3"
+  }
+}
