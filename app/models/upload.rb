@@ -35,7 +35,7 @@ class Upload < ApplicationRecord
 
   def self.get_pdf_text(pdf)
     reader = PDF::Reader.new(StringIO.new(pdf.get_input_stream.read))
-    first_page = reader.pages[0]
+    first_page = reader.pages[0].text.gsub!(/[\W]/, ' ').squeeze(" ")
     return first_page
   end
 
