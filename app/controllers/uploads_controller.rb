@@ -1,6 +1,8 @@
 require 'zip'
 
 class UploadsController < ApplicationController
+  include FlashString
+
   before_action :set_upload, only: %i[ show edit update destroy ]
   before_action :require_login, only: [:new, :edit, :update, :destroy, :index, :show, :create]
   before_action :set_tagging,  only: %i[ edit update ]
@@ -37,24 +39,23 @@ class UploadsController < ApplicationController
   def update
     result = modify_uploads_topics(@upload, params[:upload][:topics])
 
-
     respond_to do |format|
       if result == "exist" || result == "empty"
         if result == "exist"
-          flash[:danger] = "Current article already includes #{params[:upload][:topics]}!"
+          flash[:danger] = flash_message.get_duplicate_upload(params[:upload][:topics])
         end
         if result == "empty"
-          flash[:danger] = "Invalid topic input!"
+          flash[:danger] = flash_message::INVALID_TOPIC
         end
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @upload.errors, status: :unprocessable_entity }
       elsif @upload.update(upload_params.except(:topics))
-        flash[:success] = "Topics successfully updated."
+        flash[:success] = flash_message.get_added_topic(params[:upload][:topics])
         format.html { redirect_to edit_upload_path(@upload) }
         # format.html { redirect_to uploads_url}
         format.json { render :edit, status: :ok, location: @upload }
       else
-        flash[:danger] = "Update failed."
+        flash[:danger] = flash_message::ADD_FAIL
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @upload.errors, status: :unprocessable_entity }
       end
@@ -63,10 +64,8 @@ class UploadsController < ApplicationController
 
   # DELETE /uploads/1 or /uploads/1.json
   def destroy
-    @upload.destroy
-
     respond_to do |format|
-      flash[:success] = "Upload was successfully destroyed."
+      flash[:danger] = flash_message::UPLOAD_DELETED
       format.html { redirect_to uploads_url }
       format.json { head :no_content }
     end
@@ -112,8 +111,12 @@ class UploadsController < ApplicationController
   # Ensures that admin must be logged in to access upload feature
   def require_login
     if current_user.nil?
-      flash[:danger] = "You must be logged in to access this section"
+      flash[:danger] = FlashString::TO_LOGIN
       redirect_to "/sign_in"
     end
+  end
+
+  def flash_message
+    FlashString::UploadString
   end
 end
