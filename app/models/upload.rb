@@ -43,7 +43,7 @@ class Upload < ApplicationRecord
     content = ""
     reader = PDF::Reader.new(StringIO.new(pdf.get_input_stream.read))
     reader.pages.each do |page|
-      content.concat(page.text.strip.gsub("\n", ' ').squeeze(' '))
+      content.concat(page.text.strip.gsub!(/[\W]/, ' ').squeeze(' '))
     end
     return content.to_json
   end

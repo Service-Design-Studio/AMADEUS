@@ -21,10 +21,10 @@ Feature: upload zipped folder containing pdf file of articles
     And I should see the above <zip_name> zip file with its corresponding <topic_name>
 
     Examples:
-      | zip_name | topic_name |
-      | rus.zip  |   Russia   |
-      | uav.zip  |    UAV     |
-      | ukr.zip  |  Ukraine   |
+      | zip_name |
+      | rus.zip  |
+      | uav.zip  |
+      | ukr.zip  |
 
   @upload @fail
   Scenario Outline: uploading zip file by manually adding files

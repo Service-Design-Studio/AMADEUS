@@ -7,10 +7,10 @@ Feature: uploaded zipped folder successfully
     Given I am logged in as admin of Amadeus
     And I am viewing the upload database page
     And I have these zip files already uploaded
-      | zip_name | topic_name |
-      | rus.zip  |   Russia   |
-      | uav.zip  |    UAV     |
-      | ukr.zip  |  Ukraine   |
+      | zip_name |
+      | rus.zip  |
+      | uav.zip  |
+      | ukr.zip  |
 
   @db @view
   Scenario: viewing all the uploaded zip

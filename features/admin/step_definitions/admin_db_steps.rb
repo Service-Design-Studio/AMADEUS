@@ -5,7 +5,7 @@ end
 
 And /I have these zip files already uploaded/ do |db|
   db.hashes.each do |upload|
-    capybara_upload_zip(upload[:zip_name], upload[:topic_name])
+    capybara_upload_zip(upload[:zip_name])
   end
 end
 

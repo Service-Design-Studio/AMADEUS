@@ -1,17 +1,16 @@
 <%= form_with(model: topic) do |form| %>
   <% if topic.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
-
       <ul>
         <% topic.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <p> <%= error.full_message %></p>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
+
+  <div class="field">
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>  <%= form.submit "Save" %>
   </div>
