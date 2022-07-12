@@ -39,5 +39,9 @@ module FlashString
     def self.get_special_characters(topic)
       "Topic %{topic} contains special characters!" % {topic: topic}
     end
+
+    def self.get_space(topic)
+      "Topic %{topic} starts or ends with a space!" % {topic: topic}
+    end
   end
 end
