@@ -21,6 +21,7 @@ module FlashString
   end
 
   class TopicString
+    INVALID_TOPIC = "Invalid topic input!"
     def self.get_added_topic(topic)
       "%{topic} added." % {topic:topic}
     end
@@ -32,6 +33,15 @@ module FlashString
     def self.get_deleted_topic(topic)
       "Deleted %{topic}." % {topic: topic}
     end
-  end
+    def self.get_duplicate_topic(topic)
+      "Topic %{topic} already exists!" % {topic: topic}
+    end
+    def self.get_special_characters(topic)
+      "Topic %{topic} contains special characters!" % {topic: topic}
+    end
 
+    def self.get_space(topic)
+      "Topic %{topic} starts or ends with a space!" % {topic: topic}
+    end
+  end
 end
