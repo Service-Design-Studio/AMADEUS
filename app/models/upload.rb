@@ -8,7 +8,6 @@ class Upload < ApplicationRecord
   has_many :topics, through: :uploadlinks
 
   private
-
   def validate_attachment_filetype
     return unless file.attached?
 
@@ -23,6 +22,7 @@ class Upload < ApplicationRecord
         if entry.file?
           new_upload = Upload.new
           new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
+          new_upload.title = get_pdf_text(entry)
           new_upload.save
           seed_pdf_topic(new_upload.id)
         end
@@ -31,11 +31,10 @@ class Upload < ApplicationRecord
     @params = params
   end
 
-  def self.get_pdf_title(pdf)
+  def self.get_pdf_text(pdf)
     reader = PDF::Reader.new(StringIO.new(pdf.get_input_stream.read))
-    first_page = reader.pages[0].text.split("\n")
-    title = first_page[0]
-    return title
+    first_page = reader.pages[0]
+    return first_page
   end
 
   # Generates random upload_links associated to the upload, remove when ML is implemented
