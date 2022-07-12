@@ -21,11 +21,12 @@ class TopicsController < InheritedResources::Base
 
   # POST /topics or /topics.json
   def create
-    @topic = Topic.new(tag_params)
+    @topic = Topic.new(topic_params)
 
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to topics_path, notice: "Added #{tag_params[:name]}" }
+        flash[:success] = flash_message.get_added_topic(topic_params[:name])
+        format.html { redirect_to topics_path }
         format.json { render :show, status: :created, location: @topic }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -36,9 +37,11 @@ class TopicsController < InheritedResources::Base
 
   # PATCH/PUT /topics/1 or /topics/1.json
   def update
+    old_name = @topic.name
     respond_to do |format|
-      if @topic.update(tag_params)
-        format.html { redirect_to topics_path, notice: "Updated into #{tag_params[:name]}." }
+      if @topic.update(topic_params)
+        flash[:success] = flash_message.get_updated_tag(old_name, topic_params[:name])
+        format.html { redirect_to topics_path }
         format.json { render :show, status: :ok, location: @topic }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +55,8 @@ class TopicsController < InheritedResources::Base
     @topic.destroy
 
     respond_to do |format|
-      format.html { redirect_to topics_path, notice: "Deleted #{@topic.name}." }
+      flash[:danger] = flash_message.get_deleted_topic(@topic.name)
+      format.html { redirect_to topics_path }
       format.json { head :no_content }
     end
   end
@@ -65,7 +69,11 @@ class TopicsController < InheritedResources::Base
   end
 
   # Only allow a list of trusted parameters through.
-  def tag_params
+  def topic_params
     params.require(:topic).permit(:name)
+  end
+
+  def flash_message
+    FlashString::TopicString
   end
 end
