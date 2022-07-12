@@ -33,7 +33,12 @@ class TopicsController < InheritedResources::Base
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
-      elsif (@topic[:name].match(/[^a-zA-Z0-9_\s\/]/))
+      elsif (@topic[:name].match(/^(\s.*|.*\s)$/))
+        flash[:danger] = flash_message.get_space(@topic[:name])
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @topic.errors, status: :unprocessable_entity }
+      
+      elsif (@topic[:name].match(/[^a-zA-Z0-9\s\/]/))
         flash[:danger] = flash_message.get_special_characters(@topic[:name])
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
