@@ -43,7 +43,7 @@ class UploadsController < ApplicationController
           flash[:danger] = flash_message.get_duplicate_upload(params[:upload][:topics])
         end
         if result == "empty"
-          flash[:danger] = flash_message::INVALID_TOPIC
+          flash.now[:danger] = flash_message::INVALID_TOPIC
         end
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @upload.errors, status: :unprocessable_entity }
