@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     if user_signed_in?
       render "admin"
     else
-      flash[:danger] = "You must be logged in to access this section"
+      flash[:danger] = FlashString::TO_LOGIN
       redirect_to "/sign_in"
     end
   end
