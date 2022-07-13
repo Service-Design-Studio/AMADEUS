@@ -10,7 +10,7 @@ And /I have these zip files already uploaded/ do |db|
 end
 
 Then(/^I should see all the uploaded zip files$/) do
-  topics = %w(Russia UAV Ukraine)
+  topics = %w(Russia Ukraine)
   articles = [
     "Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf",
     "Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf",
@@ -28,8 +28,8 @@ Then(/^I should see all the uploaded zip files$/) do
   end
 end
 
-When(/^I click on the "New Upload" button$/) do
-  find("#new-upload-button").click
+When(/^I click on the "Upload" button$/) do
+  find("#upload-button").click
 end
 
 Then(/^I am redirected back to the upload page$/) do

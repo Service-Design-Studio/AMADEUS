@@ -11,26 +11,26 @@ user1 = User.new(
   :password => "admin123",
   :password_confirmation => "admin123"
 )
-user1.save!
+user1.save
 
 user2 = User.new(
   :email => "admin456@admin.com",
   :password => "admin456",
   :password_confirmation => "admin456"
 )
-user2.save!
+user2.save
 
 user3 = User.new(
   :email => "admin789@admin.com",
   :password => "admin789",
   :password_confirmation => "admin789"
 )
-user3.save!
+user3.save
 
 topic_bank = ["Tanks", "Artillery", "UAVs", "Fighter/Bomber Aircraft", "Helicopters", "Missles", "MANPADs", "Infrastructure damage/strike"]
 topic_bank.each do |topic|
   topic = Topic.new(:name => topic)
-  topic.save!
+  topic.save
 end
 
 # topic1 = Topic.new(

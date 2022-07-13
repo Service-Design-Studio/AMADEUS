@@ -27,9 +27,9 @@ class UploadsController < ApplicationController
     file = params[:upload][:file]
     unless file.nil?
       Upload.unzip_file(file, params)
-    end
-    respond_to do |format|
-      format.html { redirect_to uploads_url }
+      respond_to do |format|
+        format.html { redirect_to uploads_url }
+      end
     end
   end
 
