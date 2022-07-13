@@ -33,6 +33,7 @@ When(/^I click on a topic$/) do |topic|
     elsif topic == "basketball"
         find("#basketball").click
     end
+end
 
 Then (/^I should be redirected to the edit topic page$/) do |topic|
     #or use topic[:id] not sure
