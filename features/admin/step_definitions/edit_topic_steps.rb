@@ -119,3 +119,12 @@ Then(/^I should see a message that the Name can't be blank and Name is invalid$/
     expect(page).to have_content("Name is invalid")
     expect(page).to have_content("Name can't be blank")
 end
+
+Then('flash message shwon as {string}') do |string|
+    expect(page).to have_content(string)
+end
+
+  
+Then('I should return to the topic list page') do
+    expect(page).to have_current_path('/admin/topics')
+end
