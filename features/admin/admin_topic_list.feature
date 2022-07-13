@@ -1,6 +1,6 @@
 @admin @topic
 Feature: Topic list for  articles
-  As an admin of Amadeus who is interested in the Russian and Ukraine war
+  As an admin of Amadeus who is interested in the Russian-Ukraine war
   So that I can see the breakdown of category for this particular issue
   I want to see the list of topics belong to this issue
 

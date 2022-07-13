@@ -27,11 +27,11 @@ user3 = User.new(
 )
 user3.save!
 
-topic_bank = ["Tanks", "Artillery", "UAVs", "Fighter/Bomber Aircraft", "Helicopters", "Missles", "MANPADs", "Infrastructure damage/strike"]
-topic_bank.each do |topic|
-  topic = Topic.new(:name => topic)
-  topic.save!
-end
+# topic_bank = ["Tanks", "Artillery", "UAVs", "Fighter/Bomber Aircraft", "Helicopters", "Missles", "MANPADs", "Infrastructure damage/strike"]
+# topic_bank.each do |topic_name|
+#   topic = Topic.new(:name => topic_name)
+#   topic.save!
+# end
 
 # topic1 = Topic.new(
 #   :name => "topic1",
