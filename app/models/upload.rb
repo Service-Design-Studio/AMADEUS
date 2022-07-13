@@ -51,7 +51,7 @@ class Upload < ApplicationRecord
   def self.set_pdf_topic(upload_id, topics)
     topics.each do |topic, frequency|
       topic = Topic.new(:name => topic)
-      topic.save!
+      topic.save
       similarity = Random.rand(1...100)
       Uploadlink.create(upload_id: upload_id, topic_id: topic.id, similarity: similarity)
     end
