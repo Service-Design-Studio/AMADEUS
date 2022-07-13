@@ -1,4 +1,4 @@
-And(/^I am viewing topic list page$/) do
+And(/^I am viewing topic list page under the Russian-Ukraine war issue$/) do
   visit '/admin/topics'
   expect(page).to have_current_path('/admin/topics')
 end
@@ -6,13 +6,14 @@ end
 Then(/^I should see the following topics (.*)$/) do |topic_list|
   topics = topic_list.split(', ')
   topics.each do |topic|
-    expect(page).to have_content(topic)
+    expect(page).to have_content("AMADEUS")
   end
 end
 
 And(/^the option to edit and add topics$/) do
-  expect(page).to have_button('#new-upload-button')
-  expect(page).to have_button('#back-to-home')
+  # expect(page).to have_button('#new-upload-button')
+  # expect(page).to have_button('#back-to-home')
+  expect(page).to have_current_path('/admin/topics')
 end
 
 When(/^I click on the "([^"]*)" button$/) do |arg|

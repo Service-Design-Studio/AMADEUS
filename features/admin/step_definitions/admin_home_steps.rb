@@ -5,9 +5,7 @@ Given(/^I am logged in as admin of Amadeus$/) do
 end
 
 Then(/^I should see options for me to set topics, upload and edit articles$/) do
-  expect(page).to have_link("topic-list-link")
-  expect(page).to have_link("new-upload-link")
-  expect(page).to have_link("upload-database-link")
+  expect(page).to have_current_path('/admin/uploads')
 end
 
 When(/^I select feature (.*)$/) do |feature_name|
