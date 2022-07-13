@@ -1,7 +1,8 @@
-Given (/^I am logged in as an admin of Amadeus$/) do
+Given (/^I am logged in as an admin of Amadeus and on topic list page$/) do
     capybara_login('admin123@admin.com', 'admin123')
     visit '/admin/topics'
     expect(page).to have_current_path('/admin/topics')
+end
 
 Then(/^I should a list of topics, that I can click into to edit$/) do
     expect(page).to have_content("cannabis")
@@ -32,6 +33,7 @@ When(/^I click on a topic$/) do |topic|
     elsif topic == "basketball"
         find("#basketball").click
     end
+end
 
 Then (/^I should be redirected to the edit topic page$/) do |topic|
     #or use topic[:id] not sure
