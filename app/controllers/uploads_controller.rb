@@ -62,6 +62,8 @@ class UploadsController < ApplicationController
 
   # DELETE /uploads/1 or /uploads/1.json
   def destroy
+    @upload.destroy
+
     respond_to do |format|
       flash[:danger] = flash_message::UPLOAD_DELETED
       format.html { redirect_to uploads_url }
