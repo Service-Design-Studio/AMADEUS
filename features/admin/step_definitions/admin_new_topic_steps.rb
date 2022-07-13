@@ -115,3 +115,4 @@ Given('I am logged in as an admin of Amadeus viewing the topic list page') do
   Then('I should return to the topic list page') do
     expect(page).to have_current_path('/admin/topics')
   end
+
