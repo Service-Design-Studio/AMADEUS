@@ -32,12 +32,10 @@ class TopicsController < InheritedResources::Base
         flash[:danger] = flash_message.get_duplicate_topic(@topic[:name])
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
       elsif (@topic[:name].match(/^(\s.*|.*\s)$/))
         flash[:danger] = flash_message.get_space(@topic[:name])
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
-
       elsif (@topic[:name].match(/[^a-zA-Z0-9\s\/]/))
         flash[:danger] = flash_message.get_special_characters(@topic[:name])
         format.html { render :new, status: :unprocessable_entity }
@@ -57,23 +55,19 @@ class TopicsController < InheritedResources::Base
   def update
     old_name = @topic.name
     respond_to do |format|
-      # if (@topic[:name].blank?)
-      #   flash[:danger] = flash_message::INVALID_TOPIC
-      #   format.html { render :edit, status: :unprocessable_entity }
-      #   format.json { render json: @topic.errors, status: :unprocessable_entity }
-
+      if (topic_params[:name] == "")
+        flash[:danger] = flash_message::INVALID_TOPIC
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @topic.errors, status: :unprocessable_entity }
       # elsif (@topic[:name].match(/[^a-zA-Z0-9_ ]/))
       #   flash[:danger] = flash_message.get_special_characters(@topic[:name])
       #   format.html { render :edit, status: :unprocessable_entity }
-      #   format.json { render json: @topic.errors, status: :unprocessable_entity }
-
+      #   # format.json { render json: @topic.errors, status: :unprocessable_entity }
       # elsif Topic.exists?(name: @topic[:name])
       #   flash.now[:danger] = flash_message.get_duplicate_topic(@topic[:name])
       #   format.html { render :edit, status: :unprocessable_entity }
       #   format.json { render json: @topic.errors, status: :unprocessable_entity }
-      # end
-
-      if @topic.update(topic_params)
+      elsif @topic.update!(topic_params)
         flash[:success] = flash_message.get_updated_tag(old_name, topic_params[:name])
         format.html { redirect_to topics_path }
         format.json { render :show, status: :ok, location: @topic }

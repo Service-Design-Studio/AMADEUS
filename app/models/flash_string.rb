@@ -12,7 +12,7 @@ module FlashString
     end
 
     def self.get_added_topic(topic)
-      "%{topic} successfully updated!" % {topic: topic}
+      "%{topic} successfully added!" % {topic: topic}
     end
   end
 
