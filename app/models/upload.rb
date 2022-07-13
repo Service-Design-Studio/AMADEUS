@@ -28,7 +28,7 @@ class Upload < ApplicationRecord
           content = get_pdf_text(entry)
           response = NLTK_Model.request(content)
           summary = response[:summary]
-          topics = response.dig(:topics)
+          topics = response[:topics]
           new_upload.content = content
           new_upload.summary = summary
           new_upload.save
@@ -49,8 +49,8 @@ class Upload < ApplicationRecord
   end
 
   def self.set_pdf_topic(upload_id, topics)
-    topics.each do |topic, frequency|
-      topic = Topic.new(:name => topic)
+    topics.each do |topic_name, frequency|
+      topic = Topic.new(:name => topic_name)
       topic.save
       similarity = Random.rand(1...100)
       Uploadlink.create(upload_id: upload_id, topic_id: topic.id, similarity: similarity)
