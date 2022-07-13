@@ -13,23 +13,44 @@ Feature: edit uploaded articles
       | uav.zip  |
       | ukr.zip  |
 
-  @admin @topics
-  Scenario: View edit upload page
+  @view
+  Scenario Outline: View article under the topic of Russian-Ukraine war
     Then I should see options for me to set topics, upload and edit articles
+    And all the following articles <article>
 
-  Scenario: Click on topic
-    Given I click on any topic
-    Then I should be sent to Editing Topic page
+    Examples:
+      | article |
+      | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf  |
+      | Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf          |
+      | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News.pdf    |
+      | How many Ukrainian refugees are there and where have they gone_ - BBC News.pdf |
 
-  Scenario: Delete topic
-    Given I click on any cross button
-    Then Topic should be deleted
-    And flash message should be shown
+  Scenario Outline: Click topic to view more information
+    When I click on <topic> to understand more about the war
+    Then I should be sent to Editing Topic page belongs to <topic>
+
+    Examples:
+      | topic |
+      | UAVs  |
+      | Tanks |
+      | Artillery |
+
+  Scenario Outline: Delete topic
+    When I want to remove the <topic> as I find it irrelevant
+    And I press the cross next to the <topic>
+    Then the <topic> should be deleted
+    And a flash message should be shown
+
+    Examples:
+      | topic |
+      | Missles |
+      | MANPADs |
+      | Infrastructure damage/strike |
 
   Scenario: Add new topic
-    Given the "Add new topic" field is filled
-    And I click "Add new topic"
-    Then topic is added
+    Given the I want to add the following topics "Cyberwarfare", "Anonymour", "Elon Musk"
+    When I click "Add new topic"
+    Then I should be redirected to the Add topic page
 
   Scenario: Trying to add empty topic name
     Given the "Add new topic" field is empty
