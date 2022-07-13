@@ -1,4 +1,4 @@
-@admin @topics
+uh@admin @topics
 Feature: Edit existing topics from topicslist
     As an admin of Amadeus
     So that I can edit the existing topics from the topic list or delete them
@@ -50,5 +50,5 @@ Feature: Edit existing topics from topicslist
 
     @topics 
     Scenario: clicks on a topic and clicks back to topic list   
-        Then I should return to the topic list pag    
+        Then I should return to the topic list page    
 

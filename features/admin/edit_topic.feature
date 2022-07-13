@@ -49,7 +49,7 @@ Feature: Upload new Topics under TopicList
 
     @topics 
     Scenario: clicks on a topic and clicks back to topic list   
-        Then I should return to the topic list pag
+        Then I should return to the topic list page
 
     
     
