@@ -7,13 +7,15 @@ module KnowsUser
   end
 
   def capybara_logout
-    logout()
+    logout
   end
 
   def capybara_upload_zip(zip_name)
-    visit '/admin/uploads/new'
-    attach_file(Rails.root + "app/assets/test_zip/#{zip_name}")
-    find("#create-upload-button").click
+    if zip_name != ""
+      visit '/admin/uploads/new'
+      attach_file(Rails.root + "app/assets/test_zip/#{zip_name}")
+      find("#upload-button").click
+    end
   end
 end
 World(KnowsUser)

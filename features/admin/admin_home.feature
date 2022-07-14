@@ -6,18 +6,15 @@ Feature: navigate to different admin functionalities
 
   Background:
     Given I am logged in as admin of Amadeus
-
-  @admin @view
-  Scenario: view admin homepage
-    Then I should see options for me to set topics, upload and edit articles
+    Then I should see the following buttons "Topic List, New Upload, Database"
 
   @admin @success
   Scenario Outline: redirect to different functionalities
-    When I select feature <feature_name>
-    Then I should be redirected to <feature_name> page
+    When I click on the "<feature_name>" button
+    Then I should be redirected to the "<feature_name>" page
 
     Examples:
     |  feature_name   |
-    |  Topic List     |
+    |   Topic List    |
     |   New Upload    |
-    |  Edit articles  |
+    |    Database     |

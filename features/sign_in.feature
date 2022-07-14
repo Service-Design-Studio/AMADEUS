@@ -5,17 +5,14 @@ Feature: signing in as an admin
   I want to upload pdf locally in bulk using zipped format
 
   Background:
-    Given I want to log in as an admin of Amadeus
+    Given I am on the "Sign In" page
+    Then I should see a "Sign In" form with the following fields "Email", "Password"
+    And I should see a "Sign In" button
 
-
-  @sign_in @view
-  Scenario: view sign in page
-    Then I should see a "Sign In" form that requires email and password credentials
-
-
-  @sign_in @success
+  @success
   Scenario Outline: (Success) able to log in with the correct credentials
-    When I sign in with correct credentials Email <email> and password <password>
+    When I fill in my credentials with Email <email> and Password <password>
+    Then I should be redirected to the "Admin Home" page
 
     Examples:
       |       email        |  password   |
@@ -23,11 +20,11 @@ Feature: signing in as an admin
       | admin456@admin.com |  admin456   |
       | admin789@admin.com |  admin789   |
 
-  @sign_in @fail
+  @fail
   Scenario Outline: (Fail) unable to log in with incorrect credentials
     When I fill in my credentials with Email <email> and Password <password>
     And I click on the "Sign in" button
-    Then I should stay on the login page
+    Then I should stay on the "Sign In" page
 
     Examples:
       | email | password |

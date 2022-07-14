@@ -1,4 +1,4 @@
-uh@admin @topics
+@admin @topics
 Feature: Edit existing topics from topicslist
     As an admin of Amadeus
     So that I can edit the existing topics from the topic list or delete them
