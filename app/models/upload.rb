@@ -4,12 +4,45 @@ require 'json'
 
 class Upload < ApplicationRecord
   require_relative 'nltk_model.rb'
+
   has_one_attached :file
   validate :validate_attachment_filetype
   has_many :uploadlinks, dependent: :destroy
   has_many :topics, through: :uploadlinks
 
   private
+
+  def self.verify(upload, topic_name)
+    status = "fail"
+
+    upload.uploadlinks.each do |uploadlink|
+      if uploadlink.topic.name == topic_name
+        status = "exist"
+      end
+    end
+
+    if (topic_name == "") || topic_name.nil?
+      msg = flash_message::INVALID_TOPIC
+    elsif topic_name.length >= 15
+      msg = flash_message::LENGTHY_TOPIC
+    elsif topic_name.match(/\W/)
+      msg = flash_message.get_special_characters(topic_name)
+    elsif status == "exist"
+      status = "fail"
+      msg = flash_message.get_duplicate_topic(topic_name)
+    else
+      status = "success"
+      msg = ""
+      new_topic = Topic.friendly.find_by(name: topic_name)
+      if new_topic.nil?
+        new_topic = Topic.create(name: topic_name)
+        Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id, similarity: 100)
+      else
+        Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id, similarity: 100)
+      end
+    end
+    return { status: status, msg: msg }
+  end
 
   def validate_attachment_filetype
     return unless file.attached?
@@ -50,7 +83,7 @@ class Upload < ApplicationRecord
 
   def self.set_pdf_topic(upload_id, topics)
     topics.each do |topic, frequency|
-      new_topic = Topic.find_by(name: topic)
+      new_topic = Topic.friendly.find_by(name: topic)
       if new_topic.nil?
         new_topic = Topic.new(:name => topic)
         new_topic.save!
@@ -81,5 +114,9 @@ class Upload < ApplicationRecord
 
   def self.get_linked_topics(upload)
     upload.uploadlinks.order(:similarity).reverse
+  end
+
+  def self.flash_message
+    FlashString::TopicString
   end
 end

@@ -14,54 +14,53 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.corpus import wordnet
 
 def categoriser(upload_text, replace_dict, all_stopwords, num_topic):
-        for old, new in replace_dict.items():
-            upload_text = upload_text.replace(old, new)
+    for old, new in replace_dict.items():
+        upload_text = upload_text.replace(old, new)
 
-        # Lemmatize input
-        lemmatizer = WordNetLemmatizer()
-        lemmatized_words = []
-        words = word_tokenize(upload_text)
-        for word in words:
-            lemmatized_words.append(lemmatizer.lemmatize(word))
-        upload_text = ' '.join(lemmatized_words)
+    # Lemmatize input
+    lemmatizer = WordNetLemmatizer()
+    lemmatized_words = []
+    words = word_tokenize(upload_text)
+    for word in words:
+        lemmatized_words.append(lemmatizer.lemmatize(word))
+    upload_text = ' '.join(lemmatized_words)
 
-        # Perform pos tagging
-        pos_tagged = nltk.pos_tag(word_tokenize(upload_text.lower()))
+    # Perform pos tagging
+    pos_tagged = nltk.pos_tag(word_tokenize(upload_text.lower()))
 
-        def pos_tagger(nltk_tag):
-          # Identify nouns only
-          if nltk_tag.startswith('N'):
-            return wordnet.NOUN
-          else:
-            return None
+    def pos_tagger(nltk_tag):
+      # Identify nouns only
+      if nltk_tag.startswith('N'):
+        return wordnet.NOUN
+      else:
+        return None
 
-        # Mapping the pos_tagger function to the pos_tagged list.
-        # The pos_tagger function returns the wordnet.NOUN if the nltk_tag starts with 'N', otherwise it returns None.
-        wordnet_tagged = list(map(lambda x: (x[0], pos_tagger(x[1])), pos_tagged))
+    # Mapping the pos_tagger function to the pos_tagged list.
+    # The pos_tagger function returns the wordnet.NOUN if the nltk_tag starts with 'N', otherwise it returns None.
+    wordnet_tagged = list(map(lambda x: (x[0], pos_tagger(x[1])), pos_tagged))
 
-        # Create array with only nouns
-        noun_list = []
-        for i in range(len(wordnet_tagged)):
-          if wordnet_tagged[i][1] == wordnet.NOUN:
-            noun_list.append(wordnet_tagged[i][0])
+    # Create array with only nouns
+    noun_list = []
+    for i in range(len(wordnet_tagged)):
+      if wordnet_tagged[i][1] == wordnet.NOUN:
+        noun_list.append(wordnet_tagged[i][0])
 
-        # Sort noun_list by frequency
-        noun_freq = nltk.FreqDist(noun_list)
-        sorted_noun_freq = sorted(noun_freq.items(), key=lambda x: x[1], reverse=True)
+    # Sort noun_list by frequency
+    noun_freq = nltk.FreqDist(noun_list)
+    sorted_noun_freq = sorted(noun_freq.items(), key=lambda x: x[1], reverse=True)
 
-        # Filter
-        topics_dict = dict()
-        count = 0
-        for (noun, freq) in sorted_noun_freq:
-            if count > int(num_topic):
-                break
-            if noun.isalpha() and noun not in all_stopwords and len(noun) > 2:
-                if freq > 1:
-                    topics_dict[noun] = freq
-                    count += 1
-        topics_dict["count"] = num_topic
+    # Filter
+    topics_dict = dict()
+    count = 0
+    for (noun, freq) in sorted_noun_freq:
+        if count >= int(num_topic):
+            break
+        if noun.isalpha() and noun not in all_stopwords and len(noun) > 2:
+            if freq > 1:
+                topics_dict[noun] = freq
+                count += 1
 
-        return topics_dict
+    return topics_dict
 
 def summariser(upload_text, all_stopwords, summary_threshold):
     words = word_tokenize(upload_text)
