@@ -6,6 +6,9 @@ ruby "3.0.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
 
+# Friendly ID
+gem 'friendly_id', '~> 5.4.0'
+
 # For js
 gem 'jquery-rails'
 

@@ -32,7 +32,7 @@ class NLTK_Model
         "upload_text": upload_text,
         "replace_dict": {
           "US": "USA", "U.S": "USA", "United States": "USA" },
-        "num_topic": "7",
+        "num_topic": "5",
         "summary_threshold": "1.3" }
     }.to_json
   end

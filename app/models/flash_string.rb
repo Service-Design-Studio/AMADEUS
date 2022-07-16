@@ -2,18 +2,8 @@ module FlashString
   TO_LOGIN = "You must be logged in to access this section"
 
   class UploadString
-    INVALID_TOPIC = "Invalid topic input!"
-    ADD_FAIL = "Update failed!"
     UPLOAD_DELETED = "Upload deleted!"
     UPLOAD_SOME_FAILED = "Some pdfs failed to be parse!"
-
-    def self.get_duplicate_upload(upload)
-      "Current article already includes %{upload}!" % {upload: upload}
-    end
-
-    def self.get_added_topic(topic)
-      "%{topic} successfully added!" % {topic: topic}
-    end
   end
 
   class UploadLinkString
@@ -22,6 +12,7 @@ module FlashString
 
   class TopicString
     INVALID_TOPIC = "Invalid topic input!"
+    LENGTHY_TOPIC = "Topic name too long!"
     def self.get_added_topic(topic)
       "%{topic} added." % {topic:topic}
     end

@@ -1,7 +1,28 @@
 class Topic < ApplicationRecord
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   has_many :uploadlinks, dependent: :destroy
   has_many :uploads, through: :uploadlinks
-  validates :name, presence: true
-  validates :name, uniqueness: true
-  validates :name, :format => { :with => /(^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$)/ }
+
+  def self.verify(topic_name)
+    status = "fail"
+    if (topic_name == "") || topic_name.nil?
+      msg = flash_message::INVALID_TOPIC
+    elsif topic_name.length >= 15
+      msg = flash_message::LENGTHY_TOPIC
+    elsif topic_name.match(/\W/)
+      msg = flash_message.get_special_characters(topic_name)
+    elsif Topic.exists?(name: topic_name)
+      msg = flash_message.get_duplicate_topic(topic_name)
+    else
+      status = "success"
+      msg = ""
+    end
+    return { status: status, msg: msg }
+  end
+
+  def self.flash_message
+    FlashString::TopicString
+  end
 end

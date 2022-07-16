@@ -27,7 +27,7 @@ user3 = User.new(
 )
 user3.save
 
-topic_bank = %w[Tanks Artillery UAVs Helicopters Missles MANPADs]
+topic_bank = %w[Tanks Artillery UAVs Helicopters Missiles MANPADs]
 topic_bank.each do |topic|
   topic = Topic.new(:name => topic)
   topic.save
