@@ -2,14 +2,14 @@
 
 <div class="center">
   <h1>Topic List</h1>
-  <%= link_to "New topic", new_topic_path, class: "btn btn-success", id: "new-upload-button" %>
+  <%= link_to "New Topic", new_topic_path, class: "btn btn-success", id: "new-upload-button" %>
   <%= link_to "Back to Home", admin_path, class: "btn btn-primary",id: "back-to-home"%>
 </div>
 <br><br>
 
 <div id="topics">
   <% @topics.each do |topic| %>
-    <%= link_to edit_topic_path(topic), style:"text-decoration:none" do %>
+    <%= link_to edit_topic_path(topic), style:"text-decoration:none", id:"#{topic.name}-edit-link" do %>
       <span class="tag"><%= topic.name %></span>
     <% end %>
   <% end %>

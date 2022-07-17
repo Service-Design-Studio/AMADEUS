@@ -1,54 +1,95 @@
-@admin @topics
-Feature: Edit existing topics from topicslist
-    As an admin of Amadeus
-    So that I can edit the existing topics from the topic list or delete them
+@admin @topic_new
+Feature: Add new Topic
+  As an admin of Amadeus who is interested in the Russian-Ukraine war
+  So that I can include important topics that the AI might miss
+  I want to be able to add in new topic
 
-    Background:
-        Given I am logged in as an admin of Amadeus viewing the topic list page
-        And have clicked on the Topic I want to edit
+  Background:
+    Given I am logged in as admin of Amadeus
+    And I the following topics have been created "Tanks Artillery UAVs Helicopters Missiles MANPADs"
 
-    @admin @view
-    Scenario: View TopicList page
-        Then I should see the list of topics
-        And I should see a button to upload new topic and back to home
+  Scenario: View New Topic page
+    Given I am on the "Topic List" page
+    When I click on the "New Topic" button
+    Then I should be redirected to the "New Topic" page
+    And I should see the following buttons "Save, Back to Topic List"
 
-    @topics @fail
-    Scenario: enter existing topic name eg. Helicopters and click save
-        Then I should get an error message of "Topic #{name} has already been taken"
+  @happy
+  Scenario Outline: Add new nonidentical topic
+    Given I am on the "New Topic" page
+    When I add the topic "<topic_name>"
+    And I click on the "Save" button
+    Then I should be redirected to the "Topic List" page
+    And I should see the topic "<topic_name>"
 
-    @topics @fail
-    Scenario: enter an empty string and click save
-        Then I should get an error message of "Invalid Topic Input"
+    Examples:
+      | topic_name |
+      | economy    |
+      | noise      |
+      | register   |
+      | russia     |
+      | sanction   |
 
-    @topics @fail
-    Scenario: enter spacebars and click save
-        Then I should get an error message of "Invalid Topic Input"
+  @sad
+  Scenario Outline: Add duplicate topic
+    Given I am on the "New Topic" page
+    When I add the topic "<topic_name>"
+    And I click on the "Save" button
+    Then I should see a warning message "<topic_name> already exists!"
 
-    @topics @fail
-    Scenario: enter trailing white spaces at the start eg "  fire" and click save
-        Then I should get an error message of "Topic #{name} starts or ends with a space!"
+    Examples:
+      | topic_name  |
+      | Tanks       |
+      | UAVs        |
+      | Helicopters |
+      | Missiles    |
+      | MANPADs     |
 
-    @topics @fail
-    Scenario: enter trailing white spaces at the end of input eg "fire    " and click save
-        Then I should get an error message of "Topic #{name} starts or ends with a space!"
+  @sad
+  Scenario: Add blank topic
+    Given I am on the "New Topic" page
+    When I add the topic ""
+    And I click on the "Save" button
+    Then I should see a warning message "Invalid topic input!"
 
-    @topics @fail
-    Scenario: enter a string containing special characters "!@#$%&*()" except for / eg "Space%"
-        Then I should get an error message of "Topic #{name} contains special characters!"
+  @sad
+  Scenario Outline: Add topic that is more than 15 characters
+    Given I am on the "New Topic" page
+    When I add the topic "<topic_name>"
+    And I click on the "Save" button
+    Then I should see a warning message "Topic name too long!"
 
-    @topics @success
-    Scenario: type in a topic that does not exist eg. War and click save
-        Then I should be redirected to the topic list page, with a success message of "War added"
+    Examples:
+      | topic_name                 |
+      | R o y L e e K a W e i      |
+      | O k a K u r n i a w a n    |
+      | aBcDeFgHiJkLmNoPqRsTuVwXyZ |
 
-    @topics @success
-    Scenario: type in a topic that has a space between the words eg "Family Day" and click save
-        Then I should be redirected to the topic list page, with a success message of "Family Day"
+  @sad
+  Scenario Outline: Add ambiguous topic
+    Given I am on the "New Topic" page
+    When I add the topic "<topic_name>"
+    And I click on the "Save" button
+    And I should see a warning message "Topic <topic_name> contains special characters!"
 
-    @topics @success
-    Scenario: type in a topic that has a / and space between the words eg "Infrastructure damage/strike" and click save
-        Then I should be redirected to the topic list page, with a success message of "Infrastructure damage/strike"
+    Examples:
+      | topic_name  |
+      | $$$         |
+      | Oka Kun     |
+      | ( ͡❛ ͜ʖ ͡❛) |
 
-    @topics
-    Scenario: clicks on a topic and clicks back to topic list
-        Then I should return to the topic list page
+  @redirect
+  Scenario: Back to Topic List
+    Given I am on the "New Topic" page
+    When I click on the "Back to Topic List" button
+    Then I should be redirected to the "Topic List" page
+
+
+
+
+
+
+
+
+
 
