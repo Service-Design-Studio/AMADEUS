@@ -10,7 +10,7 @@ Given(/^I am a regular user$/) do
   expect(page).to have_current_path('/')
 end
 
-Given(/^I am on the "(.*)" page$/) do |page_name|
+Given(/^I am on the "([^"]*)" page$/) do |page_name|
   case page_name
   when "Home"
     visit '/'
@@ -24,8 +24,22 @@ Given(/^I am on the "(.*)" page$/) do |page_name|
   when "Upload"
     visit '/admin/uploads/new'
     expect(page).to have_current_path('/admin/uploads/new')
+  when "Topic List"
+    visit '/admin/topics'
+    expect(page).to have_current_path('/admin/topics')
+  when "New Topic"
+    visit '/admin/topics/new'
+    expect(page).to have_current_path('/admin/topics/new')
   else
     visit('/')
+    expect(page).to have_current_path('/')
+  end
+end
+
+When(/^I have uploaded these zip files (.*)$/) do |zip_lists|
+  zips = zip_lists.split(', ')
+  zips.each do |zip_name|
+    capybara_upload_zip(zip_name)
   end
 end
 
@@ -50,12 +64,24 @@ When(/^I click on the "([^"]*)" button$/) do |button_name|
     find("#upload-database-link").click
   when "Back to Home"
     find("#back-to-home-link").click
+  when "Add new Topic"
+    find(:xpath, '//*[@id="add-new-topic-button"]').click
+  when "Save"
+    find(:xpath, '//*[@id="save-button"]').click
+  when "Delete"
+    find(:xpath, '//*[@id="delete-button"]').click
+  when "Return"
+    find(:xpath, '//*[@id="return"]').click
+  when "New Topic"
+    find(:xpath, '//*[@id="new-upload-button"]').click
+  when "Back to Topic List"
+    find(:xpath, '//*[@id="back-to-home"]').click
   else
     find("#index-link").click
   end
 end
 
-Then(/^I should be redirected to the "(.*)" page$/) do |page_name|
+Then(/^I should be redirected to the "([^"]*)" page$/) do |page_name|
   case page_name
   when "Home"
     expect(page).to have_current_path('/')
@@ -77,12 +103,14 @@ Then(/^I should be redirected to the "(.*)" page$/) do |page_name|
     expect(page).to have_current_path('/admin/uploads')
   when "Database"
     expect(page).to have_current_path('/admin/uploads')
+  when "New Topic"
+    expect(page).to have_current_path('/admin/topics/new')
   else
     expect(page).to have_current_path('/')
   end
 end
 
-Then(/^I should stay on the "(.*)" page$/) do |page_name|
+Then(/^I should stay on the "([^"]*)" page$/) do |page_name|
   case page_name
   when "Home"
     expect(page).to have_current_path('/')
@@ -105,10 +133,18 @@ Then(/^I should see a "([^"]*)" form with the following fields "Email", "Passwor
   end
 end
 
-And(/^I should see the following buttons "([^"]*)"$/) do |button_lists|
-  buttons = button_lists.split(', ')
+And(/^I should see the following buttons "([^"]*)"$/) do |button_list|
+  buttons = button_list.split(', ')
   buttons.each do |button|
-    expect(page).to have_content(button)
+    if button == 'Add new Topic'
+      name = find(:xpath, '//*[@id="add-new-topic-button"]')['value']
+      expect(name).to be == "Add new Topic"
+    elsif button == 'Save'
+      name = find(:xpath, '//*[@id="save-button"]')['value']
+      expect(name).to be == "Save"
+    else
+      expect(page).to have_content(button)
+    end
   end
 end
 

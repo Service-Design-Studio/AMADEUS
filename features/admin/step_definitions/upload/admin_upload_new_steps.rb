@@ -6,8 +6,8 @@ When(/^I attach a zip file called (.*)$/) do |zip_name|
   attach_file(Rails.root + "app/assets/test_zip/#{zip_name}")
 end
 
-And(/^I should see a file called (.*)$/) do |file_name|
-  expect(page).to have_content(file_name)
+And(/^I should see a file called (.*)$/) do |article_name|
+  expect(page).to have_content(article_name)
 end
 
 When(/^I attach no zip file and upload$/) do

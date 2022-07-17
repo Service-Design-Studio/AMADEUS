@@ -1,0 +1,13 @@
+<%= form_with(model: upload) do |form| %>
+  <datalist id="topics_list">
+    <%= @all_topics.each do |topic| %>
+      <option value="<%= topic %>"></option>
+    <% end %>
+  </datalist>
+
+  <div class="d-grid gap-2">
+    <%= form.text_field :topics, class: "form-control", id: "topic-input",
+                        value: "", placeholder: "Add new topic...", list: "topics_list" %>
+    <%= form.submit "Add new Topic", class: "btn btn-outline-success d-grid gap-2", id: "add-new-topic-button" %>
+  </div>
+<% end %>
