@@ -1,12 +1,12 @@
 @admin @home
 Feature: navigate to different admin functionalities
   As an admin of Amadeus
-  So that I can set topic, upload and edit articles
+  So that I can set tag as well as upload and edit articles
   I want to be able to easily navigate to them from my home page
 
   Background:
     Given I am logged in as admin of Amadeus
-    Then I should see the following buttons "Topic List, New Upload, Database"
+    Then I should see the following buttons "Tag List, New Upload, Database"
 
   @admin @redirect
   Scenario Outline: redirect to different functionalities
@@ -15,6 +15,6 @@ Feature: navigate to different admin functionalities
 
     Examples:
       | feature_name |
-      | Topic List   |
+      | Tag List     |
       | New Upload   |
       | Database     |

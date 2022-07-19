@@ -11,8 +11,10 @@ Feature: signing in as an admin
 
   @happy
   Scenario Outline: Login with correct credentials
+    Given I am on the "Sign In" page
     When I fill in my credentials with Email <email> and Password <password>
-    Then I should be redirected to the "Admin Home" page
+    And I click on the "Sign In" button
+    Then I should be redirected to the "Admin" page
 
     Examples:
       | email              | password |
@@ -23,7 +25,7 @@ Feature: signing in as an admin
   @sad
   Scenario Outline: Unable to login with incorrect credentials
     When I fill in my credentials with Email <email> and Password <password>
-    And I click on the "Sign in" button
+    And I click on the "Sign In" button
     Then I should stay on the "Sign In" page
 
     Examples:

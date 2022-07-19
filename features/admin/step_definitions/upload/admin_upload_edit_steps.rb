@@ -6,27 +6,27 @@ Given(/^I am on the article "([^"]*)" page$/) do |article_name|
   }
 end
 
-Then(/^I should see the following topics "([^"]*)"$/) do |topic_list|
-  topics = topic_list.split(', ')
-  topics.each do |topic|
-    expect(page).to have_content(topic)
+Then(/^I should see the following tags "([^"]*)"$/) do |tag_list|
+  tags = tag_list.split(', ')
+  tags.each do |tag|
+    expect(page).to have_content(tag)
   end
 end
 
-When(/^I click delete button for the topic "([^"]*)"$/) do |topic_name|
-  find("##{topic_name}-link").click
+When(/^I click delete button for the tag "([^"]*)"$/) do |tag_name|
+  find("##{tag_name}-button").click
 end
 
-Then(/^I should not see the topic "([^"]*)"$/) do |topic_name|
-  expect(page).to_not have_button("##{topic_name}-link")
+Then(/^I should not see the tag "([^"]*)"$/) do |tag_name|
+  expect(page).to_not have_button("##{tag_name}-button")
 end
 
-When(/^I add the topic "([^"]*)"$/) do |topic_name|
-  find("#topic-input").set(topic_name)
+When(/^I add the tag "([^"]*)"$/) do |tag_name|
+  find("#tag-input").set(tag_name)
 end
 
-Then(/^I should see the topic "([^"]*)"$/) do |topic_name|
-  expect(page).to have_content(topic_name)
+Then(/^I should see the tag "([^"]*)"$/) do |tag_name|
+  expect(page).to have_content(tag_name)
 end
 
 Then(/^I should still see the same article "([^"]*)"$/) do |article_name|
@@ -39,10 +39,10 @@ And(/^I should see a warning message "([^"]*)"$/) do |msg|
   expect(page).to have_content(msg)
 end
 
-When(/^I click on the topic "([^"]*)"$/) do |topic_name|
-  find("##{topic_name}-edit-link").click
+When(/^I click on the tag "([^"]*)"$/) do |tag_name|
+  find("##{tag_name}-edit-button").click
 end
 
-Then(/^I should be redirected to the "([^"]*)" edit page$/) do |topic_name|
-  expect(page).to have_current_path("/admin/topics/#{topic_name.downcase}/edit")
+Then(/^I should be redirected to the "([^"]*)" edit page$/) do |tag_name|
+  expect(page).to have_current_path("/admin/topics/#{tag_name.downcase}/edit")
 end

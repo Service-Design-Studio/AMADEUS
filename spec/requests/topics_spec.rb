@@ -64,7 +64,7 @@ RSpec.describe "/topics", type: :request do
         }.to change(Topic, :count).by(1)
       end
 
-      it "redirects to the created topic" do
+      it "redirects to the created tag" do
         post topics_url, params: { topic: valid_attributes }
         expect(response).to redirect_to(topic_url(Topic.last))
       end
@@ -90,14 +90,14 @@ RSpec.describe "/topics", type: :request do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested topic" do
+      it "updates the requested tag" do
         topic = Topic.create! valid_attributes
         patch topic_url(topic), params: { topic: new_attributes }
         topic.reload
         skip("Add assertions for updated state")
       end
 
-      it "redirects to the topic" do
+      it "redirects to the tag" do
         topic = Topic.create! valid_attributes
         patch topic_url(topic), params: { topic: new_attributes }
         topic.reload
@@ -115,7 +115,7 @@ RSpec.describe "/topics", type: :request do
   end
 
   describe "DELETE /destroy" do
-    it "destroys the requested topic" do
+    it "destroys the requested tag" do
       topic = Topic.create! valid_attributes
       expect {
         delete topic_url(topic)

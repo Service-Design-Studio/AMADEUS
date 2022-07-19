@@ -39,7 +39,7 @@ class UploadsController < ApplicationController
       reply = Upload.verify(@upload, params[:upload][:topics])
       if reply[:status] == "success"
         @upload.update!(upload_params.except(:topics))
-        flash[:success] = FlashString::TopicString.get_added_topic(params[:upload][:topics])
+        flash[:success] = FlashString::TagString.get_added_tag(params[:upload][:topics])
         format.html { redirect_to edit_upload_path(@upload) }
         # format.html { redirect_to uploads_url}
         format.json { render :edit, status: :ok, location: @upload }

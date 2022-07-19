@@ -1,4 +1,4 @@
-<h1>Editing topic</h1>
+<h1>Editing Tag</h1>
 
 <%= render "form", topic: @topic %>
 
@@ -6,5 +6,5 @@
 
 <div>
   <%= link_to "Delete", @topic, method: :delete, class: "btn btn-outline-danger", id: "delete-button" %>
-  <%= link_to "Return", url_for(:back), class: "btn btn-primary", id: "return" %>
+  <%= link_to "Return", url_for(:back), class: "btn btn-primary", id: "return-button" %>
 </div>

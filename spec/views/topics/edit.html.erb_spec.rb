@@ -7,12 +7,12 @@ RSpec.describe "topics/edit", type: :view do
     ))
   end
 
-  it "renders the edit topic form" do
+  it "renders the edit tag form" do
     render
 
     assert_select "form[action=?][method=?]", topic_path(@topic), "post" do
 
-      assert_select "input[name=?]", "topic[name]"
+      assert_select "input[name=?]", "tag[name]"
     end
   end
 end

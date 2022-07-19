@@ -29,7 +29,7 @@ class TopicsController < InheritedResources::Base
       reply = Topic.verify(new_name)
       if reply[:status] == "success"
         @topic.save!
-        flash[:success] = FlashString::TopicString.get_added_topic(topic_params[:name])
+        flash[:success] = FlashString::TagString.get_added_tag(topic_params[:name])
         format.html { redirect_to topics_path }
         format.json { render :show, status: :created, location: @topic }
       else
@@ -48,7 +48,7 @@ class TopicsController < InheritedResources::Base
         reply = Topic.verify(new_name)
         if reply[:status] == "success"
           @topic.update!(topic_params)
-          flash[:success] = FlashString::TopicString.get_updated_tag(old_name, new_name)
+          flash[:success] = FlashString::TagString.get_updated_tag(old_name, new_name)
           format.html { redirect_to topics_path }
           format.json { render :show, status: :ok, location: @topic }
         else
@@ -63,7 +63,7 @@ class TopicsController < InheritedResources::Base
     def destroy
       @topic.destroy
       respond_to do |format|
-        flash[:danger] = FlashString::TopicString.get_deleted_topic(@topic.name)
+        flash[:danger] = FlashString::TagString.get_deleted_tag(@topic.name)
         format.html { redirect_to topics_path }
         format.json { head :no_content }
       end

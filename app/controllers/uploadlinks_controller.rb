@@ -6,7 +6,7 @@ class UploadlinksController < InheritedResources::Base
     @uploadlink.destroy
 
     respond_to do |format|
-      flash[:danger] = flash_message::DELETED_TOPIC
+      flash[:danger] = flash_message::DELETED_TAG
       format.html { redirect_to edit_upload_path(@upload) }
       format.json { head :no_content }
     end

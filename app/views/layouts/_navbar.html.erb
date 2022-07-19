@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-dark bg-dark">
   <div class="container-fluid">
-    <%= link_to "AMADEUS", root_path, class:"navbar-brand", id: "index-link"%>
+    <%= link_to "AMADEUS", root_path, class:"navbar-brand", id: "amadeus-button"%>
     <button class="navbar-toggler" id="hamburger-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,21 +9,21 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
-          <a class="nav-link" href="/" id="home-feature-link">Home</a>
+          <a class="nav-link" href="/" id="home-button">Home</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/sign_in" id='admin-feature-link'>Admin</a>
+          <a class="nav-link" href="/sign_in" id='admin-button'>Admin</a>
         </li>
 
         <% if user_signed_in? %>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="actions-button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Actions
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/admin/topics">Topic List</a></li>
+              <li><a class="dropdown-item" href="/admin/topics">Tag List</a></li>
               <li><hr class="dropdown-divider"></li>
 
               <li><a class="dropdown-item" href="/admin/uploads/new">New Upload</a></li>
@@ -33,7 +33,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <%= link_to "Sign Out", '/sign_out', method: :delete, class: "nav-link", id: "signout-feature-link"%>
+            <%= link_to "Sign Out", '/sign_out', method: :delete, class: "nav-link", id: "sign-out-button"%>
             <%# <a class="nav-link" href="/logout" > Sign Out</a> %>
           </li>
         <% end %>

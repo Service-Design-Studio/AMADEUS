@@ -22,14 +22,14 @@ class Upload < ApplicationRecord
     end
 
     if (topic_name == "") || topic_name.nil?
-      msg = flash_message::INVALID_TOPIC
+      msg = flash_message::INVALID_TAG
     elsif topic_name.length >= 15
-      msg = flash_message::LENGTHY_TOPIC
+      msg = flash_message::LENGTHY_TAG
     elsif topic_name.match(/\W/)
       msg = flash_message.get_special_characters(topic_name)
     elsif status == "exist"
       status = "fail"
-      msg = flash_message.get_duplicate_topic(topic_name)
+      msg = flash_message.get_duplicate_tag(topic_name)
     else
       status = "success"
       msg = ""
@@ -92,7 +92,6 @@ class Upload < ApplicationRecord
       else
         Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id, similarity: similarity)
       end
-
     end
   end
 
@@ -117,6 +116,6 @@ class Upload < ApplicationRecord
   end
 
   def self.flash_message
-    FlashString::TopicString
+    FlashString::TagString
   end
 end

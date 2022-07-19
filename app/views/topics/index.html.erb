@@ -1,15 +1,15 @@
 <p style="color: green"><%= notice %></p>
 
 <div class="center">
-  <h1>Topic List</h1>
-  <%= link_to "New Topic", new_topic_path, class: "btn btn-success", id: "new-upload-button" %>
-  <%= link_to "Back to Home", admin_path, class: "btn btn-primary",id: "back-to-home"%>
+  <h1>Tag List</h1>
+  <%= link_to "New Tag", new_topic_path, class: "btn btn-success", id: "new-tag-button" %>
+  <%= link_to "Back to Home", admin_path, class: "btn btn-primary",id: "back-to-home-button"%>
 </div>
 <br><br>
 
 <div id="topics">
   <% @topics.each do |topic| %>
-    <%= link_to edit_topic_path(topic), style:"text-decoration:none", id:"#{topic.name}-edit-link" do %>
+    <%= link_to edit_topic_path(topic), style:"text-decoration:none", id:"#{topic.name}-edit-button" do %>
       <span class="tag"><%= topic.name %></span>
     <% end %>
   <% end %>
