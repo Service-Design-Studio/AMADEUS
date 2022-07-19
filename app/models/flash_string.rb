@@ -7,32 +7,32 @@ module FlashString
   end
 
   class UploadLinkString
-    DELETED_TOPIC = "Successfully deleted!"
+    DELETED_TAG = "Successfully deleted!"
   end
 
-  class TopicString
-    INVALID_TOPIC = "Invalid topic input!"
-    LENGTHY_TOPIC = "Topic name too long!"
-    def self.get_added_topic(topic)
-      "%{topic} added." % {topic:topic}
+  class TagString
+    INVALID_TAG = "Invalid tag input!"
+    LENGTHY_TAG = "Tag name too long!"
+    def self.get_added_tag(tag)
+      "%{tag} added." % {tag:tag}
     end
 
     def self.get_updated_tag(old_tag, new_tag)
       "%{old} updated into %{new}." % {old: old_tag, new: new_tag}
     end
 
-    def self.get_deleted_topic(topic)
-      "Deleted %{topic}." % {topic: topic}
+    def self.get_deleted_tag(tag)
+      "Deleted %{tag}." % {tag: tag}
     end
-    def self.get_duplicate_topic(topic)
-      "Topic %{topic} already exists!" % {topic: topic}
+    def self.get_duplicate_tag(tag)
+      "Tag %{tag} already exists!" % {tag: tag}
     end
-    def self.get_special_characters(topic)
-      "Topic %{topic} contains special characters!" % {topic: topic}
+    def self.get_special_characters(tag)
+      "Tag %{tag} contains special characters!" % {tag: tag}
     end
 
-    def self.get_space(topic)
-      "Topic %{topic} starts or ends with a space!" % {topic: topic}
+    def self.get_space(tag)
+      "Tag %{tag} starts or ends with a space!" % {tag: tag}
     end
   end
 end

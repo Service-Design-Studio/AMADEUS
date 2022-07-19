@@ -6,12 +6,13 @@ Feature: upload zipped folder containing pdf file of articles
 
   Background:
     Given I am logged in as admin of Amadeus
-    And I am on the "Upload" page
+    And I am on the "New Upload" page
     Then I should see an area to upload my zip files either by browsing or dragging
     And I should see a "Upload" button
 
   @happy
   Scenario Outline: Uploading valid zip file
+    Given I am on the "New Upload" page
     When I attach a zip file called <zip_name>
     Then I click on the "Upload" button
     And I should be redirected to the "Database" page
@@ -25,10 +26,12 @@ Feature: upload zipped folder containing pdf file of articles
 
   @sad
   Scenario: Upload no zip file
+    Given I am on the "New Upload" page
     When I attach no zip file and upload
-    And I should stay on the "Upload" page
+    And I should stay on the "New Upload" page
 
   @redirect
   Scenario: Back to home
-    When I click on the "Back to Upload Database" button
+    Given I am on the "New Upload" page
+    When I click on the "Back to Database" button
     Then I should be redirected to the "Home" page
