@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="center">
+  <h1>Category List</h1>
+  <%= link_to "New Category", new_category_path, class: "btn btn-success", id: "new-category-button" %>
+  <%= link_to "Back to Home", admin_path, class: "btn btn-primary",id: "back-to-home-button"%>
+</div>
+<br><br>
+
+<div id="categories">
+  <% @categories.each do |category| %>
+    <%= link_to edit_category_path(category), style:"text-decoration:none", id:"#{category.name}-edit-button" do %>
+      <span class="tag"><%= category.name %></span>
+    <% end %>
+  <% end %>
+</div>
