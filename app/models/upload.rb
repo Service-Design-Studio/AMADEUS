@@ -7,7 +7,7 @@ class Upload < ApplicationRecord
 
   has_one_attached :file
   validates :file, presence: true
-  validates :file, file_content_type: { allow: ['application/pdf'], message: "ZIP should contain PDFs only!"}
+  validates :file, file_content_type: { allow: ['application/pdf','application/zip'], message: "ZIP should contain PDFs only!"}
   has_many :uploadlinks, dependent: :destroy
   has_many :topics, through: :uploadlinks
   has_many :upload_category_links, dependent: :destroy

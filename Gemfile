@@ -12,6 +12,9 @@ gem 'friendly_id', '~> 5.4.0'
 # For js
 gem 'jquery-rails'
 
+# For ActiveRecord
+gem 'sqlite3'
+
 # For Json serialization
 gem 'active_model_serializers'
 
@@ -67,8 +70,6 @@ gem 'file_validators'
 
 # for Heroku deployment - as described in Ap. A of ELLS book
 group :development, :test do
-# For ActiveRecord
-  gem 'sqlite3'
   gem 'byebug'
   gem 'database_cleaner'
   gem 'capybara'
@@ -88,6 +89,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg' #gcloud deployment
+  #gem 'pg' #gcloud deployment
 end
 
