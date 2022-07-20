@@ -1,5 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Upload, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "is valid with valid attributes" do
+    expect(Upload.new).to be_valid
+  end
+
+
+  describe 'associations' do
+    it { should have_many(:uploadlinks) }
+    it { should have_many(:topics) }
+    it { should have_one_attached(:file) }
+  end
+
+  #it { should allow_value('test.zip').for(:file)}
 end
