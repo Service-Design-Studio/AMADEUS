@@ -2,6 +2,10 @@ module FlashString
   TO_LOGIN = "You must be logged in to access this section"
   DELETED = "Successfully deleted!"
 
+  class CategoryString
+    CATEGORY_EMPTY = "No categories found!"
+  end
+
   class UploadString
     UPLOAD_DELETED = "Upload deleted!"
     UPLOAD_SOME_FAILED = "Some pdfs failed to be parse!"
