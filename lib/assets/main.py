@@ -13,7 +13,23 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.corpus import wordnet
 
-def categoriser(upload_text, replace_dict, all_stopwords, num_topic):
+# from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
+# checkpoint = "facebook/bart-large-mnli"
+# tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path=checkpoint)
+# model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
+# classifier = pipeline("zero-shot-classification")
+
+import random
+print("Finish setup")
+
+def bert_categoriser(upload_text):
+    categories = ['Tank', 'Artillery', 'UAV', 'Fighter Aircraft', 'Helicopter', 'Missile', 'MANPAD', 'Infrastructure']
+#     results = classifier(upload_text, candidate_labels=categories)
+#     top_category = (results['labels'][0])
+#     return top_category
+    return random.choice(categories)
+
+def tagger(upload_text, replace_dict, all_stopwords, num_tag):
     for old, new in replace_dict.items():
         upload_text = upload_text.replace(old, new)
 
@@ -50,17 +66,17 @@ def categoriser(upload_text, replace_dict, all_stopwords, num_topic):
     sorted_noun_freq = sorted(noun_freq.items(), key=lambda x: x[1], reverse=True)
 
     # Filter
-    topics_dict = dict()
+    tags_dict = dict()
     count = 0
     for (noun, freq) in sorted_noun_freq:
-        if count >= int(num_topic):
+        if count >= int(num_tag):
             break
         if noun.isalpha() and noun not in all_stopwords and len(noun) > 2:
             if freq > 1:
-                topics_dict[noun] = freq
+                tags_dict[noun] = freq
                 count += 1
 
-    return topics_dict
+    return tags_dict
 
 def summariser(upload_text, all_stopwords, summary_threshold):
     words = word_tokenize(upload_text)
@@ -101,7 +117,6 @@ def summariser(upload_text, all_stopwords, summary_threshold):
 
     return summary
 
-
 def nltk_model(request):
     request_json = request.get_json()
     request_args = request.args
@@ -113,7 +128,7 @@ def nltk_model(request):
 
         upload_text = upload['upload_text']
         replace_dict = upload['replace_dict']
-        num_topic = upload['num_topic']
+        num_tag = upload['num_tag']
         summary_threshold = upload['summary_threshold']
 
         custom_stopwords = ["said", 'month', 'months', 'year', 'years', 'date', 'dates', 'official', 'bbc',
@@ -122,8 +137,8 @@ def nltk_model(request):
         all_stopwords = original_stopwords.union(custom_stopwords)
 
         # Run model
-        topics_dict = categoriser(upload_text, replace_dict, all_stopwords, num_topic)
+        tags_dict = tagger(upload_text, replace_dict, all_stopwords, num_tag)
         summary = summariser(upload_text, all_stopwords, summary_threshold)
-        response = { "topics": topics_dict, "summary": summary }
-
+        category = bert_categoriser(summary)
+        response = { "summary": summary, "tags": tags_dict, "category": category }
     return response
