@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :uploads
     resources :topics
     resources :uploadlinks
+    resources :categories
+    resources :upload_category_links
   end
 
   get "admin", to: "sessions#admin"

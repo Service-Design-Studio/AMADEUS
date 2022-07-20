@@ -9,6 +9,8 @@ class Upload < ApplicationRecord
   validate :validate_attachment_filetype
   has_many :uploadlinks, dependent: :destroy
   has_many :topics, through: :uploadlinks
+  has_many :upload_category_links, dependent: :destroy
+  has_many :categories, through: :upload_category_links
 
   private
 
@@ -61,11 +63,13 @@ class Upload < ApplicationRecord
           content = get_pdf_text(entry)
           response = NLTK_Model.request(content)
           summary = response[:summary]
-          topics = response[:topics]
+          tags_dict = response[:tags]
+          category = response[:category]
           new_upload.content = content
           new_upload.summary = summary
           new_upload.save
-          set_pdf_topic(new_upload.id, topics)
+          set_upload_tag(new_upload.id, tags_dict)
+          set_upload_category(new_upload.id, category)
         end
       end
     end
@@ -81,7 +85,7 @@ class Upload < ApplicationRecord
     return content.to_json
   end
 
-  def self.set_pdf_topic(upload_id, topics)
+  def self.set_upload_tag(upload_id, topics)
     topics.each do |topic, frequency|
       new_topic = Topic.friendly.find_by(name: topic)
       if new_topic.nil?
@@ -95,8 +99,19 @@ class Upload < ApplicationRecord
     end
   end
 
+  def self.set_upload_category(upload_id, category)
+    new_category = Category.friendly.find_by(name: category)
+    if new_category.nil?
+      new_category = Category.new(:name => category)
+      new_category.save!
+      UploadCategoryLink.create(upload_id: upload_id, category_id: new_category.id)
+    else
+      UploadCategoryLink.create(upload_id: upload_id, category_id: new_category.id)
+    end
+  end
+
   # Generates random upload_links associated to the upload, remove when ML is implemented
-  def self.seed_pdf_topic(upload_id)
+  def self.seed_pdf_tag(upload_id)
     topic_ids = Topic.pluck(:id)
     n = Random.rand(1...topic_ids.length)
     n.times do
@@ -113,6 +128,10 @@ class Upload < ApplicationRecord
 
   def self.get_linked_topics(upload)
     upload.uploadlinks.order(:similarity).reverse
+  end
+
+  def self.get_linked_category(upload)
+    upload.upload_category_links.order(:similarity).reverse.first
   end
 
   def self.flash_message
