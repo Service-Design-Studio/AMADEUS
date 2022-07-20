@@ -2,7 +2,7 @@ require 'uri'
 require 'net/http'
 require 'json'
 
-class NLTK_Model
+class NltkModel
   @uri_string = 'https://asia-southeast1-amadeus-2000.cloudfunctions.net/nltk_model'
 
   def self.request(upload_text)
@@ -14,8 +14,8 @@ class NLTK_Model
     http.use_ssl = true
 
     # start local
-    uri = URI("http://localhost:8080")
-    http = Net::HTTP.new(uri.host, 8080)
+    # uri = URI("http://localhost:8080")
+    # http = Net::HTTP.new(uri.host, 8080)
     # end local
 
     res =  http.request(req)
