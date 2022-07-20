@@ -1,0 +1,10 @@
+<h1>Editing Category</h1>
+
+<%= render "form", category: @category %>
+
+<br>
+
+<div>
+  <%= link_to "Delete", @category, method: :delete, class: "btn btn-outline-danger", id: "delete-button" %>
+  <%= link_to "Return", url_for(:back), class: "btn btn-primary", id: "return-button" %>
+</div>

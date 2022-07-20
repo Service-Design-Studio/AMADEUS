@@ -67,6 +67,7 @@ class UploadsController < ApplicationController
   def set_tagging
     @all_topics = Upload.get_all_topics
     @linked_topics = Upload.get_linked_topics(@upload)
+    @linked_category = Upload.get_linked_category(@upload)
   end
 
   # Use callbacks to share common setup or constraints between actions.

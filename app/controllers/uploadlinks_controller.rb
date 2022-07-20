@@ -6,7 +6,7 @@ class UploadlinksController < InheritedResources::Base
     @uploadlink.destroy
 
     respond_to do |format|
-      flash[:danger] = flash_message::DELETED_TAG
+      flash[:danger] = FlashString::DELETED
       format.html { redirect_to edit_upload_path(@upload) }
       format.json { head :no_content }
     end
@@ -16,9 +16,5 @@ class UploadlinksController < InheritedResources::Base
   def set_uploadlink
     @uploadlink = Uploadlink.find(params[:id])
     @upload = Upload.find(@uploadlink.upload_id)
-  end
-
-  def flash_message
-    FlashString::UploadLinkString
   end
 end

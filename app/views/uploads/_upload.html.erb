@@ -1,11 +1,17 @@
 <div id="<%= dom_id upload %>">
   <div style="width: 100%; display: table;">
     <div style="display: table-row">
+      <div style="width: 10%; display: table-cell;">
+        <% upload.categories.each do |category| %>
+          <%= category.name %>
+        <% end %>
+      </div>
+
       <div style="width: 60%; display: table-cell;">
         <div style="display: table-cell;"> <%= render 'uploads/attachment', upload: upload %> </div>
       </div>
 
-      <div style="width: 35%; display: table-cell;">
+      <div style="width: 25%; display: table-cell;">
         <% upload.topics.each do |topic| %>
           <span class="tag"><%= topic.name %></span>
         <% end %>

@@ -1,13 +1,10 @@
 module FlashString
   TO_LOGIN = "You must be logged in to access this section"
+  DELETED = "Successfully deleted!"
 
   class UploadString
     UPLOAD_DELETED = "Upload deleted!"
     UPLOAD_SOME_FAILED = "Some pdfs failed to be parse!"
-  end
-
-  class UploadLinkString
-    DELETED_TAG = "Successfully deleted!"
   end
 
   class TagString
