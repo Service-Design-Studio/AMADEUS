@@ -21,8 +21,9 @@ class NLTK_Model
     res =  http.request(req)
     response_data = JSON.parse(res.body)
     summary = response_data["summary"]
-    topics = response_data["topics"]
-    return { "summary": summary, "topics": topics}
+    tags_dict = response_data["tags"]
+    category = response_data["category"]
+    return { "summary": summary, "tags": tags_dict, "category": category }
   end
 
   private
@@ -32,8 +33,9 @@ class NLTK_Model
         "upload_text": upload_text,
         "replace_dict": {
           "US": "USA", "U.S": "USA", "United States": "USA" },
-        "num_topic": "5",
+        "num_tag": "5",
         "summary_threshold": "1.3" }
     }.to_json
+    body_request
   end
 end
