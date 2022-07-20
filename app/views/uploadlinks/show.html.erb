@@ -1,0 +1,18 @@
+<h1> 
+    <%= @category.name %> 
+    <span class="tag">
+    #<%= @topic.name %></span>
+    <hr>
+</h1>
+
+<% @other_uploads_categories_hash.each do |category, upload| %>
+    <br>
+    <h3> 
+        <%= category.name %>
+    </h3> <br>
+    <div class="list-group">
+        <% upload.each do |upload_each| %>
+            <%= render '/main/articlelist', upload: upload_each %>
+        <% end %>
+    </div>
+<% end %>

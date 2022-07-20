@@ -130,9 +130,15 @@ class Upload < ApplicationRecord
     upload.uploadlinks.order(:similarity).reverse
   end
 
+  def self.get_uploadlink(upload, topic)
+    upload.uploadlinks.find_by(topic_id: topic.id)
+  end
+
+
   def self.get_linked_category(upload)
     upload.categories.first.name
   end
+
 
   def self.flash_message
     FlashString::TagString
