@@ -7,7 +7,7 @@ RUN (curl -sS https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearm
     apt-get update && apt-get install -y nodejs lsb-release
 
 RUN wget https://dl.yarnpkg.com/debian/pubkey.gpg
-RUN curl https://deb.nodesource.com/setup_12.x | bash
+RUN curl https://deb.nodesource.com/setup_18.x | bash
 RUN cat pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
@@ -29,6 +29,9 @@ RUN gem install bundler && \
 # Copy local code to the container image.
 COPY . /app
 
+
+WORKDIR /app
+
 ENV RAILS_ENV=production
 ENV RAILS_SERVE_STATIC_FILES=true
 # Redirect Rails log to STDOUT for Cloud Run to capture
@@ -45,5 +48,6 @@ RUN bundle exec rake db:create
 RUN bundle exec rake db:migrate
 RUN bundle exec rake db:seed
 
-EXPOSE 8080
-CMD ["bin/rails", "server", "-b", "0.0.0.0", "-p", "8080"]
+# Run rails
+EXPOSE 3000
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
