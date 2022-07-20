@@ -55,7 +55,7 @@ class Upload < ApplicationRecord
             new_upload = Upload.new
             new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
             content = get_pdf_text(entry)
-            response = NLTK_Model.request(content)
+            response = NltkModel.request(content)
             summary = response[:summary]
             tags_dict = response[:tags]
             category = response[:category]

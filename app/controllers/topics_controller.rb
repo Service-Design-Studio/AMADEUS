@@ -49,7 +49,7 @@ class TopicsController < InheritedResources::Base
         if reply[:status] == "success"
           @topic.update!(topic_params)
           flash[:success] = FlashString::TagString.get_updated_tag(old_name, new_name)
-          format.html { redirect_to topics_path }
+          format.html { redirect_back fallback_location: root_path }
           format.json { render :show, status: :ok, location: @topic }
         else
           flash[:danger] = reply[:msg]
