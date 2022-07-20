@@ -1,24 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1><%= render 'uploads/attachment', upload: @upload %></h1>
+<h1><%= link_to @upload.file.filename.to_s.sub(/(?<=.)\..*/, ''), url_for(@upload.file) %></h1>
 
 <br>
 
-<ul class="list-group">
-  <% @upload.uploadlinks.each do |uploadlink| %>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <%= link_to uploadlink.topic, style: "text-decoration:none" do %>
-        <%= uploadlink.topic.name %>
-      <% end %>
-      <span class="badge bg-primary rounded-pill"><%= uploadlink.similarity %></span>
-    </li>
-  <% end %>
-</ul>
+<p>
+  <%= @upload.summary%>
+</p>
 
-<br>
+<% @upload.topics.each do |topic| %>
+  <span class="tag">
+    <%= link_to uploadlink_path(Upload.get_uploadlink(@upload, topic).id), style:"text-decoration:none" do %>
+      <span class="tag"><%= topic.name %></span>
+    <% end %>
+  </span>
+<% end %>
 
-<div class="d-grid gap-2">
-  <%= link_to "Edit", edit_upload_path(@upload), class: "btn btn-outline-success" %>
-  <%= link_to "Remove", @upload, method: :delete, class: "btn btn-outline-danger" %>
-  <%= link_to "View Database", uploads_path, class: "btn btn-primary" %>
-</div>

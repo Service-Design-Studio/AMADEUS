@@ -68,9 +68,9 @@ body {
     height: auto;
     width: auto;
     position: relative;
-    background: rgba(112, 203, 241, 0.812);
-    left: 15%;
-    right: 15%;
+    /* background: rgba(112, 203, 241, 0.812); */
+    left: 10%;
+    right: 10%;
 }
 
 .grid {

@@ -2,24 +2,34 @@
 
 <div class="fixed custom_sidebar">
     <div class="center">
-        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-            <h3> Category </h3>
+        <ul class="list-group">
+            <br>
+            <h3> Categories </h3>
+            <br>
             <% @categories.each do |category| %>
-            <%= link_to category.name, @category, class:"btn btn-dark" %>
+                <% if @selected_category == category.name%>
+                    <%= link_to category.name, root_path({"category" => category.name}), class:"list-group-item list-group-item-dark" %>
+                <% else %>         
+                    <%= link_to category.name, root_path({"category" => category.name}), class:"list-group-item list-group-item-action" %>
+                <% end %>
             <% end %>
-        </div>
+        </ul>  
     </div>
 </div>
 
 <div class="custom_content">
-    <div class="center">
+    <% if @category == nil %>
         <h1> Welcome to Amadeus! </h1>
-    </div>
+    <% else %>
+        <h1> <%= @category.name %> </h1>
+        <hr>
+        <div id="uploads">
+            <div class="list-group">
+                <% @uploads.each do |upload| %>
+                    <%= render "articlelist", upload: upload %>
+                <% end %>
+            </div>
+        </div>        
+    <% end %>
 </div>
 
-<h3> <% @categories.each do |category| %> </h3>
-    <p class="tag"><%= link_to category.name, category %></p>
-    <% category.uploads.each do |article| %>
-      <p class="grid"> <%= article.summary %> </p>
-    <% end %>
-  <% end %>

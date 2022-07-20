@@ -1,7 +1,7 @@
 require 'zip'
 
 class UploadsController < ApplicationController
-  before_action :require_login
+  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_upload, only: %i[ show edit update destroy ]
   before_action :set_tagging, only: %i[ edit update ]
 
