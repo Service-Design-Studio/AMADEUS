@@ -6,7 +6,8 @@ class Upload < ApplicationRecord
   require_relative 'nltk_model.rb'
 
   has_one_attached :file
-  validate :validate_attachment_filetype
+  validates :file, presence: true
+  validates :file, file_content_type: { allow: ['application/pdf'], message: "ZIP should contain PDFs only!"}
   has_many :uploadlinks, dependent: :destroy
   has_many :topics, through: :uploadlinks
 
@@ -44,28 +45,22 @@ class Upload < ApplicationRecord
     return { status: status, msg: msg }
   end
 
-  def validate_attachment_filetype
-    return unless file.attached?
-
-    unless file.content_type.in?(%w[application/pdf])
-      errors.add(:file, 'must be a ZIP!')
-    end
-  end
-
   def self.unzip_file(file, params)
-    Zip::File.open(file) do |zipfile|
-      zipfile.each do |entry|
-        if entry.file?
-          new_upload = Upload.new
-          new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
-          content = get_pdf_text(entry)
-          response = NLTK_Model.request(content)
-          summary = response[:summary]
-          topics = response[:topics]
-          new_upload.content = content
-          new_upload.summary = summary
-          new_upload.save
-          set_pdf_topic(new_upload.id, topics)
+    if File.extname(file) == '.zip'
+      Zip::File.open(file) do |zipfile|
+        zipfile.each do |entry|
+          if entry.file? && entry.to_s.include?(".pdf")
+            new_upload = Upload.new
+            new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
+            content = get_pdf_text(entry)
+            response = NLTK_Model.request(content)
+            summary = response[:summary]
+            topics = response[:topics]
+            new_upload.content = content
+            new_upload.summary = summary
+            new_upload.save
+            set_pdf_topic(new_upload.id, topics)
+          end
         end
       end
     end

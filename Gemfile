@@ -12,9 +12,6 @@ gem 'friendly_id', '~> 5.4.0'
 # For js
 gem 'jquery-rails'
 
-# For ActiveRecord
-gem 'sqlite3'
-
 # For Json serialization
 gem 'active_model_serializers'
 
@@ -63,12 +60,15 @@ gem 'rubyzip'
 
 # Parsing PDFs
 gem 'pdf-reader'
+gem 'file_validators'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
 # for Heroku deployment - as described in Ap. A of ELLS book
 group :development, :test do
+# For ActiveRecord
+  gem 'sqlite3'
   gem 'byebug'
   gem 'database_cleaner'
   gem 'capybara'
@@ -76,6 +76,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
   gem 'pry-byebug'
+  gem 'shoulda-matchers'
+  gem 'factory_bot_rails'
 end
 
 group :test do
@@ -86,6 +88,6 @@ group :test do
 end
 
 group :production do
-  # gem 'pg'
+  gem 'pg' #gcloud deployment
 end
 
