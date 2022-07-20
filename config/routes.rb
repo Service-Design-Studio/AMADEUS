@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   devise_for :user, :path => ''
-
+  resources :categories
+  
   scope :admin do
     resources :uploads
     resources :topics
     resources :uploadlinks
-    resources :categories
     resources :upload_category_links
   end
 
@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   post "sign_in", to: "sessions#create"
 
   root to: "main#index"
+
+
 end

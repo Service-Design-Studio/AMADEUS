@@ -1,11 +1,11 @@
 <%# <h1> Welcome to Amadeus! </h1> %>
 
-<div class="custom_sidebar">
+<div class="fixed custom_sidebar">
     <div class="center">
         <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
             <h3> Category </h3>
             <% @categories.each do |category| %>
-            <%= link_to category.name, root_path({"category" => category.name}), class:"btn btn-dark" %>
+            <%= link_to category.name, @category, class:"btn btn-dark" %>
             <% end %>
         </div>
     </div>
@@ -13,7 +13,13 @@
 
 <div class="custom_content">
     <div class="center">
-        <h1> WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWelcome to Amadeus! </h1>
+        <h1> Welcome to Amadeus! </h1>
     </div>
 </div>
 
+<h3> <% @categories.each do |category| %> </h3>
+    <p class="tag"><%= link_to category.name, category %></p>
+    <% category.uploads.each do |article| %>
+      <p class="grid"> <%= article.summary %> </p>
+    <% end %>
+  <% end %>
