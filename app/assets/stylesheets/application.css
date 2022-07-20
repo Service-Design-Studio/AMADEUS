@@ -51,4 +51,24 @@ body {
     padding-left: 35%;
     padding-right: 35%;
 }
+
+.custom_sidebar {
+    position: fixed;
+    overflow-y: scroll;
+    width: 15%;
+    background: #ffffff;
+    top: 64px;
+    left: 0;
+    bottom: 0;
+}
   
+ 
+/* need to edit this*/
+.custom_content {
+    height: auto;
+    width: auto;
+    position: relative;
+    background: #f00;
+    left: 15%;
+    right: 15%;
+}
