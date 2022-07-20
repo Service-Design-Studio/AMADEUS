@@ -63,6 +63,7 @@ gem 'rubyzip'
 
 # Parsing PDFs
 gem 'pdf-reader'
+gem 'file_validators'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -76,6 +77,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
   gem 'pry-byebug'
+  gem 'shoulda-matchers'
+  gem 'factory_bot_rails'
 end
 
 group :test do
@@ -86,6 +89,6 @@ group :test do
 end
 
 group :production do
-  # gem 'pg'
+  #gem 'pg' #gcloud deployment
 end
 
