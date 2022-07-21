@@ -24,7 +24,13 @@
     <% if @category == nil %>
         <h1> Welcome to Amadeus! </h1>
     <% else %>
-        <h1> <%= @category.name %> </h1>
+        <h1>
+        <% if @category %>
+            <%= @category.name %>
+        <% else %>
+            <p style="color: red"> <%= "No Category" %> </p>
+        <% end %>
+        </h1>
         <hr>
         <div id="uploads">
             <div class="list-group">
