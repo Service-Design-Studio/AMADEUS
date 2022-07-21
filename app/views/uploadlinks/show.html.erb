@@ -1,11 +1,12 @@
 <h1> 
     <% if @category %>
-        <%= @category.name %>
+        <%= link_to @category.name, root_path({"category" => @category.name}), class:"list-group-item list-group-item-dark" %>
     <% else %>
         <p style="color: red"> <%= "No Category" %> </p>
     <% end %> 
     <span class="tag">
-    <%= @topic.name %></span>
+    <%= link_to @topic.name, edit_topic_path(@topic), {:style=>'color:#FFFFFF;text-decoration:none'} %>
+    </span>
     <hr>
 </h1>
 
@@ -13,7 +14,7 @@
     <br>
     <h3> 
         <% if category %>
-            <%= category.name %>
+            <%= link_to category.name, root_path({"category" => category.name}), class:"list-group-item list-group-item-dark" %>
         <% else %>
             <p style="color: red"> <%= "No Category" %></p>
         <% end %>
