@@ -8,7 +8,11 @@
 <% @other_uploads_categories_hash.each do |category, upload| %>
     <br>
     <h3> 
-        <%= category.name if category %>
+        <% if category %>
+            <%= category.name %>
+        <% else %>
+            <%= "No Category" %>
+        <% end %>
     </h3> <br>
     <div class="list-group">
         <% upload.each do |upload_each| %>
