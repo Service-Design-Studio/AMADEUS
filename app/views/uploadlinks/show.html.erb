@@ -1,5 +1,9 @@
 <h1> 
-    <%= @category.name %> 
+    <% if @category %>
+        <%= @category.name %>
+    <% else %>
+        <p style="color: red"> <%= "No Category" %> </p>
+    <% end %> 
     <span class="tag">
     #<%= @topic.name %></span>
     <hr>
@@ -11,7 +15,7 @@
         <% if category %>
             <%= category.name %>
         <% else %>
-            <%= "No Category" %>
+            <p style="color: red"> <%= "No Category" %></p>
         <% end %>
     </h3> <br>
     <div class="list-group">
