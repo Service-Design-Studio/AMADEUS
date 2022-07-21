@@ -5,7 +5,7 @@
         <p style="color: red"> <%= "No Category" %> </p>
     <% end %> 
     <span class="tag">
-    #<%= @topic.name %></span>
+    <%= @topic.name %></span>
     <hr>
 </h1>
 
@@ -24,3 +24,6 @@
         <% end %>
     </div>
 <% end %>
+
+<br>
+<%= link_to "Back to Home", root_path, class: "btn btn-primary",id: "back-to-home-button"%>
