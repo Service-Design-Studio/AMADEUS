@@ -8,8 +8,11 @@
             <br>
             <% @categories.each do |category| %>
                 <% if @selected_category == category.name%>
+                    <% if category.name.nil? %>
+                        <%= link_to "No Category", categories_path, class: "list-group-item active" %>
+                    <% end %>
                     <%= link_to category.name, root_path({"category" => category.name}), class:"list-group-item list-group-item-dark" %>
-                <% else %>         
+                <% else %>
                     <%= link_to category.name, root_path({"category" => category.name}), class:"list-group-item list-group-item-action" %>
                 <% end %>
             <% end %>
