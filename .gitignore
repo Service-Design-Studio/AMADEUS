@@ -40,3 +40,4 @@
 # Python
 __pycache__
 lib/assets/env/*
+lib/assets/torch/*

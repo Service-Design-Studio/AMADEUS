@@ -131,7 +131,7 @@ class Upload < ApplicationRecord
   end
 
   def self.get_linked_category(upload)
-    upload.upload_category_links.order(:similarity).reverse.first
+    upload.categories.first.name
   end
 
   def self.flash_message

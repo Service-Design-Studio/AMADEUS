@@ -13,20 +13,11 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.corpus import wordnet
 
-# from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
-# checkpoint = "facebook/bart-large-mnli"
-# tokenizer = AutoTokenizer.from_pretrained(pretrained_model_name_or_path=checkpoint)
-# model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
-# classifier = pipeline("zero-shot-classification")
-
 import random
 print("Finish setup")
 
-def bert_categoriser(upload_text):
+def categoriser(upload_text):
     categories = ['Tank', 'Artillery', 'UAV', 'Fighter Aircraft', 'Helicopter', 'Missile', 'MANPAD', 'Infrastructure']
-#     results = classifier(upload_text, candidate_labels=categories)
-#     top_category = (results['labels'][0])
-#     return top_category
     return random.choice(categories)
 
 def tagger(upload_text, replace_dict, all_stopwords, num_tag):
@@ -139,6 +130,6 @@ def nltk_model(request):
         # Run model
         tags_dict = tagger(upload_text, replace_dict, all_stopwords, num_tag)
         summary = summariser(upload_text, all_stopwords, summary_threshold)
-        category = bert_categoriser(summary)
+        category = categoriser(summary)
         response = { "summary": summary, "tags": tags_dict, "category": category }
     return response
