@@ -2,6 +2,7 @@ class CategoriesController < InheritedResources::Base
   before_action :require_login
   before_action :set_category, only: %i[ show edit update destroy ]
   # GET /categories or /categories.json
+
   def index
     @categories = Category.all.reverse
   end

@@ -4,7 +4,13 @@
 <h3><%= render 'uploads/attachment', upload: @upload %></h3>
 
 <br>
-<h4><%= "Category: #{@linked_category}" %></h4>
+<h4>
+<% if @linked_category %>
+   <p> Category: <%= link_to "#{@linked_category.category.name}", edit_category_path(@linked_category.category) %> </p>
+<% else %>
+  <p style="color: red"> Category: <%= "No Category" %> </p>
+<% end %>
+</h4>
 <div class="d-grid gap-2">
   <% @linked_topics.each do |uploadlink| %>
     <div class="d-flex justify-content-between">
@@ -13,7 +19,6 @@
         <div class="d-flex justify-content-between">
           <%= uploadlink.topic.name %>
 <!--          <span class="badge bg-primary rounded-pill"><%#= "#{uploadlink.similarity} %" %></span>-->
-
         </div>
         <%= link_to "x", uploadlink, method: :delete, class: "btn btn-outline-danger", id: "#{uploadlink.topic.name}-button" %>
       <% end %>

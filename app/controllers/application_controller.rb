@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
     def after_sign_in_path_for(resource)
         "/admin"
     end
@@ -8,5 +9,9 @@ class ApplicationController < ActionController::Base
             flash[:danger] = FlashString::TO_LOGIN
             redirect_to "/sign_in"
         end
+    end
+
+    def user_not_authorized
+        flash[:danger] = FlashString::USER_NOT_AUTHORIZED
     end
 end
