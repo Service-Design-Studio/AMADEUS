@@ -58,20 +58,19 @@ body {
     overflow-y: scroll;
     width: 15%;
     background: #ffffff;
-    top: 64px;
+    top: 10%;
     left: 0;
     bottom: 0;
 }
 
 
-/* need to edit this*/
 .custom_content {
-    height: auto;
-    width: auto;
-    position: relative;
+    float: none;
     /* background: rgba(112, 203, 241, 0.812); */
     left: 10%;
     right: 10%;
+    overflow: hidden;
+    margin-left: 20%;
 }
 
 .grid {

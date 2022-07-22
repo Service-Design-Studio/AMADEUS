@@ -7,7 +7,7 @@ class Upload < ApplicationRecord
 
   has_one_attached :file
   validates :file, presence: true
-  validates :file, file_content_type: { allow: ['application/pdf','application/zip'], message: "ZIP should contain PDFs only!"}
+  validates :file, file_content_type: { allow: ['application/pdf', 'application/zip'], message: "ZIP should contain PDFs only!" }
   has_many :uploadlinks, dependent: :destroy
   has_many :topics, through: :uploadlinks
   has_many :upload_category_links, dependent: :destroy
@@ -15,7 +15,7 @@ class Upload < ApplicationRecord
 
   private
 
-  def self.verify(upload, topic_name)
+  def self.verify_tag(upload, topic_name)
     status = "fail"
 
     upload.uploadlinks.each do |uploadlink|
@@ -25,14 +25,14 @@ class Upload < ApplicationRecord
     end
 
     if (topic_name == "") || topic_name.nil?
-      msg = flash_message::INVALID_TAG
+      msg = flash_message_tag::INVALID_TAG
     elsif topic_name.length >= 15
-      msg = flash_message::LENGTHY_TAG
+      msg = flash_message_tag::LENGTHY_TAG
     elsif topic_name.match(/\W/)
-      msg = flash_message.get_special_characters(topic_name)
+      msg = flash_message_tag.get_special_characters(topic_name)
     elsif status == "exist"
       status = "fail"
-      msg = flash_message.get_duplicate_tag(topic_name)
+      msg = flash_message_tag.get_duplicate_tag(topic_name)
     else
       status = "success"
       msg = ""
@@ -47,6 +47,29 @@ class Upload < ApplicationRecord
     return { status: status, msg: msg }
   end
 
+  def self.verify_category(upload, category_name)
+    status = "fail"
+
+    if (category_name == "") || category_name.nil?
+      msg = flash_message_category::INVALID_CAT
+    elsif category_name.length >= 15
+      msg = flash_message_category::LENGTHY_CAT
+    elsif category_name.match(/\W/)
+      msg = flash_message_category.get_special_characters(category_name)
+    else
+      status = "success"
+      msg = ""
+      new_category = Category.friendly.find_by(name: category_name)
+      if new_category.nil?
+        new_category = Category.create(name: category_name)
+        UploadCategoryLink.create(upload_id: upload.id, category_id: new_category.id)
+      else
+        UploadCategoryLink.create(upload_id: upload.id, category_id: new_category.id)
+      end
+    end
+    return { status: status, msg: msg }
+  end
+
   def self.unzip_file(file, params)
     if File.extname(file) == '.zip'
       Zip::File.open(file) do |zipfile|
@@ -56,7 +79,7 @@ class Upload < ApplicationRecord
             new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
             content = get_pdf_text(entry)
             response = NltkModel.request(content)
-            summary = response[:summary]
+            summary = response[:summary].gsub(/(\\\")/, "")
             tags_dict = response[:tags]
             category = response[:category]
             new_upload.content = content
@@ -75,9 +98,19 @@ class Upload < ApplicationRecord
     content = ""
     reader = PDF::Reader.new(StringIO.new(pdf.get_input_stream.read))
     reader.pages.each do |page|
-      content.concat(page.text.strip.gsub!(/[\W]/, ' ').squeeze(' '))
+      content.concat(preprocess_text(page.text))
     end
     return content.to_json
+  end
+
+  def self.preprocess_text(text)
+    text = text.gsub(/^.*\u0026/, "")                  # strip header before main text
+    text = text.strip.delete("\t\r\n")                 # strip whitespace
+    text = text.gsub(/[^\x00-\x7F]/, " ")              # strip non-ASCII
+    text = text.gsub(/(?<=[.,?!;])(?=[^\s])/, " ")     # add whitespace after punctuation
+    text = text.gsub(/\s+(?=\d)/, "")                  # remove whitespace added between number
+    text = text.gsub(/(?<=[a-z1-9])(?=[A-Z])/, " ")    # add whitespace before capital letter
+    text.squeeze(' ')
   end
 
   def self.set_upload_tag(upload_id, topics)
@@ -120,6 +153,10 @@ class Upload < ApplicationRecord
     Topic.all.collect(&:name)
   end
 
+  def self.get_all_categories
+    Category.all.collect(&:name)
+  end
+
   def self.get_linked_topics(upload)
     upload.uploadlinks.all
   end
@@ -129,7 +166,7 @@ class Upload < ApplicationRecord
   end
 
   def self.get_linked_category(upload)
-      upload.upload_category_links.first
+    upload.upload_category_links.first
   end
 
   def self.get_cleaned_summary(upload)
@@ -140,7 +177,11 @@ class Upload < ApplicationRecord
     upload.file.filename.to_s.sub(/(?<=.)\..*/, '')
   end
 
-  def self.flash_message
+  def self.flash_message_tag
     FlashString::TagString
+  end
+
+  def self.flash_message_category
+    FlashString::CategoryString
   end
 end

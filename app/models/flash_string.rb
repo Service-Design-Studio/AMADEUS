@@ -18,22 +18,16 @@ module FlashString
       "%{tag} added." % {tag:tag}
     end
 
-    def self.get_updated_tag(old_tag, new_tag)
-      "%{old} updated into %{new}." % {old: old_tag, new: new_tag}
-    end
-
     def self.get_deleted_tag(tag)
       "Deleted %{tag}." % {tag: tag}
     end
+
     def self.get_duplicate_tag(tag)
       "Tag %{tag} already exists!" % {tag: tag}
     end
+
     def self.get_special_characters(tag)
       "Tag %{tag} contains special characters!" % {tag: tag}
-    end
-
-    def self.get_space(tag)
-      "Tag %{tag} starts or ends with a space!" % {tag: tag}
     end
   end
 
@@ -41,25 +35,15 @@ module FlashString
     INVALID_CAT = "Invalid category input!"
     LENGTHY_CAT = "Category name too long!"
     def self.get_added_category(category)
-      "%{category} added." % {category:category}
-    end
-
-    def self.get_updated_category(old_category, new_category)
-      "%{old} updated into %{new}." % {old: old_category, new: new_category}
+      "Category %{category} set." % {category:category}
     end
 
     def self.get_deleted_category(category)
       "Deleted %{category}." % {category: category}
     end
-    def self.get_duplicate_category(category)
-      "Category %{category} already exists!" % {category: category}
-    end
+
     def self.get_special_characters(category)
       "Category %{category} contains special characters!" % {category: category}
-    end
-
-    def self.get_space(category)
-      "Category %{category} starts or ends with a space!" % {category: category}
     end
   end
 end
