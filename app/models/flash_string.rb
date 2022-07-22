@@ -2,6 +2,10 @@ module FlashString
   TO_LOGIN = "You must be logged in to access this section"
   DELETED = "Successfully deleted!"
 
+  class CategoryString
+    CATEGORY_EMPTY = "No categories found!"
+  end
+
   class UploadString
     UPLOAD_DELETED = "Upload deleted!"
     UPLOAD_SOME_FAILED = "Some pdfs failed to be parse!"
@@ -30,6 +34,32 @@ module FlashString
 
     def self.get_space(tag)
       "Tag %{tag} starts or ends with a space!" % {tag: tag}
+    end
+  end
+
+  class CategoryString
+    INVALID_CAT = "Invalid category input!"
+    LENGTHY_CAT = "Category name too long!"
+    def self.get_added_category(category)
+      "%{category} added." % {category:category}
+    end
+
+    def self.get_updated_category(old_category, new_category)
+      "%{old} updated into %{new}." % {old: old_category, new: new_category}
+    end
+
+    def self.get_deleted_category(category)
+      "Deleted %{category}." % {category: category}
+    end
+    def self.get_duplicate_category(category)
+      "Category %{category} already exists!" % {category: category}
+    end
+    def self.get_special_characters(category)
+      "Category %{category} contains special characters!" % {category: category}
+    end
+
+    def self.get_space(category)
+      "Category %{category} starts or ends with a space!" % {category: category}
     end
   end
 end

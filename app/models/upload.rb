@@ -39,9 +39,9 @@ class Upload < ApplicationRecord
       new_topic = Topic.friendly.find_by(name: topic_name)
       if new_topic.nil?
         new_topic = Topic.create(name: topic_name)
-        Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id, similarity: 100)
+        Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
       else
-        Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id, similarity: 100)
+        Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
       end
     end
     return { status: status, msg: msg }
@@ -86,10 +86,9 @@ class Upload < ApplicationRecord
       if new_topic.nil?
         new_topic = Topic.new(:name => topic)
         new_topic.save!
-        similarity = Random.rand(1...100)
-        Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id, similarity: similarity)
+        Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id)
       else
-        Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id, similarity: similarity)
+        Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id)
       end
     end
   end
@@ -112,7 +111,7 @@ class Upload < ApplicationRecord
     n.times do
       topic_id = topic_ids.sample
       similarity = Random.rand(1...100)
-      Uploadlink.create(upload_id: upload_id, topic_id: topic_id, similarity: similarity)
+      Uploadlink.create(upload_id: upload_id, topic_id: topic_id)
       topic_ids.delete(topic_id)
     end
   end
@@ -122,11 +121,23 @@ class Upload < ApplicationRecord
   end
 
   def self.get_linked_topics(upload)
-    upload.uploadlinks.order(:similarity).reverse
+    upload.uploadlinks.all
+  end
+
+  def self.get_uploadlink(upload, topic)
+    upload.uploadlinks.find_by(topic_id: topic.id)
   end
 
   def self.get_linked_category(upload)
-    upload.categories.first.name
+      upload.upload_category_links.first
+  end
+
+  def self.get_cleaned_summary(upload)
+    upload.summary.split(/\s+/, 100 + 1)[0...100].join(' ')
+  end
+
+  def self.get_cleaned_filename(upload)
+    upload.file.filename.to_s.sub(/(?<=.)\..*/, '')
   end
 
   def self.flash_message

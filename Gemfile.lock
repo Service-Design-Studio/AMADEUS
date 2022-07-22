@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/mmotherwell/best_in_place
+  revision: 88eb3052623a9a6cd346864d2aca05021c2f80d0
+  specs:
+    best_in_place (3.1.1)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -267,6 +275,8 @@ GEM
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
+    pundit (2.2.0)
+      activesupport (>= 3.0.0)
     racc (1.6.0)
     rack (2.2.3.1)
     rack-test (1.1.0)
@@ -369,6 +379,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   activeadmin
+  best_in_place!
   bootsnap
   byebug
   capybara
@@ -387,6 +398,7 @@ DEPENDENCIES
   pry
   pry-byebug
   puma (~> 5.0)
+  pundit
   rails (~> 7.0.3)
   rspec-rails
   rubyzip

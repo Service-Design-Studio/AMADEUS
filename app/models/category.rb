@@ -8,13 +8,13 @@ class Category < ApplicationRecord
   def self.verify(category_name)
     status = "fail"
     if (category_name == "") || category_name.nil?
-      msg = flash_message::INVALID_TAG
+      msg = flash_message::INVALID_CAT
     elsif category_name.length >= 15
-      msg = flash_message::LENGTHY_TAG
+      msg = flash_message::LENGTHY_CAT
     elsif category_name.match(/\W/)
       msg = flash_message.get_special_characters(category_name)
     elsif Category.exists?(name: category_name)
-      msg = flash_message.get_duplicate_tag(category_name)
+      msg = flash_message.get_duplicate_category(category_name)
     else
       status = "success"
       msg = ""
@@ -23,6 +23,6 @@ class Category < ApplicationRecord
   end
 
   def self.flash_message
-    FlashString::TagString
+    FlashString::CategoryString
   end
 end
