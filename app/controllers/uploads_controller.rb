@@ -40,8 +40,7 @@ class UploadsController < ApplicationController
       if reply[:status] == "success"
         @upload.update!(upload_params.except(:topics))
         flash[:success] = FlashString::TagString.get_added_tag(params[:upload][:topics])
-        format.html { redirect_to edit_upload_path(@upload) }
-        # format.html { redirect_to uploads_url}
+        format.html { redirect_to(:back) }
         format.json { render :edit, status: :ok, location: @upload }
       else
         flash[:danger] = reply[:msg]
@@ -77,7 +76,7 @@ class UploadsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def upload_params
-    params.require(:upload).permit(:file, :topics)
+    params.require(:upload).permit(:file, :topics, :category)
   end
 
   # Ensures that admin must be logged in to access upload feature

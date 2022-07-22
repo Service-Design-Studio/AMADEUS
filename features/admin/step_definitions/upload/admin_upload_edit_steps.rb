@@ -14,11 +14,11 @@ Then(/^I should see the following tags "([^"]*)"$/) do |tag_list|
 end
 
 When(/^I click delete button for the tag "([^"]*)"$/) do |tag_name|
-  find("##{tag_name}-button").click
+  find("##{tag_name}-delete-button").click
 end
 
 Then(/^I should not see the tag "([^"]*)"$/) do |tag_name|
-  expect(page).to_not have_button("##{tag_name}-button")
+  expect(page).to_not have_button("##{tag_name}-delete-button")
 end
 
 When(/^I add the tag "([^"]*)"$/) do |tag_name|

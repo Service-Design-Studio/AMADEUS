@@ -1,4 +1,4 @@
 class UploadlinkSerializer < ActiveModel::Serializer
-  attributes :id, :similarity
+  attributes :id
 end
   

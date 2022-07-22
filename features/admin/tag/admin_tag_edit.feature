@@ -110,36 +110,36 @@ Feature: Edit existing Tag
       | Oka Kun     |
       | ( ͡❛ ͜ʖ ͡❛) |
 
-  @redirect
-  Scenario Outline: Back to Tag List page
-    Given I am on the "Tag List" page
-    And I click on the tag "<tag_name>"
-    Then I should be redirected to the "<tag_name>" edit page
-    When I click on the "Return" button
-    Then I should be redirected to the "Tag List" page
-
-    Examples:
-      | tag_name  |
-      | Tanks       |
-      | UAVs        |
-      | Helicopters |
-      | Missiles    |
-      | MANPADs     |
-
-  @redirect
-  Scenario Outline: Back to article page
-    Given I have uploaded these zip files rus.zip, uav.zip, ukr.zip
-    And I am on the article "<article_name>" page
-    And I click on the tag "<tag_name>"
-    Then I should be redirected to the "<tag_name>" edit page
-    When I click on the "Return" button
-    Then I should be redirected to the article "<article_name>" page
-
-    Examples:
-      | article_name                                                                  | tag_name |
-      | Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf         | economy    |
-      | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf | russia     |
-      | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News.pdf   | war        |
+#  @redirect
+#  Scenario Outline: Back to Tag List page
+#    Given I am on the "Tag List" page
+#    And I click on the tag "<tag_name>"
+#    Then I should be redirected to the "<tag_name>" edit page
+#    When I click on the "Return" button
+#    Then I should be redirected to the "Tag List" page
+#
+#    Examples:
+#      | tag_name  |
+#      | Tanks       |
+#      | UAVs        |
+#      | Helicopters |
+#      | Missiles    |
+#      | MANPADs     |
+#
+#  @redirect
+#  Scenario Outline: Back to article page
+#    Given I have uploaded these zip files rus.zip, uav.zip, ukr.zip
+#    And I am on the article "<article_name>" page
+#    And I click on the tag "<tag_name>"
+#    Then I should be redirected to the "<tag_name>" edit page
+#    When I click on the "Return" button
+#    Then I should be redirected to the article "<article_name>" page
+#
+#    Examples:
+#      | article_name                                                                  | tag_name |
+#      | Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf         | economy    |
+#      | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf | russia     |
+#      | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News.pdf   | war        |
 
 
 

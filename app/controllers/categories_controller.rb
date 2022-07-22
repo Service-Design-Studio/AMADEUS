@@ -29,7 +29,7 @@ class CategoriesController < InheritedResources::Base
       reply = Category.verify(new_name)
       if reply[:status] == "success"
         @category.save!
-        flash[:success] = FlashString::TagString.get_added_tag(category_params[:name])
+        flash[:success] = FlashString::CategoryString.get_added_category(category_params[:name])
         format.html { redirect_to categories_path }
         format.json { render :show, status: :created, location: @category }
       else
@@ -48,7 +48,7 @@ class CategoriesController < InheritedResources::Base
       reply = Category.verify(new_name)
       if reply[:status] == "success"
         @category.update!(category_params)
-        flash[:success] = FlashString::TagString.get_updated_tag(old_name, new_name)
+        flash[:success] = FlashString::CategoryString.get_updated_category(old_name, new_name)
         format.html { redirect_to categories_path }
         format.json { render :show, status: :ok, location: @category }
       else
@@ -78,5 +78,4 @@ class CategoriesController < InheritedResources::Base
   def category_params
     params.require(:category).permit(:name)
   end
-
 end
