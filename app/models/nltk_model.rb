@@ -3,7 +3,7 @@ require 'net/http'
 require 'json'
 
 class NltkModel
-  @uri_string = 'https://asia-southeast1-amadeus-2000.cloudfunctions.net/nltk_model'
+  @uri_string = 'https://asia-southeast1-amadeus-354613.cloudfunctions.net/nltk_model'
 
   def self.request(upload_text)
     uri = URI(@uri_string)
