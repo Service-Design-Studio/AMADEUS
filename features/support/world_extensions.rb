@@ -36,6 +36,10 @@ module CapybaraHelper
     "Tag List": "tag-list-button",
     "New Tag": "new-tag-button",
     "Back to Tag List": "back-to-tag-list-button",
+    # Category resource
+    "Category List": "category-list-button",
+    "New Category": "new-category-button",
+    "Back to Category List": "back-to-category-list-button",
   }
 
   FORM_BUTTON_MAP = {

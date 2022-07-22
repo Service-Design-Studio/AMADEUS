@@ -6,7 +6,7 @@ Feature: navigate to different admin functionalities
 
   Background:
     Given I am logged in as admin of Amadeus
-    Then I should see the following buttons "Tag List, New Upload, Database"
+    Then I should see the following buttons "Category List, New Upload, Database"
 
   @admin @redirect
   Scenario Outline: redirect to different functionalities
@@ -14,7 +14,7 @@ Feature: navigate to different admin functionalities
     Then I should be redirected to the "<feature_name>" page
 
     Examples:
-      | feature_name |
-      | Tag List     |
-      | New Upload   |
-      | Database     |
+      | feature_name  |
+      | Category List |
+      | New Upload    |
+      | Database      |

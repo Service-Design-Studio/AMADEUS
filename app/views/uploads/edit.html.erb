@@ -4,7 +4,7 @@
 <h3><%= render 'uploads/attachment', upload: @upload %></h3>
 
 <br>
-<h4><%= "Category: #{@linked_category.category.name}" %></h4>
+<h4><%= "Category: #{@linked_category}" %></h4>
 <div class="d-grid gap-2">
   <% @linked_topics.each do |uploadlink| %>
     <div class="d-flex justify-content-between">

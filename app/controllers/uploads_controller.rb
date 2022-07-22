@@ -3,7 +3,7 @@ require 'zip'
 class UploadsController < ApplicationController
   before_action :require_login
   before_action :set_upload, only: %i[ show edit update destroy ]
-  before_action :set_tagging, only: %i[ edit update ]
+  before_action :set_linked_resources, only: %i[ edit update ]
 
   # GET /uploads or /uploads.json
   def index
@@ -64,7 +64,7 @@ class UploadsController < ApplicationController
 
   private
 
-  def set_tagging
+  def set_linked_resources
     @all_topics = Upload.get_all_topics
     @linked_topics = Upload.get_linked_topics(@upload)
     @linked_category = Upload.get_linked_category(@upload)
