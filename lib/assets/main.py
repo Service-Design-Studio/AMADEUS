@@ -101,11 +101,13 @@ def summariser(upload_text, all_stopwords, summary_threshold):
     average = int(scores / len(sentence_value_dict))
 
     # Storing sentences into our summary.
-    summary = sentences[0]
-    for sentence in sentences[1:]:
+    summary = []
+    for sentence in sentences:
         if (sentence in sentence_value_dict) and (sentence_value_dict[sentence] > (float(summary_threshold) * average)):
-            summary += " " + sentence
-
+            summary.append(sentence)
+    summary = " ".join(summary[2:-1])
+    print("#"*100)
+    print(summary)
     return summary
 
 def nltk_model(request):

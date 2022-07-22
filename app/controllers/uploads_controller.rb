@@ -36,16 +36,30 @@ class UploadsController < ApplicationController
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
     respond_to do |format|
-      reply = Upload.verify(@upload, params[:upload][:topics])
-      if reply[:status] == "success"
-        @upload.update!(upload_params.except(:topics))
-        flash[:success] = FlashString::TagString.get_added_tag(params[:upload][:topics])
-        format.html { redirect_to(:back) }
-        format.json { render :edit, status: :ok, location: @upload }
-      else
-        flash[:danger] = reply[:msg]
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
+      if !params[:upload][:topics].nil?
+        reply = Upload.verify_tag(@upload, params[:upload][:topics])
+        if reply[:status] == "success"
+          @upload.update!(upload_params.except(:topics))
+          flash[:success] = FlashString::TagString.get_added_tag(params[:upload][:topics])
+          format.html { redirect_to edit_upload_path(@upload) }
+          format.json { render :edit, status: :ok, location: @upload }
+        else
+          flash[:danger] = reply[:msg]
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @upload.errors, status: :unprocessable_entity }
+        end
+      elsif !params[:upload][:categories].nil?
+        reply = Upload.verify_category(@upload, params[:upload][:categories])
+        if reply[:status] == "success"
+          @upload.update!(upload_params.except(:categories))
+          flash[:success] = FlashString::CategoryString.get_added_category(params[:upload][:categories])
+          format.html { redirect_to edit_upload_path(@upload) }
+          format.json { render :edit, status: :ok, location: @upload }
+        else
+          flash[:danger] = reply[:msg]
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @upload.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -65,8 +79,10 @@ class UploadsController < ApplicationController
 
   def set_linked_resources
     @all_topics = Upload.get_all_topics
+    @all_categories = Upload.get_all_categories
     @linked_topics = Upload.get_linked_topics(@upload)
     @linked_category = Upload.get_linked_category(@upload)
+    @redirect_count = 0
   end
 
   # Use callbacks to share common setup or constraints between actions.
@@ -76,7 +92,7 @@ class UploadsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def upload_params
-    params.require(:upload).permit(:file, :topics, :category)
+    params.require(:upload).permit(:file, :topics, :categories)
   end
 
   # Ensures that admin must be logged in to access upload feature

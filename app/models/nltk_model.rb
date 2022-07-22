@@ -34,7 +34,7 @@ class NltkModel
         "replace_dict": {
           "US": "USA", "U.S": "USA", "United States": "USA" },
         "num_tag": "5",
-        "summary_threshold": "1.3" }
+        "summary_threshold": "1.4" }
     }.to_json
     body_request
   end

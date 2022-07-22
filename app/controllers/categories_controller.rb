@@ -42,13 +42,11 @@ class CategoriesController < InheritedResources::Base
 
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
-    old_name = @category.name
     respond_to do |format|
       new_name = category_params[:name]
       reply = Category.verify(new_name)
       if reply[:status] == "success"
         @category.update!(category_params)
-        flash[:success] = FlashString::CategoryString.get_updated_category(old_name, new_name)
         format.html { redirect_to categories_path }
         format.json { render :show, status: :ok, location: @category }
       else

@@ -1,0 +1,13 @@
+<%= form_with(model: upload) do |form| %>
+  <datalist id="cats_list">
+    <%= @all_categories.each do |category| %>
+      <option value="<%= category %>"></option>
+    <% end %>
+  </datalist>
+
+  <div class="d-grid gap-2">
+    <%= form.text_field :categories, class: "form-control", id: "category-input",
+                        value: "", placeholder: "Choose a category or add new", list: "cats_list" %>
+    <%= form.submit "Add Category", class: "btn btn-outline-success d-grid gap-2", id: "add-new-category-button" %>
+  </div>
+<% end %>

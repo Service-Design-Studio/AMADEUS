@@ -12,15 +12,6 @@ class UploadCategoryLinksController < InheritedResources::Base
     end
   end
 
-  def update
-    respond_to do |format|
-      if @category.create!(params[:name])
-        format.html { redirect_to(:back) }
-        format.json { head :no_content }
-      end
-    end
-  end
-
   private
   def set_upload_category_link
     @upload_category_link = UploadCategoryLink.find(params[:id])
