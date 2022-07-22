@@ -1,8 +1,13 @@
 class UploadlinksController < InheritedResources::Base
   before_action :set_uploadlink
 
-  def show
-    
+  def update
+    respond_to do |format|
+      if @topic.update!(params[:name])
+        format.html { redirect_to(edit_upload_path(@upload)) }
+        format.json { respond_with_bip(@topic) }
+      end
+    end
   end
 
   # DELETE /tags/1 or /tags/1.json
@@ -21,7 +26,8 @@ class UploadlinksController < InheritedResources::Base
     @uploadlink = Uploadlink.find(params[:id])
     @upload = Upload.find(@uploadlink.upload_id)
     @topic = Topic.find(@uploadlink.topic_id)
-    @category = @upload.categories[0]
+    @category = @upload.categories.first
+    @filename = Upload.get_cleaned_filename(@upload)
 
     # get all the uploads that are have the same @topic except the current @upload and sort by the the uploadlink that has highest similarity
     # FIX self.set_upload_tag before uncommenting the sorting verion
@@ -30,7 +36,7 @@ class UploadlinksController < InheritedResources::Base
     # get all the uploads that are have the same @topic except the current @upload and sort by creation date in descending order
     @other_uploads = @topic.uploads.where.not(id: @upload.id).sort_by { |upload| upload.created_at }.reverse
 
-    @other_uploads_categories = @other_uploads.map { |upload| upload.categories[0] }
+    @other_uploads_categories = @other_uploads.map { |upload| upload.categories.first }
     # get a hash of category and its uploads
     @other_uploads_categories_hash = Hash[@other_uploads_categories.map { |category| [category, @other_uploads.select { |upload| upload.categories[0] == category }] }]
   end

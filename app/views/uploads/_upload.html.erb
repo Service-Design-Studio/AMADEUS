@@ -1,9 +1,15 @@
 <div id="<%= dom_id upload %>">
   <div style="width: 100%; display: table;">
     <div style="display: table-row">
-      <div style="width: 10%; display: table-cell;">
-        <% upload.categories.each do |category| %>
-          <%= category.name %>
+      <div style="width: 20%; display: table-cell;">
+        <% if !upload.upload_category_links.first.nil? %>
+          <p> <%= link_to "#{upload.upload_category_links.first.category.name}",
+                          edit_category_path(upload.upload_category_links.first),
+                          class: "btn btn-outline-info" %> </p>
+        <% else %>
+          <p style="color: red">
+            <%= link_to "No Category", new_category_path, class: "btn btn-outline-danger" %>
+          </p>
         <% end %>
       </div>
 

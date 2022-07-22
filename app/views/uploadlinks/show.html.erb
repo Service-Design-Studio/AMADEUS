@@ -1,30 +1,35 @@
-<h1> 
-    <% if @category %>
-        <%= link_to @category.name, root_path({"category" => @category.name}), class:"list-group-item list-group-item-dark" %>
-    <% else %>
-        <p style="color: red"> <%= "No Category" %> </p>
-    <% end %> 
-    <span class="tag">
-    <%= link_to @topic.name, edit_topic_path(@topic), {:style=>'color:#FFFFFF;text-decoration:none'} %>
-    </span>
-    <hr>
-</h1>
-
-<% @other_uploads_categories_hash.each do |category, upload| %>
-    <br>
-    <h3> 
-        <% if category %>
-            <%= link_to category.name, root_path({"category" => category.name}), class:"list-group-item list-group-item-dark" %>
-        <% else %>
-            <p style="color: red"> <%= "No Category" %></p>
-        <% end %>
-    </h3> <br>
-    <div class="list-group">
-        <% upload.each do |upload_each| %>
-            <%= render '/main/articlelist', upload: upload_each %>
-        <% end %>
-    </div>
+<div class="list-group-item list-group-item-dark">
+  <h2>Suggested articles for tag:<span class="tag"><%= @topic.name %></span></h2>
+</div>
+Previous article: <%= link_to @filename, url_for(@upload.file) %>
+<% if !@category.nil? %>
+  <%= link_to @category.name, root_path({ "category" => @category.name }), class: "btn btn-outline-info" %>
+<% else %>
+  <div class="btn btn-outline-danger disabled"> <%= "No Category" %>  </div>
 <% end %>
 
-<br>
-<%= link_to "Back to Home", root_path, class: "btn btn-primary",id: "back-to-home-button"%>
+<br><br><br>
+<hr>
+
+<% if !@other_uploads_categories_hash.empty? %>
+  <% @other_uploads_categories_hash.each do |category, uploads| %>
+    <br>
+    <h3>
+      <% if category %>
+        <%= link_to category.name, root_path({ "category" => category.name }), class: "list-group-item list-group-item-dark" %>
+      <% else %>
+        <div class="list-group-item list-group-item-dark"> <%= "<No Category>" %></div>
+      <% end %>
+    </h3>
+    <div class="list-group">
+      <% uploads.each do |upload| %>
+        <%= render '/main/article_list', upload: upload %>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <em><u>No linked articles at the moment. Sorry for the inconvenience.</u></em>
+<% end %>
+
+<br><br><br>
+<%= link_to "Back to Home", root_path, class: "btn btn-primary", id: "back-to-home-button" %>

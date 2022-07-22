@@ -36,4 +36,30 @@ module FlashString
       "Tag %{tag} starts or ends with a space!" % {tag: tag}
     end
   end
+
+  class CategoryString
+    INVALID_CAT = "Invalid category input!"
+    LENGTHY_CAT = "Category name too long!"
+    def self.get_added_category(category)
+      "%{category} added." % {category:category}
+    end
+
+    def self.get_updated_category(old_category, new_category)
+      "%{old} updated into %{new}." % {old: old_category, new: new_category}
+    end
+
+    def self.get_deleted_category(category)
+      "Deleted %{category}." % {category: category}
+    end
+    def self.get_duplicate_category(category)
+      "Category %{category} already exists!" % {category: category}
+    end
+    def self.get_special_characters(category)
+      "Category %{category} contains special characters!" % {category: category}
+    end
+
+    def self.get_space(category)
+      "Category %{category} starts or ends with a space!" % {category: category}
+    end
+  end
 end

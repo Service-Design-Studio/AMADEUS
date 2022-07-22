@@ -1,5 +1,5 @@
 class UploadCategoryLinksController < InheritedResources::Base
-  before_action :set_upload_category_link, only: %i[destroy]
+  before_action :set_upload_category_link
 
   # DELETE /tags/1 or /tags/1.json
   def destroy
@@ -12,9 +12,19 @@ class UploadCategoryLinksController < InheritedResources::Base
     end
   end
 
+  def update
+    respond_to do |format|
+      if @category.create!(params[:name])
+        format.html { redirect_to(:back) }
+        format.json { head :no_content }
+      end
+    end
+  end
+
   private
   def set_upload_category_link
     @upload_category_link = UploadCategoryLink.find(params[:id])
     @upload = Upload.find(@upload_category_link.upload_id)
+    @category = Category.find(@upload_category_link.category_id)
   end
 end

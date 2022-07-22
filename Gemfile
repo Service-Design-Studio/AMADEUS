@@ -9,6 +9,9 @@ gem "rails", "~> 7.0.3"
 # Friendly ID
 gem 'friendly_id', '~> 5.4.0'
 
+# Inline edit
+gem "best_in_place", git: "https://github.com/mmotherwell/best_in_place"
+
 # For js
 gem 'jquery-rails'
 

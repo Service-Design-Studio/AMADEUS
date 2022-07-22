@@ -6,7 +6,7 @@ class MainController < ApplicationController
 
         if params[:category] == "" || params[:category].nil?
             @selected_category = ""
-            # if no category is selected, show all uploads in descneding order according to their created_at
+            # if no category is selected, show all uploads in descending order according to their created_at
             @uploads = Upload.all.reverse
         else
             @selected_category = params[:category]
@@ -16,10 +16,5 @@ class MainController < ApplicationController
             @uploads = @category.uploads.sort_by { |upload| upload.created_at }.reverse
 
         end
-    end
-
-    private
-    def flash_message
-        FlashString::MainString
     end
 end

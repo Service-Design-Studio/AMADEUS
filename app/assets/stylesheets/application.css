@@ -37,6 +37,7 @@ body {
     margin: 0.25em;
     border-radius: 0.25em;
     display: inline-block;
+    float: bottom;
 }
 
 .center {

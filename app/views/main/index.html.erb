@@ -1,44 +1,37 @@
 <%# <h1> Welcome to Amadeus! </h1> %>
 
 <div class="fixed custom_sidebar">
-    <div class="center">
-        <ul class="list-group">
-            <br>
-            <h3> Categories </h3>
-            <br>
-            <% @categories.each do |category| %>
-                <% if @selected_category == category.name%>
-                    <% if category.name.nil? %>
-                        <%= link_to "No Category", categories_path, class: "list-group-item active" %>
-                    <% end %>
-                    <%= link_to category.name, root_path({"category" => category.name}), class:"list-group-item list-group-item-dark" %>
-                <% else %>
-                    <%= link_to category.name, root_path({"category" => category.name}), class:"list-group-item list-group-item-action" %>
-                <% end %>
-            <% end %>
-        </ul>
-    </div>
+  <div class="center">
+    <ul class="list-group">
+      <br>
+      <h3> Categories </h3>
+      <br>
+      <% @categories.each do |category| %>
+        <% if @selected_category == category.name %>
+          <%= link_to category.name, root_path({ "category" => category.name }), class: "list-group-item list-group-item-dark" %>
+        <% else %>
+          <%= link_to category.name, root_path({ "category" => category.name }), class: "list-group-item list-group-item-action" %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
 </div>
 
 <div class="custom_content">
-    <% if @category == nil %>
-        <h1> Welcome to Amadeus! </h1>
+  <% if @category %>
+    <h1><%= @category.name %></h1>
+  <% else %>
+    <h1> <%= "All categories" %> </h1>
+  <% end %>
+  <hr>
+  <div class="list-group">
+    <% if !@uploads.empty? %>
+      <% @uploads.each do |upload| %>
+        <%= render "article_list", upload: upload %>
+      <% end %>
     <% else %>
-        <h1>
-        <% if @category %>
-            <%= @category.name %>
-        <% else %>
-            <p style="color: red"> <%= "No Category" %> </p>
-        <% end %>
-        </h1>
-        <hr>
-        <div id="uploads">
-            <div class="list-group">
-                <% @uploads.each do |upload| %>
-                    <%= render "articlelist", upload: upload %>
-                <% end %>
-            </div>
-        </div>
-    <% end %>
+      <em><u>No articles at the moment. Sorry for the inconvenience.</u></em>
+  <% end %>
+  </div>
 </div>
 

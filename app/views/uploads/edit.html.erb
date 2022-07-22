@@ -5,29 +5,28 @@
 
 <br>
 <h4>
-<% if @linked_category %>
-   <p> Category: <%= link_to "#{@linked_category.category.name}", edit_category_path(@linked_category.category) %> </p>
-<% else %>
-  <p style="color: red"> Category: <%= "No Category" %> </p>
-<% end %>
+  <% if !@linked_category.nil? %>
+    <p> Category: <%= link_to "#{@linked_category.category.name}", edit_category_path(@linked_category.category) %> </p>
+  <% else %>
+      <%= link_to "No Category", new_category_path, class: "btn btn-outline-danger" %>
+  <% end %>
 </h4>
 <div class="d-grid gap-2">
   <% @linked_topics.each do |uploadlink| %>
     <div class="d-flex justify-content-between">
-      <%= link_to edit_topic_path(uploadlink.topic), class: "list-group-item list-group-item-action",
-                  id: "#{uploadlink.topic.name}-edit-button" do %>
-        <div class="d-flex justify-content-between">
-          <%= uploadlink.topic.name %>
-<!--          <span class="badge bg-primary rounded-pill"><%#= "#{uploadlink.similarity} %" %></span>-->
-        </div>
-        <%= link_to "x", uploadlink, method: :delete, class: "btn btn-outline-danger", id: "#{uploadlink.topic.name}-button" %>
-      <% end %>
+      <div class="d-flex justify-content-start" , id="old-tag">
+        <%= best_in_place uploadlink.topic, :name, as: :input,
+                          id: "#{uploadlink.topic.name}-edit-field",
+                          ok_button: "save", ok_button_class: "btn btn-success btn-sm",
+                          cancel_button: "cancel", cancel_button_class: "btn btn-outline-dark btn-sm" %>
+      </div>
+      <%= link_to "x", uploadlink, method: :delete, class: "btn btn-outline-danger", id: "#{uploadlink.topic.name}-delete-button" %>
     </div>
   <% end %>
 
   <br>
   <%= render 'uploads/edit_form', upload: @upload %>
-  <%#= link_to "Show this upload", @upload %>
+
   <%= link_to "Delete this Upload", @upload, method: :delete, class: "btn btn-outline-danger", id: "delete-this-upload-button" %>
   <%= link_to "Back to Database", uploads_path, class: "btn btn-primary", id: "back-to-database-button" %>
 </div>
