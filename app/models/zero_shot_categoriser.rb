@@ -3,7 +3,8 @@ require 'net/http'
 require 'json'
 
 class ZeroShotCategoriser
-  @uri_string = 'https://tran-nguyen-bao-long-2018-146rrbox4kz39i98.socketxp.com/zero_shot'
+  # your public socket URI, remember to add route /zero_shot at the end
+  @uri_string = 'https://tran-nguyen-bao-long-2018-q3ny266x513te29b.socketxp.com/zero_shot'
   def self.request(summary, all_categories)
     uri = URI(@uri_string)
     req = Net::HTTP::Post.new(uri)
