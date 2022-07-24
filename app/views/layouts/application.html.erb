@@ -13,6 +13,7 @@
 >>>>>>> Stashed changes
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= turbo_include_tags %>
   </head>
 
   <body>
@@ -21,9 +22,9 @@
 =======
     <%= render 'layouts/navbar'%>
     <main class="custom-main-padding">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
+      <turbo-frame id="flash">
+        <%= render 'layouts/flash' %>
+      </turbo-frame>
       <%= yield %>
     </main>
 >>>>>>> Stashed changes

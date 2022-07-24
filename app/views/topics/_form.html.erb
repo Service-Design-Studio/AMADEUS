@@ -1,17 +1,1 @@
-<%= form_with(model: topic) do |form| %>
-  <% if topic.errors.any? %>
-    <div style="color: red">
-      <ul>
-        <% topic.errors.each do |error| %>
-          <p> <%= error.full_message %></p>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-
-  <div class="field">
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name, id: "tag-input" %>  <%= form.submit "Save", id: "save-button" %>
-  </div>
-<% end %>

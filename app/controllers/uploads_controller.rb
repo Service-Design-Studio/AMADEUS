@@ -82,7 +82,6 @@ class UploadsController < ApplicationController
     @all_categories = Upload.get_all_categories
     @linked_topics = Upload.get_linked_topics(@upload)
     @linked_category = Upload.get_linked_category(@upload)
-    @redirect_count = 0
   end
 
   # Use callbacks to share common setup or constraints between actions.
