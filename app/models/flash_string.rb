@@ -2,10 +2,6 @@ module FlashString
   TO_LOGIN = "You must be logged in to access this section"
   DELETED = "Successfully deleted!"
 
-  class CategoryString
-    CATEGORY_EMPTY = "No categories found!"
-  end
-
   class UploadString
     UPLOAD_DELETED = "Upload deleted!"
     UPLOAD_SOME_FAILED = "Some pdfs failed to be parse!"
@@ -40,6 +36,10 @@ module FlashString
 
     def self.get_deleted_category(category)
       "Deleted %{category}." % {category: category}
+    end
+
+    def self.get_duplicate_category(category)
+      "Category %{category} already exists!" % {category: category}
     end
 
     def self.get_special_characters(category)

@@ -5,7 +5,6 @@ class UploadlinksController < InheritedResources::Base
     respond_to do |format|
       if @topic.update!(params[:name])
         format.html { redirect_to(edit_upload_path(@upload)) }
-        format.json { respond_with_bip(@topic) }
       end
     end
   end

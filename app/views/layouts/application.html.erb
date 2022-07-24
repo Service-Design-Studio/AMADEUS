@@ -9,14 +9,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= turbo_include_tags %>
   </head>
 
   <body>
     <%= render 'layouts/navbar'%>
     <main class="custom-main-padding">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
+      <turbo-frame id="flash">
+        <%= render 'layouts/flash' %>
+      </turbo-frame>
       <%= yield %>
     </main>
   </body>

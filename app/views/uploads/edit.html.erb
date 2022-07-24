@@ -1,37 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<h3><%= render 'uploads/attachment', upload: @upload %></h3><br>
 
-
-<h3><%= render 'uploads/attachment', upload: @upload %></h3>
-
-<br>
 <h4>
   <% if !@linked_category.nil? %>
-    <p class="center list-group-item list-group-item-dark">
-      <%= best_in_place @linked_category.category, :name, as: :input,
-                        id: "#{@linked_category.category.name}-edit-field",
-                        ok_button: "save", ok_button_class: "btn btn-success btn-sm",
-                        cancel_button: "cancel", cancel_button_class: "btn btn-outline-dark btn-sm" %>
-    </p>
+    <%= render 'uploads/inline_category', linked_category: @linked_category, upload: @upload %>
   <% else %>
-    <p class="center list-group-item list-group-item-dark"> <%= "Category: <No Category>" %> </p>
+    <%= "Category: <No Category>" %>
     <%= render 'uploads/edit_category_form', upload: @upload %>
   <% end %>
-</h4>
+</h4><br>
+
+<h5>List of Tags:</h5>
 <div class="d-grid gap-2">
   <% @linked_topics.each do |uploadlink| %>
-    <div class="d-flex justify-content-between">
-      <div class="d-flex justify-content-start" , id="old-tag">
-        <%= best_in_place uploadlink.topic, :name, as: :input,
-                          id: "#{uploadlink.topic.name}-edit-field",
-                          ok_button: "save", ok_button_class: "btn btn-success btn-sm",
-                          cancel_button: "cancel", cancel_button_class: "btn btn-outline-dark btn-sm" %>
-      </div>
-      <%= link_to "x", uploadlink, method: :delete, class: "btn btn-outline-danger", id: "#{uploadlink.topic.name}-delete-button" %>
-    </div>
+    <%= render 'uploads/inline_tag', uploadlink: uploadlink %>
   <% end %>
-
-  <br>
-  <%= render 'uploads/edit_tag_form', upload: @upload %>
+  <%= render 'uploads/edit_tag_form', upload: @upload %><br>
 
   <%= link_to "Delete this Upload", @upload, method: :delete, class: "btn btn-outline-danger", id: "delete-this-upload-button" %>
   <%= link_to "Back to Database", uploads_path, class: "btn btn-primary", id: "back-to-database-button" %>

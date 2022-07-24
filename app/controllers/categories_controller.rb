@@ -47,12 +47,15 @@ class CategoriesController < InheritedResources::Base
       reply = Category.verify(new_name)
       if reply[:status] == "success"
         @category.update!(category_params)
-        format.html { redirect_to categories_path }
+        flash[:success] = FlashString::CategoryString.get_added_category(category_params[:name])
+        format.html { redirect_back fallback_location: root_path }
         format.json { render :show, status: :ok, location: @category }
+        format.turbo_stream { render_flash }
       else
         flash[:danger] = reply[:msg]
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.turbo_stream { render_flash }
       end
     end
   end

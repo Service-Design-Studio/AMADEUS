@@ -9,9 +9,6 @@ gem "rails", "~> 7.0.3"
 # Friendly ID
 gem 'friendly_id', '~> 5.4.0'
 
-# Inline edit
-gem "best_in_place", git: "https://github.com/mmotherwell/best_in_place"
-
 # For js
 gem 'jquery-rails'
 
@@ -40,7 +37,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
+gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

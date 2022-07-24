@@ -1,10 +1,14 @@
-<h1>Editing Category</h1>
+<h1>Edit Category</h1>
 
-<%= render "form", category: @category %>
+<%= turbo_frame_tag dom_id(@category) do %>
+  <%= form_with(model: @category) do |form| %>
+    <div class="field">
+      <%= form.text_field :name, id: "tag-input" %>
+      <%= form.submit "save", class: "btn btn-success", id: "save-button" %>
+      <%= link_to "cancel", url_for(:back), class: "btn btn-primary", id: "cancel-button" %>
+    </div>
+  <% end %>
+<% end %>
 
-<br>
-
-<div>
-  <%= link_to "Delete", @category, method: :delete, class: "btn btn-outline-danger", id: "delete-button" %>
-  <%= link_to "Return", url_for(:back), class: "btn btn-primary", id: "return-button" %>
-</div>
+<%= link_to "Delete", @category, method: :delete, class: "btn btn-outline-danger", id: "delete-button" %>
+<%= link_to "Return", url_for(:back), class: "btn btn-primary", id: "return-button" %>

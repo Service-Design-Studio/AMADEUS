@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
     def user_not_authorized
         flash[:danger] = FlashString::USER_NOT_AUTHORIZED
     end
+
+    def render_flash
+        render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash")
+    end
 end
