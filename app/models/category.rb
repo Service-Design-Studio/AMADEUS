@@ -25,4 +25,8 @@ class Category < ApplicationRecord
   def self.flash_message
     FlashString::CategoryString
   end
+
+  def self.get_category_bank
+    %w[Tanks Artillery UAVs Helicopters Missiles MANPADs Infrastructure]
+  end
 end

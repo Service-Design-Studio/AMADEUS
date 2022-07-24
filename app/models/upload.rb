@@ -78,10 +78,12 @@ class Upload < ApplicationRecord
             new_upload = Upload.new
             new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
             content = get_pdf_text(entry)
-            response = NltkModel.request(content)
-            summary = response[:summary].gsub(/(\\\")/, "")
-            tags_dict = response[:tags]
-            category = response[:category]
+            nltk_response = NltkModel.request(content)
+            summary = nltk_response[:summary].gsub(/(\\\")/, "")
+            tags_dict = nltk_response[:tags]
+            category = nltk_response[:category]
+            # zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
+            # category = zero_shot_response[:category]
             new_upload.content = content
             new_upload.summary = summary
             new_upload.save
