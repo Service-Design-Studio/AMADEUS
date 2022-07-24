@@ -16,6 +16,7 @@ class NltkModel
     # start local
     uri = URI("http://localhost:8080")
     http = Net::HTTP.new(uri.host, 8080)
+    http.read_timeout=180
     # end local
 
     res =  http.request(req)
