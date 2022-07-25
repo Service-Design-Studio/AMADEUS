@@ -1,6 +1,7 @@
 # All credits to Timothy W. https://github.com/weetimo
 
 import nltk
+
 nltk.download('averaged_perceptron_tagger')
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -15,11 +16,14 @@ from nltk.corpus import wordnet
 
 import random
 import time
+
 print("Finish setup")
+
 
 def categoriser(upload_text):
     categories = ['Tank', 'Artillery', 'UAV', 'Fighter Aircraft', 'Helicopter', 'Missile', 'MANPAD', 'Infrastructure']
     return random.choice(categories)
+
 
 def tagger(upload_text, replace_dict, all_stopwords, num_tag):
     for old, new in replace_dict.items():
@@ -37,11 +41,11 @@ def tagger(upload_text, replace_dict, all_stopwords, num_tag):
     pos_tagged = nltk.pos_tag(word_tokenize(upload_text.lower()))
 
     def pos_tagger(nltk_tag):
-      # Identify nouns only
-      if nltk_tag.startswith('N'):
-        return wordnet.NOUN
-      else:
-        return None
+        # Identify nouns only
+        if nltk_tag.startswith('N'):
+            return wordnet.NOUN
+        else:
+            return None
 
     # Mapping the pos_tagger function to the pos_tagged list.
     # The pos_tagger function returns the wordnet.NOUN if the nltk_tag starts with 'N', otherwise it returns None.
@@ -50,8 +54,8 @@ def tagger(upload_text, replace_dict, all_stopwords, num_tag):
     # Create array with only nouns
     noun_list = []
     for i in range(len(wordnet_tagged)):
-      if wordnet_tagged[i][1] == wordnet.NOUN:
-        noun_list.append(wordnet_tagged[i][0])
+        if wordnet_tagged[i][1] == wordnet.NOUN:
+            noun_list.append(wordnet_tagged[i][0])
 
     # Sort noun_list by frequency
     noun_freq = nltk.FreqDist(noun_list)
@@ -69,6 +73,19 @@ def tagger(upload_text, replace_dict, all_stopwords, num_tag):
                 count += 1
 
     return tags_dict
+
+def get_custom_stopwords():
+    return [
+        "time", "year", "people", "way", "day", "man", "thing", "woman", "life", "child", "world", "school", "state",
+        "family", "student", "group", "country", "problem", "hand", "part", "place", "case", "week", "company",
+        "system", "program", "question", "work", "government", "number", "night", "point", "home", "water",
+        "room", "mother", "area", "money", "story", "fact", "month", "lot", "right", "study", "book", "eye", "job",
+        "word", "business", "issue", "side", "kind", "head", "house", "service", "friend", "father", "power", "hour",
+        "game", "line", "end", "member", "law", "car", "city", "community", "name", "president", "team", "minute",
+        "idea", "kid", "body", "information", "back", "parent", "face", "others", "level", "office", "door", "health",
+        "person", "art", "war", "history", "party", "result", "change", "morning", "reason", "research",
+        "girl", "guy", "moment", "air", "teacher", "force", "education", "bbc", "news", "cna", "cnn", "thousands",
+    ]
 
 def summariser(upload_text, all_stopwords, summary_threshold):
     words = word_tokenize(upload_text)
@@ -109,6 +126,7 @@ def summariser(upload_text, all_stopwords, summary_threshold):
     summary = " ".join(summary[2:-1])
     return summary
 
+
 def nltk_model(request):
     request_json = request.get_json()
     request_args = request.args
@@ -123,8 +141,7 @@ def nltk_model(request):
         num_tag = upload['num_tag']
         summary_threshold = upload['summary_threshold']
 
-        custom_stopwords = ["said", 'month', 'months', 'year', 'years', 'date', 'dates', 'official', 'bbc',
-            'count', 'news', 'people','use', 'dji']
+        custom_stopwords = get_custom_stopwords()
         original_stopwords = set(stopwords.words("english"))
         all_stopwords = original_stopwords.union(custom_stopwords)
 
@@ -132,6 +149,5 @@ def nltk_model(request):
         tags_dict = tagger(upload_text, replace_dict, all_stopwords, num_tag)
         summary = summariser(upload_text, all_stopwords, summary_threshold)
         category = categoriser(summary)
-        response = { "summary": summary, "tags": tags_dict, "category": category }
-#         time.sleep(100)
+        response = {"summary": summary, "tags": tags_dict, "category": category}
     return response
