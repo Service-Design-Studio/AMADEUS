@@ -1,3 +1,3 @@
-<%= turbo_frame_tag dom_id(linked_category.category) do %>
-  Category: <%= link_to "#{linked_category.category.name}", edit_category_path(linked_category.category) %>
+<%= turbo_frame_tag dom_id(linked_category) do %>
+  Category: <%= link_to "#{linked_category.category.name}", edit_upload_category_link_path(linked_category) %>
 <% end %>

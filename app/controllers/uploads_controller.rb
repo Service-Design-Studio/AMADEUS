@@ -39,7 +39,7 @@ class UploadsController < ApplicationController
       if !params[:upload][:topics].nil?
         reply = Upload.verify_tag(@upload, params[:upload][:topics])
         if reply[:status] == "success"
-          @upload.update!(upload_params.except(:topics))
+          # @upload.update!(upload_params.except(:topics))
           flash[:success] = FlashString::TagString.get_added_tag(params[:upload][:topics])
           format.html { redirect_to edit_upload_path(@upload) }
           format.json { render :edit, status: :ok, location: @upload }
@@ -70,7 +70,7 @@ class UploadsController < ApplicationController
 
     respond_to do |format|
       flash[:danger] = flash_message::UPLOAD_DELETED
-      format.html { redirect_to uploads_url }
+      format.html { redirect_to uploads_path }
       format.json { head :no_content }
     end
   end

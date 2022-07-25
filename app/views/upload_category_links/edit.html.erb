@@ -1,0 +1,18 @@
+<h1>Edit Category</h1>
+
+<%= turbo_frame_tag dom_id(@upload_category_link) do %>
+  <%= form_with(model: @upload_category_link) do |form| %>
+    <datalist id="categories_list">
+        <%= @other_categories.all.each do |category| %>
+        <option value="<%= category.name %>"></option>
+        <% end %>
+    </datalist>
+  
+    <div class="field">
+      <%= form.text_field :categories, class: "form-control", id: "category-input",
+                          value: @category.name, list: "categories_list" %>
+      <%= form.submit "save", class: "btn btn-success", id: "save-button" %>
+      <%= link_to "cancel", url_for(:back), class: "btn btn-primary", id: "cancel-button" %>
+    </div>
+  <% end %>
+<% end %>
