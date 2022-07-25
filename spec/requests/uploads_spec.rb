@@ -23,9 +23,10 @@ RSpec.describe "/uploads", type: :request do
   before :each do 
     sign_in user = build(:user)
   end
-  let(:valid_attributes) {
-    { 
-      "file" => Rack::Test::UploadedFile.new(path)
+  let(:valid_attributes) {{ 
+      "file" => Rack::Test::UploadedFile.new(path),
+      "categories" => [Category.new(:name => "test"),Category.new(:name => "test2")],
+      "topics" => [Topic.new(:name => "test"),Topic.new(:name => "test2")]
     }}
 
   let(:invalid_attributes) {
@@ -87,37 +88,38 @@ RSpec.describe "/uploads", type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post uploads_url, params: { upload: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to redirect_to(uploads_url)
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) {{
+      "file" => Rack::Test::UploadedFile.new(path),
+      "categories" => [Category.new(:name => "test"),Category.new(:name => "test2")],
+      "topics" => [Topic.new(:name => "test"),Topic.new(:name => "test2")]
+      }}
 
       it "updates the requested upload" do
         upload = Upload.create! valid_attributes
         patch upload_url(upload), params: { upload: new_attributes }
         upload.reload
-        skip("Add assertions for updated state")
+        expect(flash[:danger]).to be_nil
       end
-
       it "redirects to the upload" do
         upload = Upload.create! valid_attributes
         patch upload_url(upload), params: { upload: new_attributes }
         upload.reload
-        expect(response).to redirect_to(upload_url(upload))
+        expect(response).to redirect_to(edit_upload_path(upload))
       end
     end
 
     context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "renders a successful response (i.e. to display the 'edit' template)" do                         
         upload = Upload.create! valid_attributes
         patch upload_url(upload), params: { upload: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to redirect_to(edit_upload_path(upload))
       end
     end
   end
