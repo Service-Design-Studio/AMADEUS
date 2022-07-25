@@ -13,22 +13,24 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/topics", type: :request do
-  
+  before :each do 
+    sign_in user = build(:user)
+  end
   # This should return the minimal set of attributes required to create a valid
   # Topic. As you add validations to Topic, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) {{
+      "name" => "test"
+    }}
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) {{
+    "name" => ""
+    }}
 
   describe "GET /index" do
     it "renders a successful response" do
       Topic.create! valid_attributes
-      get topics_url
+      get topics_path
       expect(response).to be_successful
     end
   end
@@ -64,9 +66,9 @@ RSpec.describe "/topics", type: :request do
         }.to change(Topic, :count).by(1)
       end
 
-      it "redirects to the created tag" do
+      it "redirects to all topics" do
         post topics_url, params: { topic: valid_attributes }
-        expect(response).to redirect_to(topic_url(Topic.last))
+        expect(response).to redirect_to(topics_path)
       end
     end
 
@@ -79,29 +81,29 @@ RSpec.describe "/topics", type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post topics_url, params: { topic: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) {{
+        "name" => "test1"
+      }}
 
       it "updates the requested tag" do
         topic = Topic.create! valid_attributes
         patch topic_url(topic), params: { topic: new_attributes }
         topic.reload
-        skip("Add assertions for updated state")
+        expect(flash[:danger]).to be_nil
       end
 
       it "redirects to the tag" do
         topic = Topic.create! valid_attributes
         patch topic_url(topic), params: { topic: new_attributes }
         topic.reload
-        expect(response).to redirect_to(topic_url(topic))
+        expect(response).to redirect_to(root_path)
       end
     end
 
@@ -109,7 +111,7 @@ RSpec.describe "/topics", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         topic = Topic.create! valid_attributes
         patch topic_url(topic), params: { topic: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
