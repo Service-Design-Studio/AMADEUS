@@ -42,6 +42,10 @@ module FlashString
       "Category %{category} already exists!" % {category: category}
     end
 
+    def self.get_already_assigned_category(category)
+      "%{category} already assigned to current upload!" % {category: category}
+    end
+
     def self.get_special_characters(category)
       "Category %{category} contains special characters!" % {category: category}
     end

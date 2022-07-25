@@ -61,7 +61,7 @@ class Upload < ApplicationRecord
     elsif category_name.match(/\W/)
       msg = flash_message_category.get_special_characters(category_name)
     elsif status == "exist"
-      msg = flash_message_category.get_duplicate_cat(category_name)
+      msg = flash_message_category.get_already_assigned_category(category_name)
     else
       status = "success"
       msg = ""
