@@ -50,7 +50,8 @@ class Upload < ApplicationRecord
   def self.verify_category(upload, category_name)
     status = "fail"
 
-    if get_linked_category(upload).category.name == category_name
+    linked_category = get_linked_category(upload)
+    if !linked_category.nil? and linked_category.category.name == category_name
       status = "exist"
     end
 
@@ -66,7 +67,9 @@ class Upload < ApplicationRecord
       status = "success"
       msg = ""
       new_category = Category.friendly.find_by(name: category_name)
-      get_linked_category(upload).destroy
+      if !linked_category.nil?
+        get_linked_category(upload).destroy
+      end
       if new_category.nil?
         new_category = Category.create(name: category_name)
         UploadCategoryLink.create(upload_id: upload.id, category_id: new_category.id)
@@ -113,12 +116,12 @@ class Upload < ApplicationRecord
   end
 
   def self.preprocess_text(text)
-    text = text.gsub(/^.*\u0026/, "")                  # strip header before main text
-    text = text.strip.delete("\t\r\n")                 # strip whitespace
-    text = text.gsub(/[^\x00-\x7F]/, " ")              # strip non-ASCII
-    text = text.gsub(/(?<=[.,?!;])(?=[^\s])/, " ")     # add whitespace after punctuation
-    text = text.gsub(/\s+(?=\d)/, "")                  # remove whitespace added between number
-    text = text.gsub(/(?<=[a-z1-9])(?=[A-Z])/, " ")    # add whitespace before capital letter
+    text = text.gsub(/^.*\u0026/, "") # strip header before main text
+    text = text.strip.delete("\t\r\n") # strip whitespace
+    text = text.gsub(/[^\x00-\x7F]/, " ") # strip non-ASCII
+    text = text.gsub(/(?<=[.,?!;])(?=[^\s])/, " ") # add whitespace after punctuation
+    text = text.gsub(/\s+(?=\d)/, "") # remove whitespace added between number
+    text = text.gsub(/(?<=[a-z1-9])(?=[A-Z])/, " ") # add whitespace before capital letter
     text.squeeze(' ')
   end
 

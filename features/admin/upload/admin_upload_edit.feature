@@ -17,10 +17,10 @@ Feature: edit uploaded articles
     And I should see the following tags "<tags>"
 
     Examples:
-      | article_name                                                                  | tags                                       |
-      | Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf         | economy, noise, register, russia, sanction |
-      | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf | day, drug, fogel, russia, star             |
-      | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News.pdf   | city, plant, russia, severodonetsk, war    |
+      | article_name                                                                  | tags                                        |
+      | Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf         | economy, noise, cut, russia, register       |
+      | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf | basketball, drug, fogel, russia, star       |
+      | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News.pdf   | azot, plant, russia, severodonetsk, control |
 
   @happy
   Scenario Outline: Delete tag
@@ -34,7 +34,7 @@ Feature: edit uploaded articles
       | noise    |
       | register |
       | russia   |
-      | sanction |
+      | cut      |
 
   @happy
   Scenario Outline: Add new nonidentical tag
@@ -62,11 +62,10 @@ Feature: edit uploaded articles
 
     Examples:
       | tag_name |
-      | economy  |
       | noise    |
       | register |
       | russia   |
-      | sanction |
+      | cut      |
 
   @sad
   Scenario: Add blank tag
@@ -103,21 +102,6 @@ Feature: edit uploaded articles
       | $$$         |
       | Oka Kun     |
       | ( ͡❛ ͜ʖ ͡❛) |
-
-
-  @redirect
-  Scenario Outline: Edit tag
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" page
-    When I click on the tag "<tag_name>"
-    Then I should be redirected to the "<tag_name>" edit page
-
-    Examples:
-      | tag_name |
-      | economy  |
-      | noise    |
-      | register |
-      | russia   |
-      | sanction |
 
   @redirect
   Scenario: Back to home
