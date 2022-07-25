@@ -14,6 +14,12 @@ class ZeroShotCategoriser
     http.read_timeout=180
     http.use_ssl = true
 
+    # start local
+    uri = URI("http://localhost:5001")
+    http = Net::HTTP.new(uri.host, 5001)
+    http.read_timeout=180
+    # end local
+
     res = http.request(req)
     response_data = JSON.parse(res.body)
     category = response_data["data"]["category"]
