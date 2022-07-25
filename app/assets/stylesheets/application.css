@@ -84,3 +84,7 @@ body {
     width: 100%;
     height: 100%;
 }
+
+.edit_button_custom {
+    margin-right: 1%;
+}
