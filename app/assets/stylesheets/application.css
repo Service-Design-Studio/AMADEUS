@@ -88,3 +88,8 @@ body {
 .edit_button_custom {
     margin-right: 1%;
 }
+
+.btn-x {
+    float: right;
+    padding: 0% 1.5% 0% 1.5%;
+}

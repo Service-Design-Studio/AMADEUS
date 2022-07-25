@@ -50,16 +50,23 @@ class Upload < ApplicationRecord
   def self.verify_category(upload, category_name)
     status = "fail"
 
+    if get_linked_category(upload).category.name == category_name
+      status = "exist"
+    end
+
     if (category_name == "") || category_name.nil?
       msg = flash_message_category::INVALID_CAT
     elsif category_name.length >= 15
       msg = flash_message_category::LENGTHY_CAT
     elsif category_name.match(/\W/)
       msg = flash_message_category.get_special_characters(category_name)
+    elsif status == "exist"
+      msg = flash_message_category.get_duplicate_cat(category_name)
     else
       status = "success"
       msg = ""
       new_category = Category.friendly.find_by(name: category_name)
+      get_linked_category(upload).destroy
       if new_category.nil?
         new_category = Category.create(name: category_name)
         UploadCategoryLink.create(upload_id: upload.id, category_id: new_category.id)
