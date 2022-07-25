@@ -24,4 +24,4 @@ nohup python3.9 lib/assets/zero_shot_categoriser.py > flask_log.txt 2>&1 &
 curl -O https://portal.socketxp.com/download/linux/socketxp && chmod +wx socketxp && sudo mv socketxp /usr/local/bin
 
 sudo socketxp login # [your socketxp auth id]
-sudo nohup socketxp connect http://localhost:5000 > socket_log.txt 2>&1 &
+sudo nohup socketxp connect http://localhost:5001 > socket_log.txt 2>&1 &
