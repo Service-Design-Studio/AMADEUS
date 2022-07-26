@@ -7,15 +7,7 @@ en:
       send_instructions: ""
       send_paranoid_instructions: ""
     failure:
-      already_authenticated: ""
-      inactive: ""
-      invalid: ""
-      locked: ""
-      last_attempt: ""
-      not_found_in_database: "Invalid %{authentication_keys} or password."
-      timeout: ""
-      unauthenticated: ""
-      unconfirmed: ""
+      invalid: "Invalid %{authentication_keys} or Password."
     mailer:
       confirmation_instructions:
         subject: ""

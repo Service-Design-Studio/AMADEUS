@@ -57,7 +57,7 @@ class Upload < ApplicationRecord
 
     if (category_name == "") || category_name.nil?
       msg = flash_message_category::INVALID_CAT
-    elsif category_name.length >= 15
+    elsif category_name.length >= 30
       msg = flash_message_category::LENGTHY_CAT
     elsif category_name.match(/\W/)
       msg = flash_message_category.get_special_characters(category_name)

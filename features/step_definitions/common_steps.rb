@@ -1,5 +1,5 @@
 Given(/^I am logged in as admin of Amadeus$/) do
-  capybara_login('admin123@admin.com', 'admin123')
+  capybara_login('admin123@admin.com')
   visit '/admin'
   expect(page).to have_current_path('/admin')
 end

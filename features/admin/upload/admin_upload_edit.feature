@@ -45,12 +45,12 @@ Feature: edit uploaded articles
     And I should see the tag "<tag_name>"
 
     Examples:
-      | tag_name    |
-      | UAVs        |
-      | Helicopters |
-      | Tanks       |
-      | Missiles    |
-      | Artillery   |
+      | tag_name     |
+      | weapons      |
+      | war          |
+      | cyberthreats |
+      | drone        |
+      | attack       |
 
   @sad
   Scenario Outline: Add duplicate tag

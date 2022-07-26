@@ -9,13 +9,24 @@
   <% end %>
 </h4><br>
 
+<h4>Summary</h4>
+<p class="grid" style="background:#d3d3d3">
+  <%= @upload.summary  %>
+</p></br>
+
 <h4>List of Tags:</h4>
 
 <%= render 'uploads/edit_tag_form', upload: @upload %><br><br>
 <div class="d-grid gap-2">
   <% @linked_topics.each do |uploadlink| %>
-    <%= render 'uploads/inline_tag', uploadlink: uploadlink %>
-  <% end %>
+    <div class="list-group-item flex-column align-items-start">
+      <%= uploadlink.topic.name%>
+      <%= link_to "X", uploadlink, method: :delete,
+                  class: "btn btn-outline-danger btn-x",
+                  id: "#{uploadlink.topic.name}-delete-button" %>
+
+    </div>
+<% end %>
 
   <br>
   <div class="btn-group">

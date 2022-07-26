@@ -62,9 +62,8 @@ module CapybaraHelper
     Rake::Task['db:reset'].invoke
   end
 
-  def capybara_login(email, password)
+  def capybara_login(email)
     setup_db
-    password
     user = User.find_by(email: email)
     login_as(user, :scope => :user)
   end
