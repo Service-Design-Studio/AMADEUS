@@ -35,10 +35,6 @@ Then(/^I should still see the same article "([^"]*)"$/) do |article_name|
   }
 end
 
-And(/^I should see a warning message "([^"]*)"$/) do |msg|
-  expect(page).to have_content(msg)
-end
-
 When(/^I click on the tag "([^"]*)"$/) do |tag_name|
   find("##{tag_name}-edit-button").click
 end

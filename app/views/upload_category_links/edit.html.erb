@@ -12,8 +12,8 @@
       <h4>Category:</h4>
       <%= form.text_field :categories, class: "form-control", id: "category-input",
                           value: @category.name, list: "categories_list" %>
-      <%= form.submit "save", class: "btn btn-success", id: "save-button" %>
-      <%= link_to "cancel", url_for(:back), class: "btn btn-primary", id: "cancel-button", data: { turbo: false }%>
+      <%= form.submit "Save", class: "btn btn-success", id: "save-button" %>
+      <%= link_to "Cancel", url_for(:back), class: "btn btn-primary", id: "cancel-button", data: { turbo: false }%>
     </div>
   <% end %>
 <% end %>

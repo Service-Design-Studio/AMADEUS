@@ -10,8 +10,8 @@ class UploadCategoryLinksController < InheritedResources::Base
     respond_to do |format|
       reply = Upload.verify_category(@upload, params[:upload_category_link][:categories])
       if reply[:status] == "success"
-        flash[:success] = FlashString::CategoryString.get_added_category(params[:upload_category_link][:categories])
-        format.html { render edit_upload_path(@upload) }
+        flash[:success] = reply[:msg]
+        format.html { redirect_back fallback_location: root_path}
         format.json { render :edit, status: :ok, location: @category }
         format.turbo_stream { render_flash }
       else

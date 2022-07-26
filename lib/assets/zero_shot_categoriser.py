@@ -12,6 +12,8 @@ def test():
 def getCategory():
     upload_text = request.json["inputs"]
     categories = request.json["parameters"]["candidate_labels"]
+    if not categories:
+        return jsonify({"data": {"category": "No Category"}})
     results = classifier(upload_text, candidate_labels=categories)
     top_category = results["labels"][0]
     return jsonify({"data": {"category": top_category}})

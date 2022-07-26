@@ -52,7 +52,7 @@ class UploadsController < ApplicationController
       elsif !params[:upload][:categories].nil?
         reply = Upload.verify_category(@upload, params[:upload][:categories])
         if reply[:status] == "success"
-          flash[:success] = FlashString::CategoryString.get_added_category(params[:upload][:categories])
+          flash[:success] = reply[:msg]
           format.html { redirect_to edit_upload_path(@upload) }
           format.json { render :edit, status: :ok, location: @upload }
         else

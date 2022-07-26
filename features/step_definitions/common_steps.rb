@@ -1,13 +1,11 @@
-Given(/^I am logged in as admin of Amadeus$/) do
-  capybara_login('admin123@admin.com')
+Given(/^I am logged in as an admin of Amadeus$/) do
+  capybara_login('admin123@admin.com', 'admin123')
   visit '/admin'
   expect(page).to have_current_path('/admin')
 end
 
-Given(/^I am a regular user$/) do
+Given(/^I am a user of Amadeus$/) do
   capybara_logout
-  visit '/'
-  expect(page).to have_current_path('/')
 end
 
 Given(/^I am on the "([^"]*)" page$/) do |page_name|
@@ -35,7 +33,7 @@ Then(/^I should stay on the "([^"]*)" page$/) do |page_name|
   expect(page).to have_current_path(route)
 end
 
-When(/^I have uploaded these zip files (.*)$/) do |zip_lists|
+When(/^I have uploaded these zip files: (.*)$/) do |zip_lists|
   zips = zip_lists.split(', ')
   zips.each do |zip_name|
     capybara_upload_zip(zip_name)
@@ -68,7 +66,7 @@ Then(/^I should see a "([^"]*)" form with the following fields "Email", "Passwor
   end
 end
 
-And(/^I should see the following buttons "([^"]*)"$/) do |button_list|
+And(/^I should see the following buttons: "([^"]*)"$/) do |button_list|
   buttons = button_list.split(', ')
   buttons.each do |button_name|
     button_name = button_name.to_sym
@@ -86,5 +84,28 @@ And(/^I should see the following buttons "([^"]*)"$/) do |button_list|
 end
 
 And(/^I should see a "([^"]*)" button$/) do |button_name|
-  expect(page).to have_content(button_name)
+  if CapybaraHelper::BUTTON_MAP.key?(button_name.to_sym)
+    button = CapybaraHelper::BUTTON_MAP[button_name.to_sym]
+    expect(page).to have_css("##{button}", text: button_name.to_s)
+  elsif CapybaraHelper::FORM_BUTTON_MAP.key?(button_name.to_sym)
+    button = CapybaraHelper::FORM_BUTTON_MAP[button_name.to_sym]
+    name = find(:xpath, "//*[@id=\"#{button}\"]")['value']
+    expect(name).to be == button_name.to_s
+  else
+    pending
+  end
+end
+
+And(/^I should see a success message "([^"]*)"$/) do |msg|
+  expect(page).to have_content(msg)
+end
+
+And(/^I should see a warning message "([^"]*)"$/) do |msg|
+  expect(page).to have_content(msg)
+end
+
+Then(/^I should see the following articles:$/) do |db|
+  db.hashes.each do |file|
+    expect(page).to have_content(file[:article_name])
+  end
 end

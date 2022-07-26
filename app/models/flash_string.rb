@@ -12,7 +12,7 @@ module FlashString
 
   class TagString
     INVALID_TAG = "Invalid tag input!"
-    LENGTHY_TAG = "Tag name too long!"
+    LENGTHY_TAG = "Tag name is too long!"
     def self.get_added_tag(tag)
       "%{tag} added." % {tag:tag}
     end
@@ -32,9 +32,13 @@ module FlashString
 
   class CategoryString
     INVALID_CAT = "Invalid category input!"
-    LENGTHY_CAT = "Category name too long!"
+    LENGTHY_CAT = "Category name is too long!"
     def self.get_added_category(category)
-      "Category %{category} set." % {category:category}
+      "Set new category: %{category}." % {category:category}
+    end
+
+    def self.get_linked_category(category)
+      "Replaced with existing category: %{category}." % {category:category}
     end
 
     def self.get_deleted_category(category)
@@ -46,7 +50,7 @@ module FlashString
     end
 
     def self.get_already_assigned_category(category)
-      "%{category} already assigned to current upload!" % {category: category}
+      "No change!" % {category: category}
     end
 
     def self.get_special_characters(category)
