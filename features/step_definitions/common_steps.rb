@@ -85,8 +85,7 @@ end
 
 And(/^I should see a "([^"]*)" button$/) do |button_name|
   if CapybaraHelper::BUTTON_MAP.key?(button_name.to_sym)
-    button = CapybaraHelper::BUTTON_MAP[button_name.to_sym]
-    expect(page).to have_css("##{button}", text: button_name.to_s)
+    expect(page).to have_content(button_name)
   elsif CapybaraHelper::FORM_BUTTON_MAP.key?(button_name.to_sym)
     button = CapybaraHelper::FORM_BUTTON_MAP[button_name.to_sym]
     name = find(:xpath, "//*[@id=\"#{button}\"]")['value']

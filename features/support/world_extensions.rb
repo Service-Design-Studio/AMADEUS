@@ -34,7 +34,6 @@ module CapybaraHelper
     # Upload resource
     "Database": "database-button",
     "Back to Database": "back-to-database-button",
-    "Upload": "upload-button",
     "New Upload": "new-upload-button",
     "Delete this Upload": "delete-this-upload-button",
     # Tag resource
@@ -48,10 +47,31 @@ module CapybaraHelper
   }
 
   FORM_BUTTON_MAP = {
+    "Upload": "upload-button",
     "Save": "save-button",
     "Add new Tag": "add-new-tag-button",
     "Add Category": "add-category-button",
   }
+
+  ARTICLES_ARRAY = [
+    "Russia's economy in for a bumpy ride as sanctions bite - BBC News",
+    "Russia sentences US teacher to 14 years for cannabis smuggling - BBC News",
+    "Chinese drone firm DJI pauses operations in Russia and Ukraine - BBC News",
+    "Combat drones_ We are in a new era of warfare - here's why - BBC News",
+    "How many Ukrainian refugees are there and where have they gone_ - BBC News",
+    "Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News",
+  ]
+
+  TAG_ARRAY = %w[ cut economy noise russia sanction basketball drug fogel russia star dji drone product russia use
+attack drone technology use warfare kyiv refugee russia ukraine ukrainians azot control plant russia severodonetsk ]
+
+  def capybara_get_article_idx(article_name)
+    CapybaraHelper::ARTICLES_ARRAY.index(article_name) + 1
+  end
+
+  def capybara_get_tag_idx(tag_name)
+    CapybaraHelper::TAG_ARRAY.index(tag_name) + 1
+  end
 
   def capybara_upload_zip(zip_name)
     if zip_name != ""
@@ -83,7 +103,7 @@ module CapybaraHelper
     category_bank.each do |category_name|
       category = Category.find_by(name: category_name)
       if category.nil?
-        Category.create(name: category_name )
+        Category.create(name: category_name)
       end
     end
   end

@@ -119,8 +119,8 @@ class Upload < ApplicationRecord
             summary = nltk_response[:summary].gsub(/(\\\")/, "")
             tags_dict = nltk_response[:tags]
             category = nltk_response[:category]
-            zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
-            category = zero_shot_response[:category]
+            # zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
+            # category = zero_shot_response[:category]
             new_upload.content = content
             new_upload.summary = summary
             new_upload.save

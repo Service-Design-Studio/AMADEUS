@@ -15,7 +15,9 @@
     <div class="col-5">
       <% @upload.topics.each do |topic| %>
           <span class="tag">
-            <%= link_to uploadlink_path(Upload.get_uploadlink(@upload, topic).id), style: "text-decoration:none" do %>
+            <%= link_to uploadlink_path(Upload.get_uploadlink(@upload, topic).id),
+                        id: "#{topic.name}-link",
+                        style: "text-decoration:none" do %>
               <span class="tag"><%= topic.name %></span>
             <% end %>
           </span>
