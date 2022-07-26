@@ -19,10 +19,10 @@ Feature: upload zipped folder containing pdf file of articles
     And I should see an article called <article_name>.
 
     Examples:
-      | zip_name | article_name                                                                  |
-      | rus.zip  | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf |
-      | uav.zip  | Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf     |
-      | ukr.zip  | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News.pdf   |
+      | zip_name | article_name                                                              |
+      | rus.zip  | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News |
+      | uav.zip  | Combat drones_ We are in a new era of warfare - here's why - BBC News     |
+      | ukr.zip  | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News   |
 
   @sad
   Scenario: Upload no zip file

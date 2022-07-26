@@ -9,13 +9,13 @@ Feature: uploaded zipped folder successfully
     And I am on the "Database" page
     When I have uploaded these zip files: rus.zip, uav.zip, ukr.zip
     Then I should see the following articles:
-      | article_name                                                                   |
-      | Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf          |
-      | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf  |
-      | Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf      |
-      | Chinese drone firm DJI pauses operations in Russia and Ukraine - BBC News.pdf  |
-      | How many Ukrainian refugees are there and where have they gone_ - BBC News.pdf |
-      | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News.pdf    |
+      | article_name                                                               |
+      | Russia's economy in for a bumpy ride as sanctions bite - BBC News          |
+      | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News  |
+      | Combat drones_ We are in a new era of warfare - here's why - BBC News      |
+      | Chinese drone firm DJI pauses operations in Russia and Ukraine - BBC News  |
+      | How many Ukrainian refugees are there and where have they gone_ - BBC News |
+      | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News    |
 
   @redirect
   Scenario: Create new upload
@@ -31,13 +31,13 @@ Feature: uploaded zipped folder successfully
   Scenario Outline: Navigate to Edit Upload page
     Given I am on the "Database" page
     When I click edit article "<article_name>"
-    Then I should be redirected to the article "<article_name>" page
+    Then I should be redirected to the article "<article_name>" edit page
 
     Examples:
-      | article_name                                                                   |
-      | Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf          |
-      | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News.pdf  |
-      | Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf      |
-      | Chinese drone firm DJI pauses operations in Russia and Ukraine - BBC News.pdf  |
-      | How many Ukrainian refugees are there and where have they gone_ - BBC News.pdf |
-      | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News.pdf    |
+      | article_name                                                               |
+      | Russia's economy in for a bumpy ride as sanctions bite - BBC News          |
+      | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News  |
+      | Combat drones_ We are in a new era of warfare - here's why - BBC News      |
+      | Chinese drone firm DJI pauses operations in Russia and Ukraine - BBC News  |
+      | How many Ukrainian refugees are there and where have they gone_ - BBC News |
+      | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News    |

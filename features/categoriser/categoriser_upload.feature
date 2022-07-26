@@ -27,7 +27,7 @@ Feature: Edit category linked to an article
 
   @happy
   Scenario Outline: User submit a category with new non-identical category name
-    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" page
+    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" edit page
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
@@ -45,7 +45,7 @@ Feature: Edit category linked to an article
 
   @happy
   Scenario: User submits without any change
-    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" page
+    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" edit page
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "UAVs"
     And I click on the "Save" button
@@ -55,7 +55,7 @@ Feature: Edit category linked to an article
 
   @happy
   Scenario Outline: User re-assign the category of an article to an existing category
-    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" page
+    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" edit page
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
@@ -71,7 +71,7 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario: Edit current category into category with blank name
-    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" page
+    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" edit page
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into ""
     And I click on the "Save" button
@@ -80,7 +80,7 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario Outline: Edit current category into category with name that is more than 15 characters
-    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" page
+    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" edit page
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
@@ -93,7 +93,7 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario Outline: Edit current category into category with ambiguous name
-    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" page
+    Given I am on the article "uav-Combat drones_ We are in a new era of warfare - here's why - BBC News.pdf" edit page
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
@@ -108,7 +108,7 @@ Feature: Edit category linked to an article
 
   @view
   Scenario: View article Edit page with No category
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" page
+    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" edit page
     And the article has not been assigned any category
     Then I should see the label "<No Category>"
     And I should see a form with the following categories to select from: "Tanks, Artillery, UAVs, Helicopters, Missiles, MANPADs, Fighter Aircraft"
@@ -116,7 +116,7 @@ Feature: Edit category linked to an article
 
   @happy
   Scenario Outline: Assign a category from the list of categories to an article missing a category
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" page
+    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" edit page
     And the article has not been assigned any category
     When I select the category "<category_name>"
     And I click on the "Add Category" button
@@ -135,7 +135,7 @@ Feature: Edit category linked to an article
 
   @happy
   Scenario Outline: Successfully creating and assigning a new category to a new article
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" page
+    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" edit page
     And the article has not been assigned any category
     When I type the category name as "<category_name>"
     And I click on the "Add Category" button
@@ -152,7 +152,7 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario: Attempting to create a new category “” (blank), to assign to a new article
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" page
+    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" edit page
     And the article has not been assigned any category
     When I type the category name as ""
     And I click on the "Add Category" button
@@ -160,7 +160,7 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario Outline: Attempting to create a new category more than 30 characters long, to assign to a new article
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" page
+    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" edit page
     And the article has not been assigned any category
     When I type the category name as "<category_name>"
     And I click on the "Add Category" button
@@ -173,7 +173,7 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario Outline: Modify No category into category with ambiguous name
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" page
+    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf" edit page
     And the article has not been assigned any category
     When I type the category name as "<category_name>"
     And I click on the "Add Category" button
