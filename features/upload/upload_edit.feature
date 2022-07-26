@@ -5,15 +5,15 @@ Feature: edit uploaded articles
   I want to be able to modify their associated tags or delete them
 
   Background:
-    Given I am logged in as admin of Amadeus
-    And I have uploaded these zip files rus.zip, uav.zip, ukr.zip
+    Given I am logged in as an admin of Amadeus
+    And I have uploaded these zip files: rus.zip, uav.zip, ukr.zip
 
   @redirect
   Scenario Outline: View Edit Upload page
     Given I am on the "Database" page
     When I click edit article "<article_name>"
     Then I should be redirected to the article "<article_name>" page
-    And I should see the following buttons "Add new Tag, Delete this Upload, Back to Database"
+    And I should see the following buttons: "Add new Tag, Delete this Upload, Back to Database"
     And I should see the following tags "<tags>"
 
     Examples:
@@ -81,7 +81,7 @@ Feature: edit uploaded articles
     When I add the tag "<tag_name>"
     And I click on the "Add new Tag" button
     Then I should still see the same article "Russia's economy in for a bumpy ride as sanctions bite - BBC News.pdf"
-    And I should see a warning message "Tag name too long!"
+    And I should see a warning message "Tag name is too long!"
 
     Examples:
       | tag_name                   |

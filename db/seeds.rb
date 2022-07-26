@@ -13,7 +13,7 @@ User.create(
     { email: "admin789@admin.com", password: "admin789", password_confirmation: "admin789" }
   ])
 
-Category_bank = %W[Tanks Artillery UAVs Helicopters Missiles MANPADs #{"Fighter Aircraft"} #{"Infrastructure Strike"}]
-Category_bank.each do |category_name|
+category_bank = %W[Tanks Artillery UAVs Helicopters Missiles MANPADs #{"Fighter Aircraft"} #{"Infrastructure Strike"}]
+category_bank.each do |category_name|
   Category.create(:name => category_name)
 end

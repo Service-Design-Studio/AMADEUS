@@ -59,22 +59,23 @@ class Upload < ApplicationRecord
       msg = flash_message_category::INVALID_CAT
     elsif category_name.length >= 30
       msg = flash_message_category::LENGTHY_CAT
-    elsif category_name.match(/\W/)
+    elsif !category_name.match(/^[a-zA-Z0-9_ ]*$/)
       msg = flash_message_category.get_special_characters(category_name)
     elsif status == "exist"
       msg = flash_message_category.get_already_assigned_category(category_name)
     else
       status = "success"
-      msg = ""
-      new_category = Category.friendly.find_by(name: category_name)
+      new_category = Category.find_by(name: category_name)
       if !linked_category.nil?
         get_linked_category(upload).destroy
       end
       if new_category.nil?
         new_category = Category.create(name: category_name)
         UploadCategoryLink.create(upload_id: upload.id, category_id: new_category.id)
+        msg = flash_message_category.get_added_category(new_category[:name])
       else
         UploadCategoryLink.create(upload_id: upload.id, category_id: new_category.id)
+        msg = flash_message_category.get_linked_category(new_category[:name])
       end
     end
     return { status: status, msg: msg }
@@ -106,13 +107,15 @@ class Upload < ApplicationRecord
             summary = nltk_response[:summary].gsub(/(\\\")/, "")
             tags_dict = nltk_response[:tags]
             category = nltk_response[:category]
-            # zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
-            # category = zero_shot_response[:category]
+            zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
+            category = zero_shot_response[:category]
             new_upload.content = content
             new_upload.summary = summary
             new_upload.save
             set_upload_tag(new_upload.id, tags_dict)
-            set_upload_category(new_upload.id, category)
+            if category != "No Category"
+              set_upload_category(new_upload.id, category)
+            end
           end
         end
       end

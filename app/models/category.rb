@@ -11,7 +11,7 @@ class Category < ApplicationRecord
       msg = flash_message::INVALID_CAT
     elsif category_name.length >= 30
       msg = flash_message::LENGTHY_CAT
-    elsif category_name.match(/\W/)
+    elsif !category_name.match(/^[a-zA-Z0-9_ ]*$/)
       msg = flash_message.get_special_characters(category_name)
     elsif Category.exists?(name: category_name)
       msg = flash_message.get_duplicate_category(category_name)
@@ -27,6 +27,10 @@ class Category < ApplicationRecord
   end
 
   def self.get_category_bank
-    %w[Tanks Artillery UAVs Helicopters Missiles MANPADs Infrastructure]
+    category_bank = Array.new
+    Category.all.each do |category|
+      category_bank << category.name
+    end
+    category_bank
   end
 end
