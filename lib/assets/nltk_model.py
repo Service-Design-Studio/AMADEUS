@@ -123,7 +123,7 @@ def summariser(upload_text, all_stopwords, summary_threshold):
     for sentence in sentences:
         if (sentence in sentence_value_dict) and (sentence_value_dict[sentence] > (float(summary_threshold) * average)):
             summary.append(sentence)
-    summary = " ".join(summary[2:-1])
+    summary = " ".join(summary[2:len(summary)-2])
     return summary
 
 
