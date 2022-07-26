@@ -86,6 +86,18 @@ class Upload < ApplicationRecord
       msg = flash_message::INVALID_SUMMARY
     elsif summary == upload.summary
       msg = flash_message::SAME_SUMMARY
+    # if summary length is less than 100 characters
+    elsif summary.length < 100
+      msg = flash_message::SHORT_SUMMARY
+    # if summary length is more than 2500 characters
+    elsif summary.length > 5000
+      msg = flash_message::LONG_SUMMARY
+    #summary contains only spaces
+    elsif summary.match(/^\s*$/)
+      msg = flash_message::SPACE_SUMMARY
+    #summary contains all special characters
+    elsif summary.match(/\W/)
+      msg = flash_message::SPECIAL_CHARACTERS
     else
       status = "success"
       msg = flash_message::SUMMARY_UPDATED
@@ -136,6 +148,14 @@ class Upload < ApplicationRecord
     text = text.gsub(/(?<=[.,?!;])(?=[^\s])/, " ") # add whitespace after punctuation
     text = text.gsub(/\s+(?=\d)/, "") # remove whitespace added between number
     text = text.gsub(/(?<=[a-z1-9])(?=[A-Z])/, " ") # add whitespace before capital letter
+    text = text.gsub(/(?<=[a-zA-Z])(?=\d)/, " ") # add whitespace after number
+    text = text.gsub(/\d+\s+days?\s+ago/, " ") # remove "number" days ago
+    text = text.gsub(/\d+\s+hours?\s+ago/, " ") # remove "number" hours ago
+    text = text.gsub(/\d+\s+minutes?\s+ago/, " ") # remove "number" minutes ago
+    text = text.gsub(/\d+\s+seconds?\s+ago/, " ") # remove "number" seconds ago
+    text = text.gsub(/\d+\s+years?\s+ago/, " ") # remove "number" years ago
+    text = text.gsub(/\d+\s+months?\s+ago/, " ") # remove "number" months ago
+    text = text.gsub(/\d+\s+weeks?\s+ago/, " ") # remove "number" weeks ago
     text.squeeze(' ')
   end
 

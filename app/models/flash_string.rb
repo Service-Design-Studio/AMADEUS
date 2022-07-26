@@ -8,6 +8,10 @@ module FlashString
     INVALID_SUMMARY = "Summary cannot be blank!"
     SAME_SUMMARY = "No change to summary!"
     SUMMARY_UPDATED = "Summary updated!"
+    SHORT_SUMMARY = "Summary must be at least 100 characters!"
+    LONG_SUMMARY = "Summary must be less than 2500 characters!"
+    SPACE_SUMMARY = "Summary cannot be all spaces!"
+    SPECIAL_CHARACTERS = "Summary cannot contain only special characters!"
   end
 
   class TagString
