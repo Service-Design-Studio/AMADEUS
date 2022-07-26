@@ -38,4 +38,3 @@ Then(/^I should be redirected to the article "([^"]*)" page$/) do |article_name|
     expect(page).to have_current_path("/admin/uploads/6/edit")
   end
 end
-
