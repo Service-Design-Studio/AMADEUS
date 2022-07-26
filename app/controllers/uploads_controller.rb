@@ -36,10 +36,10 @@ class UploadsController < ApplicationController
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
     respond_to do |format|
+      # Update topics
       if !params[:upload][:topics].nil?
         reply = Upload.verify_tag(@upload, params[:upload][:topics])
         if reply[:status] == "success"
-          # @upload.update!(upload_params.except(:topics))
           flash[:success] = FlashString::TagString.get_added_tag(params[:upload][:topics])
           format.html { redirect_to edit_upload_path(@upload) }
           format.json { render :edit, status: :ok, location: @upload }
@@ -48,11 +48,23 @@ class UploadsController < ApplicationController
           format.html { render :edit, status: :unprocessable_entity }
           format.json { render json: @upload.errors, status: :unprocessable_entity }
         end
+      # Update category
       elsif !params[:upload][:categories].nil?
         reply = Upload.verify_category(@upload, params[:upload][:categories])
         if reply[:status] == "success"
-          @upload.update!(upload_params.except(:categories))
           flash[:success] = FlashString::CategoryString.get_added_category(params[:upload][:categories])
+          format.html { redirect_to edit_upload_path(@upload) }
+          format.json { render :edit, status: :ok, location: @upload }
+        else
+          flash[:danger] = reply[:msg]
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @upload.errors, status: :unprocessable_entity }
+        end
+      # Update summary
+      elsif !params[:upload][:summary].nil?
+        reply = Upload.verify_summary(@upload, params[:upload][:summary])
+        if reply[:status] == "success"
+          flash[:success] = FlashString::UploadString::SUMMARY_UPDATED
           format.html { redirect_to edit_upload_path(@upload) }
           format.json { render :edit, status: :ok, location: @upload }
         else

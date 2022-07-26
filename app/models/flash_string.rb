@@ -5,6 +5,9 @@ module FlashString
   class UploadString
     UPLOAD_DELETED = "Upload deleted!"
     UPLOAD_SOME_FAILED = "Some pdfs failed to be parse!"
+    INVALID_SUMMARY = "Summary cannot be blank!"
+    SAME_SUMMARY = "No change to summary!"
+    SUMMARY_UPDATED = "Summary updated!"
   end
 
   class TagString

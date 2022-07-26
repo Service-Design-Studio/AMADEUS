@@ -10,9 +10,8 @@
 </h4><br>
 
 <h4>Summary</h4>
-<p class="grid" style="background:#d3d3d3">
-  <%= @upload.summary  %>
-</p></br>
+<%= render 'uploads/edit_summary_form', upload: @upload %>
+<br>
 
 <h4>List of Tags:</h4>
 

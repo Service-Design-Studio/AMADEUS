@@ -80,6 +80,20 @@ class Upload < ApplicationRecord
     return { status: status, msg: msg }
   end
 
+  def self.verify_summary(upload, summary)
+    status = "fail"
+    if summary == "" || summary.nil?
+      msg = flash_message::INVALID_SUMMARY
+    elsif summary == upload.summary
+      msg = flash_message::SAME_SUMMARY
+    else
+      status = "success"
+      msg = flash_message::SUMMARY_UPDATED
+      upload.update(summary: summary)
+    end
+    return { status: status, msg: msg }
+  end
+
   def self.unzip_file(file, params)
     if File.extname(file) == '.zip'
       Zip::File.open(file) do |zipfile|
@@ -187,6 +201,10 @@ class Upload < ApplicationRecord
 
   def self.get_cleaned_filename(upload)
     upload.file.filename.to_s.sub(/(?<=.)\..*/, '')
+  end
+
+  def self.flash_message
+    FlashString::UploadString
   end
 
   def self.flash_message_tag
