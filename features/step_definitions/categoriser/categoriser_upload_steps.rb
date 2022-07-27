@@ -18,10 +18,6 @@ Then(/^I should see that the category name "([^"]*)" has not changed$/) do |cate
   expect(page).to have_content(category_name)
 end
 
-Then(/^I should still see the same category "([^"]*)"$/) do |category_name|
-  expect(page).to have_content(category_name)
-end
-
 Then(/^I should see the new category "([^"]*)"$/) do |category_name|
   expect(page).to have_content(category_name)
 end

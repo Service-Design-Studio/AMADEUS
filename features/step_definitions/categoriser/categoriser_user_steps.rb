@@ -31,7 +31,7 @@ When(/^I click on the article "([^"]*)"$/) do |article_name|
   expect(page).to have_current_path("/uploads/#{id}")
 end
 
-Then(/^I should be redirected to the article "([^"]*)" page$/) do |arg|
+Then(/^I should be redirected to the article "([^"]*)" page$/) do |article_name|
   id = capybara_get_article_idx(article_name)
   expect(page).to have_current_path("/admin/uploads/#{id}/edit")
 end
