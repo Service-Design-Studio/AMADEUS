@@ -119,8 +119,8 @@ class Upload < ApplicationRecord
             summary = nltk_response[:summary].gsub(/(\\\")/, "")
             tags_dict = nltk_response[:tags]
             category = nltk_response[:category]
-            # zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
-            # category = zero_shot_response[:category]
+            zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
+            category = zero_shot_response[:category]
             new_upload.content = content
             new_upload.summary = summary
             new_upload.save
@@ -152,30 +152,7 @@ class Upload < ApplicationRecord
     text = text.gsub(/\s+(?=\d)/, "") # remove whitespace added between number
     text = text.gsub(/(?<=[a-z1-9])(?=[A-Z])/, " ") # add whitespace before capital letter
     text = text.gsub(/(?<=[a-zA-Z])(?=\d)/, " ") # add whitespace after number
-    # replace READ MORE or read more with a space
     text = text.gsub(/READ MORE|read more/, " ")
-    # replace "register for a "string" account" or "Register for a XXX account" with blank
-    text = text.gsub(/register for a [a-zA-Z0-9]+ account/, " ")
-    text = text.gsub(/Register for a [a-zA-Z0-9]+ account/, " ")
-    text = text.gsub(/register for a [a-zA-Z0-9]+ accoun/, " ")
-    text = text.gsub(/Register for a [a-zA-Z0-9]+ accoun/, " ")
-    text = text.gsub(/register for a [a-zA-Z0-9]+ accou/, " ")
-    text = text.gsub(/Register for a [a-zA-Z0-9]+ accou/, " ")
-    text = text.gsub(/register for a [a-zA-Z0-9]+ acco/, " ")
-    text = text.gsub(/Register for a [a-zA-Z0-9]+ acco/, " ")
-    text = text.gsub(/register for a [a-zA-Z0-9]+ acc/, " ")
-    text = text.gsub(/Register for a [a-zA-Z0-9]+ acc/, " ")
-    text = text.gsub(/register for a [a-zA-Z0-9]+ ac/, " ")
-    text = text.gsub(/Register for a [a-zA-Z0-9]+ ac/, " ")
-    text = text.gsub(/register for a [a-zA-Z0-9]+ a/, " ")
-    text = text.gsub(/Register for a [a-zA-Z0-9]+ a/, " ")
-    # text = text.gsub(/\d+\s+days?\s+ago/, " ") # remove "number" days ago
-    # text = text.gsub(/\d+\s+hours?\s+ago/, " ") # remove "number" hours ago
-    # text = text.gsub(/\d+\s+minutes?\s+ago/, " ") # remove "number" minutes ago
-    # text = text.gsub(/\d+\s+seconds?\s+ago/, " ") # remove "number" seconds ago
-    # text = text.gsub(/\d+\s+years?\s+ago/, " ") # remove "number" years ago
-    # text = text.gsub(/\d+\s+months?\s+ago/, " ") # remove "number" months ago
-    # text = text.gsub(/\d+\s+weeks?\s+ago/, " ") # remove "number" weeks ago
     text.squeeze(' ')
   end
 
