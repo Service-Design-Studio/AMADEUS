@@ -26,11 +26,33 @@ class UploadsController < ApplicationController
   def create
     file = params[:upload][:file]
     unless file.nil?
-      Upload.unzip_file(file, params)
+      new_zip_reply = Upload.save_zip_before_ML(file, params)
+      # Sidekiq to unzip the zip file
+      ReportWorker.perform_async(new_zip_reply[:zip_id], "")
       respond_to do |format|
+        flash[:success] = "Successfully uploaded #{new_zip_reply[:zip_name]}, waiting for unzipping and ML processing..."
         format.html { redirect_to uploads_url }
       end
+
+
+      # upload_id_list = Upload.save_raw_before_nltk(file, params)
+      # upload_id_list.each do |upload_id|
+      #   # Tells sidekiq to put this on the queue
+      #   ReportWorker.perform_async(upload_id)
+      # end
+      # respond_to do |format|
+      #   flash[:success] = "Files successfuly uploaded, running Machine Learning model on them now."
+      #   format.html { redirect_to uploads_url }
+      # end
     end
+
+    # file = params[:upload][:file]
+    # unless file.nil?
+    #   Upload.unzip_file(file, params)
+    #   respond_to do |format|
+    #     format.html { redirect_to uploads_url }
+    #   end
+    # end
   end
 
   # PATCH/PUT /uploads/1 or /uploads/1.json
@@ -95,6 +117,7 @@ class UploadsController < ApplicationController
     @linked_topics = Upload.get_linked_topics(@upload)
     @linked_category = Upload.get_linked_category(@upload)
   end
+
 
   # Use callbacks to share common setup or constraints between actions.
   def set_upload

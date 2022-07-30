@@ -36,6 +36,12 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Use sidekiq for background async tasks
+gem "sidekiq", "~> 6.5"
+
+# sidekiq uses sinatra for web interface
+gem "sinatra"
+
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
@@ -94,4 +100,5 @@ end
 group :production do
   #gem 'pg' #gcloud deployment
 end
+
 
