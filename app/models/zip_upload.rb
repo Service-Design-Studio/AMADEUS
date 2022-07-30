@@ -14,7 +14,6 @@ class ZipUpload < ApplicationRecord
         Zip::File.open(file_path) do |zip_file|
             zip_file.each do |entry|
                 # extract the entry to a file
-                puts "---------------------------------------------------------working--------------=--------------------"
                 if entry.file? && entry.name.end_with?(".pdf")
                     new_upload = Upload.new
                     content = Upload.get_pdf_text(entry)
@@ -22,6 +21,7 @@ class ZipUpload < ApplicationRecord
                     summary = "Processing..."
                     new_upload.content = content
                     new_upload.summary = summary
+                    new_upload.ml_status = "Running"
                     new_upload.save
                     # sidekiq to run nltk on new_upload
                     ReportWorker.perform_async("", new_upload.id)
