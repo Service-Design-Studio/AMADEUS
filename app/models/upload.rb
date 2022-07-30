@@ -54,6 +54,41 @@ class Upload < ApplicationRecord
     end
   end
 
+  # SIDEKIQ - creates a zip_upload
+  def self.save_zip_before_ML(file, params)
+    # attach zip file in active records
+    if File.extname(file) == ".zip"
+      new_zip = ZipUpload.new
+      new_zip.file.attach(io: StringIO.new(file.read), filename: file.original_filename)
+      new_zip.save
+      # get the zip file id
+      zip_id = new_zip.id
+      # get the zip file name
+      zip_name = new_zip.file.filename
+      return { zip_id: zip_id, zip_name: zip_name }
+    end
+    @params = params
+  end
+
+  # SIDEKIQ - runs the nltk model
+  def self.run_nltk(upload_id)
+    upload = Upload.find(upload_id)
+    content = upload.content
+    nltk_response = NltkModel.request(content)
+    summary = nltk_response[:summary].gsub(/(\\\")/, "")
+    tags_dict = nltk_response[:tags]
+    category = nltk_response[:category]
+    # zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
+    # category = zero_shot_response[:category]
+    upload.content = content
+    upload.summary = summary
+    upload.save
+    set_upload_tag(upload.id, tags_dict)
+    if category != "No Category"
+      set_upload_category(upload.id, category)
+    end
+  end
+
   def self.unzip_file(file, params)
     Zip::File.open(file) do |zipfile|
       zipfile.each do |entry|
@@ -143,6 +178,15 @@ class Upload < ApplicationRecord
 
   def self.get_cleaned_filename(upload)
     upload.file.filename.to_s.sub(/(?<=.)\..*/, '')
+  end
+
+  # get the ML status for each upload
+  def self.get_ML_status(upload)
+    if (upload.summary == "Processing...") && (upload.categories.count == 0)
+      return {status: "Running", class: "badge bg-warning"}
+    else
+      return {status: "Finished", class: "badge bg-success"}
+    end
   end
 
   def self.flash_message
