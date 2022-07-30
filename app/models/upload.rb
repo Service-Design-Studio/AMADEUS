@@ -3,6 +3,7 @@ require 'pdf-reader'
 require 'json'
 
 class Upload < ApplicationRecord
+  include ActionView::RecordIdentifier
   require_relative 'nltk_model.rb'
 
   has_one_attached :file
@@ -12,7 +13,19 @@ class Upload < ApplicationRecord
   has_many :topics, through: :uploadlinks
   has_many :upload_category_links, dependent: :destroy
   has_many :categories, through: :upload_category_links
+  
+  after_create_commit lambda {
+    broadcast_prepend_later_to "uploads_list", target: "uploads", partial: "uploads/upload"
+  }
 
+  after_update_commit lambda {
+    broadcast_replace_later_to "uploads_list", target: "#{dom_id self}", partial: "uploads/upload"
+  }
+
+  after_destroy_commit lambda {
+    broadcast_remove_to "uploads_list", target: "#{dom_id self}"
+  }
+  
   private
 
   def self.verify_tag(upload, topic_name)
@@ -135,6 +148,7 @@ class Upload < ApplicationRecord
     # category = zero_shot_response[:category]
     upload.content = content
     upload.summary = summary
+    upload.ml_status = "Complete"
     upload.save
     set_upload_tag(upload.id, tags_dict)
     if category != "No Category"
@@ -142,6 +156,7 @@ class Upload < ApplicationRecord
     end
   end
 
+  # old function without sidekiq
   def self.unzip_file(file, params)
     if File.extname(file) == '.zip'
       Zip::File.open(file) do |zipfile|
@@ -253,15 +268,6 @@ class Upload < ApplicationRecord
 
   def self.get_cleaned_filename(upload)
     upload.file.filename.to_s.sub(/(?<=.)\..*/, '')
-  end
-
-  # get the ML status for each upload
-  def self.get_ML_status(upload)
-    if (upload.summary == "Processing...") && (upload.categories.count == 0)
-      return {status: "Running", class: "badge bg-warning"}
-    else
-      return {status: "Finished", class: "badge bg-success"}
-    end
   end
 
   def self.flash_message

@@ -1,5 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
+<%= turbo_stream_from "uploads_list" %>
+
 <div class="center">
   <h1>Database</h1>
   <%= link_to "New Upload", new_upload_path, class: "btn btn-success", id: "new-upload-button" %>
@@ -7,41 +9,22 @@
 </div>
 <br><br>
 
-<div style="width: 100%; display: table;">
-  <div style="display: table-row">
-
-    </div>
-        <div style="width: 10%; display: table-cell;">
-      <p>
-        <strong>ML status</strong>
-      </p>
-    </div>
-  
-    <div style="width: 20%; display: table-cell;">
-      <p>
-        <strong>Category</strong>
-      </p>
-    </div>
-
-    <div style="width: 50%; display: table-cell;">
-      <p>
-        <strong>Article</strong>
-      </p>
-    </div>
-
-    <div style="width: 20%; display: table-cell;">
-      <p>
-        <strong>Tags</strong>
-      </p>
-  </div>
-
-</div>
-
-<div id="uploads">
-  <% @uploads.each do |upload| %>
-    <%= render upload %>
-  <% end %>
-</div>
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" class="text-center">ML status</th>
+      <th scope="col" class="text-center">Category</th>
+      <th scope="col" class="text-center">Article</th>
+      <th scope="col" class="text-center">Tags</th>
+      <th scope="col" class="text-center"></th>
+    </tr>
+  </thead>
+  <tbody id="uploads">
+    <% @uploads.each do |upload| %>
+      <%= render upload %>
+    <% end %>
+  </tbody>
+</table>
 
 
 

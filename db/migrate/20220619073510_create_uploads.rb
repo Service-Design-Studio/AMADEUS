@@ -3,6 +3,7 @@ class CreateUploads < ActiveRecord::Migration[7.0]
     create_table :uploads do |t|
       t.string :content
       t.string :summary
+      t.string :ml_status
 
       t.timestamps
     end
