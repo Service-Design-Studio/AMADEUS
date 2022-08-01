@@ -16,7 +16,7 @@ class ZipUpload < ApplicationRecord
                 # extract the entry to a file
                 if entry.file? && entry.name.end_with?(".pdf")
                     new_upload = Upload.new
-                    content = Upload.get_pdf_text(entry)
+                    content = ExtractPdf.get_pdf_text(entry)
                     new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
                     summary = "Processing..."
                     new_upload.content = content
