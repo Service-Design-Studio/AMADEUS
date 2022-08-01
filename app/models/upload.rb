@@ -1,9 +1,8 @@
 require 'zip'
-require 'pdf-reader'
-require 'json'
+
 
 class Upload < ApplicationRecord
-  require_relative 'nltk_model.rb'
+  require_relative 'concerns/nltk_model.rb'
 
   has_one_attached :file
   validates :file, presence: true
@@ -114,7 +113,7 @@ class Upload < ApplicationRecord
           if entry.file? && entry.to_s.include?(".pdf")
             new_upload = Upload.new
             new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
-            content = get_pdf_text(entry)
+            content = ExtractPdf.get_pdf_text(entry)
             nltk_response = NltkModel.request(content)
             summary = nltk_response[:summary].gsub(/(\\\")/, "")
             tags_dict = nltk_response[:tags]
@@ -133,27 +132,6 @@ class Upload < ApplicationRecord
       end
     end
     @params = params
-  end
-
-  def self.get_pdf_text(pdf)
-    content = ""
-    reader = PDF::Reader.new(StringIO.new(pdf.get_input_stream.read))
-    reader.pages.each do |page|
-      content.concat(preprocess_text(page.text))
-    end
-    return content.to_json
-  end
-
-  def self.preprocess_text(text)
-    text = text.gsub(/^.*\u0026/, "") # strip header before main text
-    text = text.strip.delete("\t\r\n") # strip whitespace
-    text = text.gsub(/[^\x00-\x7F]/, " ") # strip non-ASCII
-    text = text.gsub(/(?<=[.,?!;])(?=[^\s])/, " ") # add whitespace after punctuation
-    text = text.gsub(/\s+(?=\d)/, "") # remove whitespace added between number
-    text = text.gsub(/(?<=[a-z1-9])(?=[A-Z])/, " ") # add whitespace before capital letter
-    text = text.gsub(/(?<=[a-zA-Z])(?=\d)/, " ") # add whitespace after number
-    text = text.gsub(/READ MORE|read more/, " ")
-    text.squeeze(' ')
   end
 
   def self.set_upload_tag(upload_id, topics)
@@ -186,7 +164,6 @@ class Upload < ApplicationRecord
     n = Random.rand(1...topic_ids.length)
     n.times do
       topic_id = topic_ids.sample
-      similarity = Random.rand(1...100)
       Uploadlink.create(upload_id: upload_id, topic_id: topic_id)
       topic_ids.delete(topic_id)
     end
