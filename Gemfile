@@ -72,7 +72,7 @@ gem 'pdf-reader'
 gem 'file_validators'
 
 #policy management
-gem 'pundit'
+# gem 'pundit'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -98,7 +98,8 @@ group :test do
 end
 
 group :production do
-  #gem 'pg' #gcloud deployment
+  gem 'pg' #gcloud deployment
+  gem 'appengine'
 end
 
 
