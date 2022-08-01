@@ -2,6 +2,7 @@ require 'zip'
 
 
 class Upload < ApplicationRecord
+  include ActionView::RecordIdentifier
   require_relative 'concerns/nltk_model.rb'
 
   has_one_attached :file
@@ -11,6 +12,18 @@ class Upload < ApplicationRecord
   has_many :topics, through: :uploadlinks
   has_many :upload_category_links, dependent: :destroy
   has_many :categories, through: :upload_category_links
+
+  after_create_commit lambda {
+    broadcast_prepend_later_to "uploads_list", target: "uploads", partial: "uploads/upload"
+  }
+
+  after_update_commit lambda {
+    broadcast_replace_later_to "uploads_list", target: "#{dom_id self}", partial: "uploads/upload"
+  }
+
+  after_destroy_commit lambda {
+    broadcast_remove_to "uploads_list", target: "#{dom_id self}"
+  }
 
   private
 
@@ -106,6 +119,43 @@ class Upload < ApplicationRecord
     return { status: status, msg: msg }
   end
 
+  # SIDEKIQ - creates a zip_upload
+  def self.save_zip_before_ML(file, params)
+    # attach zip file in active records
+    if File.extname(file) == ".zip"
+      new_zip = ZipUpload.new
+      new_zip.file.attach(io: StringIO.new(file.read), filename: file.original_filename)
+      new_zip.save
+      # get the zip file id
+      zip_id = new_zip.id
+      # get the zip file name
+      zip_name = new_zip.file.filename
+      return { zip_id: zip_id, zip_name: zip_name }
+    end
+    @params = params
+  end
+
+  # SIDEKIQ - runs the nltk model
+  def self.run_nltk(upload_id)
+    upload = Upload.find(upload_id)
+    content = upload.content
+    nltk_response = NltkModel.request(content)
+    summary = nltk_response[:summary].gsub(/(\\\")/, "")
+    tags_dict = nltk_response[:tags]
+    category = nltk_response[:category]
+    # zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
+    # category = zero_shot_response[:category]
+    upload.content = content
+    upload.summary = summary
+    upload.ml_status = "Complete"
+    upload.save
+    set_upload_tag(upload.id, tags_dict)
+    if category != "No Category"
+      set_upload_category(upload.id, category)
+    end
+  end
+
+  # old function without sidekiq
   def self.unzip_file(file, params)
     if File.extname(file) == '.zip'
       Zip::File.open(file) do |zipfile|
