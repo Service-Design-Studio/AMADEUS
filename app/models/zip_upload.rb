@@ -18,9 +18,7 @@ class ZipUpload < ApplicationRecord
                     new_upload = Upload.new
                     content = ExtractPdf.get_pdf_text(entry)
                     new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
-                    summary = "Processing..."
                     new_upload.content = content
-                    new_upload.summary = summary
                     new_upload.ml_status = "Running"
                     new_upload.save
                     # sidekiq to run nltk on new_upload

@@ -22,7 +22,7 @@ def get_category():
 @app.route('/summariser', methods=['POST'])
 def get_summary():
     upload_text = request.json["inputs"]
-    summary = summarizer(upload_text, max_length=150, min_length=50, do_sample=False, truncation=True)[0]["summary_text"]
+    summary = summarizer(upload_text, max_length=100, min_length=50, do_sample=False, truncation=True)[0]["summary_text"]
     return jsonify({"data": {"summary": summary}})
 
 if __name__ == '__main__':

@@ -15,7 +15,7 @@ def tagger():
     return tags_dict
 
 def summariser():
-    return "This is a summary"
+    return "This is a valid summary with more than 10 words and less than 100 words"
 
 
 def nltk_model(request):

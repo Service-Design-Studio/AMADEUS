@@ -25,7 +25,7 @@ Feature: Edit category linked to an article
       | Chinese drone firm DJI pauses operations in Russia and Ukraine | UAVs          |
 
   @happy
-  Scenario Outline: User submit a category with new non-identical category name
+  Scenario Outline: Admin submit a category with new non-identical category name
     Given I am on the article "Combat drones_ We are in a new era of warfare - here's why - BBC News" edit page
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
@@ -43,7 +43,7 @@ Feature: Edit category linked to an article
 
 
   @happy
-  Scenario: User submits without any change
+  Scenario: Admin submits without any change
     Given I am on the article "Combat drones_ We are in a new era of warfare - here's why - BBC News" edit page
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "UAVs"
@@ -53,7 +53,7 @@ Feature: Edit category linked to an article
 
 
   @happy
-  Scenario Outline: User re-assign the category of an article to an existing category
+  Scenario Outline: Admin re-assign the category of an article to an existing category
     Given I am on the article "Combat drones_ We are in a new era of warfare - here's why - BBC News" edit page
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
@@ -75,7 +75,7 @@ Feature: Edit category linked to an article
     And I edit the category "UAVs" into ""
     And I click on the "Save" button
     Then I should see that the category name "UAVs" has not changed
-    Then I should see a warning message "Invalid category input!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
   @sad
   Scenario Outline: Edit current category into category with name that is more than 15 characters
@@ -83,7 +83,7 @@ Feature: Edit category linked to an article
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
-    Then I should see a warning message "Category name is too long!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name                                        |
@@ -97,7 +97,7 @@ Feature: Edit category linked to an article
     And I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
 
-    And I should see a warning message "Category <category_name> contains special characters!"
+    And I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name |
@@ -155,7 +155,7 @@ Feature: Edit category linked to an article
     And the article has not been assigned any category
     When I type the category name as ""
     And I click on the "Add Category" button
-    And I should see a warning message "Invalid category input!"
+    And I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
   @sad
   Scenario Outline: Attempting to create a new category more than 30 characters long, to assign to a new article
@@ -163,7 +163,7 @@ Feature: Edit category linked to an article
     And the article has not been assigned any category
     When I type the category name as "<category_name>"
     And I click on the "Add Category" button
-    Then I should see a warning message "Category name is too long!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name                                        |
@@ -176,7 +176,7 @@ Feature: Edit category linked to an article
     And the article has not been assigned any category
     When I type the category name as "<category_name>"
     And I click on the "Add Category" button
-    Then I should see a warning message "Category <category_name> contains special characters!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name |

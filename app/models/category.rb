@@ -10,7 +10,7 @@ class Category < ApplicationRecord
     if (category_name == "") || category_name.nil?
       msg = flash_message::INVALID_CAT
     elsif category_name.length >= 30
-      msg = flash_message::LENGTHY_CAT
+      msg = flash_message::INVALID_CAT
     elsif !category_name.match(/^[a-zA-Z0-9_ ]*$/)
       msg = flash_message.get_special_characters(category_name)
     elsif Category.exists?(name: category_name)
