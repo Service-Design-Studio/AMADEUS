@@ -1,10 +1,10 @@
-Given(/^I am logged in as an admin of Amadeus$/) do
+Given(/^I am logged in as an admin of AMADEUS$/) do
   capybara_login('admin123@admin.com', 'admin123')
   visit '/admin'
   expect(page).to have_current_path('/admin')
 end
 
-Given(/^I am a user of Amadeus$/) do
+Given(/^I am a user of AMADEUS$/) do
   capybara_logout
 end
 

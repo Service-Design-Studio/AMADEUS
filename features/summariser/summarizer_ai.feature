@@ -5,7 +5,7 @@ Feature: AI automatically summarize article
   I want to have my articles summarized by an AI when they are uploaded
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
 
   @happy
   Scenario Outline: Auto-generated summary after each upload

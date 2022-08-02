@@ -1,7 +1,7 @@
 @sign_in
 Feature: signing in as an admin
-  As an admin of Amadeus
-  So that I can contribute documents for Amadeus's knowledge repository
+  As an admin of AMADEUS
+  So that I can contribute documents for AMADEUS's knowledge repository
   I want to upload pdf locally in bulk using zipped format
 
   Background: View Sign In page

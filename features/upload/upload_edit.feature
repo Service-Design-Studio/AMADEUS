@@ -1,11 +1,11 @@
 @admin @upload_edit
 Feature: edit uploaded articles
-  As an admin of Amadeus who is interested in the Russian-Ukraine war
+  As an admin of AMADEUS who is interested in the Russian-Ukraine war
   So that I can make sure the articles are reliable and relevant
   I want to be able to modify their associated tags or delete them
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And I have uploaded these zip files: rus.zip, uav.zip, ukr.zip
 
   @redirect

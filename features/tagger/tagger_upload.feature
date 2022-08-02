@@ -1,11 +1,11 @@
 @admin @tagger_upload
 Feature: Edit category linked to an article
-  As an admin of Amadeus
+  As an admin of AMADEUS
   So that I can manage the tags that are currently linked to an article
   I want to be able to edit the tags in the article Edit page
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And I have uploaded these zip files: rus.zip, uav.zip, ukr.zip
 
   @redirect

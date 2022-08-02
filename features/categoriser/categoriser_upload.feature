@@ -1,11 +1,11 @@
 @admin @categoriser_upload
 Feature: Edit category linked to an article
-  As an admin of Amadeus
+  As an admin of AMADEUS
   So that I can manage the category that is currently linked to an article
   I want to be able to edit the linked category in the article Edit page
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And I have created the following categories: "Tanks, Artillery, UAVs, Helicopters, Missiles, MANPADs, Fighter Aircraft, Infrastructure Strike"
     And I have uploaded these zip files: rus.zip, uav.zip, ukr.zip
     And I have deleted the following categories: "Infrastructure Strike" from the list of categories

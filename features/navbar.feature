@@ -12,7 +12,7 @@ Feature: navigation bar
 
   @admin
   Scenario: Navigating around Amadeus as admin
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     When I click the hamburger icon
     And I should see the following buttons: "Home, Admin, Actions, Sign Out"
 
@@ -34,7 +34,7 @@ Feature: navigation bar
 
   @admin @redirect
   Scenario Outline: Choosing privileged admin features as admin
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And the navigation bar is open
     When I click on the "<feature_name>" button
     Then I should be redirected to the "<feature_name>" page

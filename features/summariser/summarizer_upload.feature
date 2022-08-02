@@ -13,7 +13,7 @@ Feature: Edit summary
     Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
     When I edit the summary into "<summary>"
     And I click on the "Save" button
-    Then I should see the summary "<summary>"
+    Then I should see the summary "<summary>".
     And I should see a success message "Summary updated!"
 
     Examples:

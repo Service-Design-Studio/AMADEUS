@@ -1,11 +1,11 @@
 @admin @upload_index
 Feature: uploaded zipped folder successfully
-  As an admin of Amadeus
+  As an admin of AMADEUS
   So that i know that I have uploaded my files successfully
   I want to be able to view all the zip files that i have uploaded
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And I am on the "Database" page
     When I have uploaded these zip files: rus.zip, uav.zip, ukr.zip
     Then I should see the following articles:

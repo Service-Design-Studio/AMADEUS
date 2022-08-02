@@ -1,11 +1,11 @@
 @admin @categoriser_manual
 Feature: Manually configure category
-  As an admin of Amadeus
+  As an admin of AMADEUS
   So that I can customize the categories that an article can be assigned to
   I want to be able to add a new or edit existing category to the list of categories
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And I have created the following categories: "Tanks, Artillery, UAVs, Helicopters, Missiles, MANPADs, Fighter Aircraft, Infrastructure Strike"
     When I am on the "Category Bank" page
     Then I should see the following categories: "Tanks, Artillery, UAVs, Helicopters, Missiles, MANPADs, Fighter Aircraft, Infrastructure Strike"
