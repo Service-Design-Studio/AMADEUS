@@ -6,7 +6,7 @@
         <div class="col-9">
           <h4> <%= upload.file.filename.to_s.sub(/(?<=.)\..*/, '') %> </h4>
           <br>
-<!--          <p> <%#= upload.summary.split(/\s+/, 100 + 1)[0...100].join(' ') %> ...</p>-->
+          <p> <%= upload.summary.split(/\s+/, 100 + 1)[0...100].join(' ') %></p>
         </div>
 
         <div class="col-3">

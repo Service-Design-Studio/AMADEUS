@@ -14,11 +14,11 @@ python3.9 -m pip install torch
 git init
 git remote add -f origin https://github.com/Service-Design-Studio/final-project-group-5-amadeus.git
 git config core.sparseCheckout true
-echo "lib/assets/zero_shot_categoriser.py" >>.git/info/sparse-checkout
+echo "lib/assets/transformers.py" >>.git/info/sparse-checkout
 git pull origin main
 
 # Run Flask app
-nohup python3.9 lib/assets/zero_shot_categoriser.py > flask_log.txt 2>&1 &
+nohup python3.9 lib/assets/transformers_model.py > flask_log.txt 2>&1 &
 
 # Setup socket
 curl -O https://portal.socketxp.com/download/linux/socketxp && chmod +wx socketxp && sudo mv socketxp /usr/local/bin

@@ -3,7 +3,6 @@ require 'zip'
 
 class Upload < ApplicationRecord
   include ActionView::RecordIdentifier
-  require_relative 'concerns/nltk_model.rb'
 
   has_one_attached :file
   validates :file, presence: true
@@ -140,48 +139,21 @@ class Upload < ApplicationRecord
     upload = Upload.find(upload_id)
     content = upload.content
     nltk_response = NltkModel.request(content)
-    summary = nltk_response[:summary].gsub(/(\\\")/, "")
+    summary = nltk_response[:summary]
     tags_dict = nltk_response[:tags]
     category = nltk_response[:category]
-    # zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
-    # category = zero_shot_response[:category]
+    zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
+    category = zero_shot_response[:category]
+    summariser_response = Summariser.request(content)
+    summary = summariser_response[:summary]
     upload.content = content
-    upload.summary = summary
+    upload.summary = summary.gsub(/(\\\")/, "")
     upload.ml_status = "Complete"
     upload.save
     set_upload_tag(upload.id, tags_dict)
     if category != "No Category"
       set_upload_category(upload.id, category)
     end
-  end
-
-  # old function without sidekiq
-  def self.unzip_file(file, params)
-    if File.extname(file) == '.zip'
-      Zip::File.open(file) do |zipfile|
-        zipfile.each do |entry|
-          if entry.file? && entry.to_s.include?(".pdf")
-            new_upload = Upload.new
-            new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
-            content = ExtractPdf.get_pdf_text(entry)
-            nltk_response = NltkModel.request(content)
-            summary = nltk_response[:summary].gsub(/(\\\")/, "")
-            tags_dict = nltk_response[:tags]
-            category = nltk_response[:category]
-            # zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
-            # category = zero_shot_response[:category]
-            new_upload.content = content
-            new_upload.summary = summary
-            new_upload.save
-            set_upload_tag(new_upload.id, tags_dict)
-            if category != "No Category"
-              set_upload_category(new_upload.id, category)
-            end
-          end
-        end
-      end
-    end
-    @params = params
   end
 
   def self.set_upload_tag(upload_id, topics)

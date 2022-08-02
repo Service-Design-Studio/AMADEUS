@@ -2,35 +2,35 @@ require 'uri'
 require 'net/http'
 require 'json'
 
-class NltkModel
-  @uri_string = 'https://asia-southeast1-amadeus-2000.cloudfunctions.net/nltk_model'
-
+class Summariser
+  # your public socket URI, remember to add route /zero_shot at the end
+  @uri_string = 'https://tran-nguyen-bao-long-2018-xs630s9hrelm5xs5.socketxp.com/summariser'
   def self.request(upload_text)
     uri = URI(@uri_string)
     req = Net::HTTP::Post.new(uri)
     req["Content-Type"] = "application/json"
     req.body = get_body_request(upload_text)
     http = Net::HTTP.new(uri.host, uri.port)
+    http.read_timeout=180
     http.use_ssl = true
 
     # start local
-    uri = URI("http://localhost:8080")
-    http = Net::HTTP.new(uri.host, 8080)
+    uri = URI("http://localhost:5001")
+    http = Net::HTTP.new(uri.host, 5001)
     http.read_timeout=180
     # end local
 
-    res =  http.request(req)
+    res = http.request(req)
     response_data = JSON.parse(res.body)
-    summary = response_data["summary"]
-    tags_dict = response_data["tags"]
-    category = response_data["category"]
-    return { "summary": summary, "tags": tags_dict, "category": category }
+    summary = response_data["data"]["summary"]
+    return { "summary": summary }
   end
 
   private
+
   def self.get_body_request(upload_text)
     body_request = {
-        "upload_text": upload_text
+      "inputs": upload_text
     }.to_json
     body_request
   end
