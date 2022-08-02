@@ -10,9 +10,9 @@ class Topic < ApplicationRecord
     if (topic_name == "") || topic_name.nil?
       msg = flash_message::INVALID_TAG
     elsif topic_name.length >= 15
-      msg = flash_message::LENGTHY_TAG
+      msg = flash_message::INVALID_TAG
     elsif topic_name.match(/\W/)
-      msg = flash_message.get_special_characters(topic_name)
+      msg = flash_message::INVALID_TAG
     elsif Topic.exists?(name: topic_name)
       msg = flash_message.get_duplicate_tag(topic_name)
     else

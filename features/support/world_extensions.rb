@@ -1,5 +1,6 @@
 include Warden::Test::Helpers
 require "rake"
+require 'zip'
 
 module CapybaraHelper
   PAGE_MAP = {
@@ -75,10 +76,25 @@ attack drone technology use warfare kyiv refugee russia ukraine ukrainians azot 
 
   def capybara_upload_zip(zip_name)
     if zip_name != ""
-      capybara_login("admin123@admin.com", "admin123")
-      visit '/admin/uploads/new'
-      attach_file(Rails.root + "app/assets/test_zip/#{zip_name}")
-      find("#upload-button").click
+      # capybara_login("admin123@admin.com", "admin123")
+      # visit '/admin/uploads/new'
+      # attach_file(Rails.root + "app/assets/test_zip/#{zip_name}")
+      # find("#upload-button").click
+      Zip::File.open(Rails.root + "app/assets/test_zip/#{zip_name}") do |zip_file|
+        zip_file.each do |entry|
+          if entry.file? && entry.name.end_with?(".pdf")
+            new_upload = Upload.new
+            content = ExtractPdf.get_pdf_text(entry)
+            new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
+            summariser_response = Summariser.request(content)
+            summary = summariser_response[:summary]
+            new_upload.content = content
+            new_upload.summary = summary
+            new_upload.ml_status = "Complete"
+            new_upload.save
+          end
+        end
+      end
     end
   end
 

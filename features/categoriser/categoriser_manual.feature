@@ -60,14 +60,14 @@ Feature: Manually configure category
     Given I am on the "New Category" page
     When I type in the category ""
     And I click on the "Save" button
-    Then I should see a warning message "Invalid category input!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
   @sad
   Scenario Outline: Add category that name is too long (more than 30 characters)
     Given I am on the "New Category" page
     When I type in the category "<category_name>"
     And I click on the "Save" button
-    Then I should see a warning message "Category name is too long!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name                                        |
@@ -79,7 +79,7 @@ Feature: Manually configure category
     Given I am on the "New Category" page
     When I type in the category "<category_name>"
     And I click on the "Save" button
-    And I should see a warning message "Category <category_name> contains special characters!"
+    And I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name |
@@ -155,14 +155,14 @@ Feature: Manually configure category
     Given I am on the Edit Category page for the category "UAVs"
     When I edit the category "UAVs" into ""
     And I click on the "Save" button
-    Then I should see a warning message "Invalid category input!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
   @sad
   Scenario Outline: Edit into category with name that is more than 15 characters
     Given I am on the Edit Category page for the category "UAVs"
     When I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
-    Then I should see a warning message "Category name is too long!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name                                        |
@@ -174,7 +174,7 @@ Feature: Manually configure category
     Given I am on the Edit Category page for the category "UAVs"
     When I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
-    And I should see a warning message "Category <category_name> contains special characters!"
+    And I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name |

@@ -1,6 +1,5 @@
 require 'zip'
 
-
 class Upload < ApplicationRecord
   include ActionView::RecordIdentifier
 
@@ -38,9 +37,9 @@ class Upload < ApplicationRecord
     if (topic_name == "") || topic_name.nil?
       msg = flash_message_tag::INVALID_TAG
     elsif topic_name.length >= 15
-      msg = flash_message_tag::LENGTHY_TAG
+      msg = flash_message_tag::INVALID_TAG
     elsif topic_name.match(/\W/)
-      msg = flash_message_tag.get_special_characters(topic_name)
+      msg = flash_message_tag::INVALID_TAG
     elsif status == "exist"
       status = "fail"
       msg = flash_message_tag.get_duplicate_tag(topic_name)
@@ -69,9 +68,9 @@ class Upload < ApplicationRecord
     if (category_name == "") || category_name.nil?
       msg = flash_message_category::INVALID_CAT
     elsif category_name.length >= 30
-      msg = flash_message_category::LENGTHY_CAT
+      msg = flash_message_category::INVALID_CAT
     elsif !category_name.match(/^[a-zA-Z0-9_ ]*$/)
-      msg = flash_message_category.get_special_characters(category_name)
+      msg = flash_message_category::INVALID_CAT
     elsif status == "exist"
       msg = flash_message_category.get_already_assigned_category(category_name)
     else
@@ -94,25 +93,13 @@ class Upload < ApplicationRecord
 
   def self.verify_summary(upload, summary)
     status = "fail"
-    if summary == "" || summary.nil?
-      msg = flash_message::INVALID_SUMMARY
-    elsif summary == upload.summary
-      msg = flash_message::SAME_SUMMARY
-    # if summary length is less than 100 characters
-    elsif summary.length < 100
-      msg = flash_message::SHORT_SUMMARY
-    # if summary length is more than 2500 characters
-    elsif summary.length > 5000
-      msg = flash_message::LONG_SUMMARY
-    #summary contains only spaces
-    elsif summary.match(/^\s*$/)
-      msg = flash_message::SPACE_SUMMARY
-    #summary contains all special characters
-    elsif summary.match(/\W/)
-      msg = flash_message::SPECIAL_CHARACTERS
+    if (summary == "" || summary.nil?)
+      msg = flash_message_summary::INVALID_SUMMARY
+    elsif summary.split.size < 10 || summary.split.size > 100
+      msg = flash_message_summary::INVALID_SUMMARY
     else
       status = "success"
-      msg = flash_message::SUMMARY_UPDATED
+      msg = flash_message_summary::SUMMARY_UPDATED
       upload.update(summary: summary)
     end
     return { status: status, msg: msg }
@@ -142,11 +129,10 @@ class Upload < ApplicationRecord
     summary = nltk_response[:summary]
     tags_dict = nltk_response[:tags]
     category = nltk_response[:category]
-    zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
-    category = zero_shot_response[:category]
-    summariser_response = Summariser.request(content)
-    summary = summariser_response[:summary]
-    upload.content = content
+    # zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
+    # category = zero_shot_response[:category]
+    # summariser_response = Summariser.request(content)
+    # summary = summariser_response[:summary]
     upload.summary = summary.gsub(/(\\\")/, "")
     upload.ml_status = "Complete"
     upload.save
@@ -229,5 +215,9 @@ class Upload < ApplicationRecord
 
   def self.flash_message_category
     FlashString::CategoryString
+  end
+
+  def self.flash_message_summary
+    FlashString::SummaryString
   end
 end

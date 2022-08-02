@@ -34,14 +34,6 @@ class UploadsController < ApplicationController
         format.html { redirect_to uploads_url }
       end
     end
-
-    # file = params[:upload][:file]
-    # unless file.nil?
-    #   Upload.unzip_file(file, params)
-    #   respond_to do |format|
-    #     format.html { redirect_to uploads_url }
-    #   end
-    # end
   end
 
   # PATCH/PUT /uploads/1 or /uploads/1.json
@@ -75,7 +67,7 @@ class UploadsController < ApplicationController
       elsif !params[:upload][:summary].nil?
         reply = Upload.verify_summary(@upload, params[:upload][:summary])
         if reply[:status] == "success"
-          flash[:success] = FlashString::UploadString::SUMMARY_UPDATED
+          flash[:success] = FlashString::SummaryString::SUMMARY_UPDATED
           format.html { redirect_to edit_upload_path(@upload) }
           format.json { render :edit, status: :ok, location: @upload }
         else
