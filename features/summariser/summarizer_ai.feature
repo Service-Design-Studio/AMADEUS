@@ -1,8 +1,8 @@
 @admin @summariser_ai
 Feature: AI automatically summarize article
-  As an admin of Amadeus
+  As an admin of AMADEUS
   So that I can quickly comprehend the uploaded articles
-  I want to have my articles to be summarized by an AI when they are uploaded
+  I want to have my articles summarized by an AI when they are uploaded
 
   Background:
     Given I am logged in as an admin of Amadeus
@@ -12,7 +12,6 @@ Feature: AI automatically summarize article
     Given I have uploaded these zip files: rus.zip
     When I am on the article "<article_name>" edit page
     Then I should see a summary between 30 to 150 words for the article "<article_name>"
-    And the summary should use words from the article "<article_name>"
 
     Examples:
       | article_name                                                              |
