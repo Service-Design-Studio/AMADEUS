@@ -1,15 +1,15 @@
 @user @summariser_user
 Feature: Read article summary
-  As a user of Amadeus
+  As a user of AMADEUS
   So that I can easily comprehend a new article
   I want to be able to read its summary
 
   Background:
-    Given I am a user of Amadeus
-    And I have uploaded these zip files: rus.zip
+    Given I am a user of AMADEUS
+    And these zip files have been uploaded: rus.zip
 
 #  @happy
-#  Scenario Outline: Viewing summary when browsing articles in the Home page
+#  Scenario Outline: Viewing summary when browsing articles in the 'Home' page
 #    Given I am on the "Home" page
 #    Then I should see the summary "<summary>" belongs to the article "<article_name>"
 #
