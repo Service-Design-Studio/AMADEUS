@@ -1,11 +1,11 @@
 @admin @tagger_ai
 Feature: AI automatically detect tag
-  As an admin of Amadeus
+  As an admin of AMADEUS
   So that I can quickly understand what the article is about
   I want to have my articles to have a list of 5 tagged keywords by an AI when they are uploaded
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
 
   @happy
   Scenario Outline: Auto-generated 5 keyword tags from the article after each upload

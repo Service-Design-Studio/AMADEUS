@@ -1,11 +1,11 @@
 @admin @upload_new
 Feature: upload zipped folder containing pdf file of articles
-  As an admin of Amadeus
-  So that I can contribute documents for Amadeus's knowledge repository
+  As an admin of AMADEUS
+  So that I can contribute documents for AMADEUS's knowledge repository
   I want to upload pdf locally in bulk using zipped format
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And I am on the "New Upload" page
     Then I should see an area to upload my zip files either by browsing or dragging
     And I should see a "Upload" button
