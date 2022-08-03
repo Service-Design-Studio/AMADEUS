@@ -10,10 +10,17 @@ class UploadCategoryLinksController < InheritedResources::Base
     respond_to do |format|
       reply = Upload.verify_category(@upload, params[:upload_category_link][:categories])
       if reply[:status] == "success"
+        @new_linked_category = UploadCategoryLink.find_by(upload_id: @upload.id)
         flash[:success] = reply[:msg]
-        format.html { redirect_back fallback_location: root_path}
+        # format.html { redirect_back fallback_location: root_path}
         format.json { render :edit, status: :ok, location: @category }
-        format.turbo_stream { render_flash }
+        # format.turbo_stream { render_flash }
+        format.turbo_stream do
+          render turbo_stream: [
+            #render_flash,
+            turbo_stream.update("edit_upload_category_link", partial: "uploads/inline_category", locals:{ linked_category: @new_linked_category }),
+          ]
+        end
       else
         flash[:danger] = reply[:msg]
         format.html { render :edit, status: :unprocessable_entity }
