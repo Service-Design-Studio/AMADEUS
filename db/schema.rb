@@ -60,8 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_30_073437) do
 
   create_table "topics", force: :cascade do |t|
     t.string "name"
-    t.string "type"
-    t.float "salience"
+    t.string "entity_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"

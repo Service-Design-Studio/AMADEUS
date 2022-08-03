@@ -177,10 +177,10 @@ class Upload < ApplicationRecord
   end
 
   def self.set_upload_tag(upload_id, tags_dict)
-    tags_dict.each do |name, data|
+    tags_dict.each do |name, entity_type|
       new_topic = Topic.friendly.find_by(name: name)
       if new_topic.nil?
-        new_topic = Topic.new(name: name, type: data[:type], salience: data[:salience])
+        new_topic = Topic.new(name: name, entity_type: entity_type)
         new_topic.save!
         Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id)
       else
