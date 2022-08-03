@@ -11,11 +11,31 @@ from nltk.stem import WordNetLemmatizer
 
 print("Finish setup")
 
+def tagger():
+    tags_dict = {}
+    ENTITY = ["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD"]
+    for i in range(3):
+        # Entity Tag
+        salience = random.uniform(0.003, 0.01)
+        if salience >= 0.004:
+            name = "Entity" + str(i+1)
+            type = random.choice(ENTITY)
+            tags_dict[name] = {"type": type, "salience": salience}
+        # Other Tag
+        salience = random.uniform(0.003, 0.01)
+        if salience >= 0.004:
+            name = "Other" + str(i+1)
+            tags_dict[name] = {"type": "OTHER", "salience": salience}
+    return tags_dict
+
 def categoriser():
     categories = ['Tank', 'Artillery', 'UAV', 'Fighter Aircraft', 'Helicopter', 'Missile', 'MANPAD', 'Infrastructure']
     return random.choice(categories)
 
-def tagger(upload_text, replace_dict, all_stopwords, num_tag):
+def summariser():
+    return "This is a valid summary with more than 10 words and less than 100 words"
+
+def legacy_tagger(upload_text, replace_dict, all_stopwords, num_tag):
     for old, new in replace_dict.items():
         upload_text = upload_text.replace(old, new)
 
@@ -64,6 +84,45 @@ def tagger(upload_text, replace_dict, all_stopwords, num_tag):
 
     return tags_dict
 
+def legacy_summariser(upload_text, all_stopwords, summary_threshold):
+    words = word_tokenize(upload_text)
+
+    # Count frequency
+    freq_table = dict()
+    for word in words:
+        word = word.lower()
+        if word in all_stopwords:
+            continue
+        if word in freq_table:
+            freq_table[word] += 1
+        else:
+            freq_table[word] = 1
+
+    # Label frequency
+    sentence_value_dict = dict()
+    sentences = sent_tokenize(upload_text)
+    for sentence in sentences:
+        for word, freq in freq_table.items():
+            if word in sentence.lower():
+                if sentence in sentence_value_dict:
+                    sentence_value_dict[sentence] += freq
+                else:
+                    sentence_value_dict[sentence] = freq
+
+    # Find total score and average
+    scores = 0
+    for sentence in sentence_value_dict:
+        scores += sentence_value_dict[sentence]
+    average = int(scores / len(sentence_value_dict))
+
+    # Storing sentences into our summary.
+    summary = []
+    for sentence in sentences:
+        if (sentence in sentence_value_dict) and (sentence_value_dict[sentence] > (float(summary_threshold) * average)):
+            summary.append(sentence)
+    summary = " ".join(summary[2:-1])
+    return summary
+
 def get_custom_stopwords():
     return [
         "time", "year", "people", "way", "day", "man", "thing", "woman", "life", "child", "world", "school", "state",
@@ -76,9 +135,6 @@ def get_custom_stopwords():
         "person", "art", "war", "history", "party", "result", "change", "morning", "reason", "research",
         "girl", "guy", "moment", "air", "teacher", "force", "education", "bbc", "news", "cna", "cnn", "thousands",
     ]
-
-def summariser():
-    return "This is a valid summary with more than 10 words and less than 100 words"
 
 def nltk_model(request):
     request_json = request.get_json()
@@ -99,8 +155,10 @@ def nltk_model(request):
         all_stopwords = original_stopwords.union(custom_stopwords)
 
         # Run model
-        tags_dict = tagger(upload_text, replace_dict, all_stopwords, num_tag)
-        summary = summariser()
+        # tags_dict = legacy_tagger(upload_text, replace_dict, all_stopwords, num_tag)
+        # summary = legacy_summariser(upload_text, all_stopwords, summary_threshold)
+        tags_dict = tagger()
         category = categoriser()
+        summary = summariser()
         response = {"summary": summary, "tags": tags_dict, "category": category}
     return response

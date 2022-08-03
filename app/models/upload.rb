@@ -122,7 +122,7 @@ class Upload < ApplicationRecord
   end
 
   # SIDEKIQ - runs the nltk model
-  def self.run_nltk(upload_id)
+  def self.run_nltk_async(upload_id)
     upload = Upload.find(upload_id)
     content = upload.content
     nltk_response = NltkModel.request(content)
@@ -133,6 +133,8 @@ class Upload < ApplicationRecord
     # category = zero_shot_response[:category]
     # summariser_response = Summariser.request(content)
     # summary = summariser_response[:summary]
+    # entities_response = GoogleEntityTagger.request(content)
+    # entities = entities_response[:entities]
     upload.summary = summary.gsub(/(\\\")/, "")
     upload.ml_status = "Complete"
     upload.save
@@ -142,11 +144,43 @@ class Upload < ApplicationRecord
     end
   end
 
-  def self.set_upload_tag(upload_id, topics)
-    topics.each do |topic, frequency|
-      new_topic = Topic.friendly.find_by(name: topic)
+  def self.unzip_file_sync(file, params)
+    if File.extname(file) == '.zip'
+      Zip::File.open(file) do |zipfile|
+        zipfile.each do |entry|
+          if entry.file? && entry.to_s.include?(".pdf")
+            new_upload = Upload.new
+            new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
+            content = ExtractPdf.get_pdf_text(entry)
+            nltk_response = NltkModel.request(content)
+            summary = nltk_response[:summary]
+            tags_dict = nltk_response[:tags]
+            category = nltk_response[:category]
+            # zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
+            # category = zero_shot_response[:category]
+            # summariser_response = Summariser.request(content)
+            # summary = summariser_response[:summary]
+            # entities_response = GoogleEntityTagger.request(content)
+            # entities = entities_response[:entities]
+            new_upload.summary = summary.gsub(/(\\\")/, "")
+            new_upload.ml_status = "Complete"
+            new_upload.save
+            set_upload_tag(new_upload.id, tags_dict)
+            if category != "No Category"
+              set_upload_category(new_upload.id, category)
+            end
+          end
+        end
+      end
+    end
+    @params = params
+  end
+
+  def self.set_upload_tag(upload_id, tags_dict)
+    tags_dict.each do |name, data|
+      new_topic = Topic.friendly.find_by(name: name)
       if new_topic.nil?
-        new_topic = Topic.new(:name => topic)
+        new_topic = Topic.new(name: name, type: data[:type], salience: data[:salience])
         new_topic.save!
         Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id)
       else
