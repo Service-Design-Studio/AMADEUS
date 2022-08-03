@@ -8,7 +8,7 @@ module FlashString
   end
 
   class SummaryString
-    INVALID_SUMMARY = "Summary cannot be blank, and must bet between 10 to 100 words."
+    INVALID_SUMMARY = "Summary cannot be blank, and must be between 10 to 100 words."
     SUMMARY_UPDATED = "Summary updated!"
   end
 

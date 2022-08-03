@@ -10,7 +10,7 @@ Feature: AI automatically summarize article
   @happy
   Scenario Outline: Auto-generated summary after each upload
     Given I have uploaded these zip files: rus.zip
-    When I am on the article "<article_name>" edit page
+    When I am on the edit page for the article "<article_name>"
     Then I should see a summary between 30 to 150 words for the article "<article_name>"
 
     Examples:

@@ -31,7 +31,7 @@ Feature: uploaded zipped folder successfully
   Scenario Outline: Navigate to Edit Upload page
     Given I am on the "Database" page
     When I click edit article "<article_name>"
-    Then I should be redirected to the article "<article_name>" edit page
+    Then I should be redirected to the edit page for the article "<article_name>"
 
     Examples:
       | article_name                                                               |

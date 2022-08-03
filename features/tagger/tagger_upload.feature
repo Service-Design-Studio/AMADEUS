@@ -2,7 +2,7 @@
 Feature: Edit category linked to an article
   As an admin of AMADEUS
   So that I can manage the tags that are currently linked to an article
-  I want to be able to edit the tags in the article Edit page
+  I want to be able to edit the tags in the article "Edit" page
 
   Background:
     Given I am logged in as an admin of AMADEUS
@@ -28,7 +28,7 @@ Feature: Edit category linked to an article
 
   @happy
   Scenario Outline: Delete tag
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News" edit page
+    Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
     When I click delete button for the tag "<tag_name>"
     Then I should not see the tag "<tag_name>"
 
@@ -42,7 +42,7 @@ Feature: Edit category linked to an article
 
   @happy
   Scenario Outline: Add new nonidentical tag
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News" edit page
+    Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
     When I add the tag "<tag_name>"
     And I click on the "Add new Tag" button
     Then I should still see the same article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
@@ -58,7 +58,7 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario Outline: Add duplicate tag
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News" edit page
+    Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
     When I add the tag "<tag_name>"
     And I click on the "Add new Tag" button
     Then I should still see the same article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
@@ -73,7 +73,7 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario: Add blank tag
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News" edit page
+    Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
     When I add the tag ""
     And I click on the "Add new Tag" button
     Then I should still see the same article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
@@ -81,7 +81,7 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario Outline: Add tag that is more than 15 characters
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News" edit page
+    Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
     When I add the tag "<tag_name>"
     And I click on the "Add new Tag" button
     Then I should still see the same article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
@@ -93,7 +93,7 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario Outline: Add ambiguous tag
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News" edit page
+    Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
     When I add the tag "<tag_name>"
     And I click on the "Add new Tag" button
     Then I should still see the same article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
