@@ -1,10 +1,17 @@
-<nav class="navbar fixed-top navbar-dark bg-dark">
+<nav class="navbar navbar-dark fixed-top" style="background-color: #201c4c;">
   <div class="container-fluid">
-    <%= link_to "AMADEUS", root_path, class:"navbar-brand", id: "amadeus-button"%>
-    <button class="navbar-toggler" id="hamburger-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <%= link_to "", root_path, class:"navbar-brand", id: "amadeus-button"%>
+    <a href="/">
+    <img class="logo" src="logo_cropped.jpg"
+      width="400"
+      height="150" />
+      </a>
+    <button class="navbar-toggler" id="hamburger-icon" type="button"
+    data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+  
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
