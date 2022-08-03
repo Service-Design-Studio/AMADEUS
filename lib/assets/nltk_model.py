@@ -16,16 +16,12 @@ def tagger():
     ENTITY = ["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD"]
     for i in range(3):
         # Entity Tag
-        salience = random.uniform(0.003, 0.01)
-        if salience >= 0.004:
-            name = "Entity" + str(i+1)
-            type = random.choice(ENTITY)
-            tags_dict[name] = {"type": type, "salience": salience}
+        name = "Entity" + str(random.randint(1, 20))
+        entity_type = random.choice(ENTITY)
+        tags_dict[name] = entity_type
         # Other Tag
-        salience = random.uniform(0.003, 0.01)
-        if salience >= 0.004:
-            name = "Other" + str(i+1)
-            tags_dict[name] = {"type": "OTHER", "salience": salience}
+        name = "Other" + str(random.randint(1, 20))
+        tags_dict[name] = "OTHER"
     return tags_dict
 
 def categoriser():
