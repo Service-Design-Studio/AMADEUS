@@ -13,10 +13,15 @@
  *= require_tree .
  *= require_self
  */
+@font-face {
+    font-family: 'Montserrat';
+    src: url('fonts/Montserrat-SemiBold.ttf');
+}
 
 * {
     margin: 0;
     padding: 0;
+    user-select: none;
     box-sizing: border-box;
 }
 
@@ -55,14 +60,37 @@ body {
 
 .custom_sidebar {
     position: fixed;
-    overflow-y: scroll;
-    width: 15%;
-    background: #ffffff;
-    top: 10%;
+    width: 16%;
+    background: #201c4c;
+    top: 18%;
     left: 0;
     bottom: 0;
 }
 
+.custom_category{
+    transition: all 0.5s ease 0s;
+    background-color:#201c4c;
+    text-decoration: none;
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-size: large;
+    text-align: left;
+}
+.active{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius:20px;
+}
+
+.side_title{
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-size:xx-large ;
+    color: #FFF;
+    text-align: left;
+    margin-left: 5%;
+}
 
 .custom_content {
     float: none;
@@ -71,6 +99,7 @@ body {
     right: 10%;
     overflow: hidden;
     margin-left: 20%;
+    font-family: "Montserrat", sans-serif;
 }
 
 .grid {
@@ -92,4 +121,9 @@ body {
 .btn-x {
     float: right;
     padding: 0% 1.5% 0% 1.5%;
+}
+
+#custom.name{
+    color: #201c4c;
+    font-family: "Montserrat",sans-serif;
 }
