@@ -31,7 +31,7 @@ body {
 }
 
 .tag {
-    background: #073da2;
+    background: #201C4C;
     color: #FFF;
     padding: 0.25em;
     margin: 0.25em;
@@ -93,3 +93,62 @@ body {
     float: right;
     padding: 0% 1.5% 0% 1.5%;
 }
+
+.btn-group.special {
+    display: flex;
+  }
+  
+.special .btn {
+    flex: 1
+}
+
+.icon-align-left {
+    float: left;
+    padding: 0% 1.5% 0% 1.5%;
+}
+
+.icon-yellow {
+    color: #ffc107;
+  }
+
+.icon-yellow:hover {
+    color: #ca9b00;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #201C4C;
+    color: white;
+    border-color: #201C4C;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #201C4C;
+    background-color: white;
+    border-color: #201C4C;
+}
+
+.btn-outline-primary {
+    border-color: #201C4C;
+    color: #201C4C;
+    background-color: white;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active, .btn-outline-primary.active, .open>.dropdown-toggle.btn-outline-primary {
+    color: #fff;
+    background-color: #201C4C;
+    border-color: #201C4C;
+}
+
+.btn-secondary {
+    background-color: #006633;
+    color: white;
+    border-color: #006633;
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open>.dropdown-toggle.btn-secondary {
+    color: #006633;
+    background-color: white;
+    border-color: #006633;
+}
+
