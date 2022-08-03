@@ -25,4 +25,22 @@ class Topic < ApplicationRecord
   def self.flash_message
     FlashString::TagString
   end
+
+  # returns the bg-type css class for the topic
+  def self.css_class_type(topic)
+    topic_entity_type = topic.entity_type
+    all_types = {
+      "PERSON" => "bg-person",
+      "LOCATION" => "bg-location",
+      "ORGANIZATION" => "bg-organization",
+      "EVENT" => "bg-event",
+      "WORK_OF_ART" => "bg-work-of-art",
+      "CONSUMER_GOOD" => "bg-consumer-good",
+      "OTHER" => "bg-other"
+    }
+    puts "-----------------------------------------------------------------------------------------------------"
+    puts "topic_type: #{topic_entity_type}"
+    return all_types[topic_entity_type]
+  end
+
 end
