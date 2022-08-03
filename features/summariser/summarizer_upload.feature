@@ -33,7 +33,7 @@ Feature: Edit summary
 
   @sad
   Scenario Outline: Admin update summary that is less than 10 words or more than 100 words
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News" edit page
+    Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
     When I edit the summary into "<summary>"
     And I click on the "Save" button
     Then I should still see the old summary belongs to the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"

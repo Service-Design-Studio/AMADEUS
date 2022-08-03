@@ -23,14 +23,10 @@ end
 
 Then(/^I should still see the same article "([^"]*)"$/) do |article_name|
   steps %Q{
-    I am on the article "#{article_name}" edit page
+    I am on the edit page for the article "#{article_name}"
   }
 end
 
 When(/^I click on the tag "([^"]*)"$/) do |tag_name|
   find("##{tag_name}-edit-button").click
-end
-
-Then(/^I should be redirected to the "([^"]*)" edit page$/) do |tag_name|
-  expect(page).to have_current_path("/admin/topics/#{tag_name.downcase}/edit")
 end

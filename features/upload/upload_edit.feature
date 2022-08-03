@@ -12,7 +12,7 @@ Feature: edit uploaded articles
   Scenario Outline: View Edit Upload page
     Given I am on the "Database" page
     When I click edit article "<article_name>"
-    Then I should be redirected to the article "<article_name>" edit page
+    Then I should be redirected to the edit page for the article "<article_name>"
     And I should see the following buttons: "Add new Tag, Delete this Upload, Back to Database"
 
     Examples:
@@ -26,6 +26,6 @@ Feature: edit uploaded articles
 
   @redirect
   Scenario: Back to home
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News" edit page
+    Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
     When I click on the "Back to Database" button
     Then I should be redirected to the "Database" page
