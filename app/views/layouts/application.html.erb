@@ -14,12 +14,14 @@
   </head>
 
   <body>
-    <%= render 'layouts/navbar'%>
-    <main class="custom-main-padding">
-      <turbo-frame id="flash">
-        <%= render 'layouts/flash' %>
-      </turbo-frame>
-      <%= yield %>
-    </main>
+    <header class="header">
+      <%= render 'layouts/navbar'%>
+      <main class="custom-main-padding">
+        <turbo-frame id="flash">
+          <%= render 'layouts/flash' %>
+        </turbo-frame>
+        <%= yield %>
+      </main>
+    </header>
   </body>
 </html>
