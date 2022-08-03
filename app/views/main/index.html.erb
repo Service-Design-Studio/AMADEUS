@@ -1,12 +1,12 @@
 <div class="fixed custom_sidebar">
-  <div class="center">
+  <div class=" center">
     <ul class="list-group">
       <br>
-      <h3> Categories </h3>
+        <h3 class="side_title"> Categories </h3>
       <br>
       <% @categories.each do |category| %>
-          <%= link_to category.name, root_path({ "category" => category.name }),
-              class: "list-group-item list-group-item-dark", id: "#{category.name}-edit-button" %>
+            <%= link_to category.name, root_path({ "category" => category.name }),
+                class: "list-group-item-action active custom_category", id: "#{category.name}-edit-button" %>
       <% end %>
     </ul>
   </div>
