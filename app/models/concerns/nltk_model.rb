@@ -30,7 +30,12 @@ class NltkModel
   private
   def self.get_body_request(upload_text)
     body_request = {
-        "upload_text": upload_text
+      "upload": {
+        "upload_text": upload_text,
+        "replace_dict": {
+          "US": "USA", "U.S": "USA", "United States": "USA" },
+        "num_tag": "5",
+        "summary_threshold": "1.4" }
     }.to_json
     body_request
   end
