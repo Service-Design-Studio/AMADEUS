@@ -3,6 +3,19 @@
 <%= turbo_stream_from "uploads_list" %>
 <h1 class="center">Database</h1><hr><br>
 
+<div class="center">
+  <h4>Tags colour legend</h4>
+    <span class="badge bg-person">Person</span>
+    <span class="badge bg-location">Location</span>
+    <span class="badge bg-organization">Organization</span>
+    <span class="badge bg-event">Event</span>
+    <span class="badge bg-work-of-art">Work of Art</span>
+    <span class="badge bg-consumer-good">Consumer Good</span>
+    <span class="badge bg-other">Other</span>
+</div>
+
+<br><br>
+
 <div class="btn-group special">
   <%= link_to new_upload_path, class: "btn btn-secondary", id: "new-upload-button" do %>
     <span class="bi bi-upload icon-align-left"></span>
@@ -16,8 +29,10 @@
 
 <br><br>
 
+
+
 <table class="table table-hover">
-  <thead class="thead">
+  <thead class="table-light">
     <tr>
       <th scope="col" class="text-center">Processing</th>
       <th scope="col" class="text-center">Category</th>

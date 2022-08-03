@@ -131,6 +131,45 @@ body {
     flex: 1
 }
 
+/* Tag types badges for 
+["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD", "OTHER"]
+*/
+.bg-person{
+    background-color: rgb(199, 0, 0);
+    color: white;
+}
+
+.bg-location{
+    background-color: #2ecf7f;
+    color: white;
+}
+
+.bg-organization{
+    background-color: #5eadf2;
+    color: white;
+}
+
+.bg-event{
+    background-color: #fc8e10;
+    color: white;
+}
+
+.bg-work-of-art{
+    background-color: #fa35cc;
+    color: white;
+}
+
+.bg-consumer-good{
+    background-color: #9e4ddc;
+    color: white;
+}
+
+.bg-other{
+    background-color: #979797;
+    color: white;
+}
+
+/* Icons */
 .icon-align-left {
     float: left;
     padding: 0% 1.5% 0% 1.5%;

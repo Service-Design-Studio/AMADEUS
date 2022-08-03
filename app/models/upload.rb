@@ -177,8 +177,9 @@ class Upload < ApplicationRecord
   end
 
   def self.set_upload_tag(upload_id, tags_dict)
-    tags_dict.each do |name, entity_type|
+    tags_dict.each do |name, entity_hash|
       new_topic = Topic.friendly.find_by(name: name)
+      entity_type = entity_hash["entity_type"]
       if new_topic.nil?
         new_topic = Topic.new(name: name, entity_type: entity_type)
         new_topic.save!

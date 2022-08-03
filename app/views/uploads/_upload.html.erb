@@ -12,7 +12,7 @@
     <% if !upload.upload_category_links.first.nil? %>
       <div> <%= "#{upload.upload_category_links.first.category.name}" %> </div>
     <% else %>
-      <div class="badge bg-warning"> <%= "No Category" %> </div>
+      <div class="badge bg-danger"> <%= "No Category" %> </div>
     <% end %>
   </td>
 
@@ -20,10 +20,9 @@
     <div style="display: table-cell;"> <%= render 'uploads/attachment', upload: upload %> </div>
   </td>
 
-
   <td>
     <% upload.topics.each do |topic| %>
-      <span class="tag"><%= topic.name %></span>
+      <span class="badge <%= Topic.css_class_type(topic) %>"><%= topic.name %></span>
     <% end %>
   </td>
 
