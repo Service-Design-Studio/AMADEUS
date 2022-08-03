@@ -2,7 +2,9 @@
 
 <h4>
   <% if !@linked_category.nil? %>
-    <%= render 'uploads/inline_category', linked_category: @linked_category, upload: @upload %>
+    <div id="edit_upload_category_link">
+      <%= render partial: 'uploads/inline_category', locals: {linked_category: @linked_category} %>
+    </div>
   <% else %>
     <%= "Category: <No Category>" %>
     <%= render 'uploads/edit_category_form', upload: @upload %>
