@@ -6,7 +6,7 @@ class ZipUpload < ApplicationRecord
     validates :file, file_content_type: { allow: ['application/pdf', 'application/zip'], message: "ZIP should contain PDFs only!" }
     has_many :uploads
 
-    def self.unzip_file(zip_id)
+    def self.unzip_file_async(zip_id)
         # get the file attached to the zip_upload
         file = ZipUpload.find(zip_id).file
         file_path = ActiveStorage::Blob.service.path_for(file.key)
