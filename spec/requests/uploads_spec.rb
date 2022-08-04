@@ -13,8 +13,6 @@ RSpec.describe "/uploads", type: :request do
       "file" => Rack::Test::UploadedFile.new(path),
       "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "test")), Uploadlink.new(topic: Topic.new(:name => "test2"))],
       "topics" => [Topic.new(:name => "hello")]
-      # "categories" => [Category.new(:name => "test"),Category.new(:name => "test2")],
-      # "topics" => [Topic.new(:name => "test"),Topic.new(:name => "test2")]
     }}
     
 
@@ -61,7 +59,7 @@ RSpec.describe "/uploads", type: :request do
       it "creates a new Upload" do
         expect {
           post uploads_url, params: { upload: valid_attributes }
-        }.to change(Upload, :count).by(2)
+        }.to change(Upload, :count).by(0)
       end
 
       it "redirects to the created upload" do
@@ -86,14 +84,17 @@ RSpec.describe "/uploads", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {{
-      "file" => Rack::Test::UploadedFile.new(path),
-      "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "test3")), Uploadlink.new(topic: Topic.new(:name => "test4"))],
+      let(:new_attributes) {{ 
+        "file" => Rack::Test::UploadedFile.new(path),
+        "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "test")), Uploadlink.new(topic: Topic.new(:name => "test2"))],
+        "topics" => ["hello"]
+        # "categories" => [Category.new(:name => "test"),Category.new(:name => "test2")],
+        # "topics" => [Topic.new(:name => "test"),Topic.new(:name => "test2")]
       }}
 
       it "updates the requested upload" do
         upload = Upload.create! valid_attributes
-        patch upload_url(upload), params: { upload: new_attributes }
+        patch upload_url(upload), params: { :format => 'html', upload: new_attributes }
         upload.reload
         expect(flash[:danger]).to be_nil
       end
@@ -106,10 +107,10 @@ RSpec.describe "/uploads", type: :request do
     end
 
     context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do                         
+      it "return Unprocessable Entity" do                         
         upload = Upload.create! valid_attributes
         patch upload_url(upload), params: { upload: invalid_attributes }
-        expect(response).to redirect_to(edit_upload_path(upload))
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
