@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install python
 sudo apt update
-sudo apt install software-properties-common
+sudo apt install software-properties-common -y
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install python3.9 -y
 sudo apt install python3-pip python3.9-distutils -y
