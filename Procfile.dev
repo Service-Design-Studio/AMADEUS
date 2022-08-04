@@ -1,4 +1,2 @@
 web: bin/rails s -p 3000
-redis: redis-server
 worker: bundle exec sidekiq -C config/sidekiq.yml
-nltk: functions_framework --source=lib/assets/nltk_model.py --target=nltk_model --port=8080

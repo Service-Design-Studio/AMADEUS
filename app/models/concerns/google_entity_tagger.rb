@@ -5,8 +5,8 @@ require 'json'
 class GoogleEntityTagger
   STOP_WORDS = %w( BBC Register )
   ENTITY = %w( PERSON LOCATION ORGANIZATION EVENT WORK_OF_ART CONSUMER_GOOD )
-  API_KEY = ENV['API_KEY']
-  @uri_string = 'https://language.googleapis.com/v1/documents:analyzeEntities?key='+API_KEY
+  NLP_API_KEY = ENV['NLP_API_KEY']
+  @uri_string = 'https://language.googleapis.com/v1/documents:analyzeEntities?key='+NLP_API_KEY
 
   def self.request(upload_text)
     uri = URI(@uri_string)
