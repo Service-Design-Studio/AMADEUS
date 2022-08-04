@@ -4,7 +4,7 @@ require 'json'
 
 class ZeroShotCategoriser
   # your public socket URI, remember to add route /zero_shot at the end
-  @uri_string = 'https://tran-nguyen-bao-long-2018-xs630s9hrelm5xs5.socketxp.com/categoriser'
+  @uri_string = 'https://tran-nguyen-bao-long-2018-pr2907whv56ch1lx.socketxp.com/categoriser'
   def self.request(upload_text, all_categories)
     uri = URI(@uri_string)
     req = Net::HTTP::Post.new(uri)
@@ -15,9 +15,9 @@ class ZeroShotCategoriser
     http.use_ssl = true
 
     # start local
-    uri = URI("http://localhost:5001")
-    http = Net::HTTP.new(uri.host, 5001)
-    http.read_timeout=180
+    # uri = URI("http://localhost:5001")
+    # http = Net::HTTP.new(uri.host, 5001)
+    # http.read_timeout=180
     # end local
 
     res = http.request(req)

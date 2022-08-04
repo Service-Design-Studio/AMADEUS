@@ -164,16 +164,16 @@ class Upload < ApplicationRecord
   def self.run_nltk_async(upload_id)
     upload = Upload.find(upload_id)
     content = upload.content
-    nltk_response = NltkModel.request(content)
-    summary = nltk_response[:summary]
-    tags_dict = nltk_response[:tags]
-    category = nltk_response[:category]
-    # zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
-    # category = zero_shot_response[:category]
-    # summariser_response = Summariser.request(content)
-    # summary = summariser_response[:summary]
-    # entities_response = GoogleEntityTagger.request(content)
-    # entities = entities_response[:entities]
+    # nltk_response = NltkModel.request(content)
+    # summary = nltk_response[:summary]
+    # tags_dict = nltk_response[:tags]
+    # category = nltk_response[:category]
+    zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
+    category = zero_shot_response[:category]
+    summariser_response = Summariser.request(content)
+    summary = summariser_response[:summary]
+    entities_response = GoogleEntityTagger.request(content)
+    tags_dict = entities_response[:entities]
     upload.summary = summary.gsub(/(\\\")/, "")
     upload.ml_status = "Complete"
     upload.save
@@ -200,7 +200,7 @@ class Upload < ApplicationRecord
             # summariser_response = Summariser.request(content)
             # summary = summariser_response[:summary]
             # entities_response = GoogleEntityTagger.request(content)
-            # entities = entities_response[:entities]
+            # tags_dict = entities_response[:entities]
             new_upload.summary = summary.gsub(/(\\\")/, "")
             new_upload.ml_status = "Complete"
             new_upload.save
