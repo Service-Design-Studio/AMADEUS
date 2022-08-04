@@ -1,13 +1,13 @@
 # All credits to Timothy W. https://github.com/weetimo
 import random
-import nltk
-
-nltk.download('wordnet')
-nltk.download('stopwords')
-
-from nltk.corpus import stopwords, wordnet
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
+# import nltk
+#
+# nltk.download('wordnet')
+# nltk.download('stopwords')
+#
+# from nltk.corpus import stopwords, wordnet
+# from nltk.tokenize import word_tokenize
+# from nltk.stem import WordNetLemmatizer
 
 print("Finish setup")
 
@@ -141,18 +141,18 @@ def nltk_model(request):
         # Extract params
         upload = request_json['upload']
 
-        upload_text = upload['upload_text']
-        replace_dict = upload['replace_dict']
-        num_tag = upload['num_tag']
-        summary_threshold = upload['summary_threshold']
-
-        custom_stopwords = get_custom_stopwords()
-        original_stopwords = set(stopwords.words("english"))
-        all_stopwords = original_stopwords.union(custom_stopwords)
-
-        # Run model
+        # START of legacy code
+        # upload_text = upload['upload_text']
+        # replace_dict = upload['replace_dict']
+        # num_tag = upload['num_tag']
+        # summary_threshold = upload['summary_threshold']#
+        # custom_stopwords = get_custom_stopwords()
+        # original_stopwords = set(stopwords.words("english"))
+        # all_stopwords = original_stopwords.union(custom_stopwords)
         # tags_dict = legacy_tagger(upload_text, replace_dict, all_stopwords, num_tag)
         # summary = legacy_summariser(upload_text, all_stopwords, summary_threshold)
+        # END of legay code
+
         tags_dict = tagger()
         category = categoriser()
         summary = summariser()
