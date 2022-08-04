@@ -14,17 +14,26 @@ module FlashString
 
   class TagString
     INVALID_TAG = "Tag cannot be blank or contain special characters and must be less than 15 characters."
-    def self.get_added_tag(tag)
-      "%{tag} added." % {tag:tag}
+    def self.get_new_added_tag(tag, tag_type)
+      "Added new tag %{tag} under type %{tag_type}." % {tag: tag, tag_type: tag_type}
+    end
+
+    def self.get_existing_added_tag(tag, tag_type)
+      "Added existing tag %{tag} under type %{tag_type}." % {tag: tag, tag_type: tag_type}
     end
 
     def self.get_deleted_tag(tag)
-      "Deleted %{tag}." % {tag: tag}
+      "Deleted tag %{tag}." % {tag: tag}
     end
 
     def self.get_duplicate_tag(tag)
-      "Tag %{tag} already exists!" % {tag: tag}
+      "%{tag} already added to this article!" % {tag: tag}
     end
+
+    def self.get_duplicated_tag_name(tag, tag_type)
+      "%{tag} already exists in database under type %{tag_type}!" % {tag: tag, tag_type: tag_type}
+    end
+
   end
 
   class CategoryString

@@ -12,13 +12,11 @@ class UploadCategoryLinksController < InheritedResources::Base
       if reply[:status] == "success"
         @new_linked_category = UploadCategoryLink.find_by(upload_id: @upload.id)
         flash[:success] = reply[:msg]
-        # format.html { redirect_back fallback_location: root_path}
         format.json { render :edit, status: :ok, location: @category }
-        # format.turbo_stream { render_flash }
         format.turbo_stream do
           render turbo_stream: [
-            #render_flash,
             turbo_stream.update("edit_upload_category_link", partial: "uploads/inline_category", locals:{ linked_category: @new_linked_category }),
+            turbo_stream.update("flash", partial: "layouts/flash"),
           ]
         end
       else

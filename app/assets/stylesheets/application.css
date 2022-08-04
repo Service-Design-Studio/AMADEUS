@@ -134,39 +134,278 @@ body {
 /* Tag types badges for 
 ["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD", "OTHER"]
 */
-.bg-person{
+.bg-person-badge{
     background-color: rgb(199, 0, 0);
     color: white;
+    font-family: "Montserrat",sans-serif;
 }
 
-.bg-location{
+.bg-location-badge{
     background-color: #2ecf7f;
     color: white;
+    font-family: "Montserrat",sans-serif;
 }
 
-.bg-organization{
+.bg-organization-badge{
     background-color: #5eadf2;
     color: white;
+    font-family: "Montserrat",sans-serif;
 }
 
-.bg-event{
+.bg-event-badge{
     background-color: #fc8e10;
     color: white;
+    font-family: "Montserrat",sans-serif;
 }
 
-.bg-work-of-art{
+.bg-work-of-art-badge{
     background-color: #fa35cc;
     color: white;
+    font-family: "Montserrat",sans-serif;
 }
 
-.bg-consumer-good{
+.bg-consumer-good-badge{
     background-color: #9e4ddc;
     color: white;
+    font-family: "Montserrat",sans-serif;
 }
 
-.bg-other{
+.bg-other-badge{
     background-color: #979797;
     color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+/* Tag types table row colour for 
+["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD", "OTHER"]
+*/
+
+.bg-person-table-row{
+    background-color: rgb(255, 177, 177);
+    color: black;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-table-row{
+    background-color: #b6ffdc;
+    color: black;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-table-row{
+    background-color: #a8d8ff;
+    color: black;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-table-row{
+    background-color: #ffe2ac;
+    color: black;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-work-of-art-table-row{
+    background-color: #ffbdee;
+    color: black;
+    font-family: "Montserrat",sans-serif
+}
+
+.bg-consumer-good-table-row{
+    background-color: #e0b8ff;
+    color: black;
+    font-family: "Montserrat",sans-serif
+}
+
+.bg-other-table-row{
+    background-color: #ffffff;
+    color: black;
+    font-family: "Montserrat",sans-serif;
+}
+
+/* Tag types button colour for 
+["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD", "OTHER"]
+*/
+
+.bg-person-active-btn{
+    background-color: rgb(199, 0, 0);
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-person-active-btn:hover{
+    background-color: rgb(170, 0, 0);
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-person-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-person-btn:hover{
+    background-color: rgb(199, 0, 0);
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-active-btn{
+    background-color: #2ecf7f;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-active-btn:hover{
+    background-color: #24975e;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-btn:hover{
+    background-color: #2ecf7f;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-active-btn{
+    background-color: #5eadf2;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-active-btn:hover{
+    background-color: #4787be;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-btn:hover{
+    background-color: #5eadf2;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-active-btn{
+    background-color: #fc8e10;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-active-btn:hover{
+    background-color: #dd7d0f;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-btn:hover{
+    background-color: #fc8e10;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-work-of-art-active-btn{
+    background-color: #fa35cc;
+    color: white;
+    font-family: "Montserrat",sans-serif
+}
+
+.bg-work-of-art-active-btn:hover{
+    background-color: #da2fb2;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-work-of-art-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-work-of-art-btn:hover{
+    background-color: #fa35cc;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-consumer-good-active-btn{
+    background-color: #9e4ddc;
+    color: white;
+    font-family: "Montserrat",sans-serif
+}
+
+.bg-event-active-btn:hover{
+    background-color: rgb#7e3daf;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-consumer-good-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-consumer-good-btn:hover{
+    background-color: #9e4ddc;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-other-active-btn{
+    background-color: #979797;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-other-active-btn:hover{
+    background-color: #757575;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-other-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-other-btn:hover{
+    background-color: #979797;
+    color:white;
+    font-family: "Montserrat",sans-serif;
 }
 
 /* Icons */
@@ -181,6 +420,14 @@ body {
 
 .icon-yellow:hover {
     color: #ca9b00;
+}
+
+.icon-red {
+    color: #e40505;
+  }
+
+.icon-red:hover {
+    color: #201C4C;
 }
 
 /* Buttons */
@@ -219,6 +466,8 @@ body {
     background-color: white;
     border-color: #006633;
 }
+
+
 
 #custom.name{
     color: #201c4c;

@@ -22,7 +22,7 @@
 
   <td>
     <% upload.topics.each do |topic| %>
-      <span class="badge <%= Topic.css_class_type(topic) %>"><%= topic.name %></span>
+      <span class="badge <%= Topic.css_class_type(topic, "badge") %>"><%= topic.name %></span>
     <% end %>
   </td>
 
