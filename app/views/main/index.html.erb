@@ -21,16 +21,17 @@
             <h2> <%= "All categories" %> </h2>
           <% end %>
         </div>
-        <hr>
       </div>
-      <div class="list-group custom-articles-list">
-        <% if !@uploads.empty? %>
-          <% @uploads.each do |upload| %>
-            <%= render "article_list", upload: upload %>
+      <div class="custom-container">
+        <div class="list-group custom-articles-list">
+          <% if !@uploads.empty? %>
+            <% @uploads.each do |upload| %>
+              <%= render "article_list", upload: upload %>
+            <% end %>
+          <% else %>
+            <em><u>No articles at the moment. Sorry for the inconvenience.</u></em>
           <% end %>
-        <% else %>
-          <em><u>No articles at the moment. Sorry for the inconvenience.</u></em>
-        <% end %>
+        </div>
       </div>
     </main>
   </div>

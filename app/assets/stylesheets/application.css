@@ -28,10 +28,10 @@
 body {
     justify-content: center;
     min-height: 100vh;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 6.5%;
     background: white;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 
@@ -50,17 +50,24 @@ body {
 }
 
 .custom-main-padding {
-    padding: 5% 0 5% 0;
+    padding: 5% 0 0 0;
 }
+
 
 .custom-menu {
     position: fixed;
 }
 
 .custom-articles-list {
-    overflow-y: scroll;
     position: relative;
-    z-index: -1;
+    max-height: 100%;
+    overflow: auto;
+}
+
+.custom-container {
+    margin-top: 10%;
+    height: 500px;
+    position: relative;
 }
 
 
@@ -75,6 +82,7 @@ body {
 }
 
 .custom-sidebar {
+    display: flex;
     margin: 0;
     padding: 0;
     width: 200px;
@@ -83,6 +91,12 @@ body {
     background: #201c4c;
     top: 20%;
     overflow-y: hidden;
+}
+
+.custom-outer-sidebar {
+    width: 200px;
+    height: 100%;
+    background: #201c4c;
 }
 
 .custom-content {
@@ -116,7 +130,6 @@ body {
     text-align: left;
     margin-left: 5%;
 }
-
 
 
 .grid {
