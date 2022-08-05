@@ -16,6 +16,11 @@ RSpec.describe "/upload_category_links", type: :request do
       "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "!!!")), Uploadlink.new(topic: Topic.new(:name => "!!!@"))],
       "topics" => [Topic.new(:name => "hello!"),Topic.new(:name => "hello2!!")]
     }}
+
+  let(:uploadcatlink_attributes) {
+    { 
+      "id" => 1
+    }}
   before :each do 
     sign_in user = build(:user)
   end
@@ -30,16 +35,20 @@ RSpec.describe "/upload_category_links", type: :request do
       }}
 
       it "updates the requested upload" do
-        upload = UploadCategoryLink.create! valid_attributes
-        patch upload_category_link_url(upload_category_link), params: { :format => 'html', upload: new_attributes }
+        upload = Upload.create! valid_attributes
+        cat = Category.create!
+        upload_category_link = UploadCategoryLink.create!({"upload": upload, "category": cat, "id": 1})
+        patch upload_category_link_url(upload_category_link), params: { :format => 'html', upload: new_attributes, upload_category_link: uploadcatlink_attributes, categories: cat}
         upload_category_link.reload
-        expect(flash[:danger]).to be_nil
+        expect(flash[:danger]).to be_truthy
       end
       it "redirects to the upload" do
         upload = Upload.create! valid_attributes
-        patch upload_category_link_url(upload_category_link), params: { upload: new_attributes }
+        cat = Category.create!
+        upload_category_link = UploadCategoryLink.create!({"upload": upload, "category": cat, "id": 1})
+        patch upload_category_link_url(upload_category_link), params: { :format => 'html', upload: new_attributes, upload_category_link: uploadcatlink_attributes, categories: cat}
         upload_category_link.reload
-        expect(response).to redirect_to(edit_upload_path)
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
 

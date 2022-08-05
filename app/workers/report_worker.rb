@@ -8,7 +8,9 @@ class ReportWorker
             ZipUpload.unzip_file(zip_id)
         elsif upload_id != ""
             Upload.run_nltk(upload_id)
+        else return true
         end
+    
     end
 
 end
