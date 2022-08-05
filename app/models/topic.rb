@@ -25,4 +25,33 @@ class Topic < ApplicationRecord
   def self.flash_message
     FlashString::TagString
   end
+
+  # returns the bg-type css class for the topic for bagde/table row
+  def self.css_class_type(topic, type)
+    topic_entity_type = topic.entity_type
+    all_types = {
+      "PERSON" => "bg-person",
+      "LOCATION" => "bg-location",
+      "ORGANIZATION" => "bg-organization",
+      "EVENT" => "bg-event",
+      "WORK OF ART" => "bg-work-of-art",
+      "CONSUMER GOOD" => "bg-consumer-good",
+      "OTHER" => "bg-other"
+    }
+    if type == "table-row"
+      return all_types[topic_entity_type] + "-table-row"
+    else
+      return all_types[topic_entity_type] + "-badge"
+    end
+  end
+
+  # toggles the params in edit page
+  def self.set_toggle_tag_type(btn_pressed, previous_tag_type)
+    if btn_pressed == previous_tag_type
+      return ""
+    else
+      return btn_pressed.gsub(" ", "_")
+    end
+  end
+
 end

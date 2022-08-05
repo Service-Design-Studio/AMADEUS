@@ -36,13 +36,13 @@ body {
 }
 
 .tag {
-    background: #073da2;
+    background: #201C4C;
     color: #FFF;
     padding: 0.25em;
     margin: 0.25em;
     border-radius: 0.25em;
     display: inline-block;
-    
+    float: bottom;
 }
 
 .center {
@@ -60,9 +60,9 @@ body {
 
 .custom_sidebar {
     position: fixed;
-    width: 17%;
+    width: 16%;
     background: #201c4c;
-    top: 21%;
+    top: 18%;
     left: 0;
     bottom: 0;
 }
@@ -89,7 +89,7 @@ body {
     width: 100%;
     padding: 20px;
     font-family: "Montserrat", sans-serif;
-    font-size:auto;
+    font-size: auto;
     text-align: left;
     top:21%;
 }
@@ -139,12 +139,12 @@ body {
 }
 .nav-link{
     font-family: "Montserrat", sans-serif;
-    color: #f1f1f1; 
+    color: #f1f1f1;
     position: relative;
     top: 5px;
     padding:10px;
     display: block;
-    
+
 }
 .btn-outline-light{
     margin: 15px;
@@ -153,19 +153,368 @@ body {
     background-color: #201c4c;
     font-family: "Montserrat", sans-serif;
     border-color: #201c4c;
-    
+
 }
 .btn-outline-light:hover {
     color:#073da2;
     background-color: #201c4c;
     border-color: #201c4c;
 
+.btn-group.special {
+    display: flex;
+  }
+
+.special .btn {
+    flex: 1
+}
+
+/* Tag types badges for
+["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD", "OTHER"]
+*/
+.bg-person-badge{
+    background-color: rgb(199, 0, 0);
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-badge{
+    background-color: #2ecf7f;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-badge{
+    background-color: #5eadf2;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-badge{
+    background-color: #fc8e10;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-work-of-art-badge{
+    background-color: #fa35cc;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-consumer-good-badge{
+    background-color: #9e4ddc;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-other-badge{
+    background-color: #979797;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+/* Tag types table row colour for
+["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD", "OTHER"]
+*/
+
+.bg-person-table-row{
+    background-color: rgb(255, 177, 177);
+    color: black;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-table-row{
+    background-color: #b6ffdc;
+    color: black;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-table-row{
+    background-color: #a8d8ff;
+    color: black;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-table-row{
+    background-color: #ffe2ac;
+    color: black;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-work-of-art-table-row{
+    background-color: #ffbdee;
+    color: black;
+    font-family: "Montserrat",sans-serif
+}
+
+.bg-consumer-good-table-row{
+    background-color: #e0b8ff;
+    color: black;
+    font-family: "Montserrat",sans-serif
+}
+
+.bg-other-table-row{
+    background-color: #ffffff;
+    color: black;
+    font-family: "Montserrat",sans-serif;
+}
+
+/* Tag types button colour for
+["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD", "OTHER"]
+*/
+
+.bg-person-active-btn{
+    background-color: rgb(199, 0, 0);
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-person-active-btn:hover{
+    background-color: rgb(170, 0, 0);
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-person-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-person-btn:hover{
+    background-color: rgb(199, 0, 0);
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-active-btn{
+    background-color: #2ecf7f;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-active-btn:hover{
+    background-color: #24975e;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-location-btn:hover{
+    background-color: #2ecf7f;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-active-btn{
+    background-color: #5eadf2;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-active-btn:hover{
+    background-color: #4787be;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-organization-btn:hover{
+    background-color: #5eadf2;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-active-btn{
+    background-color: #fc8e10;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-active-btn:hover{
+    background-color: #dd7d0f;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-event-btn:hover{
+    background-color: #fc8e10;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-work-of-art-active-btn{
+    background-color: #fa35cc;
+    color: white;
+    font-family: "Montserrat",sans-serif
+}
+
+.bg-work-of-art-active-btn:hover{
+    background-color: #da2fb2;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-work-of-art-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-work-of-art-btn:hover{
+    background-color: #fa35cc;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-consumer-good-active-btn{
+    background-color: #9e4ddc;
+    color: white;
+    font-family: "Montserrat",sans-serif
+}
+
+.bg-event-active-btn:hover{
+    background-color: rgb#7e3daf;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-consumer-good-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-consumer-good-btn:hover{
+    background-color: #9e4ddc;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-other-active-btn{
+    background-color: #979797;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-other-active-btn:hover{
+    background-color: #757575;
+    color: white;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-other-btn{
+    background-color: white;
+    border-color: #201C4C;
+    border-width: 1px;
+    color: #201C4C;
+    font-family: "Montserrat",sans-serif;
+}
+
+.bg-other-btn:hover{
+    background-color: #979797;
+    color:white;
+    font-family: "Montserrat",sans-serif;
+}
+
+/* Icons */
+.icon-align-left {
+    float: left;
+    padding: 0% 1.5% 0% 1.5%;
+}
+
+.icon-yellow {
+    color: #ffc107;
+  }
+
+.icon-yellow:hover {
+    color: #ca9b00;
+}
+
+.icon-red {
+    color: #e40505;
+  }
+
+.icon-red:hover {
+    color: #201C4C;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #201C4C;
+    color: white;
+    border-color: #201C4C;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #201C4C;
+    background-color: white;
+    border-color: #201C4C;
+}
+
+.btn-outline-primary {
+    border-color: #201C4C;
+    color: #201C4C;
+    background-color: white;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active, .btn-outline-primary.active, .open>.dropdown-toggle.btn-outline-primary {
+    color: #fff;
+    background-color: #201C4C;
+    border-color: #201C4C;
+}
+
+.btn-secondary {
+    background-color: #006633;
+    color: white;
+    border-color: #006633;
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active, .open>.dropdown-toggle.btn-secondary {
+    color: #006633;
+    background-color: white;
+    border-color: #006633;
+}
+
+
+
+#custom.name{
+    color: #201c4c;
+    font-family: "Montserrat",sans-serif;
 }
 .dropdown-menu .dropdown-item {
     font-family: "Montserrat", sans-serif;
     background-color:#201c4c ;
     git
-   
+
 }
 .dropdown-menu{
     background-color:#201c4c ;
@@ -175,7 +524,7 @@ body {
     text-decoration: none;
     margin-right: 300px;
     font-family: "Montserrat", sans-serif;
-    
+
 }
 
 

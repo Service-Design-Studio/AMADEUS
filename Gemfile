@@ -6,14 +6,14 @@ ruby "3.0.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
 
+# Foreman
+gem "foreman"
+
 # Friendly ID
 gem 'friendly_id', '~> 5.4.0'
 
 # For js
 gem 'jquery-rails'
-
-# For ActiveRecord
-gem 'sqlite3'
 
 # For Json serialization
 gem 'active_model_serializers'
@@ -72,7 +72,7 @@ gem 'pdf-reader'
 gem 'file_validators'
 
 #policy management
-gem 'pundit'
+# gem 'pundit'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -88,6 +88,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
+  gem 'sqlite3'
 end
 
 group :test do
@@ -100,7 +101,8 @@ group :test do
 end
 
 group :production do
-  #gem 'pg' #gcloud deployment
+  gem 'pg' #gcloud deployment
+  gem 'appengine'
 end
 
 
