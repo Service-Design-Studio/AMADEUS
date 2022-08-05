@@ -42,7 +42,7 @@ body {
     margin: 0.25em;
     border-radius: 0.25em;
     display: inline-block;
-    float: bottom;
+    
 }
 
 .center {
@@ -60,11 +60,25 @@ body {
 
 .custom_sidebar {
     position: fixed;
-    width: 16%;
+    width: 17%;
     background: #201c4c;
-    top: 18%;
+    top: 21%;
     left: 0;
     bottom: 0;
+}
+
+.custom_hamburger {
+    position: fixed;
+    top: 19%;
+    left: 0;
+    transition: all 0.5s ease 0s;
+    text-decoration: none;
+    background-color:#201c4c;
+    color: #f1f1f1;
+    width: 17%;
+    font-family: "Montserrat", sans-serif;
+    font-size:auto;
+    text-align: left;
 }
 
 .custom_category{
@@ -75,8 +89,9 @@ body {
     width: 100%;
     padding: 20px;
     font-family: "Montserrat", sans-serif;
-    font-size: large;
+    font-size:auto;
     text-align: left;
+    top:21%;
 }
 .active{
     border-top-left-radius: 20px;
@@ -86,7 +101,7 @@ body {
 .side_title{
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
-    font-size:xx-large ;
+    font-size:x-large ;
     color: #FFF;
     text-align: left;
     margin-left: 5%;
@@ -122,8 +137,46 @@ body {
     float: right;
     padding: 0% 1.5% 0% 1.5%;
 }
-
-#custom.name{
-    color: #201c4c;
-    font-family: "Montserrat",sans-serif;
+.nav-link{
+    font-family: "Montserrat", sans-serif;
+    color: #f1f1f1; 
+    position: relative;
+    top: 5px;
+    padding:10px;
+    display: block;
+    
 }
+.btn-outline-light{
+    margin: 15px;
+    padding:0;
+    color: #f1f1f1;
+    background-color: #201c4c;
+    font-family: "Montserrat", sans-serif;
+    border-color: #201c4c;
+    
+}
+.btn-outline-light:hover {
+    color:#073da2;
+    background-color: #201c4c;
+    border-color: #201c4c;
+
+}
+.dropdown-menu .dropdown-item {
+    font-family: "Montserrat", sans-serif;
+    background-color:#201c4c ;
+    git
+   
+}
+.dropdown-menu{
+    background-color:#201c4c ;
+}
+
+.border{
+    text-decoration: none;
+    margin-right: 300px;
+    font-family: "Montserrat", sans-serif;
+    
+}
+
+
+

@@ -1,32 +1,32 @@
-<div class="fixed custom_sidebar">
-  <div class=" center">
-    <ul class="list-group">
-      <br>
-        <h3 class="side_title"> Categories </h3>
-      <br>
-      <% @categories.each do |category| %>
-            <%= link_to category.name, root_path({ "category" => category.name }),
-                class: "list-group-item-action active custom_category", id: "#{category.name}-edit-button" %>
-      <% end %>
-    </ul>
+<div class="col-auto px-0">
+  <div class="fixed" style= "position:relative; right:200px; bottom:150px; ">
+    <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border"><i class="bi bi-list"></i>
+      Category</a>
+    <div id="sidebar" class="custom_sidebar collapse collapse-horizontal hide border-end">
+      <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+        <% @categories.each do |category| %>
+          <%= link_to category.name, root_path({ "category" => category.name }),
+                      class: "list-group-item-action active custom_category", id: "#{category.name}-edit-button" %>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="custom_content">
-  <% if @category %>
-    <h1><%= @category.name %></h1>
-  <% else %>
-    <h1> <%= "All categories" %> </h1>
-  <% end %>
-  <hr>
-  <div class="list-group">
-    <% if !@uploads.empty? %>
-      <% @uploads.each do |upload| %>
-        <%= render "article_list", upload: upload %>
-      <% end %>
+  <div class="custom_content">
+    <% if @category %>
+      <h1><%= @category.name %></h1>
     <% else %>
-      <em><u>No articles at the moment. Sorry for the inconvenience.</u></em>
-  <% end %>
+      <h1> <%= "All categories" %> </h1>
+    <% end %>
+    <hr>
+    <div class="list-group">
+      <% if !@uploads.empty? %>
+        <% @uploads.each do |upload| %>
+          <%= render "article_list", upload: upload %>
+        <% end %>
+      <% else %>
+        <em><u>No articles at the moment. Sorry for the inconvenience.</u></em>
+      <% end %>
+    </div>
   </div>
 </div>
-
