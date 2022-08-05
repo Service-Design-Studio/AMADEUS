@@ -1,26 +1,29 @@
 <div class="container-fluid">
   <div class="row flex-nowrap">
     <div class="col-auto px-0">
-      <div id="sidebar" class="custom_sidebar collapse collapse-horizontal show border-end">
+      <div id="sidebar" class="custom-sidebar collapse collapse-horizontal show border-end">
         <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
           <% @categories.each do |category| %>
             <%= link_to category.name, root_path({ "category" => category.name }),
-                        class: "list-group-item-action active custom_category", id: "#{category.name}-edit-button" %>
+                        class: "list-group-item-action active custom-category", id: "#{category.name}-edit-button" %>
           <% end %>
         </div>
       </div>
     </div>
-
-    <div class="custom_content">
-      <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border">
-        <i class="bi bi-list bi-lg py-2 p-1"></i>Category</a>
-      <% if @category %>
-        <h1><%= @category.name %></h1>
-      <% else %>
-        <h1> <%= "All categories" %> </h1>
-      <% end %>
-      <hr>
-      <div class="list-group">
+    <main class="col ps-md-2 pt-2 custom-content">
+      <div class="custom-menu">
+        <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i>
+          Categories</a>
+        <div class="page-header pt-3">
+          <% if @category %>
+            <h2><%= @category.name %></h2>
+          <% else %>
+            <h2> <%= "All categories" %> </h2>
+          <% end %>
+        </div>
+        <hr>
+      </div>
+      <div class="list-group custom-articles-list">
         <% if !@uploads.empty? %>
           <% @uploads.each do |upload| %>
             <%= render "article_list", upload: upload %>
@@ -29,6 +32,6 @@
           <em><u>No articles at the moment. Sorry for the inconvenience.</u></em>
         <% end %>
       </div>
-    </div>
+    </main>
   </div>
 </div>
