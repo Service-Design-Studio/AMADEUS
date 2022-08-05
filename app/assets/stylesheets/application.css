@@ -42,7 +42,7 @@ body {
     margin: 0.25em;
     border-radius: 0.25em;
     display: inline-block;
-    float: bottom;
+
 }
 
 .center {
@@ -58,18 +58,20 @@ body {
     padding-right: 35%;
 }
 
-.custom_sidebar {
-    position: fixed;
-    width: 16%;
+.fixed{
+    position:absolute;
+    width: 18%;
     background: #201c4c;
-    top: 18%;
-    left: 0;
+    top: 20%;
+    left: 150px;
     bottom: 0;
+    right: 0;
+    width:20% ;
 }
 
 .custom_hamburger {
     position: fixed;
-    top: 19%;
+    top: 15%;
     left: 0;
     transition: all 0.5s ease 0s;
     text-decoration: none;
@@ -79,6 +81,7 @@ body {
     font-family: "Montserrat", sans-serif;
     font-size:auto;
     text-align: left;
+    list-style: none;
 }
 
 .custom_category{
@@ -91,7 +94,7 @@ body {
     font-family: "Montserrat", sans-serif;
     font-size: auto;
     text-align: left;
-    top:21%;
+    top:15%;
 }
 .active{
     border-top-left-radius: 20px;
@@ -139,12 +142,12 @@ body {
 }
 .nav-link{
     font-family: "Montserrat", sans-serif;
-    color: #f1f1f1;
+    color: #f1f1f1; 
     position: relative;
     top: 5px;
     padding:10px;
     display: block;
-
+    
 }
 .btn-outline-light{
     margin: 15px;
@@ -153,12 +156,13 @@ body {
     background-color: #201c4c;
     font-family: "Montserrat", sans-serif;
     border-color: #201c4c;
-
+    
 }
 .btn-outline-light:hover {
     color:#073da2;
     background-color: #201c4c;
     border-color: #201c4c;
+}
 
 .btn-group.special {
     display: flex;
@@ -513,8 +517,8 @@ body {
 .dropdown-menu .dropdown-item {
     font-family: "Montserrat", sans-serif;
     background-color:#201c4c ;
-    git
 
+   
 }
 .dropdown-menu{
     background-color:#201c4c ;
@@ -524,7 +528,7 @@ body {
     text-decoration: none;
     margin-right: 300px;
     font-family: "Montserrat", sans-serif;
-
+    
 }
 
 

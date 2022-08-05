@@ -101,7 +101,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg' #gcloud deployment
+  # gem 'pg' #gcloud deployment
   gem 'appengine'
 end
 
