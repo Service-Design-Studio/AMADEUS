@@ -1,31 +1,37 @@
 # All credits to Timothy W. https://github.com/weetimo
-
-import nltk
-
-nltk.download('averaged_perceptron_tagger')
-nltk.download('stopwords')
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
-
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize, sent_tokenize
-from nltk.stem import WordNetLemmatizer
-from sklearn.feature_extraction.text import TfidfVectorizer
-from nltk.corpus import wordnet
-
 import random
-import time
+# import nltk
+#
+# nltk.download('wordnet')
+# nltk.download('stopwords')
+#
+# from nltk.corpus import stopwords, wordnet
+# from nltk.tokenize import word_tokenize
+# from nltk.stem import WordNetLemmatizer
 
 print("Finish setup")
 
+def tagger():
+    tags_dict = {}
+    ENTITY = ["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD"]
+    for i in range(3):
+        # Entity Tag
+        name = "Entity" + str(random.randint(1, 20))
+        entity_type = random.choice(ENTITY)
+        tags_dict[name] = entity_type
+        # Other Tag
+        name = "Other" + str(random.randint(1, 20))
+        tags_dict[name] = "OTHER"
+    return tags_dict
 
-def categoriser(upload_text):
+def categoriser():
     categories = ['Tank', 'Artillery', 'UAV', 'Fighter Aircraft', 'Helicopter', 'Missile', 'MANPAD', 'Infrastructure']
     return random.choice(categories)
 
+def summariser():
+    return "This is a valid summary with more than 10 words and less than 100 words"
 
-def tagger(upload_text, replace_dict, all_stopwords, num_tag):
+def legacy_tagger(upload_text, replace_dict, all_stopwords, num_tag):
     for old, new in replace_dict.items():
         upload_text = upload_text.replace(old, new)
 
@@ -74,20 +80,7 @@ def tagger(upload_text, replace_dict, all_stopwords, num_tag):
 
     return tags_dict
 
-def get_custom_stopwords():
-    return [
-        "time", "year", "people", "way", "day", "man", "thing", "woman", "life", "child", "world", "school", "state",
-        "family", "student", "group", "country", "problem", "hand", "part", "place", "case", "week", "company",
-        "system", "program", "question", "work", "government", "number", "night", "point", "home", "water",
-        "room", "mother", "area", "money", "story", "fact", "month", "lot", "right", "study", "book", "eye", "job",
-        "word", "business", "issue", "side", "kind", "head", "house", "service", "friend", "father", "power", "hour",
-        "game", "line", "end", "member", "law", "car", "city", "community", "name", "president", "team", "minute",
-        "idea", "kid", "body", "information", "back", "parent", "face", "others", "level", "office", "door", "health",
-        "person", "art", "war", "history", "party", "result", "change", "morning", "reason", "research",
-        "girl", "guy", "moment", "air", "teacher", "force", "education", "bbc", "news", "cna", "cnn", "thousands",
-    ]
-
-def summariser(upload_text, all_stopwords, summary_threshold):
+def legacy_summariser(upload_text, all_stopwords, summary_threshold):
     words = word_tokenize(upload_text)
 
     # Count frequency
@@ -126,6 +119,18 @@ def summariser(upload_text, all_stopwords, summary_threshold):
     summary = " ".join(summary[2:-1])
     return summary
 
+def get_custom_stopwords():
+    return [
+        "time", "year", "people", "way", "day", "man", "thing", "woman", "life", "child", "world", "school", "state",
+        "family", "student", "group", "country", "problem", "hand", "part", "place", "case", "week", "company",
+        "system", "program", "question", "work", "government", "number", "night", "point", "home", "water",
+        "room", "mother", "area", "money", "story", "fact", "month", "lot", "right", "study", "book", "eye", "job",
+        "word", "business", "issue", "side", "kind", "head", "house", "service", "friend", "father", "power", "hour",
+        "game", "line", "end", "member", "law", "car", "city", "community", "name", "president", "team", "minute",
+        "idea", "kid", "body", "information", "back", "parent", "face", "others", "level", "office", "door", "health",
+        "person", "art", "war", "history", "party", "result", "change", "morning", "reason", "research",
+        "girl", "guy", "moment", "air", "teacher", "force", "education", "bbc", "news", "cna", "cnn", "thousands",
+    ]
 
 def nltk_model(request):
     request_json = request.get_json()
@@ -136,18 +141,20 @@ def nltk_model(request):
         # Extract params
         upload = request_json['upload']
 
-        upload_text = upload['upload_text']
-        replace_dict = upload['replace_dict']
-        num_tag = upload['num_tag']
-        summary_threshold = upload['summary_threshold']
+        # START of legacy code
+        # upload_text = upload['upload_text']
+        # replace_dict = upload['replace_dict']
+        # num_tag = upload['num_tag']
+        # summary_threshold = upload['summary_threshold']#
+        # custom_stopwords = get_custom_stopwords()
+        # original_stopwords = set(stopwords.words("english"))
+        # all_stopwords = original_stopwords.union(custom_stopwords)
+        # tags_dict = legacy_tagger(upload_text, replace_dict, all_stopwords, num_tag)
+        # summary = legacy_summariser(upload_text, all_stopwords, summary_threshold)
+        # END of legay code
 
-        custom_stopwords = get_custom_stopwords()
-        original_stopwords = set(stopwords.words("english"))
-        all_stopwords = original_stopwords.union(custom_stopwords)
-
-        # Run model
-        tags_dict = tagger(upload_text, replace_dict, all_stopwords, num_tag)
-        summary = summariser(upload_text, all_stopwords, summary_threshold)
-        category = categoriser(summary)
+        tags_dict = tagger()
+        category = categoriser()
+        summary = summariser()
         response = {"summary": summary, "tags": tags_dict, "category": category}
     return response

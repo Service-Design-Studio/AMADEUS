@@ -1,10 +1,7 @@
 require 'zip'
-require 'pdf-reader'
-require 'json'
 
 class Upload < ApplicationRecord
   include ActionView::RecordIdentifier
-  require_relative 'nltk_model.rb'
 
   has_one_attached :file
   validates :file, presence: true
@@ -13,7 +10,7 @@ class Upload < ApplicationRecord
   has_many :topics, through: :uploadlinks
   has_many :upload_category_links, dependent: :destroy
   has_many :categories, through: :upload_category_links
-  
+
   after_create_commit lambda {
     broadcast_prepend_later_to "uploads_list", target: "uploads", partial: "uploads/upload"
   }
@@ -25,38 +22,77 @@ class Upload < ApplicationRecord
   after_destroy_commit lambda {
     broadcast_remove_to "uploads_list", target: "#{dom_id self}"
   }
-  
+
   private
 
-  def self.verify_tag(upload, topic_name)
+  def self.verify_tag(upload, topic_name, entity_type)
     status = "fail"
 
     upload.uploadlinks.each do |uploadlink|
+      # if the topic is already linked to the upload
       if uploadlink.topic.name == topic_name
         status = "exist"
       end
     end
 
+    # if topic_name contains invalid inputs
     if (topic_name == "") || topic_name.nil?
       msg = flash_message_tag::INVALID_TAG
     elsif topic_name.length >= 15
-      msg = flash_message_tag::LENGTHY_TAG
+      msg = flash_message_tag::INVALID_TAG
     elsif topic_name.match(/\W/)
-      msg = flash_message_tag.get_special_characters(topic_name)
+      msg = flash_message_tag::INVALID_TAG
+
+    # if topic already exists
     elsif status == "exist"
-      status = "fail"
       msg = flash_message_tag.get_duplicate_tag(topic_name)
+    
+    # Checking entity_type
     else
-      status = "success"
-      msg = ""
-      new_topic = Topic.friendly.find_by(name: topic_name)
-      if new_topic.nil?
-        new_topic = Topic.create(name: topic_name)
-        Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
+      existing_topic = Topic.friendly.find_by(name: topic_name)
+      # Did not specify entity_type
+      if entity_type == "all"
+        # If topic does not exist
+        if existing_topic.nil?
+          msg = "Please select a tag type!"
+        # If topic exists
+        else
+          status = "success"
+          msg = flash_message_tag.get_existing_added_tag(topic_name, existing_topic.entity_type)
+          Uploadlink.create(upload_id: upload.id, topic_id: existing_topic.id)
+        end
+      # Specified entity_type
       else
-        Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
-      end
+        # If topic exists and is of different entity_type
+        if ((!existing_topic.nil?) && (existing_topic.entity_type != entity_type))
+          msg = flash_message_tag.get_duplicated_tag_name(topic_name, existing_topic.entity_type)
+        # If topic exists and is of same entity_type
+        elsif ((!existing_topic.nil?) && (existing_topic.entity_type == entity_type))
+          status = "success"
+          msg = flash_message_tag.get_existing_added_tag(topic_name, existing_topic.entity_type)
+          Uploadlink.create(upload_id: upload.id, topic_id: existing_topic.id)
+        # If topic does not exist
+        else
+          status = "success"
+          msg = flash_message_tag.get_new_added_tag(topic_name, entity_type)
+          new_topic = Topic.create(name: topic_name, entity_type: entity_type)
+          Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
+        end
+      end  
     end
+
+    # else
+    #   status = "success"
+    #   msg = ""
+    #   new_topic = Topic.friendly.find_by(name: topic_name)
+    #   if new_topic.nil?
+    #     new_topic = Topic.create(name: topic_name)
+    #     Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
+    #   else
+    #     Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
+    #   end
+    # end
+    
     return { status: status, msg: msg }
   end
 
@@ -71,9 +107,9 @@ class Upload < ApplicationRecord
     if (category_name == "") || category_name.nil?
       msg = flash_message_category::INVALID_CAT
     elsif category_name.length >= 30
-      msg = flash_message_category::LENGTHY_CAT
+      msg = flash_message_category::INVALID_CAT
     elsif !category_name.match(/^[a-zA-Z0-9_ ]*$/)
-      msg = flash_message_category.get_special_characters(category_name)
+      msg = flash_message_category::INVALID_CAT
     elsif status == "exist"
       msg = flash_message_category.get_already_assigned_category(category_name)
     else
@@ -96,25 +132,13 @@ class Upload < ApplicationRecord
 
   def self.verify_summary(upload, summary)
     status = "fail"
-    if summary == "" || summary.nil?
-      msg = flash_message::INVALID_SUMMARY
-    elsif summary == upload.summary
-      msg = flash_message::SAME_SUMMARY
-    # if summary length is less than 100 characters
-    elsif summary.length < 100
-      msg = flash_message::SHORT_SUMMARY
-    # if summary length is more than 2500 characters
-    elsif summary.length > 5000
-      msg = flash_message::LONG_SUMMARY
-    #summary contains only spaces
-    elsif summary.match(/^\s*$/)
-      msg = flash_message::SPACE_SUMMARY
-    #summary contains all special characters
-    elsif summary.match(/\W/)
-      msg = flash_message::SPECIAL_CHARACTERS
+    if (summary == "" || summary.nil?)
+      msg = flash_message_summary::INVALID_SUMMARY
+    elsif summary.split.size < 10 || summary.split.size > 100
+      msg = flash_message_summary::INVALID_SUMMARY
     else
       status = "success"
-      msg = flash_message::SUMMARY_UPDATED
+      msg = flash_message_summary::SUMMARY_UPDATED
       upload.update(summary: summary)
     end
     return { status: status, msg: msg }
@@ -137,17 +161,20 @@ class Upload < ApplicationRecord
   end
 
   # SIDEKIQ - runs the nltk model
-  def self.run_nltk(upload_id)
+  def self.run_nltk_async(upload_id)
     upload = Upload.find(upload_id)
     content = upload.content
-    nltk_response = NltkModel.request(content)
-    summary = nltk_response[:summary].gsub(/(\\\")/, "")
-    tags_dict = nltk_response[:tags]
-    category = nltk_response[:category]
-    # zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
-    # category = zero_shot_response[:category]
-    upload.content = content
-    upload.summary = summary
+    # nltk_response = NltkModel.request(content)
+    # summary = nltk_response[:summary]
+    # tags_dict = nltk_response[:tags]
+    # category = nltk_response[:category]
+    zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
+    category = zero_shot_response[:category]
+    summariser_response = Summariser.request(content)
+    summary = summariser_response[:summary]
+    entities_response = GoogleEntityTagger.request(content)
+    tags_dict = entities_response[:entities]
+    upload.summary = summary.gsub(/(\\\")/, "")
     upload.ml_status = "Complete"
     upload.save
     set_upload_tag(upload.id, tags_dict)
@@ -156,23 +183,26 @@ class Upload < ApplicationRecord
     end
   end
 
-  # old function without sidekiq
-  def self.unzip_file(file, params)
+  def self.unzip_file_sync(file, params)
     if File.extname(file) == '.zip'
       Zip::File.open(file) do |zipfile|
         zipfile.each do |entry|
           if entry.file? && entry.to_s.include?(".pdf")
             new_upload = Upload.new
             new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
-            content = get_pdf_text(entry)
+            content = ExtractPdf.get_pdf_text(entry)
             nltk_response = NltkModel.request(content)
-            summary = nltk_response[:summary].gsub(/(\\\")/, "")
+            summary = nltk_response[:summary]
             tags_dict = nltk_response[:tags]
             category = nltk_response[:category]
-            # zero_shot_response = ZeroShotCategoriser.request(summary, Category.get_category_bank)
+            # zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
             # category = zero_shot_response[:category]
-            new_upload.content = content
-            new_upload.summary = summary
+            # summariser_response = Summariser.request(content)
+            # summary = summariser_response[:summary]
+            # entities_response = GoogleEntityTagger.request(content)
+            # tags_dict = entities_response[:entities]
+            new_upload.summary = summary.gsub(/(\\\")/, "")
+            new_upload.ml_status = "Complete"
             new_upload.save
             set_upload_tag(new_upload.id, tags_dict)
             if category != "No Category"
@@ -185,32 +215,12 @@ class Upload < ApplicationRecord
     @params = params
   end
 
-  def self.get_pdf_text(pdf)
-    content = ""
-    reader = PDF::Reader.new(StringIO.new(pdf.get_input_stream.read))
-    reader.pages.each do |page|
-      content.concat(preprocess_text(page.text))
-    end
-    return content.to_json
-  end
-
-  def self.preprocess_text(text)
-    text = text.gsub(/^.*\u0026/, "") # strip header before main text
-    text = text.strip.delete("\t\r\n") # strip whitespace
-    text = text.gsub(/[^\x00-\x7F]/, " ") # strip non-ASCII
-    text = text.gsub(/(?<=[.,?!;])(?=[^\s])/, " ") # add whitespace after punctuation
-    text = text.gsub(/\s+(?=\d)/, "") # remove whitespace added between number
-    text = text.gsub(/(?<=[a-z1-9])(?=[A-Z])/, " ") # add whitespace before capital letter
-    text = text.gsub(/(?<=[a-zA-Z])(?=\d)/, " ") # add whitespace after number
-    text = text.gsub(/READ MORE|read more/, " ")
-    text.squeeze(' ')
-  end
-
-  def self.set_upload_tag(upload_id, topics)
-    topics.each do |topic, frequency|
-      new_topic = Topic.friendly.find_by(name: topic)
+  def self.set_upload_tag(upload_id, tags_dict)
+    tags_dict.each do |name, entity_hash|
+      new_topic = Topic.friendly.find_by(name: name)
+      entity_type = entity_hash["entity_type"].gsub(/_/, " ")
       if new_topic.nil?
-        new_topic = Topic.new(:name => topic)
+        new_topic = Topic.new(name: name, entity_type: entity_type)
         new_topic.save!
         Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id)
       else
@@ -236,7 +246,6 @@ class Upload < ApplicationRecord
     n = Random.rand(1...topic_ids.length)
     n.times do
       topic_id = topic_ids.sample
-      similarity = Random.rand(1...100)
       Uploadlink.create(upload_id: upload_id, topic_id: topic_id)
       topic_ids.delete(topic_id)
     end
@@ -252,6 +261,11 @@ class Upload < ApplicationRecord
 
   def self.get_linked_topics(upload)
     upload.uploadlinks.all
+  end
+
+  def self.get_unlinked_topics(upload)
+    topics_in_upload = upload.uploadlinks.pluck(:topic_id)
+    unlinked_topics = Topic.where.not(id: topics_in_upload).sort_by(&:name)
   end
 
   def self.get_uploadlink(upload, topic)
@@ -280,5 +294,9 @@ class Upload < ApplicationRecord
 
   def self.flash_message_category
     FlashString::CategoryString
+  end
+
+  def self.flash_message_summary
+    FlashString::SummaryString
   end
 end

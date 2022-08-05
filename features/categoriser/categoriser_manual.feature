@@ -1,11 +1,11 @@
 @admin @categoriser_manual
 Feature: Manually configure category
-  As an admin of Amadeus
+  As an admin of AMADEUS
   So that I can customize the categories that an article can be assigned to
   I want to be able to add a new or edit existing category to the list of categories
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And I have created the following categories: "Tanks, Artillery, UAVs, Helicopters, Missiles, MANPADs, Fighter Aircraft, Infrastructure Strike"
     When I am on the "Category Bank" page
     Then I should see the following categories: "Tanks, Artillery, UAVs, Helicopters, Missiles, MANPADs, Fighter Aircraft, Infrastructure Strike"
@@ -60,14 +60,14 @@ Feature: Manually configure category
     Given I am on the "New Category" page
     When I type in the category ""
     And I click on the "Save" button
-    Then I should see a warning message "Invalid category input!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
   @sad
   Scenario Outline: Add category that name is too long (more than 30 characters)
     Given I am on the "New Category" page
     When I type in the category "<category_name>"
     And I click on the "Save" button
-    Then I should see a warning message "Category name is too long!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name                                        |
@@ -79,7 +79,7 @@ Feature: Manually configure category
     Given I am on the "New Category" page
     When I type in the category "<category_name>"
     And I click on the "Save" button
-    And I should see a warning message "Category <category_name> contains special characters!"
+    And I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name |
@@ -155,14 +155,14 @@ Feature: Manually configure category
     Given I am on the Edit Category page for the category "UAVs"
     When I edit the category "UAVs" into ""
     And I click on the "Save" button
-    Then I should see a warning message "Invalid category input!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
   @sad
   Scenario Outline: Edit into category with name that is more than 15 characters
     Given I am on the Edit Category page for the category "UAVs"
     When I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
-    Then I should see a warning message "Category name is too long!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name                                        |
@@ -174,7 +174,7 @@ Feature: Manually configure category
     Given I am on the Edit Category page for the category "UAVs"
     When I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
-    And I should see a warning message "Category <category_name> contains special characters!"
+    And I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name |

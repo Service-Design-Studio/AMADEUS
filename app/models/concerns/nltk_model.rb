@@ -3,21 +3,13 @@ require 'net/http'
 require 'json'
 
 class NltkModel
-  @uri_string = 'https://asia-southeast1-amadeus-2000.cloudfunctions.net/nltk_model'
-
   def self.request(upload_text)
-    uri = URI(@uri_string)
+    uri = URI("http://localhost:8080")
+    http = Net::HTTP.new(uri.host, 8080)
+
     req = Net::HTTP::Post.new(uri)
     req["Content-Type"] = "application/json"
     req.body = get_body_request(upload_text)
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-
-    # start local
-    uri = URI("http://localhost:8080")
-    http = Net::HTTP.new(uri.host, 8080)
-    http.read_timeout=180
-    # end local
 
     res =  http.request(req)
     response_data = JSON.parse(res.body)

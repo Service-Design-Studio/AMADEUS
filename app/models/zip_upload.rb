@@ -6,7 +6,7 @@ class ZipUpload < ApplicationRecord
     validates :file, file_content_type: { allow: ['application/pdf', 'application/zip'], message: "ZIP should contain PDFs only!" }
     has_many :uploads
 
-    def self.unzip_file(zip_id)
+    def self.unzip_file_async(zip_id)
         # get the file attached to the zip_upload
         file = ZipUpload.find(zip_id).file
         file_path = ActiveStorage::Blob.service.path_for(file.key)
@@ -16,11 +16,9 @@ class ZipUpload < ApplicationRecord
                 # extract the entry to a file
                 if entry.file? && entry.name.end_with?(".pdf")
                     new_upload = Upload.new
-                    content = Upload.get_pdf_text(entry)
+                    content = ExtractPdf.get_pdf_text(entry)
                     new_upload.file.attach(io: StringIO.new(entry.get_input_stream.read), filename: entry.name)
-                    summary = "Processing..."
                     new_upload.content = content
-                    new_upload.summary = summary
                     new_upload.ml_status = "Running"
                     new_upload.save
                     # sidekiq to run nltk on new_upload

@@ -11,10 +11,11 @@ class UploadlinksController < InheritedResources::Base
 
   # DELETE /tags/1 or /tags/1.json
   def destroy
+    tag_name = @uploadlink.topic.name
     @uploadlink.destroy
 
     respond_to do |format|
-      flash[:danger] = FlashString::DELETED
+      flash[:danger] = FlashString::TagString.get_deleted_tag(tag_name)
       format.html { redirect_to edit_upload_path(@upload) }
       format.json { head :no_content }
     end

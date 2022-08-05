@@ -1,11 +1,11 @@
 @user @categoriser_user
 Feature: Browse articles according to their category
-  As a user of Amadeus
+I am a user of AMADEUS
   So that I can easily learn about a new topic
   I want to be able to read articles that are grouped by category
 
   Background:
-    Given I am a user of Amadeus
+    Given I am a user of AMADEUS
     And the following categories have been created: "Tanks, Artillery, UAVs, Helicopters, Missiles, MANPADs, Fighter Aircraft, Infrastructure Strike"
     And the following zip files have been uploaded: rus.zip, uav.zip, ukr.zip
 

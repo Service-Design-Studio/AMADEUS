@@ -165,6 +165,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    docile (1.4.0)
     erubi (1.10.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -181,6 +182,8 @@ GEM
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
+    flores (0.0.7)
+    foreman (0.87.2)
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
     formtastic_i18n (0.7.0)
@@ -423,6 +426,12 @@ GEM
       faraday (>= 0.17.5, < 3.a)
       jwt (>= 1.5, < 3.0)
       multi_json (~> 1.10)
+    simplecov (0.21.2)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     sinatra (2.2.2)
       mustermann (~> 2.0)
       rack (~> 2.2)
@@ -485,6 +494,8 @@ DEPENDENCIES
   devise
   factory_bot_rails
   file_validators
+  flores
+  foreman
   friendly_id (~> 5.4.0)
   importmap-rails
   jbuilder
@@ -501,6 +512,7 @@ DEPENDENCIES
   rubyzip
   shoulda-matchers
   sidekiq (~> 6.5)
+  simplecov
   sinatra
   sprockets-rails
   sqlite3

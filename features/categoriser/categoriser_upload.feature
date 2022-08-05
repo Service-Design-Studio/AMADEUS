@@ -1,11 +1,11 @@
 @admin @categoriser_upload
 Feature: Edit category linked to an article
-  As an admin of Amadeus
+  As an admin of AMADEUS
   So that I can manage the category that is currently linked to an article
-  I want to be able to edit the linked category in the article Edit page
+  I want to be able to edit the linked category in the article "Edit" page
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And I have created the following categories: "Tanks, Artillery, UAVs, Helicopters, Missiles, MANPADs, Fighter Aircraft, Infrastructure Strike"
     And I have uploaded these zip files: rus.zip, uav.zip, ukr.zip
     And I have deleted the following categories: "Infrastructure Strike" from the list of categories
@@ -25,8 +25,8 @@ Feature: Edit category linked to an article
       | Chinese drone firm DJI pauses operations in Russia and Ukraine | UAVs          |
 
   @happy
-  Scenario Outline: User submit a category with new non-identical category name
-    Given I am on the article "Combat drones_ We are in a new era of warfare - here's why - BBC News" edit page
+  Scenario Outline: Admin submit a category with new non-identical category name
+    Given I am on the edit page for the article "Combat drones_ We are in a new era of warfare - here's why - BBC News"
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
@@ -43,8 +43,8 @@ Feature: Edit category linked to an article
 
 
   @happy
-  Scenario: User submits without any change
-    Given I am on the article "Combat drones_ We are in a new era of warfare - here's why - BBC News" edit page
+  Scenario: Admin submits without any change
+    Given I am on the edit page for the article "Combat drones_ We are in a new era of warfare - here's why - BBC News"
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "UAVs"
     And I click on the "Save" button
@@ -53,8 +53,8 @@ Feature: Edit category linked to an article
 
 
   @happy
-  Scenario Outline: User re-assign the category of an article to an existing category
-    Given I am on the article "Combat drones_ We are in a new era of warfare - here's why - BBC News" edit page
+  Scenario Outline: Admin re-assign the category of an article to an existing category
+    Given I am on the edit page for the article "Combat drones_ We are in a new era of warfare - here's why - BBC News"
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
@@ -70,20 +70,20 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario: Edit current category into category with blank name
-    Given I am on the article "Combat drones_ We are in a new era of warfare - here's why - BBC News" edit page
+    Given I am on the edit page for the article "Combat drones_ We are in a new era of warfare - here's why - BBC News"
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into ""
     And I click on the "Save" button
     Then I should see that the category name "UAVs" has not changed
-    Then I should see a warning message "Invalid category input!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
   @sad
   Scenario Outline: Edit current category into category with name that is more than 15 characters
-    Given I am on the article "Combat drones_ We are in a new era of warfare - here's why - BBC News" edit page
+    Given I am on the edit page for the article "Combat drones_ We are in a new era of warfare - here's why - BBC News"
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
-    Then I should see a warning message "Category name is too long!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name                                        |
@@ -92,12 +92,12 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario Outline: Edit current category into category with ambiguous name
-    Given I am on the article "Combat drones_ We are in a new era of warfare - here's why - BBC News" edit page
+    Given I am on the edit page for the article "Combat drones_ We are in a new era of warfare - here's why - BBC News"
     When I click on the hyperlink for the category "UAVs"
     And I edit the category "UAVs" into "<category_name>"
     And I click on the "Save" button
 
-    And I should see a warning message "Category <category_name> contains special characters!"
+    And I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name |
@@ -107,7 +107,7 @@ Feature: Edit category linked to an article
 
   @view
   Scenario: View article Edit page with No category
-    Given I am on the article "How many Ukrainian refugees are there and where have they gone_ - BBC News" edit page
+    Given I am on the edit page for the article "How many Ukrainian refugees are there and where have they gone_ - BBC News"
     And the article has not been assigned any category
     Then I should see the label "<No Category>"
     And I should see a form with the following categories to select from: "Tanks, Artillery, UAVs, Helicopters, Missiles, MANPADs, Fighter Aircraft"
@@ -115,7 +115,7 @@ Feature: Edit category linked to an article
 
   @happy
   Scenario Outline: Assign a category from the list of categories to an article missing a category
-    Given I am on the article "How many Ukrainian refugees are there and where have they gone_ - BBC News" edit page
+    Given I am on the edit page for the article "How many Ukrainian refugees are there and where have they gone_ - BBC News"
     And the article has not been assigned any category
     When I select the category "<category_name>"
     And I click on the "Add Category" button
@@ -134,7 +134,7 @@ Feature: Edit category linked to an article
 
   @happy
   Scenario Outline: Successfully creating and assigning a new category to a new article
-    Given I am on the article "How many Ukrainian refugees are there and where have they gone_ - BBC News" edit page
+    Given I am on the edit page for the article "How many Ukrainian refugees are there and where have they gone_ - BBC News"
     And the article has not been assigned any category
     When I type the category name as "<category_name>"
     And I click on the "Add Category" button
@@ -151,19 +151,19 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario: Attempting to create a new category “” (blank), to assign to a new article
-    Given I am on the article "How many Ukrainian refugees are there and where have they gone_ - BBC News" edit page
+    Given I am on the edit page for the article "How many Ukrainian refugees are there and where have they gone_ - BBC News"
     And the article has not been assigned any category
     When I type the category name as ""
     And I click on the "Add Category" button
-    And I should see a warning message "Invalid category input!"
+    And I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
   @sad
   Scenario Outline: Attempting to create a new category more than 30 characters long, to assign to a new article
-    Given I am on the article "How many Ukrainian refugees are there and where have they gone_ - BBC News" edit page
+    Given I am on the edit page for the article "How many Ukrainian refugees are there and where have they gone_ - BBC News"
     And the article has not been assigned any category
     When I type the category name as "<category_name>"
     And I click on the "Add Category" button
-    Then I should see a warning message "Category name is too long!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name                                        |
@@ -172,11 +172,11 @@ Feature: Edit category linked to an article
 
   @sad
   Scenario Outline: Modify No category into category with ambiguous name
-    Given I am on the article "How many Ukrainian refugees are there and where have they gone_ - BBC News" edit page
+    Given I am on the edit page for the article "How many Ukrainian refugees are there and where have they gone_ - BBC News"
     And the article has not been assigned any category
     When I type the category name as "<category_name>"
     And I click on the "Add Category" button
-    Then I should see a warning message "Category <category_name> contains special characters!"
+    Then I should see a warning message "Category cannot be blank or contain special characters and must be less than 30 characters."
 
     Examples:
       | category_name |

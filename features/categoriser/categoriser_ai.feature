@@ -1,12 +1,12 @@
 @admin @categoriser_ai
 Feature: AI automatically detect category
-  As an admin of Amadeus
+  As an admin of AMADEUS
   So that I can quickly organize uploaded articles
   I want to have my articles to be categorized by an AI when they are uploaded
 
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And I have created the following categories: "Tanks, Artillery, UAVs, Helicopters, Missiles, MANPADs, Fighter Aircraft, Infrastructure Strike"
 
   @happy

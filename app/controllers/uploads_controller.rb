@@ -26,37 +26,36 @@ class UploadsController < ApplicationController
   def create
     file = params[:upload][:file]
     unless file.nil?
+      # START of sync
+      Upload.unzip_file_sync(file, params)
+      # END of sync
       new_zip_reply = Upload.save_zip_before_ML(file, params)
-      # Sidekiq to unzip the zip file
-      ReportWorker.perform_async(new_zip_reply[:zip_id], "")
+      # START of async with sidekiq
+      # ReportWorker.perform_async(new_zip_reply[:zip_id], "")
+      # END of async
       respond_to do |format|
         flash[:success] = "Successfully uploaded #{new_zip_reply[:zip_name]}, waiting for unzipping and ML processing..."
         format.html { redirect_to uploads_url }
       end
     end
-
-    # file = params[:upload][:file]
-    # unless file.nil?
-    #   Upload.unzip_file(file, params)
-    #   respond_to do |format|
-    #     format.html { redirect_to uploads_url }
-    #   end
-    # end
   end
 
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
     respond_to do |format|
+      puts "---------------------------------------------------------------------------"
+      puts params
+      puts "---------------------------------------------------------------------------"  
       # Update topics
       if !params[:upload][:topics].nil?
-        reply = Upload.verify_tag(@upload, params[:upload][:topics])
+          reply = Upload.verify_tag(@upload, params[:upload][:topics], params[:upload][:entity_type])
         if reply[:status] == "success"
-          flash[:success] = FlashString::TagString.get_added_tag(params[:upload][:topics])
+          flash[:success] = reply[:msg]
           format.html { redirect_to edit_upload_path(@upload) }
           format.json { render :edit, status: :ok, location: @upload }
         else
           flash[:danger] = reply[:msg]
-          format.html { render :edit, status: :unprocessable_entity }
+          format.html { redirect_to edit_upload_path(@upload), status: :unprocessable_entity }
           format.json { render json: @upload.errors, status: :unprocessable_entity }
         end
       # Update category
@@ -75,7 +74,7 @@ class UploadsController < ApplicationController
       elsif !params[:upload][:summary].nil?
         reply = Upload.verify_summary(@upload, params[:upload][:summary])
         if reply[:status] == "success"
-          flash[:success] = FlashString::UploadString::SUMMARY_UPDATED
+          flash[:success] = FlashString::SummaryString::SUMMARY_UPDATED
           format.html { redirect_to edit_upload_path(@upload) }
           format.json { render :edit, status: :ok, location: @upload }
         else
@@ -98,13 +97,47 @@ class UploadsController < ApplicationController
     end
   end
 
+
+
   private
 
   def set_linked_resources
     @all_topics = Upload.get_all_topics
+    @all_topics_types = ["CONSUMER GOOD", "EVENT", "LOCATION", "ORGANIZATION", "PERSON", "WORK OF ART", "OTHER"]
     @all_categories = Upload.get_all_categories
     @linked_topics = Upload.get_linked_topics(@upload)
+    @unlinked_topics = Upload.get_unlinked_topics(@upload)
     @linked_category = Upload.get_linked_category(@upload)
+    set_filterted_topics(params[:tag_type])
+    set_filter_css
+  end
+
+  def set_filterted_topics(from_params)
+    if from_params.nil? || from_params == ""
+      @tag_type = "all"
+      @filtered_topics = Topic.all
+    else
+      @tag_type = from_params.gsub("_", " ")
+      @filtered_topics = Topic.where(entity_type: @tag_type)
+    end 
+  end
+
+  def set_filter_css()
+    @filter_css = {
+      "CONSUMER GOOD" => "bg-consumer-good-btn",
+      "EVENT" => "bg-event-btn",
+      "LOCATION" => "bg-location-btn",
+      "ORGANIZATION" => "bg-organization-btn",
+      "PERSON" => "bg-person-btn",
+      "WORK OF ART" => "bg-work-of-art-btn",
+      "OTHER" => "bg-other-btn"}
+
+    if @tag_type == "all"
+      return @filter_css
+    else
+      css_tag_type = @tag_type.gsub(" ", "-").downcase
+      @filter_css[@tag_type] = "bg-" + css_tag_type + "-active-btn"
+    end
   end
 
   # Use callbacks to share common setup or constraints between actions.

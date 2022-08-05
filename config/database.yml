@@ -20,17 +20,15 @@ test: &test
   <<: *default
   database: db/test.sqlite3
 
+
 production:
-  <<: *default
-  database: db/production.sqlite3
-
-cucumber:
-  <<: *test
-cucumber:
-  <<: *test
-
-cucumber:
-  <<: *test
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  username: amadeus-pg-db-user
+  password: rbeNXDxzVlXKMWdpMYmAwozVTVRNXgzFSLEDEcwAAdPicFiTds
+  database: amadeus-pg-db
+  host: 34.143.169.103 #from instances
 
 cucumber:
   <<: *test

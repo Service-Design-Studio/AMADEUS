@@ -6,14 +6,14 @@ ruby "3.0.0"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
 
+# Foreman
+gem "foreman"
+
 # Friendly ID
 gem 'friendly_id', '~> 5.4.0'
 
 # For js
 gem 'jquery-rails'
-
-# For ActiveRecord
-gem 'sqlite3'
 
 # For Json serialization
 gem 'active_model_serializers'
@@ -88,11 +88,14 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'shoulda-matchers'
   gem 'factory_bot_rails'
+  gem 'sqlite3'
 end
 
 group :test do
   gem 'cucumber-rails', require: false
   gem 'cucumber-rails-training-wheels'
+  gem 'flores'
+  gem 'simplecov'
   # database_cleaner is not required, but highly recommended
   # gem 'database_cleaner'
 end

@@ -1,18 +1,18 @@
 @admin @upload_edit
 Feature: edit uploaded articles
-  As an admin of Amadeus who is interested in the Russian-Ukraine war
+  As an admin of AMADEUS who is interested in the Russian-Ukraine war
   So that I can make sure the articles are reliable and relevant
   I want to be able to modify their associated tags or delete them
 
   Background:
-    Given I am logged in as an admin of Amadeus
+    Given I am logged in as an admin of AMADEUS
     And I have uploaded these zip files: rus.zip, uav.zip, ukr.zip
 
   @redirect
   Scenario Outline: View Edit Upload page
     Given I am on the "Database" page
     When I click edit article "<article_name>"
-    Then I should be redirected to the article "<article_name>" edit page
+    Then I should be redirected to the edit page for the article "<article_name>"
     And I should see the following buttons: "Add new Tag, Delete this Upload, Back to Database"
 
     Examples:
@@ -26,6 +26,6 @@ Feature: edit uploaded articles
 
   @redirect
   Scenario: Back to home
-    Given I am on the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News" edit page
+    Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
     When I click on the "Back to Database" button
     Then I should be redirected to the "Database" page
