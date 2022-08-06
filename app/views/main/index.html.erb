@@ -1,9 +1,20 @@
 <div class="center">
   <% if @category %>
-    <h1><%= @category.name %></h2>
+    <h1><strong><%= @category.name %></strong></h2>
   <% else %>
-    <h1> <%= "All Categories" %> </h2>
+    <h1><strong><%= "All Categories" %></strong></h2>
   <% end %>
+</div>
+<br>
+<div class="center">
+  <span><strong>Tag Types: </strong></span>
+    <span class="badge bg-person-badge">Person</span>
+    <span class="badge bg-location-badge">Location</span>
+    <span class="badge bg-organization-badge">Organization</span>
+    <span class="badge bg-event-badge">Event</span>
+    <span class="badge bg-work-of-art-badge">Work of Art</span>
+    <span class="badge bg-consumer-good-badge">Consumer Good</span>
+    <span class="badge bg-other-badge">Other</span>
 </div>
 <hr>
 <div class="list-group">

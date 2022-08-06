@@ -109,6 +109,16 @@ body {
     text-align: center;
 }
 
+.custom-category-selected{
+    background-color: white;
+    border-width: 0ch;
+    color: #201c4c00;
+    width: 100%;
+    padding: 20px;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+}
+
 .active {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -191,7 +201,7 @@ body {
 }
 
 .custom-category-bank-width{
-    width: 100%;
+    width: 150%;
 }
 
 

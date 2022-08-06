@@ -16,5 +16,6 @@ class MainController < ApplicationController
             @uploads = @category.uploads.sort_by { |upload| upload.created_at }.reverse
 
         end
+
     end
 end

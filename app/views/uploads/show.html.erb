@@ -3,6 +3,15 @@
 <h1 class="center"><strong><%= link_to @upload.file.filename.to_s.sub(/(?<=.)\..*/, ''), url_for(@upload.file) %></strong></h1>
 <br>
 
+<h3><strong>Category: </strong>
+  <% if @upload.categories.first %>
+    <% @upload.categories.first %>
+  <% else %>
+    <%="<No category>"%>
+  <% end %>
+</h3>
+<br>
+
 <p class="grid"> <%= @upload.summary  %> </p>
 <br>
 
