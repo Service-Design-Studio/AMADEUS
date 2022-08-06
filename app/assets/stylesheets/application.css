@@ -54,24 +54,6 @@ body {
     padding: 5% 10% 5% 10%;
 }
 
-
-.custom-menu {
-    position: fixed;
-}
-
-.custom-articles-list {
-    position: relative;
-    max-height: 100%;
-    overflow: auto;
-}
-
-.custom-container {
-    margin-top: 10%;
-    height: 500px;
-    position: relative;
-}
-
-
 .fixed {
     position: absolute;
     width: 18%;
@@ -105,11 +87,6 @@ body {
     z-index: 1;
 }
 
-.custom-content {
-    font-family: "Montserrat", sans-serif;
-    font-size: 1vw;
-}
-
 .custom-category {
     transition: all 0.5s ease 0s;
     background-color: #201c4c00;
@@ -130,16 +107,6 @@ body {
     background-color: #f1f1f1;
     color:black;
 }
-
-.side_title {
-    text-decoration: none;
-    font-family: "Montserrat", sans-serif;
-    font-size: x-large;
-    color: #FFF;
-    text-align: left;
-    margin-left: 5%;
-}
-
 
 .grid {
     display: grid;
