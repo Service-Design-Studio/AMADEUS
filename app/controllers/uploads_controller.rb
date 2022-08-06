@@ -97,8 +97,6 @@ class UploadsController < ApplicationController
     end
   end
 
-
-
   private
 
   def set_linked_resources

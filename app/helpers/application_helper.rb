@@ -8,4 +8,16 @@ module ApplicationHelper
         return true
     end
 
+    def set_sidebar_category_selected(selected_category_name, category_name)
+        if selected_category_name == ""
+            return "custom-category"
+        else
+            if selected_category_name == category_name
+                return "custom-category-selected btn-outline-primary"
+            else
+                return "custom-category"
+            end
+        end
+    end
+
 end

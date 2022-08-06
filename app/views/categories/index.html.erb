@@ -2,17 +2,37 @@
 <div class="center d-grid gap-2">
   <h1>Category Bank</h1>
   <hr>
-  <div class="btn-group special ">
-    <%= link_to "New Category", new_category_path, class: "btn btn-secondary", id: "new-category-button" %>
-    <%= link_to "Back to Home", admin_path, class: "btn btn-primary",id: "back-to-home-button"%>
-  </div>
+  
+    <%= link_to new_category_path, class: "btn btn-secondary", id: "new-category-button" do %>
+      <span class="bi bi-file-earmark-plus icon-align-left"></span>
+      New Category
+    <% end %>
+    <%= link_to  admin_path, class: "btn btn-primary", id: "back-to-home-button" do %>
+      <span class="bi bi-person-circle icon-align-left"></span>
+      Admin Homepage
+    <% end %>
   <br>
 
-  <div class="list-group">
-  <div id="categories">
-    <% @categories.each do |category| %>
-        <%= link_to category.name, edit_category_path(category), id:"#{category.name}-edit-button", class: "list-group-item btn-outline-primary"%>
-    <% end %>
-  </div>
-</div>
+
+  <table class="table table-hover">
+    <thead class="table">
+      <tr>
+        <th scope="col" class="text-center">Category Name</th>
+        <th scope="col" class="text-center"></th>
+      </tr>
+    </thead>
+    <tbody id="categories">
+      <% @categories.each do |category| %>
+        <tr class="align-middle center">
+          <td><%= category.name %></td>
+          <td>
+            <%= link_to edit_category_path(category), id: "#{category.name}-edit-button" do %>
+              <i class="bi bi-pencil-square icon-yellow" style="font-size: 2rem;"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 </div>
