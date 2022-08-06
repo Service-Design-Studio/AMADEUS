@@ -1,14 +1,13 @@
-<div class="list-group-item list-group-item-dark">
-  <h2>Suggested articles for tag:<span class="tag"><%= @topic.name %></span></h2>
-</div>
-Previous article: <%= link_to @filename, url_for(@upload.file) %>
-<% if !@category.nil? %>
-  <%= link_to @category.name, root_path({ "category" => @category.name }), class: "btn btn-outline-info" %>
-<% else %>
-  <div class="btn btn-outline-danger disabled"> <%= "No Category" %>  </div>
-<% end %>
-
-<br><br><br>
+<h1 class="center"><strong>Suggested articles:  </strong><span class="badge <%= Topic.css_class_type(@topic, "badge") %>"><%= @topic.name %></span></h2>
+<br>
+<u>Previous Category: 
+  <% if @category %>
+    <% @category.name %>
+  <% else %>
+    <%="<No category>"%>
+  <% end %></u>
+<br>
+<a href="/uploads/<%=@upload.id%>" class="btn btn-primary">Previous article</a>
 <hr>
 
 <% if !@other_uploads_categories_hash.empty? %>
@@ -16,9 +15,9 @@ Previous article: <%= link_to @filename, url_for(@upload.file) %>
     <br>
     <h3>
       <% if category %>
-        <%= link_to category.name, root_path({ "category" => category.name }), class: "list-group-item list-group-item-dark" %>
+        <%= link_to category.name, root_path({ "category" => category.name }), class: "list-group-item list-group-item-dark center" %>
       <% else %>
-        <div class="list-group-item list-group-item-dark"> <%= "<No Category>" %></div>
+        <div class="list-group-item list-group-item-dark center"> <%= "<No Category>" %></div>
       <% end %>
     </h3>
     <div class="list-group">
@@ -30,6 +29,3 @@ Previous article: <%= link_to @filename, url_for(@upload.file) %>
 <% else %>
   <em><u>No linked articles at the moment. Sorry for the inconvenience.</u></em>
 <% end %>
-
-<br><br><br>
-<%= link_to "Back to Home", root_path, class: "btn btn-primary", id: "back-to-home-button" %>

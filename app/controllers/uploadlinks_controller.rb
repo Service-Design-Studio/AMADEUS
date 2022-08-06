@@ -37,7 +37,10 @@ class UploadlinksController < InheritedResources::Base
     @other_uploads = @topic.uploads.where.not(id: @upload.id).sort_by { |upload| upload.created_at }.reverse
 
     @other_uploads_categories = @other_uploads.map { |upload| upload.categories.first }
-    # get a hash of category and its uploads
+    # get a hash of category and its uploads and sort by the uploads creation date in descending order
     @other_uploads_categories_hash = Hash[@other_uploads_categories.map { |category| [category, @other_uploads.select { |upload| upload.categories[0] == category }] }]
+    @other_uploads_categories_hash.each do |category, uploads|
+      @other_uploads_categories_hash[category] = uploads.sort_by { |upload| upload.created_at }.reverse
+    end
   end
 end

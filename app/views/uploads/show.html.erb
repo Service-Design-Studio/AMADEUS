@@ -1,32 +1,30 @@
 <p style="color: green"><%= notice %></p>
 
-<h1><%= link_to @upload.file.filename.to_s.sub(/(?<=.)\..*/, ''), url_for(@upload.file) %></h1>
-
+<h1 class="center"><strong><%= link_to @upload.file.filename.to_s.sub(/(?<=.)\..*/, ''), url_for(@upload.file) %></strong></h1>
 <br>
 
-<p class="grid" style="background:#d3d3d3"> <%= @upload.summary  %> </p>
+<p class="grid"> <%= @upload.summary  %> </p>
+<br>
 
 <div class="container">
   <div class="row">
 
-    <div class="col-6">
-      <h3>Select a tag explore other related articles:</h3>
+    <div class="col-7">
+      <h3>Select a tag to explore other related articles:</h3>
     </div>
     <div class="col-5">
       <% @upload.topics.each do |topic| %>
-          <span class="tag">
             <%= link_to uploadlink_path(Upload.get_uploadlink(@upload, topic).id),
                         id: "#{topic.name}-link",
                         style: "text-decoration:none" do %>
-              <span class="tag"><%= topic.name %></span>
+              <h5 style="display: inline-block"><span class="badge <%= Topic.css_class_type(topic, "badge") %> badge-lg"><%= topic.name %></span></h5>
             <% end %>
-          </span>
       <% end %>
     </div>
   </div>
 </div>
 
 <br>
-<br>
+<div class="d-grid gap-2">
 <%= link_to "Back to Home", root_path, class: "btn btn-primary", id: "back-to-home-button" %>
-
+</div>
