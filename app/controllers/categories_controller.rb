@@ -4,7 +4,7 @@ class CategoriesController < InheritedResources::Base
   # GET /categories or /categories.json
 
   def index
-    @categories = Category.all.reverse
+    @categories = Category.all.order(:name)
   end
 
   # GET /categories/1 or /categories/1.json

@@ -1,14 +1,15 @@
-<h1>Edit Category</h1>
+<%= form_with(model: @category) do |form| %>
+  <div class="d-grid gap-2">
+    <h1 class="center">Edit Category</h1><hr>
+    <%= form.text_field :name, class: "form-control", id: "category-input", placeholder: @category.name %>
+    <span></span>
+    <%= form.submit "Save changes", class: "btn btn-success", id: "save-button" %>
 
-<%= turbo_frame_tag dom_id(@category) do %>
-  <%= form_with(model: @category) do |form| %>
-    <div class="field">
-      <%= form.text_field :name, id: "category-input" %>
-      <%= form.submit "Save", class: "btn btn-success", id: "save-button" %>
-      <%= link_to "Cancel", url_for(:back), class: "btn btn-primary", id: "cancel-button" %>
+    <div class="btn-group ">
+      <%= link_to "Back to Category Bank", categories_path, class: "btn btn-primary edit_button_custom", id: "return-button" %>
+      <%= button_to "Delete Category", {:controller => :categories, :action=>'destroy', :id=> @category.id}, :method=> :delete, class: "btn btn-outline-danger", id: "delete-button" %> 
     </div>
-  <% end %>
+    
+  </div>
 <% end %>
 
-<%= link_to "Delete", @category, method: :delete, class: "btn btn-outline-danger", id: "delete-button" %>
-<%= link_to "Return", url_for(:back), class: "btn btn-primary", id: "return-button" %>
