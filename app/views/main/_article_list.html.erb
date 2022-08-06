@@ -4,7 +4,7 @@
       <div class="row">
 
         <div class="col-9">
-          <h4> <%= upload.file.filename.to_s.sub(/(?<=.)\..*/, '') %> </h4>
+          <h4> <strong> <%= upload.file.filename.to_s.sub(/(?<=.)\..*/, '') %> </strong> </h4>
           <br>
           <% if upload.summary.nil? %>
             <p><em><u>No summary. Sorry for the inconvenience.</u></em></p>
@@ -13,9 +13,9 @@
           <% end %>
         </div>
 
-        <div class="col-3">
+        <div class="col-3 d-grid gap-2 d-md-block">
           <% upload.topics.each do |topic| %>
-            <span class="tag"><%= topic.name %></span>
+            <span class="badge <%= Topic.css_class_type(topic, "badge") %>"><%= topic.name %></span>   
           <% end %>
         </div>
       </div>
