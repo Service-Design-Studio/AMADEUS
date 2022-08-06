@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-
+    include ApplicationHelper
     def after_sign_in_path_for(resource)
         "/admin"
     end
@@ -18,4 +18,5 @@ class ApplicationController < ActionController::Base
     def render_flash
         render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash")
     end
+
 end
