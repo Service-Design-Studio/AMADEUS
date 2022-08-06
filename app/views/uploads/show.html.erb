@@ -5,7 +5,7 @@
 
 <h3><strong>Category: </strong>
   <% if @upload.categories.first %>
-    <% @upload.categories.first %>
+    <%= @upload.categories.first.name %>
   <% else %>
     <%="<No category>"%>
   <% end %>
