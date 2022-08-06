@@ -35,6 +35,17 @@ body {
     background: white;
 }
 
+.no-wrap{
+    white-space: nowrap; 
+    overflow: show;
+}
+
+.btn{
+    white-space: nowrap; 
+    overflow: show;
+    text-align: center;
+}
+
 
 .tag {
     background: #201C4C;
@@ -161,6 +172,11 @@ body {
 .special .btn {
     flex: 1
 }
+
+.custom-category-bank-width{
+    width: 100%;
+}
+
 
 /* Tag types badges for
 ["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD", "OTHER"]

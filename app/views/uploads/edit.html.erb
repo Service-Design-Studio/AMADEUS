@@ -1,21 +1,22 @@
-<h1 class="center"><%= render 'uploads/attachment', upload: @upload %></h1><hr>
 <div class="d-grid gap-2">
+<h1 class="center"><%= render 'uploads/attachment', upload: @upload %></h1><hr>
 <h4>
   <% if !@linked_category.nil? %>
     <div id="edit_upload_category_link">
       <%= render partial: 'uploads/inline_category', locals: {linked_category: @linked_category} %>
     </div>
   <% else %>
-    <%= "Category: <No Category>" %>
+    <p><strong>Category: </strong>
+    <%= "<No Category>" %>
     <%= render 'uploads/edit_category_form', upload: @upload %>
   <% end %>
 </h4><br>
 
-<h4>Summary: </h4>
+<h4><strong>Summary: </strong></h4>
 <%= render 'uploads/edit_summary_form', upload: @upload %>
 <br>
 
-<h4>Tags:</h4>
+<h4><strong>Tags: </strong></h4>
 
   <div class="btn-group special">
     <a href="<%=edit_upload_path({:tag_type => Topic.set_toggle_tag_type("PERSON", @tag_type)})%>" class="btn <%= @filter_css["PERSON"] %>">PERSON</a>

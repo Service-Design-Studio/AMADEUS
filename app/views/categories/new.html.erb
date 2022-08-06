@@ -1,9 +1,8 @@
-<h1>New category</h1>
+<div class="d-grid gap-2">
+  <h1 class="no-wrap center">New category</h1><hr>
 
-<%= render "form", category: @category %>
+  <%= render "form", category: @category %>
 
-<br>
+  <%= link_to "Return", categories_path, class: "btn btn-primary",id: "return-button" %>
 
-<div>
-  <%= link_to "Return", url_for(:back), class: "btn btn-primary",id: "return-button" %>
 </div>
