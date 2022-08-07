@@ -15,7 +15,7 @@
  */
 @font-face {
     font-family: 'Montserrat';
-    src: url('/public/fonts/Montserrat-SemiBold.ttf');
+    src: url('/fonts/Montserrat-SemiBold.ttf');
 }
 
 * {
