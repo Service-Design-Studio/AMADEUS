@@ -3,8 +3,8 @@ require 'net/http'
 require 'json'
 
 class Summariser
-  # your public socket URI, remember to add route /zero_shot at the end
-  @uri_string = 'https://tran-nguyen-bao-long-2018-pr2907whv56ch1lx.socketxp.com/summariser'
+  FLASK_URL = ENV.fetch('FLASK_URL', nil)
+  @uri_string = FLASK_URL+'/summariser'
   def self.request(upload_text)
     uri = URI(@uri_string)
     req = Net::HTTP::Post.new(uri)
@@ -12,7 +12,7 @@ class Summariser
     req.body = get_body_request(upload_text)
     http = Net::HTTP.new(uri.host, uri.port)
     http.read_timeout=180
-    http.use_ssl = true
+    # http.use_ssl = true
 
     # start local
     # uri = URI("http://localhost:5001")
