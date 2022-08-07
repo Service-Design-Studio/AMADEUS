@@ -27,11 +27,11 @@ class UploadsController < ApplicationController
     file = params[:upload][:file]
     unless file.nil?
       # START of sync
-      Upload.unzip_file_sync(file, params)
+      # Upload.unzip_file_sync(file, params)
       # END of sync
       new_zip_reply = Upload.save_zip_before_ML(file, params)
       # START of async with sidekiq
-      # ReportWorker.perform_async(new_zip_reply[:zip_id], "")
+      ReportWorker.perform_async(new_zip_reply[:zip_id], "")
       # END of async
       respond_to do |format|
         flash[:success] = "Successfully uploaded #{new_zip_reply[:zip_name]}, waiting for unzipping and ML processing..."
@@ -43,9 +43,6 @@ class UploadsController < ApplicationController
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
     respond_to do |format|
-      puts "---------------------------------------------------------------------------"
-      puts params
-      puts "---------------------------------------------------------------------------"  
       # Update topics
       if !params[:upload][:topics].nil?
           reply = Upload.verify_tag(@upload, params[:upload][:topics], params[:upload][:entity_type])
