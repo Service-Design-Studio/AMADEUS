@@ -25,10 +25,10 @@ production:
   adapter: postgresql
   pool: 5
   timeout: 5000
-  username: amadeus-pg-db-user
-  password: rbeNXDxzVlXKMWdpMYmAwozVTVRNXgzFSLEDEcwAAdPicFiTds
   database: amadeus-pg-db
-  host: 34.143.169.103 #from instances
+  username: amadeus-pg-db-user
+  password: <%= ENV.fetch("PG_USER_KEY") { nil } %>
+  host: <%= ENV.fetch("PG_URL") { nil } %>
 
 cucumber:
   <<: *test

@@ -342,6 +342,7 @@ GEM
       hashery (~> 2.0)
       ruby-rc4
       ttfunk
+    pg (1.4.2)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -501,6 +502,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   pdf-reader
+  pg
   pry
   pry-byebug
   puma (~> 5.0)
