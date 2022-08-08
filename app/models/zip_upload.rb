@@ -1,16 +1,15 @@
 require 'zip'
+require "google/cloud/storage"
 
 class ZipUpload < ApplicationRecord
-    has_one_attached :file
+    has_one_attached :file, service: :local
     validates :file, presence: true
     validates :file, file_content_type: { allow: ['application/pdf', 'application/zip'], message: "ZIP should contain PDFs only!" }
     has_many :uploads
 
     def self.unzip_file_async(zip_id)
-        # get the file attached to the zip_upload
         file = ZipUpload.find(zip_id).file
         file_path = ActiveStorage::Blob.service.path_for(file.key)
-        # unzip the file using file path
         Zip::File.open(file_path) do |zip_file|
             zip_file.each do |entry|
                 # extract the entry to a file
@@ -26,6 +25,6 @@ class ZipUpload < ApplicationRecord
                 end
             end
         end
+        ZipUpload.destroy(zip_id)
     end
-
 end

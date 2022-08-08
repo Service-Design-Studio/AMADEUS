@@ -3,7 +3,7 @@ require 'zip'
 class Upload < ApplicationRecord
   include ActionView::RecordIdentifier
 
-  has_one_attached :file
+  has_one_attached :file, service: :google_pdf
   validates :file, presence: true
   validates :file, file_content_type: { allow: ['application/pdf', 'application/zip'], message: "ZIP should contain PDFs only!" }
   has_many :uploadlinks, dependent: :destroy
