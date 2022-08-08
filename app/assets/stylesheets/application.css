@@ -33,7 +33,10 @@ body {
     margin-top: 150px;
     padding-bottom: 100px;
     background: white;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 .no-wrap{
     white-space: nowrap; 
@@ -41,8 +44,6 @@ body {
 }
 
 .btn{
-    white-space: nowrap; 
-    overflow: show;
     text-align: center;
 }
 
@@ -122,6 +123,10 @@ body {
     padding: 20px;
     font-family: "Montserrat", sans-serif;
     text-align: center;
+}
+
+.no-wrap {
+    white-space: nowrap;
 }
 
 .active {
@@ -206,7 +211,7 @@ body {
 }
 
 .custom-category-bank-width{
-    width: 150%;
+    width: 100%;
 }
 
 

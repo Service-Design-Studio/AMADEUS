@@ -1,27 +1,27 @@
-<div class=" custom-category-bank-width">
-<div class="center d-grid gap-2">
-  <h1>Category Bank</h1>
-  <hr>
-  
+<div class=" custom-category-bank-width no-wrap">
+  <div class="center d-grid gap-2">
+    <h1>Category Bank</h1>
+    <hr>
+
     <%= link_to new_category_path, class: "btn btn-secondary", id: "new-category-button" do %>
       <span class="bi bi-file-earmark-plus icon-align-left"></span>
       New Category
     <% end %>
-    <%= link_to  admin_path, class: "btn btn-primary", id: "back-to-home-button" do %>
+    <%= link_to admin_path, class: "btn btn-primary", id: "back-to-home-button" do %>
       <span class="bi bi-person-circle icon-align-left"></span>
       Admin Homepage
     <% end %>
-  <br>
+    <br>
 
 
-  <table class="table table-hover">
-    <thead class="table">
+    <table class="table table-hover">
+      <thead class="table">
       <tr>
         <th scope="col" class="text-center">Category Name</th>
         <th scope="col" class="text-center"></th>
       </tr>
-    </thead>
-    <tbody id="categories">
+      </thead>
+      <tbody id="categories">
       <% @categories.each do |category| %>
         <tr class="align-middle center">
           <td><%= category.name %></td>
@@ -32,7 +32,7 @@
           </td>
         </tr>
       <% end %>
-    </tbody>
-  </table>
-
+      </tbody>
+    </table>
+  </div>
 </div>
