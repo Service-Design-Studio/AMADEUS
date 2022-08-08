@@ -4,12 +4,14 @@
     <%= form.text_field :name, class: "form-control", id: "category-input", placeholder: @category.name %>
     <span></span>
     <%= form.submit "Save changes", class: "btn btn-success", id: "save-button" %>
-
-    <div class="btn-group ">
-      <%= link_to "Back to Category Bank", categories_path, class: "btn btn-primary edit_button_custom", id: "return-button" %>
-      <%= button_to "Delete Category", {:controller => :categories, :action=>'destroy', :id=> @category.id}, :method=> :delete, class: "btn btn-outline-danger", id: "delete-button" %> 
-    </div>
     
   </div>
 <% end %>
 
+<div class="d-grid gap-2">
+  <span></span>
+  <div class="btn-group ">
+    <%= link_to "Back to Category Bank", categories_path, class: "btn btn-primary edit_button_custom", id: "return-button" %>
+    <%= button_to "Delete Category", {:controller => :categories, :action=>'destroy', :id=> @category.id}, :method=> :delete, class: "btn btn-outline-danger", id: "delete-button" %> 
+  </div>
+</div
