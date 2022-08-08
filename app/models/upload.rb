@@ -193,14 +193,14 @@ class Upload < ApplicationRecord
             content = ExtractPdf.get_pdf_text(entry)
             nltk_response = NltkModel.request(content)
             summary = nltk_response[:summary]
-            # tags_dict = nltk_response[:tags]
+            tags_dict = nltk_response[:tags]
             category = nltk_response[:category]
             # zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
             # category = zero_shot_response[:category]
             # summariser_response = Summariser.request(content)
             # summary = summariser_response[:summary]
-            entities_response = GoogleEntityTagger.request(content)
-            tags_dict = entities_response[:entities]
+            # entities_response = GoogleEntityTagger.request(content)
+            # tags_dict = entities_response[:entities]
             new_upload.summary = summary.gsub(/(\\\")/, "")
             new_upload.ml_status = "Complete"
             new_upload.save

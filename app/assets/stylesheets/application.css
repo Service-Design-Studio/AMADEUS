@@ -30,10 +30,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 160px;
+    margin-top: 150px;
     padding-bottom: 100px;
     background: white;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 .no-wrap{
     white-space: nowrap; 
@@ -41,8 +44,6 @@ body {
 }
 
 .btn{
-    white-space: nowrap; 
-    overflow: show;
     text-align: center;
 }
 
@@ -62,7 +63,7 @@ body {
 }
 
 .custom-main-padding {
-    padding: 5% 10% 5% 10%;
+    margin: 5% 5% 5% 5%;
 }
 
 .fixed {
@@ -73,6 +74,11 @@ body {
     left: 150px;
     bottom: 0;
     right: 0;
+}
+
+.custom-icon{
+    max-width: 220px;
+    cursor: pointer;
 }
 
 .custom-sidebar-container{
@@ -117,6 +123,10 @@ body {
     padding: 20px;
     font-family: "Montserrat", sans-serif;
     text-align: center;
+}
+
+.no-wrap {
+    white-space: nowrap;
 }
 
 .active {
@@ -201,7 +211,7 @@ body {
 }
 
 .custom-category-bank-width{
-    width: 150%;
+    width: 100%;
 }
 
 

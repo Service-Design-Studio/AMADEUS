@@ -6,11 +6,14 @@
       data-bs-toggle="collapse" data-bs-target="#navbarSupportedContentCategory" aria-controls="navbarSupportedContentCategory" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <% else %>
+      <%= link_to "", root_path, class:"navbar-brand", id: "amadeus-button"%>
     <% end %>
     
     <%= link_to root_path do %>
-      <%= image_tag "/logo_cropped.jpg", height: 100 %>
+      <%= image_tag "/logo_cropped_sm.jpg", class: "custom-icon" %>
     <% end %>
+
     <button class="navbar-toggler" id="hamburger-icon" type="button"
     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -29,20 +32,6 @@
         </li>
 
         <% if user_signed_in? %>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="actions-button" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Actions
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark " aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="/admin/categories">Category Bank</a></li>
-            
-              <li><a class="dropdown-item" href="/admin/uploads/new">New Upload</a></li>
-             
-
-              <li><a class="dropdown-item" href="/admin/uploads" >Database</a></li>
-            </ul>
-          </li>
           <li class="nav-item">
             <%= button_to "Sign Out", '/sign_out', method: :delete, class: "btn btn-outline-light" , id: "sign-out-button"%>
           </li>
