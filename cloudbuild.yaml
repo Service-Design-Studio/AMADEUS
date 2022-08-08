@@ -32,7 +32,7 @@ steps:
 substitutions:
   _REGION: asia-southeast1
   _SERVICE_NAME: amadeus
-  _INSTANCE_NAME: amadeus-pg-instance
+  _INSTANCE_NAME: amadeus-pg
 
 images:
   - "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"

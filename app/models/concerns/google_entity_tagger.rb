@@ -5,7 +5,7 @@ require 'json'
 class GoogleEntityTagger
   STOP_WORDS = %w( BBC Register )
   ENTITY = %w( PERSON LOCATION ORGANIZATION EVENT WORK_OF_ART CONSUMER_GOOD )
-  NLP_API_KEY = ENV.fetch('NLP_API_KEY', nil)
+  NLP_API_KEY = Rails.application.credentials.gcp[:nlp_api_key]
   @uri_string = 'https://language.googleapis.com/v1/documents:analyzeEntities?key='+NLP_API_KEY
 
   def self.request(upload_text)
