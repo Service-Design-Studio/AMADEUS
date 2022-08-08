@@ -1,9 +1,6 @@
 # Use the official lightweight Ruby image.
 # https://hub.docker.com/_/ruby
 FROM ruby:3.0.0 AS rails-toolbox
-ARG NLP_API_KEY_ARG="YOUR CLOUD SERVICE ACCOUNT API_KEY"
-ARG SECRET_KEY_BASE_ARG="YOUR SECRET RAILS PRODUCTION KEY"
-ARG REDIS_URL_ARG="YOUR_MEMORY_STORE_IP"
 
 # Install dependencies
 ## node
@@ -35,13 +32,10 @@ ARG CACHEBUST=1
 COPY . /app
 WORKDIR /app
 
-# Set ENV
+# Rails ENV
 ENV RAILS_ENV=production
 ENV RAILS_SERVE_STATIC_FILES=true
 ENV RAILS_LOG_TO_STDOUT=true
-ENV NLP_API_KEY=$NLP_API_KEY_ARG
-ENV SECRET_KEY_BASE=$SECRET_KEY_BASE_ARG
-ENV REDIS_URL=$REDIS_URL_ARG
 
 # Rake task
 RUN bundle exec rake assets:precompile
