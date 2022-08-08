@@ -37,6 +37,16 @@ ENV RAILS_ENV=production
 ENV RAILS_SERVE_STATIC_FILES=true
 ENV RAILS_LOG_TO_STDOUT=true
 
+# Set dummy credentials
+RUN if [[ "$RAILS_ENV" == "production" ]]; then \
+      mv config/credentials.yml.enc config/credentials.yml.enc.backup; \
+      mv config/credentials.yml.enc.sample config/credentials.yml.enc; \
+      mv config/master.key.sample config/master.key; \
+      bundle exec rails assets:precompile; \
+      mv config/credentials.yml.enc.backup config/credentials.yml.enc; \
+      rm config/master.key; \
+    fi
+
 # Rake task
 RUN bundle exec rake assets:precompile
 RUN bundle exec rake db:create
