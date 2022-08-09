@@ -19,9 +19,9 @@ class Upload < ApplicationRecord
     broadcast_replace_later_to "uploads_list", target: "#{dom_id self}", partial: "uploads/upload"
   }
 
-  after_destroy_commit lambda {
-    broadcast_remove_to "uploads_list", target: "#{dom_id self}"
-  }
+  #after_destroy_commit lambda {
+  #  broadcast_remove_to "uploads_list", target: "#{dom_id self}"
+  #}
 
   private
 
