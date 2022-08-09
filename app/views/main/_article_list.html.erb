@@ -1,7 +1,7 @@
 <div id="<%= dom_id upload %>">
   <div class="container">
     <a href="/uploads/<%= upload.id %>" class="list-group-item list-group-item-action" id="upload-<%= upload.id %>">
-      <div class="row">
+      <div class="row table-container">
 
         <div class="col-9">
           <h4> <strong> <%= upload.file.filename.to_s.sub(/(?<=.)\..*/, '') %> </strong> </h4>

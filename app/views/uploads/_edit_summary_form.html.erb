@@ -1,6 +1,6 @@
 <%= form_with(model: upload) do |form| %>
   <div class="d-grid gap-2">
-        <%= form.text_area :summary, id: "summary-input", class:"form-control", rows: 5 %>
+        <%= form.text_area :summary, id: "summary-input", class:"form-control grid", rows: 5 %>
         <%= form.submit "Save", id: "save-button", class: "btn btn-outline-success d-grid gap-2" %>
   </div>
 <% end %>
