@@ -11,14 +11,14 @@ class Upload < ApplicationRecord
   has_many :upload_category_links, dependent: :destroy
   has_many :categories, through: :upload_category_links
 
-  after_create_commit lambda {
-    broadcast_prepend_later_to "uploads_list", target: "uploads", partial: "uploads/upload"
-  }
-
-  after_update_commit lambda {
-    broadcast_replace_later_to "uploads_list", target: "#{dom_id self}", partial: "uploads/upload"
-  }
-
+  # after_create_commit lambda {
+  #   broadcast_prepend_later_to "uploads_list", target: "uploads", partial: "uploads/upload"
+  # }
+  #
+  # after_update_commit lambda {
+  #   broadcast_replace_later_to "uploads_list", target: "#{dom_id self}", partial: "uploads/upload"
+  # }
+  #
   #after_destroy_commit lambda {
   #  broadcast_remove_to "uploads_list", target: "#{dom_id self}"
   #}
