@@ -157,6 +157,7 @@ GEM
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
+    declarative (0.0.20)
     devise (4.8.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -165,8 +166,14 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    digest-crc (0.6.4)
+      rake (>= 12.0.0, < 14.0.0)
     docile (1.4.0)
-    erubi (1.10.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
+    erubi (1.11.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -189,7 +196,7 @@ GEM
     formtastic_i18n (0.7.0)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
-    gapic-common (0.11.0)
+    gapic-common (0.11.1)
       faraday (>= 1.9, < 3.a)
       faraday-retry (>= 1.0, < 3.a)
       google-protobuf (~> 3.14)
@@ -199,6 +206,19 @@ GEM
       grpc (~> 1.36)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    google-apis-core (0.7.0)
+      addressable (~> 2.5, >= 2.5.1)
+      googleauth (>= 0.16.2, < 2.a)
+      httpclient (>= 2.8.1, < 3.a)
+      mini_mime (~> 1.0)
+      representable (~> 3.0)
+      retriable (>= 2.0, < 4.a)
+      rexml
+      webrick
+    google-apis-iamcredentials_v1 (0.13.0)
+      google-apis-core (>= 0.7, < 2.a)
+    google-apis-storage_v1 (0.17.0)
+      google-apis-core (>= 0.7, < 2.a)
     google-cloud-core (1.6.0)
       google-cloud-env (~> 1.0)
       google-cloud-errors (~> 1.0)
@@ -221,6 +241,14 @@ GEM
     google-cloud-logging-v2 (0.8.1)
       gapic-common (>= 0.10, < 2.a)
       google-cloud-errors (~> 1.0)
+    google-cloud-storage (1.38.0)
+      addressable (~> 2.8)
+      digest-crc (~> 0.4)
+      google-apis-iamcredentials_v1 (~> 0.1)
+      google-apis-storage_v1 (~> 0.17.0)
+      google-cloud-core (~> 1.6)
+      googleauth (>= 0.16.2, < 2.a)
+      mini_mime (~> 1.0)
     google-cloud-trace (0.42.1)
       concurrent-ruby (~> 1.1)
       google-cloud-core (~> 1.5)
@@ -259,6 +287,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
     hashery (2.1.2)
+    httpclient (2.8.3)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -391,9 +420,14 @@ GEM
       i18n
     redis (4.7.1)
     regexp_parser (2.5.0)
+    representable (3.2.0)
+      declarative (< 0.1.0)
+      trailblazer-option (>= 0.1.1, < 0.2.0)
+      uber (< 0.2.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    retriable (3.1.2)
     rexml (3.2.5)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
@@ -417,10 +451,10 @@ GEM
     rubyzip (2.3.2)
     shoulda-matchers (5.1.0)
       activesupport (>= 5.2.0)
-    sidekiq (6.5.1)
+    sidekiq (6.5.3)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
-      redis (>= 4.2.0)
+      redis (>= 4.5.0)
     signet (0.17.0)
       addressable (~> 2.8)
       faraday (>= 0.17.5, < 3.a)
@@ -459,6 +493,7 @@ GEM
     thor (1.2.1)
     tilt (2.0.11)
     timeout (0.3.0)
+    trailblazer-option (0.1.2)
     ttfunk (1.7.0)
     turbo-rails (1.1.1)
       actionpack (>= 6.0.0)
@@ -466,6 +501,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
+    uber (0.1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     webrick (1.7.0)
@@ -492,11 +528,13 @@ DEPENDENCIES
   cucumber-rails-training-wheels
   database_cleaner
   devise
+  dotenv-rails
   factory_bot_rails
   file_validators
   flores
   foreman
   friendly_id (~> 5.4.0)
+  google-cloud-storage
   importmap-rails
   jbuilder
   jquery-rails

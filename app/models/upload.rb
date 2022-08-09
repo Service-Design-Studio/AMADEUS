@@ -3,7 +3,7 @@ require 'zip'
 class Upload < ApplicationRecord
   include ActionView::RecordIdentifier
 
-  has_one_attached :file
+  has_one_attached :file, service: :google
   validates :file, presence: true
   validates :file, file_content_type: { allow: ['application/pdf', 'application/zip'], message: "ZIP should contain PDFs only!" }
   has_many :uploadlinks, dependent: :destroy
@@ -11,17 +11,17 @@ class Upload < ApplicationRecord
   has_many :upload_category_links, dependent: :destroy
   has_many :categories, through: :upload_category_links
 
-  after_create_commit lambda {
-    broadcast_prepend_later_to "uploads_list", target: "uploads", partial: "uploads/upload"
-  }
-
-  after_update_commit lambda {
-    broadcast_replace_later_to "uploads_list", target: "#{dom_id self}", partial: "uploads/upload"
-  }
-
-  after_destroy_commit lambda {
-    broadcast_remove_to "uploads_list", target: "#{dom_id self}"
-  }
+  # after_create_commit lambda {
+  #   broadcast_prepend_later_to "uploads_list", target: "uploads", partial: "uploads/upload"
+  # }
+  #
+  # after_update_commit lambda {
+  #   broadcast_replace_later_to "uploads_list", target: "#{dom_id self}", partial: "uploads/upload"
+  # }
+  #
+  #after_destroy_commit lambda {
+  #  broadcast_remove_to "uploads_list", target: "#{dom_id self}"
+  #}
 
   private
 
@@ -164,10 +164,10 @@ class Upload < ApplicationRecord
   def self.run_nltk_async(upload_id)
     upload = Upload.find(upload_id)
     content = upload.content
-    # nltk_response = NltkModel.request(content)
-    # summary = nltk_response[:summary]
-    # tags_dict = nltk_response[:tags]
-    # category = nltk_response[:category]
+    #nltk_response = NltkModel.request(content)
+    #summary = nltk_response[:summary]
+    #tags_dict = nltk_response[:tags]
+    #category = nltk_response[:category]
     zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
     category = zero_shot_response[:category]
     summariser_response = Summariser.request(content)

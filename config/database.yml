@@ -25,10 +25,10 @@ production:
   adapter: postgresql
   pool: 5
   timeout: 5000
-  database: amadeus-pg-db
-  username: amadeus-pg-db-user
-  password: <%= ENV.fetch("PG_USER_KEY") { nil } %>
-  host: <%= ENV.fetch("PG_URL") { nil } %>
+  database: <%= ENV.fetch("PRODUCTION_DB_NAME") { nil } %>
+  username: <%= ENV.fetch("PRODUCTION_DB_USERNAME") { nil } %>
+  password: <%= Rails.application.credentials.gcp[:db_password] %>
+  host: <%= ENV.fetch("PRODUCTION_DB_URL") { nil } %>
 
 cucumber:
   <<: *test
