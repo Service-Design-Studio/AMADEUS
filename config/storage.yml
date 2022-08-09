@@ -18,7 +18,17 @@ local:
 google:
   service: GCS
   project: <%= ENV.fetch("PROJECT_ID") %>
-  credentials: <%= Rails.application.credentials.gcp[:secret_key] %>
+  credentials:
+    type: "service_account"
+    project_id: "amadeus-2000"
+    private_key_id: <%= Rails.application.credentials.dig(:gcs, :private_key_id) %>
+    private_key: <%= Rails.application.credentials.dig(:gcs, :private_key).dump %>
+    client_email: "amadeus-service-account@amadeus-2000.iam.gserviceaccount.com"
+    client_id: "104099822487193976770"
+    auth_uri: "https://accounts.google.com/o/oauth2/auth"
+    token_uri: "https://accounts.google.com/o/oauth2/token"
+    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+    client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/amadeus-service-account%40amadeus-2000.iam.gserviceaccount.com"
   bucket: <%= ENV.fetch("BUCKET_NAME") %>
 
 # Use bin/rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
@@ -32,3 +42,4 @@ google:
 #   service: Mirror
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
+

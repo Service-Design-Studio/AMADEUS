@@ -43,7 +43,6 @@ ENV RAILS_LOG_TO_STDOUT=true
 RUN bundle exec rake assets:precompile
 RUN bundle exec rake db:create
 RUN bundle exec rake db:migrate
-RUN bundle exec rake db:seed
 
 EXPOSE 3000
 
