@@ -31,33 +31,34 @@
   <%= render 'uploads/edit_tag_form', upload: @upload %><br>
 
 
-
-<table class="table table-hover">
-  <thead class="table">
-    <tr>
-      <th scope="col" class="text-center">Tag Type</th>
-      <th scope="col" class="text-center">Name</th>
-      <th scope="col" class="text-center"></th>
-    </tr>
-  </thead>
-  <tbody id="tags">
-    <% @linked_topics.each do |uploadlink| %>
-      <tr class="align-middle center">
-        <td>
-          <span class="badge <%= Topic.css_class_type(uploadlink.topic, "badge") %>">
-            <%= uploadlink.topic.entity_type%>
-          </span>
-        </td>
-        <td><%= uploadlink.topic.name%></td>
-        <td>
-          <%= button_to raw("<i class=\"bi bi-trash-fill icon-red\" style=\"font-size: 1.5rem;\"></i>"), 
-            {:controller => :uploadlinks, :action=>'destroy', :id=> uploadlink.id}, :method=> :delete, 
-            class: "btn", id: "#{uploadlink.topic.name}-delete-button"%>
-        </td>
+<div class="table-container">
+  <table class="table table-hover">
+    <thead class="table">
+      <tr>
+        <th scope="col" class="text-center">Tag Type</th>
+        <th scope="col" class="text-center">Name</th>
+        <th scope="col" class="text-center"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody id="tags">
+      <% @linked_topics.each do |uploadlink| %>
+        <tr class="align-middle center">
+          <td>
+            <span class="badge <%= Topic.css_class_type(uploadlink.topic, "badge") %>">
+              <%= uploadlink.topic.entity_type%>
+            </span>
+          </td>
+          <td><%= uploadlink.topic.name%></td>
+          <td>
+            <%= button_to raw("<i class=\"bi bi-trash-fill icon-red\" style=\"font-size: 1.5rem;\"></i>"), 
+              {:controller => :uploadlinks, :action=>'destroy', :id=> uploadlink.id}, :method=> :delete, 
+              class: "btn", id: "#{uploadlink.topic.name}-delete-button"%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
   <br>
   <div class="btn-group">

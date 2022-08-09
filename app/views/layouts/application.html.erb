@@ -16,13 +16,15 @@
   <body>
     <header class="header">
       <%= render 'layouts/navbar'%>
-      <main class="custom-main-padding">
-        <turbo-frame id="flash">
-          <%= render 'layouts/flash' %>
-        </turbo-frame>
-        <%= yield %>
-      </main>
-      <%= render 'main/sidebar' %>
+        <%= render 'main/sidebar' %>
+        <main>
+          <div class="custom-main-padding">
+          <turbo-frame id="flash">
+            <%= render 'layouts/flash' %>
+          </turbo-frame>
+          <%= yield %>
+          </div>
+        </main>
     </header>
   </body>
 </html>
