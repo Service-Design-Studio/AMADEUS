@@ -15,11 +15,11 @@ local:
 #   bucket: your_own_bucket-<%= Rails.env %>
 
 # Remember not to checkin your GCS keyfile to a repository
-google_pdf:
+google:
   service: GCS
-  project: <%= ENV.fetch("GOOGLE_PROJECT_ID") %>
+  project: <%= ENV.fetch("PROJECT_ID") %>
   credentials: <%= Rails.application.credentials.gcp[:secret_key] %>
-  bucket: <%= ENV.fetch("STORAGE_BUCKET_PDF_NAME") %>
+  bucket: <%= ENV.fetch("BUCKET_NAME") %>
 
 # Use bin/rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
 # microsoft:
