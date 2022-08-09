@@ -1,4 +1,5 @@
-redis = { url: ENV.fetch('REDIS_URL', "redis://localhost:6379/1"), id: nil }
+redis = { url: ENV.fetch('REDIS_URL', "redis://localhost:6379/1"), id: nil,
+          password: Rails.application.credentials.redis_key }
 Sidekiq.configure_server do |config|
   config.redis = redis
   # config.logger = nil
