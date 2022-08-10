@@ -16,10 +16,11 @@ fuzz "flash string method" do
       m.generator
     end
   
-    data "enclosing curly braces" do
+    data "fixed curly braces" do
       c = FuzzBert::Container.new
-      c << FuzzBert::Generators.fixed("Testing")
-      # c << FuzzBert::Generators.fixed("}")
+      c << FuzzBert::Generators.fixed("{")
+      c << FuzzBert::Generators.random
+      c << FuzzBert::Generators.fixed("}")
       c.generator
     end
     data "random data" do
