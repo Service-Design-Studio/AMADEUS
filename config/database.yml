@@ -23,14 +23,3 @@ test: &test
 production:
   <<: *default
   database: db/production.sqlite3
-
-cucumber:
-  <<: *test
-cucumber:
-  <<: *test
-
-cucumber:
-  <<: *test
-
-cucumber:
-  <<: *test

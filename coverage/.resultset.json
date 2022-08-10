@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/support/factory_bot.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/support/factory_bot.rb": {
         "lines": [
           1,
           1,
@@ -9,7 +9,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/environment.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -18,7 +18,7 @@
           1
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/application.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/application.rb": {
         "lines": [
           1,
           null,
@@ -44,7 +44,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/boot.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -52,7 +52,7 @@
           1
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/environments/test.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -120,7 +120,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/initializers/assets.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
@@ -136,323 +136,8 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/initializers/content_security_policy.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/initializers/content_security_policy.rb": {
         "lines": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/initializers/devise.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           null,
@@ -480,7 +165,322 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/initializers/filter_parameter_logging.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/initializers/devise.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -492,7 +492,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/initializers/friendly_id.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/initializers/friendly_id.rb": {
         "lines": [
           null,
           null,
@@ -603,7 +603,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/initializers/inflections.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -623,7 +623,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/initializers/permissions_policy.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/initializers/permissions_policy.rb": {
         "lines": [
           null,
           null,
@@ -638,7 +638,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/factories.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/factories.rb": {
         "lines": [
           1,
           null,
@@ -649,7 +649,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/config/routes.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/config/routes.rb": {
         "lines": [
           1,
           null,
@@ -684,7 +684,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/user.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/models/user.rb": {
         "lines": [
           1,
           null,
@@ -698,20 +698,20 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/application_record.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/models/application_record.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/helpers/application_helper.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/category.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/models/category.rb": {
         "lines": [
           1,
           1,
@@ -751,7 +751,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/models/concerns/flash_string_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/models/concerns/flash_string_spec.rb": {
         "lines": [
           1,
           null,
@@ -790,7 +790,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/concerns/flash_string.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/models/concerns/flash_string.rb": {
         "lines": [
           1,
           1,
@@ -846,7 +846,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/models/topic_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/models/topic_spec.rb": {
         "lines": [
           1,
           null,
@@ -860,7 +860,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/topic.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/models/topic.rb": {
         "lines": [
           1,
           1,
@@ -892,7 +892,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/models/upload_category_link_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/models/upload_category_link_spec.rb": {
         "lines": [
           1,
           null,
@@ -902,7 +902,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/upload_category_link.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/models/upload_category_link.rb": {
         "lines": [
           1,
           1,
@@ -910,7 +910,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/models/upload_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/models/upload_spec.rb": {
         "lines": [
           1,
           1,
@@ -1016,7 +1016,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/upload.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/models/upload.rb": {
         "lines": [
           1,
           null,
@@ -1032,7 +1032,7 @@
           1,
           null,
           1,
-          29,
+          28,
           null,
           null,
           1,
@@ -1243,7 +1243,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/models/uploadlink_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/models/uploadlink_spec.rb": {
         "lines": [
           1,
           null,
@@ -1253,7 +1253,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/uploadlink.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/models/uploadlink.rb": {
         "lines": [
           1,
           1,
@@ -1261,7 +1261,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/models/zip_upload_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/models/zip_upload_spec.rb": {
         "lines": [
           1,
           null,
@@ -1289,7 +1289,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/zip_upload.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/models/zip_upload.rb": {
         "lines": [
           1,
           null,
@@ -1307,147 +1307,24 @@
           1,
           1,
           null,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          2,
-          null,
-          2,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/requests/application_spec.rb": {
-        "lines": [
-          1,
-          null,
           1,
           1,
-          13,
-          null,
-          null,
-          1,
-          10,
-          null,
-          null,
-          1,
-          3,
-          null,
-          null,
           1,
           1,
           1,
           1,
           1,
           null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
           1,
           null,
           null,
           null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          2,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
           null,
           null,
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/requests/categories_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/requests/application_spec.rb": {
         "lines": [
           1,
           null,
@@ -1570,7 +1447,130 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/requests/topics_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/requests/categories_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          13,
+          null,
+          null,
+          1,
+          10,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/requests/topics_spec.rb": {
         "lines": [
           1,
           null,
@@ -1694,7 +1694,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/requests/upload_category_links_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/requests/upload_category_links_spec.rb": {
         "lines": [
           1,
           null,
@@ -1779,7 +1779,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/requests/uploads_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/requests/uploads_spec.rb": {
         "lines": [
           1,
           1,
@@ -1847,7 +1847,7 @@
           null,
           1,
           1,
-          1,
+          0,
           null,
           null,
           null,
@@ -1860,7 +1860,7 @@
           null,
           1,
           1,
-          1,
+          0,
           null,
           null,
           null,
@@ -1915,7 +1915,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/routing/categories_routing_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/routing/categories_routing_spec.rb": {
         "lines": [
           1,
           null,
@@ -1957,7 +1957,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/controllers/categories_controller.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/controllers/categories_controller.rb": {
         "lines": [
           1,
           1,
@@ -2043,7 +2043,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/controllers/application_controller.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/controllers/application_controller.rb": {
         "lines": [
           1,
           null,
@@ -2068,7 +2068,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/routing/topics_routing_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/routing/topics_routing_spec.rb": {
         "lines": [
           1,
           null,
@@ -2110,7 +2110,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/controllers/topics_controller.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/controllers/topics_controller.rb": {
         "lines": [
           1,
           1,
@@ -2148,7 +2148,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/routing/upload_category_links_routing_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/routing/upload_category_links_routing_spec.rb": {
         "lines": [
           1,
           null,
@@ -2187,7 +2187,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/controllers/upload_category_links_controller.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/controllers/upload_category_links_controller.rb": {
         "lines": [
           1,
           1,
@@ -2243,7 +2243,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/routing/uploads_routing_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/routing/uploads_routing_spec.rb": {
         "lines": [
           1,
           null,
@@ -2281,7 +2281,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/controllers/uploads_controller.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/controllers/uploads_controller.rb": {
         "lines": [
           1,
           null,
@@ -2314,9 +2314,9 @@
           4,
           null,
           4,
-          4,
-          4,
-          8,
+          0,
+          0,
+          0,
           null,
           null,
           null,
@@ -2401,7 +2401,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/workers/report_worker_spec.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/spec/workers/report_worker_spec.rb": {
         "lines": [
           1,
           null,
@@ -2414,7 +2414,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/workers/report_worker.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/workers/report_worker.rb": {
         "lines": [
           1,
           1,
@@ -2434,7 +2434,7 @@
           null
         ]
       },
-      "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/concerns/extract_pdf.rb": {
+      "/mnt/c/Users/ernes/Desktop/GitHub Projects/SDS/final-project-group-5-amadeus/app/models/concerns/extract_pdf.rb": {
         "lines": [
           1,
           1,
@@ -2443,69 +2443,69 @@
           1,
           null,
           1,
-          2,
-          2,
-          2,
-          7,
-          7,
-          7,
-          7,
-          2,
-          null,
-          null,
-          2,
+          1,
+          1,
+          1,
+          5,
+          5,
+          5,
+          5,
+          1,
           null,
           null,
           1,
-          7,
-          7,
-          null,
-          null,
-          7,
-          1240,
-          21,
-          null,
-          null,
-          7,
-          7,
-          2,
-          2,
-          null,
-          null,
-          null,
-          5,
-          5,
-          5,
           null,
           null,
           1,
           5,
-          null,
-          276,
-          53,
-          null,
-          null,
-          223,
-          223,
-          16,
-          null,
-          null,
           5,
           null,
           null,
+          5,
+          886,
+          15,
+          null,
+          null,
+          5,
+          5,
           1,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
-          7,
+          1,
+          null,
+          null,
+          null,
+          4,
+          4,
+          4,
+          null,
+          null,
+          1,
+          4,
+          null,
+          222,
+          49,
+          null,
+          null,
+          173,
+          173,
+          13,
+          null,
+          null,
+          4,
+          null,
+          null,
+          1,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
           null,
           null
         ]
       }
     },
-    "timestamp": 1659658201
+    "timestamp": 1660152617
   }
 }
