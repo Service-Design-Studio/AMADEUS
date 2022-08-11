@@ -11,16 +11,16 @@ import random
 
 print("Finish setup")
 
-def tagger():
+def tagger(upload_text):
     tags_dict = {}
     ENTITY = ["PERSON", "LOCATION", "ORGANIZATION", "EVENT", "WORK_OF_ART", "CONSUMER_GOOD"]
     for i in range(3):
         # Entity Tag
-        name = "Entity" + str(random.randint(1, 20))
+        name = random.choice(upload_text.split())
         entity_type = random.choice(ENTITY)
         tags_dict[name] = entity_type
         # Other Tag
-        name = "Other" + str(random.randint(1, 20))
+        name = random.choice(upload_text.split())
         tags_dict[name] = "OTHER"
     return tags_dict
 
@@ -142,7 +142,7 @@ def nltk_model(request):
         upload = request_json['upload']
 
         # START of legacy code
-        # upload_text = upload['upload_text']
+        upload_text = upload['upload_text']
         # replace_dict = upload['replace_dict']
         # num_tag = upload['num_tag']
         # summary_threshold = upload['summary_threshold']#
@@ -153,7 +153,7 @@ def nltk_model(request):
         # summary = legacy_summariser(upload_text, all_stopwords, summary_threshold)
         # END of legay code
 
-        tags_dict = tagger()
+        tags_dict = tagger(upload_text)
         category = categoriser()
         summary = summariser()
         response = {"summary": summary, "tags": tags_dict, "category": category}
