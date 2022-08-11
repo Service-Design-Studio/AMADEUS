@@ -1,11 +1,11 @@
 require 'fuzzbert'
-require '/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/concerns/flash_string.rb'
+require '/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/concerns/extract_pdf.rb'
 
 fuzz "flash string method" do
 
     deploy do |data|
       begin
-      FlashString::TagString.get_added_tag data
+      ExtractPdf.get_pdf_text data
       rescue StandardError
       #fine, we just want to capture crashes
       end

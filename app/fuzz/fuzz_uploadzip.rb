@@ -1,5 +1,5 @@
 require 'fuzzbert'
-require '/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/upload.rb'
+require '/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/app/models/concerns/upload_zip.rb'
 
 fuzz "summary" do
 
@@ -24,4 +24,14 @@ fuzz "summary" do
     data "random data" do
         FuzzBert::Generators.random
         end
+
+    data "my custom generator" do
+      prng = Random.new
+      lambda do
+        buf = '{ user: { '
+        buf << prng.bytes(100)
+        buf << ' } }'
+        end
+      end
+      
     end

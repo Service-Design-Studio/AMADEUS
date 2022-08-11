@@ -31,7 +31,7 @@
 /tmp/storage/*
 !/tmp/storage/
 !/tmp/storage/.keep
-
+/coverage/*
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
