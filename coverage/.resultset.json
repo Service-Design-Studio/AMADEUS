@@ -1315,7 +1315,7 @@
           2,
           2,
           null,
-          2,
+          null,
           null,
           null,
           null,
@@ -1781,6 +1781,7 @@
       },
       "/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project-group-5-amadeus/spec/requests/uploads_spec.rb": {
         "lines": [
+          1,
           1,
           1,
           null,
@@ -2313,7 +2314,7 @@
           4,
           4,
           null,
-          4,
+          null,
           4,
           4,
           8,
@@ -2506,6 +2507,6 @@
         ]
       }
     },
-    "timestamp": 1660230815
+    "timestamp": 1660279930
   }
 }
