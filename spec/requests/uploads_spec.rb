@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'factory_bot'
+require 'fuzzbert'
 
 
 RSpec.describe "/uploads", type: :request do
