@@ -3,35 +3,26 @@ require '/mnt/c/Users/ngtro/github-classroom/Service-Design-Studio/final-project
 
 fuzz "summary" do
 
-    deploy do |data|
-      begin
-        Upload.verify_summary(data, "Testing")
-      rescue StandardError
-      #fine, we just want to capture crashes
-      end
+  deploy do |data|
+    begin
+      Upload.verify_tag(data, "Topic name")
+      Upload.verify_category(data, "category name")
+      Upload.verify_summary(data, "summary")
+      Upload.save_zip_before_ML(data)
+    rescue StandardError
+    #fine, we just want to capture crashes
     end
+  end
 
-    data "mutated data" do
-        m = FuzzBert::Mutator.new "Testing"
-        m.generator
-        end
-    data "enclosing curly braces" do
-        c = FuzzBert::Container.new
-        c << FuzzBert::Generators.fixed("Testing")
-        # c << FuzzBert::Generators.fixed("}")
-        c.generator
-        end
-    data "random data" do
-        FuzzBert::Generators.random
-        end
+  data "JSON template" do
+    t = FuzzBert::Template.new '{ upload: { id: ${id}, name: "${name}" } }'
+    t.set(:id, FuzzBert::Generators.cycle(1..10000))
+    t.set(:name) { "Fixed text plus two random bytes: #{FuzzBert::Generators.random_fixlen(2).call}" }
+    t.generator
+  end
 
-    data "my custom generator" do
-      prng = Random.new
-      lambda do
-        buf = '{ user: { '
-        buf << prng.bytes(100)
-        buf << ' } }'
-        end
+  data "random data" do
+      FuzzBert::Generators.random
       end
-      
-    end
+    
+  end
