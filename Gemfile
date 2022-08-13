@@ -95,8 +95,8 @@ end
 group :test do
   gem 'cucumber-rails', require: false
   gem 'cucumber-rails-training-wheels'
-  gem 'flores'
   gem 'simplecov'
+  gem 'fuzzbert'
   # database_cleaner is not required, but highly recommended
   # gem 'database_cleaner'
 end

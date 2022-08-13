@@ -33,7 +33,7 @@ class UploadCategoryLinksController < InheritedResources::Base
     @upload_category_link.destroy
 
     respond_to do |format|
-      flash[:danger] = flash_message::DELETED_TAG
+      #flash[:danger] = flash_message::DELETED_TAG
       format.html { redirect_to edit_upload_path(@upload) }
       format.json { head :no_content }
     end

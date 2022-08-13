@@ -9,6 +9,7 @@ class ReportWorker
         elsif upload_id != ""
             Upload.run_nltk_async(upload_id)
         end
+    
     end
 
 end

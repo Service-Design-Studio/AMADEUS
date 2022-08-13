@@ -189,8 +189,8 @@ GEM
     file_validators (3.0.0)
       activemodel (>= 3.2)
       mime-types (>= 1.0)
-    flores (0.0.7)
     foreman (0.87.2)
+
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
     formtastic_i18n (0.7.0)
@@ -204,6 +204,7 @@ GEM
       googleapis-common-protos-types (>= 1.3.1, < 2.a)
       googleauth (~> 1.0)
       grpc (~> 1.36)
+    fuzzbert (1.0.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
     google-apis-core (0.7.0)
@@ -535,6 +536,7 @@ DEPENDENCIES
   foreman
   friendly_id (~> 5.4.0)
   google-cloud-storage
+  fuzzbert
   importmap-rails
   jbuilder
   jquery-rails
