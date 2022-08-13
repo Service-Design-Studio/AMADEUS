@@ -30,9 +30,14 @@ class UploadsController < ApplicationController
       # Upload.unzip_file_sync(file, params)
       # END of sync
       new_zip_reply = Upload.save_zip_before_ML(file, params)
+<<<<<<< HEAD
       # START of async with sidekiq
       ReportWorker.perform_async(new_zip_reply[:zip_id], "")
       # END of async
+=======
+      # Sidekiq to unzip the zip file
+      #ReportWorker.perform_async(new_zip_reply[:zip_id], "")
+>>>>>>> rspec
       respond_to do |format|
         flash[:success] = "Successfully uploaded #{new_zip_reply[:zip_name]}, waiting for unzipping and ML processing..."
         format.html { redirect_to uploads_url }

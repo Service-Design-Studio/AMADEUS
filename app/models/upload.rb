@@ -37,13 +37,19 @@ class Upload < ApplicationRecord
 
     # if topic_name contains invalid inputs
     if (topic_name == "") || topic_name.nil?
-      msg = flash_message_tag::INVALID_TAG
+      msg = flash_message_tag::INVALID_TAG 
     elsif topic_name.length >= 15
+<<<<<<< HEAD
       msg = flash_message_tag::INVALID_TAG
     elsif topic_name.match(/\W/)
       msg = flash_message_tag::INVALID_TAG
 
     # if topic already exists
+=======
+      msg = flash_message_tag::INVALID_TAG 
+    elsif topic_name[0].match(/\W/)
+      msg = flash_message_tag::INVALID_TAG 
+>>>>>>> rspec
     elsif status == "exist"
       msg = flash_message_tag.get_duplicate_tag(topic_name)
     
@@ -149,7 +155,7 @@ class Upload < ApplicationRecord
     # attach zip file in active records
     if File.extname(file) == ".zip"
       new_zip = ZipUpload.new
-      new_zip.file.attach(io: StringIO.new(file.read), filename: file.original_filename)
+      new_zip.file.attach(io: StringIO.new(file.read), filename: file.to_s)
       new_zip.save
       # get the zip file id
       zip_id = new_zip.id

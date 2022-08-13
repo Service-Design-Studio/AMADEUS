@@ -6,6 +6,7 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+<<<<<<< HEAD
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
 #   service: S3
@@ -43,3 +44,5 @@ google:
 #   primary: local
 #   mirrors: [ amazon, google, microsoft ]
 
+=======
+>>>>>>> rspec
