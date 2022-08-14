@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe FlashString::TagString do
 
-  describe '.get_added_tag' do
-    it { expect(subject.class.get_added_tag("hello")).to be_truthy}
+  describe '.get_new_added_tag' do
+    it { expect(subject.class.get_new_added_tag("hello", "test")).to be_truthy}
   end
   describe '.get_deleted_tag' do
     it { expect(subject.class.get_deleted_tag("hello")).to be_truthy}

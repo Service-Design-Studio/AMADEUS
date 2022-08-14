@@ -4,6 +4,7 @@ require 'rails_helper'
 RSpec.describe "/topics", type: :request do
   before :each do 
     sign_in user = build(:user)
+    host! "localhost:3000"
   end
 
   let(:valid_attributes) {{

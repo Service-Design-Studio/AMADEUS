@@ -24,7 +24,7 @@ RSpec.describe Upload, type: :model do
 
   describe '.verify_tag' do 
     before { Upload.create! valid_attributes }
-    it { expect(subject.class.verify_tag(subject, "hello")).to be_truthy}
+    it { expect(subject.class.verify_tag(subject, "hello", "test")).to be_truthy}
   end
 
   describe '.verify_category' do 

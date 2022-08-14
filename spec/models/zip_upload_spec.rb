@@ -19,6 +19,6 @@ RSpec.describe ZipUpload, type: :model do
 
   describe '.unzip_file' do 
     before { ZipUpload.create! valid_attributes }
-    it { expect(subject.class.unzip_file(1)).to be_truthy}
+    it { expect(subject.class.unzip_file_async(1)).to be_truthy}
   end
 end

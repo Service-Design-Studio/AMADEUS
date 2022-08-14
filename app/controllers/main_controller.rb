@@ -1,4 +1,6 @@
 class MainController < ApplicationController
+    skip_before_action :verify_authenticity_token
+    include ApplicationHelper
     def index
         # sort all categories by their name in ascending order
         @categories = Category.all.sort_by { |category| category.name }
