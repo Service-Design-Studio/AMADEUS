@@ -9,6 +9,7 @@ RSpec.describe "/uploads", type: :request do
   path_fail = Rails.root + "spec/support/assets/big_chungus.jpg"
   before :each do 
     sign_in user = build(:user)
+    host! "localhost:3000"
   end
   let(:valid_attributes) {{ 
       "file" => Rack::Test::UploadedFile.new(path),
