@@ -1,20 +1,20 @@
-class Topic < ApplicationRecord
+class Tag < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  has_many :uploadlinks, dependent: :destroy
-  has_many :uploads, through: :uploadlinks
+  has_many :upload_tag_links, dependent: :destroy
+  has_many :uploads, through: :upload_tag_links
 
-  def self.verify(topic_name)
+  def self.verify(tag_name)
     status = "fail"
-    if (topic_name == "") || topic_name.nil?
+    if (tag_name == "") || tag_name.nil?
       msg = flash_message::INVALID_TAG
-    elsif topic_name.length >= 15
+    elsif tag_name.length >= 15
       msg = flash_message::INVALID_TAG
-    elsif topic_name.match(/\W/)
+    elsif tag_name.match(/\W/)
       msg = flash_message::INVALID_TAG
-    elsif Topic.exists?(name: topic_name)
-      msg = flash_message.get_duplicate_tag(topic_name)
+    elsif Tag.exists?(name: tag_name)
+      msg = flash_message.get_duplicate_tag(tag_name)
     else
       status = "success"
       msg = ""
@@ -26,9 +26,9 @@ class Topic < ApplicationRecord
     FlashString::TagString
   end
 
-  # returns the bg-type css class for the topic for bagde/table row
-  def self.css_class_type(topic, type)
-    topic_entity_type = topic.entity_type
+  # returns the bg-type css class for the tag for bagde/table row
+  def self.css_class_type(tag, type)
+    tag_entity_type = tag.entity_type
     all_types = {
       "PERSON" => "bg-person",
       "LOCATION" => "bg-location",
@@ -39,9 +39,9 @@ class Topic < ApplicationRecord
       "OTHER" => "bg-other"
     }
     if type == "table-row"
-      return all_types[topic_entity_type] + "-table-row"
+      return all_types[tag_entity_type] + "-table-row"
     else
-      return all_types[topic_entity_type] + "-badge"
+      return all_types[tag_entity_type] + "-badge"
     end
   end
 

@@ -2,13 +2,13 @@
     <div class="d-grid gap-2">
 
         <datalist id="tags_list">
-            <%= @filtered_topics.each do |topic| %>
-            <option value="<%= topic.name %>"></option>
+            <%= @filtered_tags.each do |tag| %>
+            <option value="<%= tag.name %>"></option>
             <% end %>
         </datalist>
 
         <div class="form-floating">
-            <%= form.text_field :topics, class: "form-control", id: "tag-input",
+            <%= form.text_field :tags, class: "form-control", id: "tag-input",
                                 value: "", placeholder: "Add new tag...", list: "tags_list" %>
             <label for="tag-input">Tag name</label>
         </div>

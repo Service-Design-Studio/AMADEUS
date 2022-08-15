@@ -21,7 +21,7 @@ class ZipUpload < ApplicationRecord
                     new_upload.ml_status = "Running"
                     new_upload.save
                     # sidekiq to run nltk on new_upload
-                    #ReportWorker.perform_async("", new_upload.id)
+                    ReportWorker.perform_async("", new_upload.id)
                 end
             end
         end

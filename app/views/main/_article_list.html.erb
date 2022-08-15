@@ -14,8 +14,8 @@
         </div>
 
         <div class="col-3 d-grid gap-2 d-md-block">
-          <% upload.topics.each do |topic| %>
-            <span class="badge <%= Topic.css_class_type(topic, "badge") %>"><%= topic.name %></span>   
+          <% upload.tags.each do |tag| %>
+            <span class="badge <%= Tag.css_class_type(tag, "badge") %>"><%= tag.name %></span>
           <% end %>
         </div>
       </div>

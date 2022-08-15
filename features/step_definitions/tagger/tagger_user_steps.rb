@@ -6,8 +6,8 @@ end
 
 Then(/^I should be redirected to the linking page for the tag "([^"]*)"$/) do |tag_name|
   id = capybara_get_tag_idx(tag_name)
-  visit("/uploadlinks/#{id}")
-  expect(page).to have_current_path("/uploadlinks/#{id}")
+  visit("/upload_tag_links/#{id}")
+  expect(page).to have_current_path("/upload_tag_links/#{id}")
 end
 
 When(/^I click on the linking tag "([^"]*)"$/) do |tag_name|

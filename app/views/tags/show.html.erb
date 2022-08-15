@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= link_to tag_path, style: "text-decoration:none" do %>
+  <span class="tag"><%= @tag.name %></span>
+<% end %>
+
+<div>
+  <%= link_to "Edit", edit_tag_path(@tag) %> |
+  <%= link_to "View all tags", tags_path %>
+</div>

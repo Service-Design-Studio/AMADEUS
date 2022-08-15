@@ -5,7 +5,7 @@ fuzz "summary" do
 
   deploy do |data|
     begin
-      Upload.verify_tag(data, "Topic name")
+      Upload.verify_tag(data, "Tag name")
       Upload.verify_category(data, "category name")
       Upload.verify_summary(data, "summary")
       Upload.save_zip_before_ML(data)
