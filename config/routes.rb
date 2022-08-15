@@ -9,14 +9,14 @@ Rails.application.routes.draw do
   
   scope :admin do
     resources :uploads, except: :show
-    resources :topics
+    resources :tags
     resources :categories
 
-    resources :uploadlinks, only: %i[ update, destroy, edit ]
+    resources :upload_tag_links, only: %i[ update, destroy, edit ]
     resources :upload_category_links, only: %i[ update, destroy, edit ]
   end
 
-  resources :uploadlinks, except: %i[ update, destroy, edit ]
+  resources :upload_tag_links, except: %i[ update, destroy, edit ]
   resources :upload_category_links, except: %i[ update, destroy, edit ]
 
   get "admin", to: "sessions#admin"

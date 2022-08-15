@@ -5,16 +5,16 @@ RSpec.describe "/upload_category_links", type: :request do
   path_fail = Rails.root + "spec/support/assets/big_chungus.jpg"
   let(:valid_attributes) {{ 
     "file" => Rack::Test::UploadedFile.new(path),
-    "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "test")), Uploadlink.new(topic: Topic.new(:name => "test2"))],
-    "topics" => [Topic.new(:name => "hello")]
+    "upload_tag_links" => [UploadTagLink.new(tag: Tag.new(:name => "test")), UploadTagLink.new(tag: Tag.new(:name => "test2"))],
+    "tags" => [Tag.new(:name => "hello")]
     # "categories" => [Category.new(:name => "test"),Category.new(:name => "test2")],
-    # "topics" => [Topic.new(:name => "test"),Topic.new(:name => "test2")]
+    # "tags" => [Tag.new(:name => "test"),Tag.new(:name => "test2")]
   }}
   let(:invalid_attributes) {
     { 
       "file" => Rack::Test::UploadedFile.new(path_fail),
-      "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "!!!")), Uploadlink.new(topic: Topic.new(:name => "!!!@"))],
-      "topics" => [Topic.new(:name => "hello!"),Topic.new(:name => "hello2!!")]
+      "upload_tag_links" => [UploadTagLink.new(tag: Tag.new(:name => "!!!")), UploadTagLink.new(tag: Tag.new(:name => "!!!@"))],
+      "tags" => [Tag.new(:name => "hello!"),Tag.new(:name => "hello2!!")]
     }}
 
   let(:uploadcatlink_attributes) {
@@ -28,10 +28,10 @@ RSpec.describe "/upload_category_links", type: :request do
     context "with valid parameters" do
       let(:new_attributes) {{ 
         "file" => Rack::Test::UploadedFile.new(path),
-        "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "test")), Uploadlink.new(topic: Topic.new(:name => "test2"))],
-        "topics" => ["hello"]
+        "upload_tag_links" => [UploadTagLink.new(tag: Tag.new(:name => "test")), UploadTagLink.new(tag: Tag.new(:name => "test2"))],
+        "tags" => ["hello"]
         # "categories" => [Category.new(:name => "test"),Category.new(:name => "test2")],
-        # "topics" => [Topic.new(:name => "test"),Topic.new(:name => "test2")]
+        # "tags" => [Tag.new(:name => "test"),Tag.new(:name => "test2")]
       }}
 
       it "updates the requested upload" do

@@ -22,11 +22,11 @@
       <h3>Select a tag to explore other related articles:</h3>
     </div>
     <div class="col-5">
-      <% @upload.topics.each do |topic| %>
-            <%= link_to uploadlink_path(Upload.get_uploadlink(@upload, topic).id),
-                        id: "#{topic.name}-link",
+      <% @upload.tags.each do |tag| %>
+            <%= link_to upload_tag_link_path(Upload.get_upload_tag_link(@upload, tag).id),
+                        id: "#{tag.name}-link",
                         style: "text-decoration:none" do %>
-              <h5 style="display: inline-block"><span class="badge <%= Topic.css_class_type(topic, "badge") %> badge-lg"><%= topic.name %></span></h5>
+              <h5 style="display: inline-block"><span class="badge <%= Tag.css_class_type(tag, "badge") %> badge-lg"><%= tag.name %></span></h5>
             <% end %>
       <% end %>
     </div>

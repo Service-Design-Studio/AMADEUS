@@ -2,33 +2,33 @@ require 'zip'
 
 class Upload 
 
-  def self.verify_tag(upload, topic_name)
+  def self.verify_tag(upload, tag_name)
     status = "fail"
 
-    upload.uploadlinks.each do |uploadlink|
-      if uploadlink.topic.name == topic_name
+    upload.upload_tag_links.each do |upload_tag_link|
+      if upload_tag_link.tag.name == tag_name
         status = "exist"
       end
     end
 
-    if (topic_name == "") || topic_name.nil?
+    if (tag_name == "") || tag_name.nil?
       msg = flash_message_tag::INVALID_TAG 
-    elsif topic_name.length >= 15
+    elsif tag_name.length >= 15
       msg = flash_message_tag::INVALID_TAG 
-    elsif topic_name[0].match(/\W/)
+    elsif tag_name[0].match(/\W/)
       msg = flash_message_tag::INVALID_TAG 
     elsif status == "exist"
       status = "fail"
-      msg = flash_message_tag.get_duplicate_tag(topic_name)
+      msg = flash_message_tag.get_duplicate_tag(tag_name)
     else
       status = "success"
       msg = ""
-      new_topic = Topic.friendly.find_by(name: topic_name)
-      if new_topic.nil?
-        new_topic = Topic.create(name: topic_name)
-        Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
+      new_tag = Tag.friendly.find_by(name: tag_name)
+      if new_tag.nil?
+        new_tag = Tag.create(name: tag_name)
+        UploadTagLink.create(upload_id: upload.id, tag_id: new_tag.id)
       else
-        Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
+        UploadTagLink.create(upload_id: upload.id, tag_id: new_tag.id)
       end
     end
     return { status: status, msg: msg }
@@ -119,15 +119,15 @@ class Upload
     end
   end
 
-  def self.set_upload_tag(upload_id, topics)
-    topics.each do |topic, frequency|
-      new_topic = Topic.friendly.find_by(name: topic)
-      if new_topic.nil?
-        new_topic = Topic.new(:name => topic)
-        new_topic.save!
-        Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id)
+  def self.set_upload_tag(upload_id, tags)
+    tags.each do |tag, frequency|
+      new_tag = Tag.friendly.find_by(name: tag)
+      if new_tag.nil?
+        new_tag = Tag.new(:name => tag)
+        new_tag.save!
+        UploadTagLink.create(upload_id: upload_id, tag_id: new_tag.id)
       else
-        Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id)
+        UploadTagLink.create(upload_id: upload_id, tag_id: new_tag.id)
       end
     end
   end
@@ -145,29 +145,29 @@ class Upload
 
   # Generates random upload_links associated to the upload, remove when ML is implemented
   def self.seed_pdf_tag(upload_id)
-    topic_ids = Topic.pluck(:id)
-    n = Random.rand(1...topic_ids.length)
+    tag_ids = Tag.pluck(:id)
+    n = Random.rand(1...tag_ids.length)
     n.times do
-      topic_id = topic_ids.sample
-      Uploadlink.create(upload_id: upload_id, topic_id: topic_id)
-      topic_ids.delete(topic_id)
+      tag_id = tag_ids.sample
+      UploadTagLink.create(upload_id: upload_id, tag_id: tag_id)
+      tag_ids.delete(tag_id)
     end
   end
 
-  def self.get_all_topics
-    Topic.all.collect(&:name)
+  def self.get_all_tags
+    Tag.all.collect(&:name)
   end
 
   def self.get_all_categories
     Category.all.collect(&:name)
   end
 
-  def self.get_linked_topics(upload)
-    upload.uploadlinks.all
+  def self.get_linked_tags(upload)
+    upload.upload_tag_links.all
   end
 
-  def self.get_uploadlink(upload, topic)
-    upload.uploadlinks.find_by(topic_id: topic.id)
+  def self.get_upload_tag_link(upload, tag)
+    upload.upload_tag_links.find_by(tag_id: tag.id)
   end
 
   def self.get_linked_category(upload)

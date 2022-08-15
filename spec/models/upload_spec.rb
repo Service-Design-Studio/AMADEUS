@@ -4,17 +4,17 @@ RSpec.describe Upload, type: :model do
   path = Rails.root + "app/assets/test_zip/rus.zip"
   let(:valid_attributes) {{ 
       "file" => Rack::Test::UploadedFile.new(path),
-      "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "test")), Uploadlink.new(topic: Topic.new(:name => "test2"))],
-      "topics" => [Topic.new(:name => "hello")],
+      "upload_tag_links" => [UploadTagLink.new(tag: Tag.new(:name => "test")), UploadTagLink.new(tag: Tag.new(:name => "test2"))],
+      "tags" => [Tag.new(:name => "hello")],
       "id" => 1,
       "categories" => [Category.new(:name => "test")]
     }}
 
   describe 'associations' do
-    it { should have_many(:uploadlinks) }
+    it { should have_many(:upload_tag_links) }
     it { should have_many(:upload_category_links) }
     it { should have_many(:categories) }
-    it { should have_many(:topics) }
+    it { should have_many(:tags) }
     it { should have_one_attached(:file) }
   end
 
@@ -48,7 +48,7 @@ RSpec.describe Upload, type: :model do
   # end
   describe '.set_upload_tag' do 
     before { Upload.create! valid_attributes }
-    it { expect(subject.class.set_upload_tag(1, subject.topics)).to be_truthy}
+    it { expect(subject.class.set_upload_tag(1, subject.tags)).to be_truthy}
   end
 
   # describe '.set_upload_category' do 
@@ -61,9 +61,9 @@ RSpec.describe Upload, type: :model do
     it { expect(subject.class.seed_pdf_tag(1)).to be_truthy}
   end
 
-  describe '.get_all_topics' do 
+  describe '.get_all_tags' do
     before { Upload.create! valid_attributes }
-    it { expect(subject.class.get_all_topics).to be_truthy}
+    it { expect(subject.class.get_all_tags).to be_truthy}
   end
 
   describe '.get_all_categories' do 
@@ -71,9 +71,9 @@ RSpec.describe Upload, type: :model do
     it { expect(subject.class.get_all_categories).to be_truthy}
   end
 
-  describe '.get_linked_topics' do 
+  describe '.get_linked_tags' do
     before { Upload.create! valid_attributes }
-    it { expect(subject.class.get_linked_topics(subject)).to be_truthy}
+    it { expect(subject.class.get_linked_tags(subject)).to be_truthy}
   end
   # describe '.get_cleaned_summary' do 
   #   before { Upload.create! valid_attributes }

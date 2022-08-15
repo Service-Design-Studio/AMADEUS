@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  skip_before_action :verify_authenticity_token
   include ApplicationHelper
   def admin
     if user_signed_in?

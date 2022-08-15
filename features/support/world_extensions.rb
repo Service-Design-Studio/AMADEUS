@@ -13,8 +13,8 @@ module CapybaraHelper
     "Database": "/admin/uploads",
     "New Upload": "/admin/uploads/new",
     # Tag resource
-    "Tag List": "/admin/topics",
-    "New Tag": "/admin/topics/new",
+    "Tag List": "/admin/tags",
+    "New Tag": "/admin/tags/new",
     # Category resource
     "Category Bank": "/admin/categories",
     "New Category": "/admin/categories/new",

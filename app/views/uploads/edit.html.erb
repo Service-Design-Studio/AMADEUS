@@ -19,13 +19,13 @@
 <h4><strong>Tags: </strong></h4>
 
   <div class="btn-group special">
-    <a href="<%=edit_upload_path({:tag_type => Topic.set_toggle_tag_type("PERSON", @tag_type)})%>" class="btn <%= @filter_css["PERSON"] %>">PERSON</a>
-    <a href="<%=edit_upload_path({:tag_type => Topic.set_toggle_tag_type("LOCATION", @tag_type)})%>" class="btn <%= @filter_css["LOCATION"] %>">LOCATION</a>
-    <a href="<%=edit_upload_path({:tag_type => Topic.set_toggle_tag_type("ORGANIZATION", @tag_type)})%>" class="btn <%= @filter_css["ORGANIZATION"] %>">ORGANIZATION</a>
-    <a href="<%=edit_upload_path({:tag_type => Topic.set_toggle_tag_type("EVENT", @tag_type)})%>" class="btn <%= @filter_css["EVENT"] %>">EVENT</a>
-    <a href="<%=edit_upload_path({:tag_type => Topic.set_toggle_tag_type("WORK OF ART", @tag_type)})%>" class="btn <%= @filter_css["WORK OF ART"] %>">WORK OF ART</a>
-    <a href="<%=edit_upload_path({:tag_type => Topic.set_toggle_tag_type("CONSUMER GOOD", @tag_type)})%>" class="btn <%= @filter_css["CONSUMER GOOD"] %>">CONSUMER GOOD</a>
-    <a href="<%=edit_upload_path({:tag_type => Topic.set_toggle_tag_type("OTHER", @tag_type)})%>" class="btn <%= @filter_css["OTHER"] %>">OTHER</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("PERSON", @tag_type)})%>" class="btn <%= @filter_css["PERSON"] %>">PERSON</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("LOCATION", @tag_type)})%>" class="btn <%= @filter_css["LOCATION"] %>">LOCATION</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("ORGANIZATION", @tag_type)})%>" class="btn <%= @filter_css["ORGANIZATION"] %>">ORGANIZATION</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("EVENT", @tag_type)})%>" class="btn <%= @filter_css["EVENT"] %>">EVENT</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("WORK OF ART", @tag_type)})%>" class="btn <%= @filter_css["WORK OF ART"] %>">WORK OF ART</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("CONSUMER GOOD", @tag_type)})%>" class="btn <%= @filter_css["CONSUMER GOOD"] %>">CONSUMER GOOD</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("OTHER", @tag_type)})%>" class="btn <%= @filter_css["OTHER"] %>">OTHER</a>
   </div>
 
   <%= render 'uploads/edit_tag_form', upload: @upload %><br>
@@ -41,18 +41,18 @@
       </tr>
     </thead>
     <tbody id="tags">
-      <% @linked_topics.each do |uploadlink| %>
+      <% @linked_tags.each do |upload_tag_link| %>
         <tr class="align-middle center">
           <td>
-            <span class="badge <%= Topic.css_class_type(uploadlink.topic, "badge") %>">
-              <%= uploadlink.topic.entity_type%>
+            <span class="badge <%= Tag.css_class_type(upload_tag_link.tag, "badge") %>">
+              <%= upload_tag_link.tag.entity_type%>
             </span>
           </td>
-          <td><%= uploadlink.topic.name%></td>
+          <td><%= upload_tag_link.tag.name%></td>
           <td>
             <%= button_to raw("<i class=\"bi bi-trash-fill icon-red\" style=\"font-size: 1.5rem;\"></i>"), 
-              {:controller => :uploadlinks, :action=>'destroy', :id=> uploadlink.id}, :method=> :delete, 
-              class: "btn", id: "#{uploadlink.topic.name}-delete-button"%>
+              {:controller => :upload_tag_links, :action=>'destroy', :id=> upload_tag_link.id}, :method=> :delete,
+              class: "btn", id: "#{upload_tag_link.tag.name}-delete-button"%>
           </td>
         </tr>
       <% end %>

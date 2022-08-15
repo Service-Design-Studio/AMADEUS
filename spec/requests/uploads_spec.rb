@@ -13,16 +13,16 @@ RSpec.describe "/uploads", type: :request do
   end
   let(:valid_attributes) {{ 
       "file" => Rack::Test::UploadedFile.new(path),
-      "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "test")), Uploadlink.new(topic: Topic.new(:name => "test2"))],
-      "topics" => [Topic.new(:name => "hello")]
+      "upload_tag_links" => [UploadTagLink.new(tag: Tag.new(:name => "test")), UploadTagLink.new(tag: Tag.new(:name => "test2"))],
+      "tags" => [Tag.new(:name => "hello")]
     }}
     
 
   let(:invalid_attributes) {
     { 
       "file" => Rack::Test::UploadedFile.new(path_fail),
-      "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "!!!")), Uploadlink.new(topic: Topic.new(:name => "!!!@"))],
-      "topics" => [Topic.new(:name => "hello!"),Topic.new(:name => "hello2!!")]
+      "upload_tag_links" => [UploadTagLink.new(tag: Tag.new(:name => "!!!")), UploadTagLink.new(tag: Tag.new(:name => "!!!@"))],
+      "tags" => [Tag.new(:name => "hello!"),Tag.new(:name => "hello2!!")]
     }}
 
   describe "GET /index" do
@@ -88,10 +88,8 @@ RSpec.describe "/uploads", type: :request do
     context "with valid parameters" do
       let(:new_attributes) {{ 
         "file" => Rack::Test::UploadedFile.new(path),
-        "uploadlinks" => [Uploadlink.new(topic: Topic.new(:name => "test")), Uploadlink.new(topic: Topic.new(:name => "test2"))],
-        "topics" => ["hello"]
-        # "categories" => [Category.new(:name => "test"),Category.new(:name => "test2")],
-        # "topics" => [Topic.new(:name => "test"),Topic.new(:name => "test2")]
+        "upload_tag_links" => [UploadTagLink.new(tag: Tag.new(:name => "test")), UploadTagLink.new(tag: Tag.new(:name => "test2"))],
+        "tags" => ["hello"]
       }}
 
       it "updates the requested upload" do

@@ -6,8 +6,8 @@ class Upload < ApplicationRecord
   has_one_attached :file, service: :local
   validates :file, presence: true
   validates :file, file_content_type: { allow: ['application/pdf', 'application/zip'], message: "ZIP should contain PDFs only!" }
-  has_many :uploadlinks, dependent: :destroy
-  has_many :topics, through: :uploadlinks
+  has_many :upload_tag_links, dependent: :destroy
+  has_many :tags, through: :upload_tag_links
   has_many :upload_category_links, dependent: :destroy
   has_many :categories, through: :upload_category_links
 
@@ -25,73 +25,60 @@ class Upload < ApplicationRecord
 
   private
 
-  def self.verify_tag(upload, topic_name, entity_type)
+  def self.verify_tag(upload, tag_name, entity_type)
     status = "fail"
 
-    upload.uploadlinks.each do |uploadlink|
-      # if the topic is already linked to the upload
-      if uploadlink.topic.name == topic_name
+    upload.upload_tag_links.each do |upload_tag_link|
+      # if the tag is already linked to the upload
+      if upload_tag_link.tag.name == tag_name
         status = "exist"
       end
     end
 
-    # if topic_name contains invalid inputs
-    if (topic_name == "") || topic_name.nil?
+    # if tag_name contains invalid inputs
+    if (tag_name == "") || tag_name.nil?
       msg = flash_message_tag::INVALID_TAG 
-    elsif topic_name.length >= 15
+    elsif tag_name.length >= 15
       msg = flash_message_tag::INVALID_TAG
-    elsif topic_name.match(/\W/)
+    elsif tag_name.match(/\W/)
       msg = flash_message_tag::INVALID_TAG
-    # if topic already exists
+    # if tag already exists
     elsif status == "exist"
-      msg = flash_message_tag.get_duplicate_tag(topic_name)
+      msg = flash_message_tag.get_duplicate_tag(tag_name)
     
     # Checking entity_type
     else
-      existing_topic = Topic.friendly.find_by(name: topic_name)
+      existing_tag = Tag.friendly.find_by(name: tag_name)
       # Did not specify entity_type
       if entity_type == "all"
-        # If topic does not exist
-        if existing_topic.nil?
+        # If tag does not exist
+        if existing_tag.nil?
           msg = "Please select a tag type!"
-        # If topic exists
+        # If tag exists
         else
           status = "success"
-          msg = flash_message_tag.get_existing_added_tag(topic_name, existing_topic.entity_type)
-          Uploadlink.create(upload_id: upload.id, topic_id: existing_topic.id)
+          msg = flash_message_tag.get_existing_added_tag(tag_name, existing_tag.entity_type)
+          UploadTagLink.create(upload_id: upload.id, tag_id: existing_tag.id)
         end
       # Specified entity_type
       else
-        # If topic exists and is of different entity_type
-        if ((!existing_topic.nil?) && (existing_topic.entity_type != entity_type))
-          msg = flash_message_tag.get_duplicated_tag_name(topic_name, existing_topic.entity_type)
-        # If topic exists and is of same entity_type
-        elsif ((!existing_topic.nil?) && (existing_topic.entity_type == entity_type))
+        # If tag exists and is of different entity_type
+        if ((!existing_tag.nil?) && (existing_tag.entity_type != entity_type))
+          msg = flash_message_tag.get_duplicated_tag_name(tag_name, existing_tag.entity_type)
+        # If tag exists and is of same entity_type
+        elsif ((!existing_tag.nil?) && (existing_tag.entity_type == entity_type))
           status = "success"
-          msg = flash_message_tag.get_existing_added_tag(topic_name, existing_topic.entity_type)
-          Uploadlink.create(upload_id: upload.id, topic_id: existing_topic.id)
-        # If topic does not exist
+          msg = flash_message_tag.get_existing_added_tag(tag_name, existing_tag.entity_type)
+          UploadTagLink.create(upload_id: upload.id, tag_id: existing_tag.id)
+        # If tag does not exist
         else
           status = "success"
-          msg = flash_message_tag.get_new_added_tag(topic_name, entity_type)
-          new_topic = Topic.create(name: topic_name, entity_type: entity_type)
-          Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
+          msg = flash_message_tag.get_new_added_tag(tag_name, entity_type)
+          new_tag = Tag.create(name: tag_name, entity_type: entity_type)
+          UploadTagLink.create(upload_id: upload.id, tag_id: new_tag.id)
         end
       end  
     end
-
-    # else
-    #   status = "success"
-    #   msg = ""
-    #   new_topic = Topic.friendly.find_by(name: topic_name)
-    #   if new_topic.nil?
-    #     new_topic = Topic.create(name: topic_name)
-    #     Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
-    #   else
-    #     Uploadlink.create(upload_id: upload.id, topic_id: new_topic.id)
-    #   end
-    # end
-    
     return { status: status, msg: msg }
   end
 
@@ -163,9 +150,9 @@ class Upload < ApplicationRecord
   def self.run_nltk_async(upload_id)
     upload = Upload.find(upload_id)
     content = upload.content
-    nltk_response = NltkModel.request(content)
+    # nltk_response = NltkModel.request(content)
     # summary = nltk_response[:summary]
-    tags_dict = nltk_response[:tags]
+    # tags_dict = nltk_response[:tags]
     # category = nltk_response[:category]
     zero_shot_response = ZeroShotCategoriser.request(content, Category.get_category_bank)
     category = zero_shot_response[:category]
@@ -176,7 +163,7 @@ class Upload < ApplicationRecord
     upload.summary = summary.gsub(/(\\\")/, "")
     upload.ml_status = "Complete"
     upload.save
-    set_upload_tag(upload.id, tags_dict)
+    # set_upload_tag(upload.id, tags_dict)
     if category != "No Category"
       set_upload_category(upload.id, category)
     end
@@ -216,14 +203,14 @@ class Upload < ApplicationRecord
 
   def self.set_upload_tag(upload_id, tags_dict)
     tags_dict.each do |name, entity_type|
-      new_topic = Topic.friendly.find_by(name: name)
+      new_tag = Tag.friendly.find_by(name: name)
       entity_type = entity_type.gsub(/_/, " ")
-      if new_topic.nil?
-        new_topic = Topic.new(name: name, entity_type: entity_type)
-        new_topic.save!
-        Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id)
+      if new_tag.nil?
+        new_tag = Tag.new(name: name, entity_type: entity_type)
+        new_tag.save!
+        UploadTagLink.create(upload_id: upload_id, tag_id: new_tag.id)
       else
-        Uploadlink.create(upload_id: upload_id, topic_id: new_topic.id)
+        UploadTagLink.create(upload_id: upload_id, tag_id: new_tag.id)
       end
     end
   end
@@ -241,34 +228,35 @@ class Upload < ApplicationRecord
 
   # Generates random upload_links associated to the upload, remove when ML is implemented
   def self.seed_pdf_tag(upload_id)
-    topic_ids = Topic.pluck(:id)
-    n = Random.rand(1...topic_ids.length)
+    tag_ids = Tag.pluck(:id)
+    n = Random.rand(1...tag_ids.length)
     n.times do
-      topic_id = topic_ids.sample
-      Uploadlink.create(upload_id: upload_id, topic_id: topic_id)
-      topic_ids.delete(topic_id)
+      tag_id = tag_ids.sample
+      UploadTagLink.create(upload_id: upload_id, tag_id: tag_id)
+      tag_ids.delete(tag_id)
     end
   end
 
-  def self.get_all_topics
-    Topic.all.collect(&:name)
+  def self.get_all_tags
+    Tag.all.collect(&:name)
   end
 
   def self.get_all_categories
     Category.all.collect(&:name)
   end
 
-  def self.get_linked_topics(upload)
-    upload.uploadlinks.all
+  def self.get_linked_tags(upload)
+    upload.upload_tag_links.all
   end
 
-  def self.get_unlinked_topics(upload)
-    topics_in_upload = upload.uploadlinks.pluck(:topic_id)
-    unlinked_topics = Topic.where.not(id: topics_in_upload).sort_by(&:name)
+  def self.get_unlinked_tags(upload)
+    tags_in_upload = upload.upload_tag_links.pluck(:tag_id)
+    unlinked_tags = Tag.where.not(id: tags_in_upload).sort_by(&:name)
+    unlinked_tags
   end
 
-  def self.get_uploadlink(upload, topic)
-    upload.uploadlinks.find_by(topic_id: topic.id)
+  def self.get_upload_tag_link(upload, tag)
+    upload.upload_tag_links.find_by(tag_id: tag.id)
   end
 
   def self.get_linked_category(upload)

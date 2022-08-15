@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="center">
+  <h1>Tag List</h1>
+  <%= link_to "New Tag", new_tag_path, class: "btn btn-success", id: "new-tag-button" %>
+  <%= link_to "Back to Home", admin_path, class: "btn btn-primary",id: "back-to-home-button"%>
+</div>
+<br><br>
+
+<div id="tags">
+  <% @tags.each do |tag| %>
+    <%= link_to edit_tag_path(tag), style:"text-decoration:none", id:"#{tag.name}-edit-button" do %>
+      <span class="tag"><%= tag.name %></span>
+    <% end %>
+  <% end %>
+</div>
+
+

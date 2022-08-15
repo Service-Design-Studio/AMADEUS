@@ -34,7 +34,7 @@ class UploadsController < ApplicationController
       ReportWorker.perform_async(new_zip_reply[:zip_id], "")
       # END of async
       respond_to do |format|
-        flash[:success] = "Successfully uploaded #{new_zip_reply[:zip_name]}, waiting for unzipping and ML processing..."
+        flash[:success] = "Successfully uploaded, waiting for unzipping and ML processing..."
         format.html { redirect_to uploads_url }
       end
     end
@@ -43,9 +43,9 @@ class UploadsController < ApplicationController
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
     respond_to do |format|
-      # Update topics
-      if !params[:upload][:topics].nil?
-          reply = Upload.verify_tag(@upload, params[:upload][:topics], params[:upload][:entity_type])
+      # Update tags
+      if !params[:upload][:tags].nil?
+          reply = Upload.verify_tag(@upload, params[:upload][:tags], params[:upload][:entity_type])
         if reply[:status] == "success"
           flash[:success] = reply[:msg]
           format.html { redirect_to edit_upload_path(@upload) }
@@ -97,23 +97,23 @@ class UploadsController < ApplicationController
   private
 
   def set_linked_resources
-    @all_topics = Upload.get_all_topics
-    @all_topics_types = ["CONSUMER GOOD", "EVENT", "LOCATION", "ORGANIZATION", "PERSON", "WORK OF ART", "OTHER"]
+    @all_tags = Upload.get_all_tags
+    @all_tags_types = ["CONSUMER GOOD", "EVENT", "LOCATION", "ORGANIZATION", "PERSON", "WORK OF ART", "OTHER"]
     @all_categories = Upload.get_all_categories
-    @linked_topics = Upload.get_linked_topics(@upload)
-    @unlinked_topics = Upload.get_unlinked_topics(@upload)
+    @linked_tags = Upload.get_linked_tags(@upload)
+    @unlinked_tags = Upload.get_unlinked_tags(@upload)
     @linked_category = Upload.get_linked_category(@upload)
-    set_filterted_topics(params[:tag_type])
+    set_filterted_tags(params[:tag_type])
     set_filter_css
   end
 
-  def set_filterted_topics(from_params)
+  def set_filterted_tags(from_params)
     if from_params.nil? || from_params == ""
       @tag_type = "all"
-      @filtered_topics = Topic.all
+      @filtered_tags = Tag.all
     else
       @tag_type = from_params.gsub("_", " ")
-      @filtered_topics = Topic.where(entity_type: @tag_type)
+      @filtered_tags = Tag.where(entity_type: @tag_type)
     end 
   end
 
@@ -142,7 +142,7 @@ class UploadsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def upload_params
-    params.require(:upload).permit(:file, :topics, :categories)
+    params.require(:upload).permit(:file, :tags, :categories)
   end
 
   # Ensures that admin must be logged in to access upload feature

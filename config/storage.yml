@@ -22,7 +22,7 @@ google:
     type: "service_account"
     project_id: "amadeus-2000"
     private_key_id: <%= Rails.application.credentials.dig(:gcs, :private_key_id) %>
-    private_key: <%= Rails.application.credentials.dig(:gcs, :private_key).dump %>
+    private_key: <%= Rails.application.credentials.dig(:gcs, :private_key) %>
     client_email: "amadeus-service-account@amadeus-2000.iam.gserviceaccount.com"
     client_id: "104099822487193976770"
     auth_uri: "https://accounts.google.com/o/oauth2/auth"
