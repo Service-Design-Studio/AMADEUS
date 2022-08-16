@@ -14,9 +14,6 @@ RSpec.describe UploadCategoryLinksController, type: :routing do
       expect(get: "/upload_category_links/1").to route_to("upload_category_links#show", id: "1")
     end
 
-    it "routes to #edit" do
-      expect(get: "/upload_category_links/1/edit").to route_to("upload_category_links#edit", id: "1")
-    end
 
 
     it "routes to #create" do

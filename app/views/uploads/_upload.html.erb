@@ -1,22 +1,36 @@
-<div id="<%= dom_id upload %>">
-  <div style="width: 100%; display: table;">
-    <div style="display: table-row">
-      <div style="width: 60%; display: table-cell;">
-        <div style="display: table-cell;"> <%= render 'uploads/attachment', upload: upload %> </div>
-      </div>
+<tr class="align-middle center" id="<%= dom_id upload %>">
 
-      <div style="width: 35%; display: table-cell;">
-        <% upload.topics.each do |topic| %>
-          <span class="tag"><%= topic.name %></span>
-        <% end %>
-      </div>
-      <div style="display: table-cell;">
-        <%= link_to "Edit", edit_upload_path(upload), class: "btn btn-outline-secondary btn-sm" %>
-      </div>
-    </div>
+  <td>
+    <% if upload.ml_status == "Running" %>
+      <span class="badge bg-warning"><%= upload.ml_status %></span>
+    <% else %>
+      <span class="badge bg-success"><%= upload.ml_status %></span>
+    <% end %>
+  </td>
 
+  <td>
+    <% if !upload.upload_category_links.first.nil? %>
+      <div> <%= "#{upload.upload_category_links.first.category.name}" %> </div>
+    <% else %>
+      <div class="badge bg-danger"> <%= "No Category" %> </div>
+    <% end %>
+  </td>
 
-  </div>
-</div>
-<hr style="width:100%">
+  <td>
+    <div style="display: table-cell;"> <%= render 'uploads/attachment', upload: upload %> </div>
+  </td>
+
+  <td>
+    <% upload.tags.each do |tag| %>
+      <span class="badge <%= Tag.css_class_type(tag, "badge") %>"><%= tag.name %></span>
+    <% end %>
+  </td>
+
+  <td>
+    <%= link_to edit_upload_path(upload), id: "upload-#{upload.id}" do %>
+      <i class="bi bi-pencil-square icon-yellow" style="font-size: 2rem;"></i>
+    <% end %>
+  </td>
+
+</tr>
 

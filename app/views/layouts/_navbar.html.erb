@@ -1,41 +1,41 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
+<nav class="navbar navbar-dark fixed-top" style="background-color: #201c4c;">
   <div class="container-fluid">
-    <%= link_to "AMADEUS", root_path, class:"navbar-brand"%>
-    <button class="navbar-toggler" id="hamburger-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <%#= link_to "", root_path, class:"navbar-brand", id: "amadeus-button"%>
+    <% if side_bar_visible %>
+      <button class="navbar-toggler" id="hamburger-icon" type="button"
+      data-bs-toggle="collapse" data-bs-target="#navbarSupportedContentCategory" aria-controls="navbarSupportedContentCategory" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <% else %>
+      <%= link_to "", root_path, class:"navbar-brand", id: "amadeus-button"%>
+    <% end %>
+    
+    <div class="icon-container">
+    <%= link_to root_path do %>
+      <%= image_tag "/logo_cropped_sm.jpg", class: "custom-icon" %>
+    <% end %>
+    </div>
+
+    <button class="navbar-toggler" id="hamburger-icon" type="button"
+    data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+  
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="nav justify-content-end">
 
         <li class="nav-item">
-          <a class="nav-link" href="/" id="home-feature-link">Home</a>
+          <a class="nav-link" href="/" id="home-button">Home</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/sign_in" id='admin-feature-link'>Admin</a>
+          <a class="nav-link" href="/sign_in" id='admin-button'>Admin</a>
         </li>
 
         <% if user_signed_in? %>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Actions
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/admin/topics">Topic List</a></li>
-              <li><hr class="dropdown-divider"></li>
-
-              <li><a class="dropdown-item" href="/admin/uploads/new">New Upload</a></li>
-              <li><hr class="dropdown-divider"></li>
-
-              <li><a class="dropdown-item" href="/admin/uploads" >Database</a></li>
-            </ul>
-          </li>
           <li class="nav-item">
-            <%= link_to "Sign Out", '/sign_out', method: :delete, class: "nav-link", id: "signout-feature-link"%>
-            <%# <a class="nav-link" href="/logout" > Sign Out</a> %>
+            <%= button_to "Sign Out", '/sign_out', method: :delete, class: "btn btn-outline-light" , id: "sign-out-button"%>
           </li>
         <% end %>
 

@@ -1,2 +1,30 @@
-<h1> Welcome to Amadeus! </h1>
-<%#= link_to "Admin", admin_path %>
+<div class="center">
+  <% if @category %>
+    <h1><strong><%= @category.name %></strong></h1>
+  <% else %>
+    <h1><strong><%= "All Categories" %></strong></h1>
+  <% end %>
+</div>
+<br>
+<div class="center">
+  <span><strong>Tag Types: </strong></span>
+    <span class="badge bg-person-badge">Person</span>
+    <span class="badge bg-location-badge">Location</span>
+    <span class="badge bg-organization-badge">Organization</span>
+    <span class="badge bg-event-badge">Event</span>
+    <span class="badge bg-work-of-art-badge">Work of Art</span>
+    <span class="badge bg-consumer-good-badge">Consumer Good</span>
+    <span class="badge bg-other-badge">Other</span>
+</div>
+<hr>
+<div class="list-group">
+  <% if !@uploads.empty? %>
+    <% @uploads.each do |upload| %>
+      <%= render "article_list", upload: upload %>
+    <% end %>
+  <% else %>
+    <em><u>No articles at the moment. Sorry for the inconvenience.</u></em>
+  <% end %>
+</div>
+
+

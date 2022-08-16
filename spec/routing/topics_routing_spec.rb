@@ -1,38 +1,38 @@
 require "rails_helper"
 
-RSpec.describe TopicsController, type: :routing do
+RSpec.describe TagsController, type: :routing do
   describe "routing" do
     it "routes to #index" do
-      expect(get: "/topics").to route_to("topics#index")
+      expect(get: "admin/tags").to route_to("tags#index")
     end
 
     it "routes to #new" do
-      expect(get: "/topics/new").to route_to("topics#new")
+      expect(get: "admin/tags/new").to route_to("tags#new")
     end
 
     it "routes to #show" do
-      expect(get: "/topics/1").to route_to("topics#show", id: "1")
+      expect(get: "admin/tags/1").to route_to("tags#show", id: "1")
     end
 
     it "routes to #edit" do
-      expect(get: "/topics/1/edit").to route_to("topics#edit", id: "1")
+      expect(get: "admin/tags/1/edit").to route_to("tags#edit", id: "1")
     end
 
 
     it "routes to #create" do
-      expect(post: "/topics").to route_to("topics#create")
+      expect(post: "admin/tags").to route_to("tags#create")
     end
 
     it "routes to #update via PUT" do
-      expect(put: "/topics/1").to route_to("topics#update", id: "1")
+      expect(put: "admin/tags/1").to route_to("tags#update", id: "1")
     end
 
     it "routes to #update via PATCH" do
-      expect(patch: "/topics/1").to route_to("topics#update", id: "1")
+      expect(patch: "admin/tags/1").to route_to("tags#update", id: "1")
     end
 
     it "routes to #destroy" do
-      expect(delete: "/topics/1").to route_to("topics#destroy", id: "1")
+      expect(delete: "admin/tags/1").to route_to("tags#destroy", id: "1")
     end
   end
 end

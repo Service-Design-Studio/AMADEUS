@@ -1,10 +1,14 @@
-<h1>Editing topic</h1>
+<h1>Edit Tag</h1>
 
-<%= render "form", topic: @topic %>
+<%= turbo_frame_tag dom_id(@tag) do %>
+  <%= form_with(model: @tag) do |form| %>
+    <div class="field">
+      <%= form.text_field :name, id: "tag-input" %>
+      <%= form.submit "save", class: "btn btn-success", id: "save-button" %>
+      <%= link_to "cancel", url_for(:back), class: "btn btn-primary", id: "cancel-button" %>
+    </div>
+  <% end %>
+<% end %>
 
-<br>
-
-<div>
-  <%= link_to "Delete", @topic, method: :delete, class: "btn btn-outline-danger" %>
-  <%= link_to "Back to Topic List", topics_path, class: "btn btn-primary",id: "back-to-home" %>
-</div>
+<%= link_to "Delete", @tag, method: :delete, class: "btn btn-outline-danger", id: "delete-button" %>
+<%= link_to "Return", url_for(:back), class: "btn btn-primary", id: "return-button" %>

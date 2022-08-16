@@ -1,10 +1,20 @@
-<h1>New Upload</h1>
+<h1 class="center">New Upload</h1>
+<hr>
+<p>Select a zip file to upload:</p>
 
-<%= render "form", upload: @upload %>
+<div class="d-grid gap-2">
+  <%= render "new_form", upload: @upload %>
+  <a href="/admin/uploads" class="btn btn-outline-primary" id="back-to-database-button">
+    <span class="bi bi-archive icon-align-left"></span>
+    Uploads Database
+  </a>
+  
+  <%= link_to  admin_path, class: "btn btn-outline-primary", id: "back-to-home-button" do %>
+    <span class="bi bi-person-circle icon-align-left"></span>
+    Admin Homepage
+  <% end %>
 
-<br>
-
-<div>
-  <%= link_to "Back to Database", uploads_path, class: "btn btn-primary", id: "back-to-database" %>
-  <%= link_to "Back to Home", admin_path, class: "btn btn-primary", id: "back-to-home" %>
 </div>
+
+
+

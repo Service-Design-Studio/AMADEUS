@@ -1,24 +1,39 @@
 <p style="color: green"><%= notice %></p>
 
-<h1><%= render 'uploads/attachment', upload: @upload %></h1>
-
+<h1 class="center"><strong><%= link_to @upload.file.filename.to_s.sub(/(?<=.)\..*/, ''), url_for(@upload.file) %></strong></h1>
 <br>
 
-<ul class="list-group">
-  <% @upload.uploadlinks.each do |uploadlink| %>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <%= link_to uploadlink.topic, style: "text-decoration:none" do %>
-        <%= uploadlink.topic.name %>
-      <% end %>
-      <span class="badge bg-primary rounded-pill"><%= uploadlink.similarity %></span>
-    </li>
+<h3><strong>Category: </strong>
+  <% if @upload.categories.first %>
+    <%= @upload.categories.first.name %>
+  <% else %>
+    <%="<No category>"%>
   <% end %>
-</ul>
-
+</h3>
 <br>
 
+<p class="grid"> <%= @upload.summary  %> </p>
+<br>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-7">
+      <h3>Select a tag to explore other related articles:</h3>
+    </div>
+    <div class="col-5">
+      <% @upload.tags.each do |tag| %>
+            <%= link_to upload_tag_link_path(Upload.get_upload_tag_link(@upload, tag).id),
+                        id: "#{tag.name}-link",
+                        style: "text-decoration:none" do %>
+              <h5 style="display: inline-block"><span class="badge <%= Tag.css_class_type(tag, "badge") %> badge-lg"><%= tag.name %></span></h5>
+            <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<br>
 <div class="d-grid gap-2">
-  <%= link_to "Edit", edit_upload_path(@upload), class: "btn btn-outline-success" %>
-  <%= link_to "Remove", @upload, method: :delete, class: "btn btn-outline-danger" %>
-  <%= link_to "View Database", uploads_path, class: "btn btn-primary" %>
+<%= link_to "Back to Home", root_path, class: "btn btn-primary", id: "back-to-home-button" %>
 </div>

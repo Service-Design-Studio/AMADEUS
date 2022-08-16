@@ -1,42 +1,31 @@
-@admin @upload @topics
+@admin @upload_edit
 Feature: edit uploaded articles
-  As an admin of Amadeus who is interested in the Russian-Ukraine war
-  So that I can see the breakdown of category for this particular issue
-  I want to see the list of topics belong to this issue
+  As an admin of AMADEUS who is interested in the Russian-Ukraine war
+  So that I can make sure the articles are reliable and relevant
+  I want to be able to modify their associated tags or delete them
 
   Background:
-    Given I am logged in as admin of Amadeus
-    And I am viewing the upload database for the Russian-Ukraine war
-    And I have uploaded these zip files into my database
-      | zip_name |
-      | rus.zip  |
-      | uav.zip  |
-      | ukr.zip  |
+    Given I am logged in as an admin of AMADEUS
+    And I have uploaded these zip files: rus.zip, uav.zip, ukr.zip
 
-  @admin @topics
-  Scenario: View edit upload page
-    Then I should see options for me to set topics, upload and edit articles
+  @redirect
+  Scenario Outline: View Edit Upload page
+    Given I am on the "Database" page
+    When I click edit article "<article_name>"
+    Then I should be redirected to the edit page for the article "<article_name>"
+    And I should see the following buttons: "Add new Tag, Delete this Upload, Back to Database"
 
-  Scenario: Click on topic
-    Given I click on any topic
-    Then I should be sent to Editing Topic page
+    Examples:
+      | article_name                                                               |
+      | Russia's economy in for a bumpy ride as sanctions bite - BBC News          |
+      | Russia sentences US teacher to 14 years for cannabis smuggling - BBC News  |
+      | Chinese drone firm DJI pauses operations in Russia and Ukraine - BBC News  |
+      | Combat drones_ We are in a new era of warfare - here's why - BBC News      |
+      | Ukraine war_ Thousands of civilians trapped in Severodonetsk - BBC News    |
+      | How many Ukrainian refugees are there and where have they gone_ - BBC News |
 
-  Scenario: Delete topic
-    Given I click on any cross button
-    Then Topic should be deleted
-    And flash message should be shown
-
-  Scenario: Add new topic
-    Given the "Add new topic" field is filled
-    And I click "Add new topic"
-    Then topic is added
-
-  Scenario: Trying to add empty topic name
-    Given the "Add new topic" field is empty
-    And I click "Add new topic"
-    Then "Invalid topic input!" is shown
-
-  Scenario: Want to leave edit upload page
-    When I click "Back to Database" button
-    Then I am redirected back to upload database page
-
+  @redirect
+  Scenario: Back to home
+    Given I am on the edit page for the article "Russia's economy in for a bumpy ride as sanctions bite - BBC News"
+    When I click on the "Back to Database" button
+    Then I should be redirected to the "Database" page

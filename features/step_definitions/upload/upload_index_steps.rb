@@ -9,4 +9,3 @@ Then(/^I should be redirected to the edit page for the article "([^"]*)"$/) do |
   id = capybara_get_article_idx(article_name)
   expect(page).to have_current_path("/admin/uploads/#{id}/edit")
 end
-

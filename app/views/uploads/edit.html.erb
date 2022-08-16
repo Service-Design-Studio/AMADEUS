@@ -1,39 +1,69 @@
-<p style="color: green"><%= notice %></p>
-
-<h2><%= render 'uploads/attachment', upload: @upload %></h2>
-
-<br>
 <div class="d-grid gap-2">
-  <% @linked_topics.each do |uploadlink| %>
-    <div class="d-flex justify-content-between">
-      <%= link_to edit_topic_path(uploadlink.topic), class: "list-group-item list-group-item-action" do %>
-        <div class="d-flex justify-content-between">
-          <%= uploadlink.topic.name %>
-          <span class="badge bg-primary rounded-pill"><%= "#{uploadlink.similarity} %" %></span>
-
-        </div>
-        <%= link_to "x", uploadlink, method: :delete, class: "btn btn-outline-danger" %>
-      <% end %>
+<h1 class="center"><%= render 'uploads/attachment', upload: @upload %></h1><hr>
+<h4>
+  <% if !@linked_category.nil? %>
+    <div id="edit_upload_category_link">
+      <%= render partial: 'uploads/inline_category', locals: {linked_category: @linked_category} %>
     </div>
+  <% else %>
+    <p><strong>Category: </strong>
+    <%= "<No Category>" %>
+    <%= render 'uploads/edit_category_form', upload: @upload %>
   <% end %>
+</h4><br>
+
+<h4><strong>Summary: </strong></h4>
+<%= render 'uploads/edit_summary_form', upload: @upload %>
+<br>
+
+<h4><strong>Tags: </strong></h4>
+
+  <div class="btn-group special">
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("PERSON", @tag_type)})%>" class="btn <%= @filter_css["PERSON"] %>">PERSON</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("LOCATION", @tag_type)})%>" class="btn <%= @filter_css["LOCATION"] %>">LOCATION</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("ORGANIZATION", @tag_type)})%>" class="btn <%= @filter_css["ORGANIZATION"] %>">ORGANIZATION</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("EVENT", @tag_type)})%>" class="btn <%= @filter_css["EVENT"] %>">EVENT</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("WORK OF ART", @tag_type)})%>" class="btn <%= @filter_css["WORK OF ART"] %>">WORK OF ART</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("CONSUMER GOOD", @tag_type)})%>" class="btn <%= @filter_css["CONSUMER GOOD"] %>">CONSUMER GOOD</a>
+    <a href="<%=edit_upload_path({:tag_type => Tag.set_toggle_tag_type("OTHER", @tag_type)})%>" class="btn <%= @filter_css["OTHER"] %>">OTHER</a>
+  </div>
+
+  <%= render 'uploads/edit_tag_form', upload: @upload %><br>
+
+
+<div class="table-container">
+  <table class="table table-hover">
+    <thead class="table">
+      <tr>
+        <th scope="col" class="text-center">Tag Type</th>
+        <th scope="col" class="text-center">Name</th>
+        <th scope="col" class="text-center"></th>
+      </tr>
+    </thead>
+    <tbody id="tags">
+      <% @linked_tags.each do |upload_tag_link| %>
+        <tr class="align-middle center">
+          <td>
+            <span class="badge <%= Tag.css_class_type(upload_tag_link.tag, "badge") %>">
+              <%= upload_tag_link.tag.entity_type%>
+            </span>
+          </td>
+          <td><%= upload_tag_link.tag.name%></td>
+          <td>
+            <%= button_to raw("<i class=\"bi bi-trash-fill icon-red\" style=\"font-size: 1.5rem;\"></i>"), 
+              {:controller => :upload_tag_links, :action=>'destroy', :id=> upload_tag_link.id}, :method=> :delete,
+              class: "btn", id: "#{upload_tag_link.tag.name}-delete-button"%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
   <br>
-
-  <div class="d-grid gap-2">
-    <%= form_with(model: @upload) do |form| %>
-      <datalist id="topics_list">
-        <%= @all_topics.each do |topic| %>
-          <option value="<%= topic %>"></option>
-        <% end %>
-      </datalist>
-
-      <div class="d-grid gap-2">
-        <%= form.text_field :topics, class: "form-control", value: "", placeholder: "Add new topic...", list: "topics_list" %>
-        <%= form.submit "Add new topic", class: "btn btn-outline-success d-grid gap-2" %>
-      </div>
-    <% end %>
-    <%#= link_to "Show this upload", @upload %>
-    <%= link_to "Delete this upload", @upload, method: :delete, class: "btn btn-outline-danger" %>
-    <%= link_to "Back to Database", uploads_path, class: "btn btn-primary" %>
+  <div class="btn-group">
+    <%= link_to "Back to Database", uploads_path, class: "btn btn-primary edit_button_custom", id: "back-to-database-button" %>
+    <%= button_to "Delete this Upload", {:controller => :uploads, :action=>'destroy', :id=> @upload.id}, :method=> :delete, class: "btn btn-outline-danger", id: "delete-this-upload-button" %> 
   </div>
+
 </div>

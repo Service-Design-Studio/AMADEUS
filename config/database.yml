@@ -21,5 +21,14 @@ test: &test
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  database: <%= ENV.fetch("PRODUCTION_DB_NAME") { nil } %>
+  username: <%= ENV.fetch("PRODUCTION_DB_USERNAME") { nil } %>
+  password: <%#= Rails.application.credentials.gcp[:db_password] %>
+  host: <%= ENV.fetch("PRODUCTION_DB_URL") { nil } %>
+
+cucumber:
+  <<: *test
+

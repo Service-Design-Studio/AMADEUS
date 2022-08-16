@@ -1,5 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Uploadlink, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe UploadTagLink, type: :model do
+  it { should belong_to(:upload) }
+  it { should belong_to(:tag) }
 end
