@@ -90,7 +90,7 @@ rvm use 3.0.0
   sudo apt install software-properties-common -y
   sudo add-apt-repository ppa:deadsnakes/ppa
   sudo apt install python3.9 -y
-  sudo apt install python3-pip python3.9-distutils -y
+  sudo apt install python3-pip python3.9-distutils python3.9-venv -y
   python3.9 -m pip install pip
   ```
   - MacOS
@@ -112,7 +112,7 @@ bundle install
 ```shell
 rake db:create db:migrate db:seed
 ```
-4. Run AI microservices
+4. Setup microservices
    1. Install python virtual environment under `./lib/assets` and activate
    ```shell
    cd lib/assets
@@ -123,15 +123,55 @@ rake db:create db:migrate db:seed
    ```shell
    pip install flask torch transformers
    ```
-   3. In 1 separate terminal, run flask app in port `5001`
-   ```shell
-   python transformers_model.py
-   ```
-5. Run Rails application
+
+### Run development
+> All commands is ran under repository root path
+>
+> Test zip files can be downloaded from [app/assets/test_zip](app/assets/test_zip)
+
+1. Run microservices (1 terminal)
+```shell
+cd lib/assets
+source env/bin/activate
+python transfomers.py
+```
+
+2. Run Rails application (1 terminal)
 ```shell
 foreman start -f Procfile_test.dev
 ```
+
+### Troubleshooting
+0. Reset database
+```shell
+rake db:reset db:migrate db:seed
+```
+1. Clean database
+- Install sqlite3
+```shell
+sudo apt update
+sudo apt install sqlite3
+```
+- Open development db
+```shell
+sqlite3 db/development.db
+```
+- Common commands
+```shell
+# Get all tables
+.tables
+
+# Check schema
+.schema [table-name]
+
+# Get data
+SELECT * FROM [table-name]
+
+# Delete data
+DELETE FROM [table-name] WHERE [column-name]=[value]
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 ## Testing
 - Acceptance and System Testing using Cucumber under [./features](./features)
